@@ -4,6 +4,9 @@ This public fork of [docmost/docmost](https://github.com/docmost/docmost) adapts
 Docmost's AGPL core note client for Knowledge Engine. It distributes the
 original/adapted application shell, page editor, navigation and styles as an
 importable browser library, with a typed adapter to the existing domain API.
+Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
+knowledge-context and relation extensions retain the full product experience.
+See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 The product hosts this library inside Next.js; Vite is an optional development
 and demo harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than
@@ -43,7 +46,8 @@ client selects spaces already authorized by that API; it does not manage them.
 Links to related sources, rules, reviews and actions navigate to the product
 web routes. The host consumes the library while the existing Kotlin API remains
 authoritative for authentication, permissions and data; there is no second
-Docmost backend or browser body database. Trilium is a behavioral reference for
+Docmost backend or browser body database in the KMS runtime. The independent
+single-user example uses explicitly selected browser persistence. Trilium is a behavioral reference for
 navigation additions.
 
 The canonical requirements remain the
@@ -71,7 +75,10 @@ and environment files stay out of the source archive; set Make's `PYTHON`
 variable to the available Python command when needed. The build generates the
 source offer, checks TypeScript, emits declarations, runs
 `vite.library.config.ts`, copies declaration support files and verifies the
-distribution. Tests remain a separate required step in `make verify`.
+distribution. Tests remain a separate required step in `make verify`. That gate
+also runs `pnpm test:package`: a fresh consumer resolves the root, KMS and CSS
+package exports from copied distribution files and type-checks public imports
+with `skipLibCheck: false`.
 
 The package is `private: true`; these instructions do not describe an npm
 publication. Consume a verified build from the pinned public repository and
@@ -85,9 +92,15 @@ The package exports are:
 | --- | --- | --- |
 | `.` | `dist/note-gui.js`, with `dist/types/index.d.ts` | ES module and public TypeScript declarations |
 | `./style.css` | `dist/note-gui.css` | Required Mantine, native editor and integration styles |
+| `./kms` | `dist/kms.js`, with `dist/types/kms.d.ts` | Complete compatibility adapter, KMS routes and access notifications |
 
-The module exports `mountNoteGui` at runtime and the `NoteGuiOptions`, `NoteApi`,
-`MountedNoteGui` and `NoteGuiHostModule` TypeScript contracts.
+The module exports `mountNoteCoreGui`, `mountNoteGui`, `createNoteAccess`,
+`createLocalNoteApi`, `ApiError` and the public model/host declarations.
+`mountNoteCoreGui(container, { api, host, knowledgeContext?, relations?, timeZone? })`
+requires only the injected core and host bindings. Absent extensions hide their
+controls and cause no calls. The injected path does not load the compatibility
+HTTP adapter. The complete `NoteApi`, `NoteGuiOptions`, `MountedNoteGui` and
+`NoteGuiHostModule` contracts remain available.
 `mountNoteGui(container, options?)` bundles the pinned React runtime, creates
 an isolated React root and returns `{ unmount() }`. `NoteGuiOptions.api` may supply a compatible `NoteApi` adapter;
 omitting it uses the existing authenticated domain adapter. `NoteGuiOptions.onNavigate`
@@ -146,6 +159,12 @@ cancellation/error handling so a completed import cannot mount after cleanup.
 Use `NoteGuiHostModule` for the browser-host type contract when needed. Loading
 the module alone does not load the separately emitted stylesheet.
 
+For a KMS-free persistence example, run `pnpm example` after building and open
+`http://127.0.0.1:18139/example/`. It serves built assets without Vite, uses actual
+revision-checked browser storage and Web Locks, and supplies no contextual stubs.
+`pnpm test:independent` runs its isolated browser checks. The example is
+single-user, subject to browser quota/eviction and separate from product storage.
+
 The product host serves this module and CSS and uses the existing same-origin
 `/graphql` and `/api` endpoints. The current product host imports this module
 with the optional Vite server stopped; preserve this condition during
@@ -181,7 +200,7 @@ Keep credentials out of every browser-visible setting.
 
 ## Domain API and diagrams
 
-The connected API must expose `knowledgeCurrentItems`, `KnowledgeNote.authoredBody`
+The complete KMS compatibility API must expose `knowledgeCurrentItems`, `KnowledgeNote.authoredBody`
 and `bodyOrigin` on notes and revisions. The editor loads `richBody` first,
 then `authoredBody`, including an intentionally empty authored body. Current
 knowledge comes only from the API's current-item projection. Older mixed
@@ -278,7 +297,8 @@ required for that delivered work.
 Each pane has its own editor, title, toolbar, comments, history and in-memory
 tab drafts. A pane ID is independent of the note ID. Saves use
 `expectedRevision` and idempotency keys; stale edits must report a conflict.
-There is no Hocuspocus/Yjs provider or browser body database.
+There is no Hocuspocus/Yjs provider. KMS keeps canonical persistence in its API;
+the independent example explicitly selects its own browser store.
 
 The tree requests 50 siblings at a time and retains at most 24 pages.
 The attachment tab reads 50 authorized file records per page, including earlier

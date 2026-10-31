@@ -1,5 +1,5 @@
 import type { NoteAccumulation } from './model';
-import { webUrl } from './webOrigin';
+import { HostLink } from './hostRuntime';
 import { useNoteDateTime } from './dateTime';
 
 
@@ -8,7 +8,7 @@ export function NoteEvidence({ evidence, evidenceCount }: Pick<NoteAccumulation,
   return <>
     {evidence.map(item => <section key={item.id} className="note-evidence" data-visibility={item.visibility} aria-label={`${item.title} 근거`}>
       <div className="evidence-heading">
-        <a href={webUrl(`/spaces/${encodeURIComponent(item.spaceId)}/source-revisions/${encodeURIComponent(item.revisionId)}`)} target="_blank" rel="noreferrer">{item.title}</a>
+         <HostLink destination={{ kind: 'source', spaceId: item.spaceId, revisionId: item.revisionId }}>{item.title}</HostLink>
         {item.visibility !== 'SPACE' && <span className="visibility-label">{item.visibility === 'PRIVATE' ? '본인만' : '관리자 전용'}</span>}
       </div>
       <blockquote>{item.quote}</blockquote>

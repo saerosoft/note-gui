@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": { "noEmit": false, "declaration": true, "emitDeclarationOnly": true, "outDir": ".tmp/types" },
-  "include": ["src/index.tsx", "src/docmost/browserGlobals.d.ts"]
+  "include": ["src/index.tsx", "src/kms.ts", "src/docmost/browserGlobals.d.ts"]
 }

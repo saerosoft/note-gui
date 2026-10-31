@@ -3,18 +3,20 @@ import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element
 import { ActionIcon, Button, Group, Select, Text, TextInput } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconChevronLeft, IconChevronRight, IconPlus, IconRefresh } from '@tabler/icons-react';
-import type { CreateNote, NoteApi, NoteSummary, Page, Space, TreeNote, Visibility } from './model';
+import type { CreateNote, NoteCoreApi, NoteSummary, Page, Space, TreeNote, Visibility } from './model';
 import { NotePicker } from './NotePicker';
 import { TreeCache } from './treeCache';
 import { DocTree } from './vendor/docmost/client/features/page/tree/components/doc-tree';
 import { SpaceTreeRow } from './vendor/docmost/client/features/page/tree/components/space-tree-row';
 import type { TreeNode } from './vendor/docmost/client/features/page/tree/model/tree-model.types';
 import treeStyles from './docmost/TreeLayout.module.css';
-import { ApiError, onAccessLost, onAccessRefresh } from './transport';
+import { ApiError } from './access';
+import { useNoteAccess } from './hostRuntime';
 
-interface Props { api: NoteApi; spaceId: string; activeNoteId: string | null; onOpen: (id: string) => void }
+interface Props { api: NoteCoreApi; spaceId: string; activeNoteId: string | null; onOpen: (id: string) => void }
 interface BranchPage { cursor: string | null; previous: (string | null)[] }
 export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
+  const { onAccessLost, onAccessRefresh } = useNoteAccess();
   const narrow = useMediaQuery('(max-width: 47.99em)');
   const [parentId, setParentId] = useState<string | null>(null);
   const [ancestors, setAncestors] = useState<{ id: string | null; title: string }[]>([]);
@@ -179,6 +181,8 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
     }
     if (start !== epoch.current) return;
     setSelected([]); setDestination(null); setMoved({ id: ids[0], spaceId: targetSpace });
+    window.dispatchEvent(new Event('note-moved'));
+    window.dispatchEvent(new Event('note-changed'));
   }
   async function perform(action: () => Promise<void>) {
     const start = epoch.current; setBusy(true); setError('');

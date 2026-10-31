@@ -1,31 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, TextInput } from '@mantine/core';
-import type { NoteApi, NoteSummary } from './model';
+import type { NoteCoreApi, NoteRelationsApi, NoteSummary } from './model';
 import { RelationNotePicker } from './RelationNotePicker';
+import { useNoteAccess } from './hostRuntime';
 
-interface Props { api: NoteApi; spaceId: string; label: string; selected: NoteSummary | null; onSelect: (note: NoteSummary | null) => void; exclude?: string[]; disabled?: boolean; relationNoteId?: string; error?: string }
+interface Props { api: NoteCoreApi & Partial<NoteRelationsApi>; relations?: NoteRelationsApi; spaceId: string; label: string; selected: NoteSummary | null; onSelect: (note: NoteSummary | null) => void; exclude?: string[]; disabled?: boolean; relationNoteId?: string; error?: string }
 
 /** Relation targets use their authorized selector; navigation keeps its existing readable-note search. */
 export function NotePicker(props: Props) {
   return props.relationNoteId
-    ? <RelationNotePicker key={props.spaceId + ':' + props.relationNoteId} api={props.api} noteId={props.relationNoteId} label={props.label} selected={props.selected} onSelect={props.onSelect} disabled={props.disabled} error={props.error}/>
+     ? <RelationNotePicker key={props.spaceId + ':' + props.relationNoteId} api={props.relations ?? props.api as NoteRelationsApi} noteId={props.relationNoteId} label={props.label} selected={props.selected} onSelect={props.onSelect} disabled={props.disabled} error={props.error}/>
     : <ReadableNotePicker {...props}/>;
 }
 
 function ReadableNotePicker({ api, spaceId, label, selected, onSelect, exclude = [], disabled = false }: Props) {
+  const access = useNoteAccess();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<NoteSummary[] | null>(null);
   const [error, setError] = useState('');
+  const generation = useRef(0);
+  const revoked = useRef(false);
+  const selection = useRef({ selected, onSelect }); selection.current = { selected, onSelect };
   useEffect(() => {
     const text = query.trim();
-    setResults(null); setError('');
-    if (!text) return;
     let alive = true;
-    const timer = window.setTimeout(() => {
-      api.findNotes(spaceId, text).then(values => { if (alive) setResults(values); }).catch(e => { if (alive) setError((e as Error).message); });
-    }, 250);
-    return () => { alive = false; window.clearTimeout(timer); };
-  }, [api, spaceId, query]);
+    let timer = 0;
+    async function load() {
+      window.clearTimeout(timer);
+      const epoch = ++generation.current;
+      setResults(null); setError('');
+      if (!text || revoked.current) return;
+      try { const values = await api.findNotes(spaceId, text); if (alive && epoch === generation.current) setResults(values); }
+      catch (failure) { if (alive && epoch === generation.current) setError((failure as Error).message); }
+    }
+    setResults(null); setError('');
+    timer = window.setTimeout(() => { void load(); }, 250);
+    const stopRefresh = access.onAccessRefresh(() => {
+      if (selection.current.selected) selection.current.onSelect(null);
+      return load();
+    });
+    const stopLost = access.onAccessLost(() => {
+      revoked.current = true; generation.current++; window.clearTimeout(timer);
+      setResults(null); setError('');
+      if (selection.current.selected) selection.current.onSelect(null);
+    });
+    return () => { alive = false; generation.current++; window.clearTimeout(timer); stopRefresh(); stopLost(); };
+  }, [api, spaceId, query, access]);
   if (selected) {
     return <div className="note-picker">
       <span>{label}: <strong>{selected.title}</strong></span>

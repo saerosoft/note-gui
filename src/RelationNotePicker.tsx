@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Group, TextInput } from '@mantine/core';
-import type { NoteApi, NoteSummary, RelationTargetPage } from './model';
-import { onAccessLost } from './transport';
+import type { NoteRelationsApi, NoteSummary, RelationTargetPage } from './model';
+import { useNoteAccess } from './hostRuntime';
+import { ApiError } from './access';
 
 interface Props {
-  api: NoteApi; noteId: string; label: string; selected: NoteSummary | null;
+  api: NoteRelationsApi; noteId: string; label: string; selected: NoteSummary | null;
   onSelect: (note: NoteSummary | null) => void; disabled?: boolean; error?: string;
 }
+interface Revalidation { resolve: () => void; reject: (reason: unknown) => void }
 
 /** The server applies relation audience/owner rules before counting and paging. */
 export function RelationNotePicker({ api, noteId, label, selected, onSelect, disabled = false, error: fieldError }: Props) {
+  const { onAccessLost, onAccessRefresh } = useNoteAccess();
   const [query, setQuery] = useState('');
   const [cursors, setCursors] = useState<string[]>([]);
   const [answer, setAnswer] = useState<RelationTargetPage | null>(null);
@@ -18,31 +21,63 @@ export function RelationNotePicker({ api, noteId, label, selected, onSelect, dis
   const [refresh, setRefresh] = useState(0);
   const [revoked, setRevoked] = useState(false);
   const generation = useRef(0);
+  const revalidation = useRef<Revalidation | undefined>(undefined);
+  const typing = useRef(false);
+  const denied = useRef(false);
+  const select = useRef(onSelect); select.current = onSelect;
   const cursor = cursors.at(-1) ?? null;
-  useEffect(() => onAccessLost(() => {
-    generation.current++;
-    setRevoked(true); setAnswer(null); setError(''); setLoading(false);
-    onSelect(null);
-  }), [onSelect]);
+  useEffect(() => {
+    function retire() {
+      const pending = revalidation.current; revalidation.current = undefined;
+      // No projection remains to install after retirement; the session still awaits guarded adapter work.
+      pending?.resolve();
+    }
+    const lost = onAccessLost(() => {
+      denied.current = true; generation.current++; retire();
+      setRevoked(true); setAnswer(null); setError(''); setLoading(false); select.current(null);
+    });
+    const refresh = onAccessRefresh(() => {
+      if (denied.current) return Promise.reject(new ApiError('Relation target access is no longer available.', 'ACCESS_DENIED'));
+      generation.current++; retire(); typing.current = false;
+      setAnswer(null); setError(''); setLoading(true); setCursors([]); select.current(null);
+      const pending = new Promise<void>((resolve, reject) => { revalidation.current = { resolve, reject }; });
+      setRefresh(value => value + 1);
+      return pending;
+    });
+    return () => { generation.current++; retire(); lost(); refresh(); };
+  }, [onAccessLost, onAccessRefresh]);
   useEffect(() => {
     setAnswer(null); setError('');
-    if (revoked || selected) { setLoading(false); return; }
+    if (revoked || selected) { setLoading(!!revalidation.current && !revoked); return; }
     let alive = true;
-    const epoch = generation.current;
-    setLoading(true);
-    const timer = window.setTimeout(() => {
-      api.findRelationNotes(noteId, query.trim(), cursor).then(page => {
-        if (alive && epoch === generation.current) setAnswer(page);
-      }).catch(failure => {
-        if (alive && epoch === generation.current) setError((failure as Error).message);
-      }).finally(() => {
+    let timer = 0;
+    const pending = revalidation.current;
+    const load = async () => {
+      window.clearTimeout(timer);
+      const epoch = ++generation.current;
+      setAnswer(null); setError('');
+      setLoading(true);
+      try {
+        const page = await api.findRelationNotes(noteId, query.trim(), cursor);
+        if (alive && epoch === generation.current) {
+          setAnswer(page);
+          if (pending && pending === revalidation.current) { revalidation.current = undefined; pending.resolve(); }
+        }
+      } catch (failure) {
+        if (alive && epoch === generation.current) {
+          setError((failure as Error).message);
+          if (pending && pending === revalidation.current) { revalidation.current = undefined; pending.reject(failure); }
+        }
+      } finally {
         if (alive && epoch === generation.current) setLoading(false);
-      });
-    }, 250);
-    return () => { alive = false; window.clearTimeout(timer); };
+      }
+    };
+    const debounce = typing.current && !pending; typing.current = false; setLoading(true);
+    if (debounce) timer = window.setTimeout(() => { void load(); }, 250); else void load();
+    return () => { alive = false; generation.current++; window.clearTimeout(timer); };
   }, [api, noteId, query, cursor, refresh, revoked, selected]);
   if (revoked) return <p role="alert">접근 권한이 변경되었습니다. 노트를 다시 열어 주세요.</p>;
-  if (selected) return <div className="note-picker">
+  if (selected && !revalidation.current) return <div className="note-picker">
     <span>{label}: <strong>{selected.title}</strong></span>
     <Button size="xs" variant="subtle" disabled={disabled} onClick={() => onSelect(null)}>다시 선택</Button>
     {fieldError && <p role="alert">{fieldError}</p>}
@@ -58,7 +93,7 @@ export function RelationNotePicker({ api, noteId, label, selected, onSelect, dis
       disabled={disabled}
       maxLength={200}
       error={fieldError ? <span role="alert">{fieldError}</span> : undefined}
-      onChange={event => { setQuery(event.currentTarget.value); setCursors([]); setAnswer(null); setError(''); }}
+      onChange={event => { typing.current = event.currentTarget.value !== query; setQuery(event.currentTarget.value); setCursors([]); setAnswer(null); setError(''); }}
       onKeyDown={event => { if (event.key === 'Enter') event.preventDefault(); }}/>
     {loading && <p role="status">연결할 노트를 읽는 중…</p>}
     {error && <div><p role="alert">{error}</p><Button size="xs" variant="subtle" disabled={disabled || loading} onClick={() => setRefresh(value => value + 1)}>검색 다시 시도</Button></div>}

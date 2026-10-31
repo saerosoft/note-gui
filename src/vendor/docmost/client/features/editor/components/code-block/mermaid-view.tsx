@@ -7,8 +7,10 @@ import { Button, Group, Modal, Textarea, useComputedColorScheme } from "@mantine
 import DOMPurify from "dompurify";
 import { useDiagramSource } from "@knowledge/docmost/useDiagramSource";
 import { useDiagramUnload } from "@knowledge/docmost/useDiagramUnload";
+import { useNoteAccess } from "@knowledge/hostRuntime";
 
 export default function MermaidView(props: NodeViewProps) {
+  const access = useNoteAccess();
   const { t } = useTranslation();
   const computedColorScheme = useComputedColorScheme();
   const stored = useDiagramSource(props);
@@ -18,6 +20,7 @@ export default function MermaidView(props: NodeViewProps) {
   const [source, setSource] = useState("");
   const [dirty, setDirty] = useState(false);
   useDiagramUnload(opened && dirty);
+  useEffect(() => access.onAccessLost(() => { setSource(""); setPreview(""); setError(""); setDirty(false); setOpened(false); }), [access]);
 
   useEffect(() => {
     let active = true;
@@ -40,7 +43,7 @@ export default function MermaidView(props: NodeViewProps) {
     <Group justify="space-between"><strong>Mermaid</strong><Button size="xs" disabled={!stored.loaded} onClick={() => { setSource(stored.source); setDirty(false); setOpened(true); }}>{stored.editable ? "원본 편집" : "원본 보기"}</Button></Group>
     <div className={classes.mermaid} contentEditable={false} dangerouslySetInnerHTML={{ __html: preview }}/>
     {(stored.error || error) && <p className={classes.error} role="alert">{stored.error || error} · 원문은 보존됩니다.</p>}
-    <Modal opened={opened} onClose={close} title="Mermaid" closeOnEscape={!stored.busy} closeButtonProps={{ 'aria-label': 'Mermaid 닫기' }}>
+    <Modal opened={opened && stored.loaded} keepMounted={opened} onClose={close} title="Mermaid" closeOnEscape={!stored.busy} closeButtonProps={{ 'aria-label': 'Mermaid 닫기' }}>
       <Textarea label="Mermaid 원본" value={source} onChange={event => { setSource(event.currentTarget.value); setDirty(true); }} readOnly={!stored.editable || stored.busy} autosize minRows={8}/>
       {stored.error && <p role="alert">{stored.error}</p>}
       <Button loading={stored.busy} disabled={!stored.editable} onClick={async () => { if (await stored.saveData(source)) { setDirty(false); setOpened(false); } }}>첨부 개정 저장 후 노트에 적용</Button>

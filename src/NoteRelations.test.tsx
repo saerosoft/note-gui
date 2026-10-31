@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { MantineProvider } from '@mantine/core';
-import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
+import { render } from './test/legacyRender';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { Note, NoteApi, Page, Relation, RelationEvidence } from './model';
 import { NoteRelations } from './NoteRelations';
@@ -92,7 +93,7 @@ it('decides a proposed relation against its revision with the given reason', asy
 });
 it('records a typed relation to a note picked by title with its validity and refreshes the note revision', async () => {
   const value = fixture(); show(value);
-  expect(screen.getByRole('button', { name: '관계 추가' })).toHaveProperty('disabled', true);
+  expect(await screen.findByRole('button', { name: '관계 추가' })).toHaveProperty('disabled', true);
   fireEvent.change(await screen.findByRole('textbox', { name: '연결할 노트' }), { target: { value: 'Tar' } });
   fireEvent.click(await screen.findByRole('button', { name: 'Target note' }));
   expect(value.findRelationNotes).toHaveBeenLastCalledWith('note', 'Tar', null);

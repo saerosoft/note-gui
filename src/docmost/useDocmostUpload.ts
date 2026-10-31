@@ -2,9 +2,10 @@ import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { pageEditorAtom } from '../vendor/docmost/client/features/editor/atoms/editor-atoms';
 import { useAttachments } from '../editor/attachmentContext';
-import { onAccessLost } from '../transport';
+import { useNoteAccess } from '../hostRuntime';
 
 export function useDocmostUpload() {
+  const { onAccessLost } = useNoteAccess();
   const { api, noteId, editable } = useAttachments();
   const editor = useAtomValue(pageEditorAtom);
   const [busy, setBusy] = useState(false);

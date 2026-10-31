@@ -108,7 +108,7 @@ it('uses the GUI language and reserves Escape for canvas editing while guarding 
   render(view());
   fireEvent.click(await screen.findByRole('button', { name: '드로잉 편집' }));
   await screen.findByText('ko-KR');
-  fireEvent.click(screen.getByRole('button', { name: 'Change drawing' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Change drawing' }));
   fireEvent.keyDown(screen.getByRole('textbox', { name: 'Canvas text' }), { key: 'Escape', code: 'Escape', bubbles: true });
   expect(confirm).not.toHaveBeenCalled();
   expect(screen.getByRole('dialog')).toBeTruthy();

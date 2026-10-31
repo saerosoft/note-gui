@@ -10,11 +10,12 @@ import { useDiagramSource } from "@knowledge/docmost/useDiagramSource";
 import { useDiagramUnload } from "@knowledge/docmost/useDiagramUnload";
 import { excalidrawLanguageCode, loadExcalidraw } from "@knowledge/docmost/excalidraw";
 import { ExcalidrawPreview } from "@knowledge/docmost/ExcalidrawPreview";
-import { onAccessLost } from "@knowledge/transport";
+import { useNoteAccess } from "@knowledge/hostRuntime";
 
 const ExcalidrawComponent = lazy(() => loadExcalidraw().then(module => ({ default: module.Excalidraw })));
 
 export default function ExcalidrawView(props: NodeViewProps) {
+  const { onAccessLost } = useNoteAccess();
   const { t, i18n } = useTranslation();
   const stored = useDiagramSource(props);
   const [excalidrawAPI, setExcalidrawAPI] = useState<ExcalidrawImperativeAPI | null>(null);
@@ -66,7 +67,7 @@ export default function ExcalidrawView(props: NodeViewProps) {
   }, [stored.busy, dirty, close, t]);
 
   return <NodeViewWrapper ref={stored.container} data-drag-handle contentEditable={false}>
-    <Modal.Root opened={opened} onClose={handleClose} fullScreen closeOnEscape={false}>
+    <Modal.Root opened={opened && stored.loaded} keepMounted={opened} onClose={handleClose} fullScreen closeOnEscape={false}>
       <Modal.Overlay/><Modal.Content><Modal.Header><Modal.Title>Excalidraw</Modal.Title><Modal.CloseButton aria-label="Excalidraw 닫기" disabled={stored.busy}/></Modal.Header><Modal.Body pos="relative">
         <LoadingOverlay visible={stored.busy}/>
         <Group justify="flex-end" wrap="nowrap" bg="var(--mantine-color-body)" p="xs">

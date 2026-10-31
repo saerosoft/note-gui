@@ -10,6 +10,7 @@ process.env.TMP = runtimeDirectory;
 
 export default defineConfig({
   testDir: './e2e',
+  testIgnore: 'independent.spec.ts',
   workers: 1,
   timeout: 60_000,
   expect: { timeout: 10_000 },

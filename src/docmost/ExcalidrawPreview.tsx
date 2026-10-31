@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { onAccessLost } from '../transport';
+import { useNoteAccess } from '../hostRuntime';
 import { renderExcalidrawPreview } from './excalidraw';
 
 interface Preview { source: string; url?: string; empty: boolean; omittedExternalMedia: boolean }
 export function ExcalidrawPreview({ source, theme }: { source?: string; theme: 'light' | 'dark' }) {
+  const { onAccessLost } = useNoteAccess();
   const { t } = useTranslation();
   const [preview, setPreview] = useState<Preview>();
   const [failure, setFailure] = useState<string>();

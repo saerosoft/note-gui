@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Independent note host</title>
+  <link rel="stylesheet" href="/note-gui/note-gui.css">
+</head>
+<body>
+  <div id="notes"></div>
+  <script type="module">
+    import { createLocalNoteApi, createNoteAccess, mountNoteCoreGui } from '/note-gui/note-gui.js';
+    const api = createLocalNoteApi({ namespace: 'independent-example' });
+    const access = createNoteAccess();
+    const host = { access, destinations: { home: '/example/' } };
+    const mounted = mountNoteCoreGui(document.getElementById('notes'), { api, host });
+    window.noteExample = { api, access, host, mounted };
+    window.addEventListener('pagehide', () => mounted.unmount(), { once: true });
+  </script>
+</body>
+</html>

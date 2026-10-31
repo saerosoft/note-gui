@@ -17,3 +17,4 @@ test:
 	@$(PNPM) test
 
 verify: test build
+	@$(PNPM) test:package

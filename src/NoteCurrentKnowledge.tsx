@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import type { CurrentKnowledgeItem, CurrentKnowledgePage, NoteApi } from './model';
+import type { CurrentKnowledgeItem, CurrentKnowledgePage, NoteKnowledgeContextApi } from './model';
 import { NoteEvidence } from './NoteEvidence';
 import { NoteAccumulationChange } from './NoteAccumulationChange';
-import { webUrl } from './webOrigin';
+import { HostLink } from './hostRuntime';
 import { useNoteDateTime } from './dateTime';
 
 const claims: Record<CurrentKnowledgeItem['claimKind'], string> = {
   CONFIRMED_FACT: '확정 사실', REQUEST: '제안·요청', INFERENCE: '추정 · 확인 전', UNSPECIFIED: '확정 여부 미분류',
 };
 
-export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteApi; noteId: string; spaceId: string }) {
+export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteKnowledgeContextApi; noteId: string; spaceId: string }) {
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState<CurrentKnowledgePage>();
   const [error, setError] = useState('');
@@ -39,7 +39,7 @@ export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteApi; n
   </section>;
 }
 
-function CurrentItem({ api, item, spaceId }: { api: NoteApi; item: CurrentKnowledgeItem; spaceId: string }) {
+function CurrentItem({ api, item, spaceId }: { api: NoteKnowledgeContextApi; item: CurrentKnowledgeItem; spaceId: string }) {
   const date = useNoteDateTime();
   const [expanded, setExpanded] = useState(false);
   return <article className="current-knowledge-item">
@@ -48,7 +48,7 @@ function CurrentItem({ api, item, spaceId }: { api: NoteApi; item: CurrentKnowle
     <details><summary>근거·반영 기록 · {item.evidenceCount}</summary>
       <NoteEvidence evidence={item.evidence} evidenceCount={item.evidenceCount}/>
       <p className="context-muted">반영 시각 <time dateTime={item.appliedAt}>{date(item.appliedAt)}</time> · 개정 {item.resultRevision}</p>
-      <p className="applied-rules">적용 규칙: {item.rules.length ? item.rules.map(rule => <a key={rule.versionId} href={webUrl(`/spaces/${encodeURIComponent(spaceId)}/rules?stage=history&ruleset=${encodeURIComponent(rule.rulesetId)}&version=${encodeURIComponent(rule.versionId)}`)} target="_blank" rel="noreferrer">{rule.name} v{rule.versionNumber}</a>) : '적용 기록 없음'}</p>
+       <p className="applied-rules">적용 규칙: {item.rules.length ? item.rules.map(rule => <HostLink key={rule.versionId} destination={{ kind: 'rule', spaceId, rulesetId: rule.rulesetId, versionId: rule.versionId }}>{rule.name} v{rule.versionNumber}</HostLink>) : '적용 기록 없음'}</p>
       <div className="context-actions"><button type="button" aria-expanded={expanded} onClick={() => setExpanded(value => !value)}>{expanded ? '변경 전후·반영 기준 닫기' : '변경 전후·반영 기준 보기'}</button></div>
       {expanded && <NoteAccumulationChange api={api} id={item.id}/>}
     </details>

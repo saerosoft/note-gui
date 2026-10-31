@@ -1,9 +1,11 @@
 import { createContext, useContext } from 'react';
-import type { NoteApi } from '../model';
+import type { NoteCoreApi } from '../model';
+import { useNoteCore } from '../hostRuntime';
 
-export const AttachmentContext = createContext<{ api: NoteApi; noteId: string; editable: boolean } | null>(null);
+export const AttachmentContext = createContext<{ api: NoteCoreApi; noteId: string; editable: boolean } | null>(null);
 export function useAttachments() {
   const value = useContext(AttachmentContext);
-  if (!value) throw new Error('Missing pane attachment context');
-  return value;
+  const api = useNoteCore(value?.api);
+  if (!value || !api) throw new Error('Missing pane attachment context');
+  return { ...value, api };
 }

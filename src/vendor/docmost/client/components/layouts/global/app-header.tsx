@@ -10,7 +10,7 @@ export interface AppHeaderProps {
   desktopOpened: boolean;
   toggleMobile: () => void;
   toggleDesktop: () => void;
-  homeHref: string;
+  homeHref?: string;
   askHref?: string;
   onNavigate: MouseEventHandler<HTMLAnchorElement>;
   onSearch: () => void;
@@ -31,11 +31,11 @@ export function AppHeader({ mobileOpened, desktopOpened, toggleMobile, toggleDes
         <SidebarToggle aria-label="페이지 탐색" aria-controls="page-navigation" opened={desktopOpened}
           onClick={toggleDesktop} visibleFrom="sm" size="sm"/>
       </Tooltip>
-      <Anchor href={homeHref} c="inherit" underline="never" onClick={onNavigate} aria-label="Knowledge Engine 홈">
+      <Anchor component={homeHref ? 'a' : 'span'} href={homeHref} c="inherit" underline="never" onClick={homeHref ? onNavigate : undefined} aria-label="Knowledge Engine 홈">
         <Box hiddenFrom="sm"><IconBook2 size={22} stroke={1.7}/></Box>
         <Text component="span" size="lg" fw={600} visibleFrom="sm">Knowledge Engine</Text>
       </Anchor>
-      <a href={homeHref} className={classes.link + ' desktop-home-link'} onClick={onNavigate}>홈</a>
+      {homeHref && <a href={homeHref} className={classes.link + ' desktop-home-link'} onClick={onNavigate}>홈</a>}
     </Group>
     <Group visibleFrom="md"><SearchControl aria-label="노트 검색" disabled={searchDisabled} onClick={onSearch}/></Group>
     <Group gap="sm" wrap="nowrap">

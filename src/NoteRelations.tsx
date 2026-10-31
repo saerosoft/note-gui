@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Group, Select, TextInput } from '@mantine/core';
-import type { Note, NoteApi, NoteSummary, Page, Relation, RelationEvidence, RelationKind, RelationPredicate, RelationReviewState } from './model';
+import type { Note, NoteCoreApi, NoteRelationsApi, NoteSummary, Page, Relation, RelationEvidence, RelationKind, RelationPredicate, RelationReviewState } from './model';
 import { NotePicker } from './NotePicker';
-import { ApiError, onAccessLost } from './transport';
-import { webUrl } from './webOrigin';
+import { ApiError } from './access';
+import { HostLink, useNoteAccess } from './hostRuntime';
 
 const PREDICATES: { value: RelationPredicate; label: string }[] = [
   { value: 'RELATED_TO', label: '관련' },
@@ -14,14 +14,16 @@ const PREDICATES: { value: RelationPredicate; label: string }[] = [
 const KINDS: Record<RelationKind, string> = { RECORDED: '기록', INFERRED: '추론', UNCERTAIN: '불확실' };
 const STATES: Record<RelationReviewState, string> = { PROPOSED: '검토 대기', ACCEPTED: '확정', REJECTED: '거절' };
 
-interface Props { api: NoteApi; note: Note; onOpen: (id: string) => void; onRevision: (note: Note) => void }
+interface Props { api: NoteCoreApi; relations?: NoteRelationsApi; note: Note; onOpen: (id: string) => void; onRevision: (note: Note) => void }
 
 /** Typed relation assertions of a note: a person records accepted relations here and decides relations extracted from evidence. */
 export function NoteRelations(props: Props) {
   return <NoteRelationsPanel key={props.note.id + ':' + props.note.spaceId + ':' + props.note.visibility} {...props}/>;
 }
 
-function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
+function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, onRevision }: Props) {
+  const relationApi = suppliedRelations ?? api as NoteCoreApi & NoteRelationsApi;
+  const { onAccessLost, onAccessRefresh } = useNoteAccess();
   const [relations, setRelations] = useState<Page<Relation>>({ items: [], nextCursor: null });
   const [target, setTarget] = useState<NoteSummary | null>(null);
   const [targetError, setTargetError] = useState('');
@@ -30,11 +32,14 @@ function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
   const [validTo, setValidTo] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [refresh, setRefresh] = useState(0);
   const [accessLost, setAccessLost] = useState(false);
   const mounted = useRef(false);
   const revoked = useRef(false);
   const generation = useRef(0);
   const inFlight = useRef(false);
+  const formOpened = useRef(false);
   function current(epoch = generation.current) {
     return mounted.current && !revoked.current && generation.current === epoch;
   }
@@ -43,19 +48,23 @@ function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
     const off = onAccessLost(() => {
       revoked.current = true; generation.current++;
       setAccessLost(true); setRelations({ items: [], nextCursor: null }); setTarget(null);
-      setTargetError(''); setPredicate('RELATED_TO'); setValidFrom(''); setValidTo(''); setError(''); setBusy(false);
+      setTargetError(''); setPredicate('RELATED_TO'); setValidFrom(''); setValidTo(''); setError(''); setBusy(false); setLoaded(false);
     });
-    return () => { mounted.current = false; generation.current++; off(); };
+    const stopRefresh = onAccessRefresh(() => {
+      generation.current++; setLoaded(false); setRelations({ items: [], nextCursor: null }); setTarget(null);
+      setRefresh(value => value + 1);
+    });
+    return () => { mounted.current = false; generation.current++; off(); stopRefresh(); };
   }, []);
   useEffect(() => {
     if (revoked.current) return;
     let alive = true;
     const epoch = generation.current;
-    setError(''); setBusy(true); setRelations({ items: [], nextCursor: null });
-    api.relations(note.id, null).then(value => { if (alive && current(epoch)) setRelations(value); })
+    setError(''); setBusy(true); setLoaded(false); setRelations({ items: [], nextCursor: null });
+    relationApi.relations(note.id, null).then(value => { if (alive && current(epoch)) { formOpened.current = true; setRelations(value); setLoaded(true); } })
       .catch(e => { if (alive && current(epoch)) setError(e.message); }).finally(() => { if (alive && current(epoch)) setBusy(false); });
     return () => { alive = false; };
-  }, [api, note.id, note.revision]);
+  }, [relationApi, note.id, note.revision, refresh]);
   async function perform(action: (isCurrent: () => boolean) => Promise<void>) {
     if (!current() || inFlight.current) return;
     const epoch = generation.current;
@@ -77,9 +86,9 @@ function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
     const reason = window.prompt(decision === 'ACCEPTED' ? '확정 이유를 입력해 주세요.' : '거절 이유를 입력해 주세요.')?.trim();
     if (!reason) return;
     void perform(async isCurrent => {
-      await api.decideRelation(relation.id, relation.revision, decision, reason);
+      await relationApi.decideRelation(relation.id, relation.revision, decision, reason);
       if (!isCurrent()) return;
-      const page = await api.relations(note.id, null);
+      const page = await relationApi.relations(note.id, null);
       if (isCurrent()) setRelations(page);
     });
   }
@@ -98,32 +107,32 @@ function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
       <p>{value.direction === 'OUTGOING' ? '이 노트 → 연결된 노트' : '연결된 노트 → 이 노트'}</p>
       {value.actorLabel && <p>기록자: {value.actorLabel}</p>}
       <p style={{ whiteSpace: 'pre-wrap' }}>{value.provenance}</p>
-      {value.evidenceCount > 0 && <SupportingEvidence api={api} relationId={value.id}/>}
+      {value.evidenceCount > 0 && <SupportingEvidence api={relationApi} relationId={value.id}/>}
       {note.canEdit && value.reviewState === 'PROPOSED' && <Group>
         <Button size="xs" disabled={busy} onClick={() => decide(value, 'ACCEPTED')}>관계 확정</Button>
         <Button size="xs" variant="outline" disabled={busy} onClick={() => decide(value, 'REJECTED')}>관계 거절</Button>
       </Group>}
     </article>)}
-    {!relations.items.length && !busy && <p>아직 관계가 없습니다.</p>}
+    {!relations.items.length && !busy && !error && <p>아직 관계가 없습니다.</p>}
     {relations.nextCursor && <Button disabled={busy} onClick={() => void perform(async isCurrent => {
-      const page = await api.relations(note.id, relations.nextCursor);
+      const page = await relationApi.relations(note.id, relations.nextCursor);
       if (isCurrent()) setRelations({ items: [...relations.items, ...page.items].slice(-100), nextCursor: page.nextCursor });
     })}>관계 더 보기</Button>}
-    {note.canEdit && <form onSubmit={event => {
+    {note.canEdit && formOpened.current && <form hidden={!loaded} onSubmit={event => {
       event.preventDefault();
-      if (!current() || !note.canEdit || !target) return;
+      if (!current() || !loaded || !note.canEdit || !target) return;
       void perform(async isCurrent => {
-        await api.relate(note.id, target.id, predicate, { validFrom: validFrom ? new Date(validFrom).toISOString() : null, validTo: validTo ? new Date(validTo).toISOString() : null });
+        await relationApi.relate(note.id, target.id, predicate, { validFrom: validFrom ? new Date(validFrom).toISOString() : null, validTo: validTo ? new Date(validTo).toISOString() : null });
         if (!isCurrent()) return;
         setTarget(null); setValidFrom(''); setValidTo('');
-        const page = await api.relations(note.id, null);
+        const page = await relationApi.relations(note.id, null);
         if (!isCurrent()) return;
         setRelations(page);
         const updated = await api.note(note.id);
         if (isCurrent()) onRevision(updated);
       });
     }}>
-      <NotePicker api={api} spaceId={note.spaceId} relationNoteId={note.id} label="연결할 노트" selected={target} onSelect={value => { if (current()) { setTarget(value); setTargetError(''); } }} disabled={busy} error={targetError}/>
+      <NotePicker api={api} relations={relationApi} spaceId={note.spaceId} relationNoteId={note.id} label="연결할 노트" selected={target} onSelect={value => { if (current()) { setTarget(value); setTargetError(''); } }} disabled={busy} error={targetError}/>
       <Select label="관계" data={PREDICATES} value={predicate} onChange={value => { if (value && current()) setPredicate(value as RelationPredicate); }} allowDeselect={false}/>
       <TextInput type="date" label="효력 시작" value={validFrom} onChange={event => { if (current()) setValidFrom(event.currentTarget.value); }}/>
       <TextInput type="date" label="효력 종료" value={validTo} min={validFrom || undefined} onChange={event => { if (current()) setValidTo(event.currentTarget.value); }}/>
@@ -132,7 +141,7 @@ function NoteRelationsPanel({ api, note, onOpen, onRevision }: Props) {
   </>;
 }
 
-function SupportingEvidence({ api, relationId }: { api: NoteApi; relationId: string }) {
+function SupportingEvidence({ api, relationId }: { api: NoteRelationsApi; relationId: string }) {
   const [open, setOpen] = useState(false);
   return <section>
     <Button size="xs" variant="subtle" aria-expanded={open} onClick={() => setOpen(value => !value)}>{open ? '관계 근거 접기' : '관계 근거 보기'}</Button>
@@ -140,7 +149,8 @@ function SupportingEvidence({ api, relationId }: { api: NoteApi; relationId: str
   </section>;
 }
 
-function SupportingEvidencePage({ api, relationId }: { api: NoteApi; relationId: string }) {
+function SupportingEvidencePage({ api, relationId }: { api: NoteRelationsApi; relationId: string }) {
+  const { onAccessLost } = useNoteAccess();
   const [cursors, setCursors] = useState<string[]>([]);
   const [page, setPage] = useState<Page<RelationEvidence>>();
   const [error, setError] = useState('');
@@ -158,7 +168,7 @@ function SupportingEvidencePage({ api, relationId }: { api: NoteApi; relationId:
   return <section aria-label="관계 근거">
     {!page.items.length && <p>현재 볼 수 있는 근거가 없습니다.</p>}
     {page.items.map(value => <article key={value.id}>
-      <a href={webUrl(`/spaces/${encodeURIComponent(value.spaceId)}/source-revisions/${encodeURIComponent(value.sourceRevisionId)}`)} target="_blank" rel="noreferrer">{value.sourceTitle}</a>
+      <HostLink destination={{ kind: 'source', spaceId: value.spaceId, revisionId: value.sourceRevisionId }}>{value.sourceTitle}</HostLink>
       <p>원본 버전 {value.sourceRevision} · {value.locator}</p>
       <blockquote style={{ whiteSpace: 'pre-wrap' }}>{value.excerpt}</blockquote>
       {value.excerptTruncated && <p>일부 내용입니다. 전체 문맥은 원본에서 확인하세요.</p>}

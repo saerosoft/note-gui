@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import type { NoteApi, NoteFile, Page } from './model';
-import { onAccessLost, onAccessRefresh } from './transport';
+import type { NoteCoreApi, NoteFile, Page } from './model';
+import { useNoteAccess, useNoteHost } from './hostRuntime';
 
-interface Props { api: NoteApi; noteId: string; revision: number }
+interface Props { api: NoteCoreApi; noteId: string; revision: number }
 const date = (value: string) => new Date(value).toLocaleString('ko-KR', { dateStyle: 'medium', timeStyle: 'short' });
 
 export function NoteAttachments({ api, noteId, revision }: Props) {
@@ -10,6 +10,21 @@ export function NoteAttachments({ api, noteId, revision }: Props) {
 }
 
 function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
+  const { onAccessLost, onAccessRefresh, generation } = useNoteAccess();
+  const host = useNoteHost();
+  const alive = useRef(true);
+  useEffect(() => () => { alive.current = false; }, []);
+  async function download(file: NoteFile) {
+    const epoch = generation;
+    try {
+      const blob = await api.attachment(file.id, 1);
+      if (!alive.current || epoch !== accessGeneration.current) return;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a'); link.href = url; link.download = file.fileName; link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    } catch (failure) { if (alive.current && epoch === accessGeneration.current) setError((failure as Error).message); }
+  }
+  const accessGeneration = useRef(generation); accessGeneration.current = generation;
   const [cursor, setCursor] = useState<string | null>(null);
   const [previous, setPrevious] = useState<(string | null)[]>([]);
   const [page, setPage] = useState<Page<NoteFile>>();
@@ -61,7 +76,7 @@ function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
     {page && <>
       {!page.items.length && <p>현재 볼 수 있는 첨부파일이 없습니다.</p>}
       {page.items.map(file => <article key={file.id}>
-        <a href={`/api/files/${encodeURIComponent(file.id)}`} download={file.fileName}>{file.fileName}</a>
+         {host.attachmentUrl?.(file.id, 1) ? <a href={host.attachmentUrl(file.id, 1)} download={file.fileName}>{file.fileName}</a> : <button type="button" onClick={() => void download(file)}>{file.fileName}</button>}
         <p className="context-muted">개정 {file.revision} · {file.mediaType} · {file.byteSize.toLocaleString('ko-KR')} 바이트</p>
         <time dateTime={file.createdAt}>{date(file.createdAt)}</time>
         <details><summary>파일 무결성 정보</summary><p className="context-muted">SHA-256: <code>{file.checksum}</code></p></details>

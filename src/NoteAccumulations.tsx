@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import type { NoteAccumulation, NoteApi, Page } from './model';
+import type { NoteAccumulation, NoteKnowledgeContextApi, Page } from './model';
 import { NoteEvidence } from './NoteEvidence';
 import { NoteAccumulationChange } from './NoteAccumulationChange';
-import { webUrl } from './webOrigin';
+import { HostLink } from './hostRuntime';
 import { useNoteDateTime } from './dateTime';
 
 const operationLabels: Record<string, string> = { CREATE_NOTE: '노트 생성', APPEND_NOTE: '추가 제안 반영', REPLACE_NOTE: '교체 제안 반영' };
 
-export function NoteAccumulations({ api, noteId }: { api: NoteApi; noteId: string }) {
+export function NoteAccumulations({ api, noteId }: { api: NoteKnowledgeContextApi; noteId: string }) {
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState<Page<NoteAccumulation>>();
   const [error, setError] = useState('');
@@ -36,21 +36,20 @@ export function NoteAccumulations({ api, noteId }: { api: NoteApi; noteId: strin
   </section>;
 }
 
-function Accumulation({ api, item }: { api: NoteApi; item: NoteAccumulation }) {
+function Accumulation({ api, item }: { api: NoteKnowledgeContextApi; item: NoteAccumulation }) {
   const date = useNoteDateTime();
   const [expanded, setExpanded] = useState(false);
-  const path = `/spaces/${encodeURIComponent(item.spaceId)}`;
   return <article className="accumulation-item">
     <details><summary><span className="accumulation-heading"><span>{operationLabels[item.kind] || item.kind}</span>{' · '}<span>개정 {item.resultRevision}</span></span>{' · '}<time className="context-muted" dateTime={item.appliedAt}>{date(item.appliedAt)}</time></summary>
     <h3>{item.title}</h3>
     <p className="preserve">{item.preview}</p>
     <p className="context-muted">반영 시각 <time dateTime={item.appliedAt}>{date(item.appliedAt)}</time> · {item.actorName || '알 수 없는 사용자'} · {item.automatic ? '정책에 따라 자동 반영' : `${item.reviewerName || '알 수 없는 사용자'} 검토 후 반영`}</p>
     <NoteEvidence evidence={item.evidence} evidenceCount={item.evidenceCount}/>
-    <p className="applied-rules">적용 규칙: {item.rules.length ? item.rules.map(rule => <a key={rule.versionId} href={webUrl(`${path}/rules?stage=history&ruleset=${encodeURIComponent(rule.rulesetId)}&version=${encodeURIComponent(rule.versionId)}`)} target="_blank" rel="noreferrer">{rule.name} v{rule.versionNumber}</a>) : '적용 기록 없음'}</p>
+     <p className="applied-rules">적용 규칙: {item.rules.length ? item.rules.map(rule => <HostLink key={rule.versionId} destination={{ kind: 'rule', spaceId: item.spaceId, rulesetId: rule.rulesetId, versionId: rule.versionId }}>{rule.name} v{rule.versionNumber}</HostLink>) : '적용 기록 없음'}</p>
     <div className="context-actions">
       <button type="button" aria-expanded={expanded} onClick={() => setExpanded(value => !value)}>{expanded ? '변경 전후·반영 기준 닫기' : '변경 전후·반영 기준 보기'}</button>
-      <a href={webUrl(`${path}/reviews?changeSet=${encodeURIComponent(item.changeSetId)}&operation=${encodeURIComponent(item.id)}`)} target="_blank" rel="noreferrer">반영 기록</a>
-      <a href={webUrl(`${path}/rules?stage=improvements`)} target="_blank" rel="noreferrer">규칙 개선 제안</a>
+       <HostLink destination={{ kind: 'review', spaceId: item.spaceId, id: item.changeSetId, reviewKind: 'changeSet', operationId: item.id }}>반영 기록</HostLink>
+       <HostLink destination={{ kind: 'ruleImprovements', spaceId: item.spaceId }}>규칙 개선 제안</HostLink>
     </div>
     {expanded && <NoteAccumulationChange api={api} id={item.id}/>}
     </details>

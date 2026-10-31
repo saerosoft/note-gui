@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { NoteApi, Space } from './model';
-import { clearAccess, onAccessLost, refreshAccess } from './transport';
+import type { NoteCoreApi, Space } from './model';
+import { useNoteAccess, useNoteAuthorityRefresh } from './hostRuntime';
 
 // A 30-second interval and deadline bound stale display to 60 seconds, excluding browser scheduling; focus/visibility also checks.
 const ACCESS_CHECK_INTERVAL = 30_000;
@@ -14,7 +14,9 @@ function withinAccessDeadline<T>(operation: Promise<T>): Promise<T> {
   return Promise.race([operation, deadline]).finally(() => window.clearTimeout(timer));
 }
 
-export function useSpaceAccess(api: NoteApi) {
+export function useSpaceAccess(api: NoteCoreApi) {
+  const { revoke: clearAccess, onAccessLost } = useNoteAccess();
+  const refreshAccess = useNoteAuthorityRefresh();
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [ready, setReady] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -57,7 +59,7 @@ export function useSpaceAccess(api: NoteApi) {
     } finally {
       if (sequence === request.current) pending.current = false;
     }
-  }, [api]);
+  }, [api, clearAccess, refreshAccess]);
 
   useEffect(() => {
     active.current = true;

@@ -137,7 +137,8 @@
       "upstreamSha256": "24ff933e2addadc7eb404d4831ce988a8e19a6da77f0b76ceb0522086b34a46a",
       "changes": [
         "Keeps the core title/body/toolbar composition with explicit authorized pane inputs and attachment context; removes global page queries, preferences and Enterprise controls.",
-        "Adds a pane-controlled fixed-toolbar toggle, hidden by default, and an optional byline between the retained title and body editors."
+        "Adds a pane-controlled fixed-toolbar toggle, hidden by default, and an optional byline between the retained title and body editors.",
+        "Accepts the reusable core API without requiring knowledge-context or relation methods."
       ]
     },
     {
@@ -420,7 +421,9 @@
       "changes": [
         "Keeps the core node card and edit modal with authorized immutable XML attachments. Uses explicit HTTPS origin/window message validation, an XML editor when unconfigured, dirty-state protection and late-write guards.",
         "Uses a non-portaled full-screen diagram dialog within the pane subtree and labels its close control. The approved embed occupies the native canvas; XML is available in a disclosure and remains read-only while the embed is active, with direct XML editing retained when no embed is configured.",
-        "Separates Modal content and viewport classNames so full-screen sizing keeps the native horizontal flex layout and anchors a non-portaled dialog at the viewport origin."
+        "Separates Modal content and viewport classNames so full-screen sizing keeps the native horizontal flex layout and anchors a non-portaled dialog at the viewport origin.",
+        "Uses the injected access lifecycle, clears cached XML on revocation and withholds the preserved dirty dialog during attachment revalidation.",
+        "Keeps the iframe edit/view URL and verified native window stable during temporary revalidation, including pending autosave after hidden-modal ref detachment."
       ]
     },
     {
@@ -431,7 +434,8 @@
         "Keeps the core node card, local Excalidraw canvas and dirty modal flow. Reopens and serializes full scenes through immutable authorized attachments; removes upstream storage, library persistence and CDN path rewriting.",
         "Portals the diagram dialog to the document body so its controls remain inside the viewport in either editing pane, and labels its close control.",
         "Use the GUI locale and explicit guarded exit; render authorized stored scenes through sanitized local SVG previews",
-        "Normalize Korean GUI language codes before selecting the explicitly enabled bundled SDK locale"
+        "Normalize Korean GUI language codes before selecting the explicitly enabled bundled SDK locale",
+        "Uses the injected access lifecycle and preserves the mounted dirty canvas while authorized attachment bytes are revalidated."
       ]
     },
     {
@@ -441,7 +445,8 @@
       "changes": [
         "Keeps the core Mermaid rendering flow with strict, sanitized SVG. Adds canonical source editing and immutable authorized attachments; lazy-loads only visible diagrams.",
         "Portals the diagram dialog to the document body so its controls remain inside the viewport in either editing pane, and labels its close control.",
-        "Disables HTML labels at the Mermaid root configuration so sanitized SVG retains its node and edge text."
+        "Disables HTML labels at the Mermaid root configuration so sanitized SVG retains its node and edge text.",
+        "Clears source and preview on injected access revocation and preserves the hidden dirty source editor during revalidation."
       ]
     },
     {
@@ -672,7 +677,8 @@
       "destination": "src/vendor/docmost/client/components/layouts/global/app-header.tsx",
       "upstreamSha256": "759245d7fd231c48fedc3dc9afd9d187567b05a4dbe7f43738e54092d8398e5d",
       "changes": [
-        "Restores the native core shell/navigation/control composition and styling with explicit authorized product adapter props; excludes upstream routes, account services, storage and Enterprise imports. Retains pane-local editing and product permission ownership."
+        "Restores the native core shell/navigation/control composition and styling with explicit authorized product adapter props; excludes upstream routes, account services, storage and Enterprise imports. Retains pane-local editing and product permission ownership.",
+        "Makes the home destination optional so an injected core-only host has no implicit product route; its destination-free logo has no navigation handler."
       ]
     },
     {

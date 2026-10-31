@@ -1,14 +1,13 @@
-import type { Note, NoteApi } from './model';
+import type { Note, NoteKnowledgeContextApi } from './model';
 import { NoteAccumulations } from './NoteAccumulations';
 import { NoteProvenance } from './NoteProvenance';
-import { webUrl } from './webOrigin';
+import { HostLink } from './hostRuntime';
 
-export function NoteKnowledgeContext({ api, note }: { api: NoteApi; note: Note }) {
-  const path = `/spaces/${encodeURIComponent(note.spaceId)}`;
+export function NoteKnowledgeContext({ api, note }: { api: NoteKnowledgeContextApi; note: Note }) {
   return <aside className="knowledge-context" aria-label="노트의 근거와 누적 이력">
     <nav className="context-actions" aria-label="이 노트에서 이어서 하기">
-      <a href={webUrl(`${path}/knowledge/conflicts?note=${encodeURIComponent(note.id)}`)} target="_blank" rel="noreferrer">갱신 검토·미결</a>
-      <a href={webUrl(`${path}/actions/new?note=${encodeURIComponent(note.id)}`)} target="_blank" rel="noreferrer">업무 만들기</a>
+       <HostLink destination={{ kind: 'conflicts', spaceId: note.spaceId, noteId: note.id }}>갱신 검토·미결</HostLink>
+       <HostLink destination={{ kind: 'createAction', spaceId: note.spaceId, noteId: note.id }}>업무 만들기</HostLink>
     </nav>
     <section className="context-card" aria-label="새 소스 반영 기준">
       <h2>새 소스 반영 기준</h2>

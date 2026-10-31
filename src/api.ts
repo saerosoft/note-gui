@@ -22,7 +22,7 @@ export function parseBody(value: string | null, plain: string): JSONContent {
   return parsed;
 }
 async function mapNote(value: WireNote): Promise<Note> {
-  return { id: value.id, spaceId: value.spaceId, title: value.title, revision: value.revision, bodyJson: parseBody(value.richBody, value.authoredBody ?? value.body), bodyOrigin: value.bodyOrigin, visibility: value.visibility, parentId: value.parentId, canEdit: value.canEdit };
+  return { id: value.id, spaceId: value.spaceId, title: value.title, revision: value.revision, bodyJson: parseBody(value.richBody, value.authoredBody ?? value.body), bodyOrigin: value.bodyOrigin, presentation: { bodyOrigin: value.bodyOrigin }, visibility: value.visibility, parentId: value.parentId, canEdit: value.canEdit };
 }
 function page<T>(items: T[], cursor: (value: T) => string, size: number): Page<T> { return { items, nextCursor: items.length === size ? cursor(items[items.length - 1]) : null }; }
 export const api: NoteApi = {
@@ -111,7 +111,7 @@ export const api: NoteApi = {
   async history(noteId, cursor) {
     const offset = Number(cursor || 0);
     const values = (await graphql<{ noteRevisions: { id: string; revision: number; title: string; createdAt: string; richBody: string | null; authoredBody: string | null; bodyOrigin: KnowledgeBodyOrigin; body: string }[] }>('query($noteId:UUID!,$offset:Int!){noteRevisions(noteId:$noteId,offset:$offset,limit:20){id revision title createdAt richBody body authoredBody bodyOrigin}}', { noteId, offset })).noteRevisions;
-    return { items: values.map(value => ({ ...value, bodyJson: parseBody(value.richBody, value.authoredBody ?? value.body) })), nextCursor: values.length === 20 ? String(offset + 20) : null } as Page<Revision>;
+    return { items: values.map(value => ({ ...value, presentation: { bodyOrigin: value.bodyOrigin }, bodyJson: parseBody(value.richBody, value.authoredBody ?? value.body) })), nextCursor: values.length === 20 ? String(offset + 20) : null } as Page<Revision>;
   },
   async restore(id, revision, expectedRevision) { return mapNote((await graphql<{ restoreNote: WireNote }>(`mutation($id:UUID!,$input:RestoreNoteInput!){restoreNote(id:$id,input:$input){${fields}}}`, { id, input: { sourceRevision: revision, expectedRevision, idempotencyKey: key() } })).restoreNote); },
   async comments(noteId, cursor) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { NoteAccumulationChange as Change, NoteApi } from './model';
+import type { NoteAccumulationChange as Change, NoteKnowledgeContextApi } from './model';
 
-export function NoteAccumulationChange({ api, id }: { api: NoteApi; id: string }) {
+export function NoteAccumulationChange({ api, id }: { api: NoteKnowledgeContextApi; id: string }) {
   const [value, setValue] = useState<Change>();
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);

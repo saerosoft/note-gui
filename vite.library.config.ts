@@ -9,7 +9,7 @@ export default mergeConfig(config, {
     'import.meta.env.VITE_DRAWIO_ORIGIN': JSON.stringify(process.env.NOTE_GUI_DRAWIO_ORIGIN || process.env.VITE_DRAWIO_ORIGIN || ''),
   },
   build: {
-    lib: { entry: fileURLToPath(new URL('./src/index.tsx', import.meta.url)), formats: ['es'], fileName: 'note-gui', cssFileName: 'note-gui' },
+    lib: { entry: { 'note-gui': fileURLToPath(new URL('./src/index.tsx', import.meta.url)), kms: fileURLToPath(new URL('./src/kms.ts', import.meta.url)) }, formats: ['es'], fileName: (_format: string, entry: string) => `${entry}.js`, cssFileName: 'note-gui' },
     rolldownOptions: { output: { chunkFileNames: 'assets/[name]-[hash].js', assetFileNames: '[name][extname]' } },
   },
 });

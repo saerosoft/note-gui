@@ -6,7 +6,8 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": { "types": "./dist/types/index.d.ts", "import": "./dist/note-gui.js" },
-    "./style.css": "./dist/note-gui.css"
+    "./style.css": "./dist/note-gui.css",
+    "./kms": { "types": "./dist/types/kms.d.ts", "import": "./dist/kms.js" }
   },
   "files": ["dist", "LICENSE", "NOTICE"],
   "type": "module",
@@ -20,6 +21,9 @@
     "build": "node scripts/source-offer.mjs && tsc --noEmit && tsc --project tsconfig.library.json && vite build --config vite.library.config.ts && node scripts/library-types.mjs && node scripts/verify-distribution.mjs",
     "test": "vitest run",
     "test:browser": "playwright test",
+    "test:independent": "node scripts/build-drawio-fixture.mjs && playwright test --config playwright.independent.config.ts",
+    "example": "node scripts/independent-host.mjs",
+    "test:package": "node scripts/test-package-consumer.mjs",
     "source": "node scripts/source-offer.mjs",
     "source-offer": "node scripts/source-offer.mjs"
   },

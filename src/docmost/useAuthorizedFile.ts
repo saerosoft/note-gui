@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAttachments } from '../editor/attachmentContext';
-import { onAccessLost } from '../transport';
+import { useNoteAccess } from '../hostRuntime';
 
 export function useAuthorizedFile(fileId: string | null) {
+  const access = useNoteAccess();
   const { api } = useAttachments();
   const container = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -11,15 +12,15 @@ export function useAuthorizedFile(fileId: string | null) {
   const [error, setError] = useState('');
   const authorized = useRef(true);
   const currentUrl = useRef<string | undefined>(undefined);
+  const request = useRef(0);
+  function clear() {
+    if (currentUrl.current) URL.revokeObjectURL(currentUrl.current);
+    currentUrl.current = undefined; setUrl(undefined); setSize(undefined); setError('');
+  }
   useEffect(() => {
     authorized.current = true;
-    return onAccessLost(() => {
-      authorized.current = false;
-      if (currentUrl.current) URL.revokeObjectURL(currentUrl.current);
-      currentUrl.current = undefined;
-      setUrl(undefined); setSize(undefined); setError('');
-    });
-  }, []);
+    return access.onAccessLost(() => { authorized.current = false; request.current++; clear(); });
+  }, [access]);
   useEffect(() => {
     if (!('IntersectionObserver' in window)) { setVisible(true); return; }
     const observer = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { setVisible(true); observer.disconnect(); } }, { rootMargin: '200px' });
@@ -27,11 +28,20 @@ export function useAuthorizedFile(fileId: string | null) {
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
-    setUrl(undefined); setSize(undefined); setError('');
-    if (!visible || !fileId || !authorized.current) return;
-    let active = true; let objectUrl: string | undefined;
-    void api.attachment(fileId, 1).then(blob => { if (active && authorized.current) { objectUrl = URL.createObjectURL(blob); currentUrl.current = objectUrl; setUrl(objectUrl); setSize(blob.size); } }).catch(failure => { if (active && authorized.current) setError((failure as Error).message); });
-    return () => { active = false; if (objectUrl && currentUrl.current === objectUrl) { URL.revokeObjectURL(objectUrl); currentUrl.current = undefined; } };
-  }, [api, fileId, visible]);
+    let active = true;
+    async function load() {
+      const sequence = ++request.current; const epoch = access.generation;
+      clear();
+      if (!visible || !fileId || !authorized.current) return;
+      try {
+        const blob = await api.attachment(fileId, 1);
+        if (!active || !authorized.current || sequence !== request.current || epoch !== access.generation) return;
+        const objectUrl = URL.createObjectURL(blob); currentUrl.current = objectUrl; setUrl(objectUrl); setSize(blob.size);
+      } catch (failure) { if (active && authorized.current && sequence === request.current && epoch === access.generation) setError((failure as Error).message); }
+    }
+    void load();
+    const stop = access.onAccessRefresh(load);
+    return () => { active = false; request.current++; stop(); if (currentUrl.current) URL.revokeObjectURL(currentUrl.current); currentUrl.current = undefined; };
+  }, [api, fileId, visible, access]);
   return { container, url, size, error, visible, load: () => setVisible(true) };
 }

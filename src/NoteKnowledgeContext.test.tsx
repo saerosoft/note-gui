@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { render } from './test/legacyRender';
 import { afterEach, expect, it, vi } from 'vitest';
 import type { Note, NoteApi, NoteAccumulation } from './model';
 import { NoteKnowledgeContext } from './NoteKnowledgeContext';

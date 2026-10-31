@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { MantineProvider } from '@mantine/core';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
+import { render } from './test/legacyRender';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import type { Note, NoteApi } from './model';
 import { NoteProvenance } from './NoteProvenance';

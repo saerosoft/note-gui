@@ -16,12 +16,17 @@ with zipfile.ZipFile(archive) as bundle:
     assert all(not name.startswith('/') and '..' not in Path(name).parts for name in names), 'Unsafe source archive path'
     assert not any('/.tmp/' in name or any(part.startswith('.env') for part in Path(name).parts) for name in names), 'Temporary or environment files included in source archive'
     assert not any('/ee/' in name or '/apps/server/' in name or '/frontend/' in name or '/node_modules/' in name and name.startswith('note-gui/') for name in names), 'Unrelated application or upstream persistence source included'
-    required = ['LICENSE', 'NOTICE', 'README.md', 'package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml', 'upstream-manifest.json']
+    required = ['LICENSE', 'NOTICE', 'README.md', 'CONTRACT.md', 'package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml', 'upstream-manifest.json', 'examples/independent.html', 'src/access.ts', 'src/hostRuntime.tsx', 'src/kms.ts', 'src/localPersistence.ts']
     required += [item['destination'] for item in manifest['files']]
     required += [path.relative_to(root).as_posix() for directory in ['patches', 'third-party'] for path in (root / directory).rglob('*') if path.is_file()]
     for name in required:
         assert bundle.read('note-gui/' + name) == (root / name).read_bytes(), f'Source archive is missing current source: {name}'
     assert any(name.startswith('dependency-notices/') for name in names), 'Installed dependency notices missing'
+
+package = json.loads((root / 'package.json').read_text(encoding='utf-8'))
+for name, entry in package['exports'].items():
+    for target in entry.values() if isinstance(entry, dict) else [entry]:
+        assert (root / target).is_file(), f'Public export is absent from distribution: {name} -> {target}'
 
 font_root = root / 'node_modules' / '@excalidraw' / 'excalidraw' / 'dist' / 'prod' / 'fonts'
 fonts = [path for path in font_root.rglob('*') if path.is_file()]

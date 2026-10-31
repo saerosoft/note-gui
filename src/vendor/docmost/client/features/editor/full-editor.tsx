@@ -6,14 +6,14 @@ import { TitleEditor } from "./title-editor";
 import PageEditor from "./page-editor";
 import { FixedToolbar } from "./components/fixed-toolbar/fixed-toolbar";
 import { AttachmentContext } from "@knowledge/editor/attachmentContext";
-import type { NoteApi } from "@knowledge/model";
+import type { NoteCoreApi } from "@knowledge/model";
 
 const MemoizedTitleEditor = React.memo(TitleEditor);
 const MemoizedPageEditor = React.memo(PageEditor);
 const MemoizedFixedToolbar = React.memo(FixedToolbar);
 
 export interface FullEditorProps {
-  api: NoteApi;
+  api: NoteCoreApi;
   pageId: string;
   title: string;
   content: JSONContent;

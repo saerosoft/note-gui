@@ -6,11 +6,14 @@ import { DocmostHistory } from './docmost/DocmostHistory';
 import { NoteProperties } from './NoteProperties';
 import { NoteRelations } from './NoteRelations';
 import { NoteAttachments } from './NoteAttachments';
-import type { AddComment, Comment, Note, NoteApi, Page, Revision } from './model';
+import type { AddComment, Comment, Note, NoteCoreApi, Page, Revision } from './model';
+import { useNoteAccess, useRelations } from './hostRuntime';
 
 export type NotePanel = 'comments' | 'history' | 'properties' | 'relations' | 'attachments';
-interface Props { api: NoteApi; note: Note; dirty: boolean; panel?: NotePanel; onPanelChange?: (panel: NotePanel) => void; onRestore: (note: Note) => void; onOpen: (id: string) => void; onRevision: (note: Note) => void }
+interface Props { api: NoteCoreApi; note: Note; dirty: boolean; panel?: NotePanel; onPanelChange?: (panel: NotePanel) => void; onRestore: (note: Note) => void; onOpen: (id: string) => void; onRevision: (note: Note) => void }
 export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChange, onRestore, onOpen, onRevision }: Props) {
+  const relations = useRelations();
+  const access = useNoteAccess();
   const [localPanel, setLocalPanel] = useState<NotePanel>('comments');
   const panel = selectedPanel || localPanel;
   const [visited, setVisited] = useState<NotePanel[]>([panel]);
@@ -26,13 +29,20 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   const [busy, setBusy] = useState(false);
   const pendingComment = useRef<{ noteId: string; input: AddComment } | undefined>(undefined);
   useEffect(() => {
-    let alive = true; setError(''); setBusy(true);
-    const load = panel === 'comments' ? api.comments(note.id, null).then(value => { if (alive) setComments(value); })
-      : panel === 'history' ? api.history(note.id, null).then(value => { if (alive) setHistory(value); })
-      : Promise.resolve();
-    load.catch(e => { if (alive) setError(e.message); }).finally(() => { if (alive) setBusy(false); });
-    return () => { alive = false; };
-  }, [api, note.id, note.revision, panel]);
+    let alive = true; let sequence = 0;
+    async function load() {
+      const request = ++sequence;
+      setError(''); setBusy(true); setComments({ items: [], nextCursor: null }); setHistory({ items: [], nextCursor: null });
+      try {
+        if (panel === 'comments') { const value = await api.comments(note.id, null); if (alive && request === sequence) setComments(value); }
+        if (panel === 'history') { const value = await api.history(note.id, null); if (alive && request === sequence) setHistory(value); }
+      } catch (failure) { if (alive && request === sequence) setError((failure as Error).message); }
+      finally { if (alive && request === sequence) setBusy(false); }
+    }
+    void load();
+    const stop = access.onAccessRefresh(load);
+    return () => { alive = false; sequence++; stop(); };
+  }, [api, note.id, note.revision, panel, access]);
   async function perform(action: () => Promise<void>) {
     setBusy(true); setError('');
     try { await action(); } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
@@ -56,7 +66,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   }
   return <aside className="note-panels" aria-label="노트 상세">
     <Tabs value={panel} onChange={select}><Tabs.List aria-label="노트 상세 패널">
-      <Tabs.Tab value="comments">댓글</Tabs.Tab><Tabs.Tab value="history">이력</Tabs.Tab><Tabs.Tab value="properties">속성</Tabs.Tab><Tabs.Tab value="relations">관계</Tabs.Tab><Tabs.Tab value="attachments">첨부</Tabs.Tab>
+       <Tabs.Tab value="comments">댓글</Tabs.Tab><Tabs.Tab value="history">이력</Tabs.Tab><Tabs.Tab value="properties">속성</Tabs.Tab>{relations && <Tabs.Tab value="relations">관계</Tabs.Tab>}<Tabs.Tab value="attachments">첨부</Tabs.Tab>
     </Tabs.List></Tabs>
     {error && <p role="alert">{error}</p>}{busy && <p role="status">처리 중…</p>}
     {visited.includes('comments') && <div hidden={panel !== 'comments'} className="note-panel-content"><CommentListWithTabs comments={comments} canComment={note.canEdit} isLoading={busy} onSave={comment}
@@ -69,6 +79,6 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
     </div>}
     {visited.includes('properties') && <div hidden={panel !== 'properties'} className="note-panel-content"><NoteProperties api={api} note={note} dirty={dirty} onRevision={onRevision}/></div>}
     {visited.includes('attachments') && <div hidden={panel !== 'attachments'} className="note-panel-content"><NoteAttachments api={api} noteId={note.id} revision={note.revision}/></div>}
-    {visited.includes('relations') && <div hidden={panel !== 'relations'} className="note-panel-content"><NoteRelations api={api} note={note} onOpen={onOpen} onRevision={onRevision}/></div>}
+     {visited.includes('relations') && relations && <div hidden={panel !== 'relations'} className="note-panel-content"><NoteRelations api={api} relations={relations} note={note} onOpen={onOpen} onRevision={onRevision}/></div>}
   </aside>;
 }
