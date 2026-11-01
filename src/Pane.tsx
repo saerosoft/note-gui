@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ActionIcon, Alert, Box, Button, Group, Menu, Tabs, Text, Tooltip } from '@mantine/core';
 import { IconDots, IconFileText, IconHistory, IconInfoCircle, IconMessage, IconPaperclip, IconRefresh } from '@tabler/icons-react';
 import Aside from './vendor/docmost/client/components/layouts/global/aside';
-import type { NoteCoreApi } from './model';
+import type { Note, NoteCoreApi } from './model';
 import { acceptMetadata, acceptSave, canClose, editDraft, openDraft, prepareSave, reorder, type Draft } from './paneState';
 import Page from './vendor/docmost/client/pages/page/page';
 import { DocmostPaneProvider } from './docmost/DocmostPaneProvider';
@@ -84,6 +84,12 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     catch (e) { if (epoch === sessionEpoch.current) setError((e as Error).message); }
     finally { setBusy(false); saving.current = false; }
   }
+  function acceptRestore(note: Note) {
+    const current = state.current[note.id];
+    if (!current) return;
+    update(note.id, value => value.dirty ? acceptMetadata(value, note) : openDraft(note));
+    if (!current.dirty && activeRef.current === note.id) setEditorEpoch(value => value + 1);
+  }
   function close(id: string) {
     if (saving.current || !canClose(drafts[id], () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
     const remaining = tabs.filter(value => value !== id); setTabs(remaining);
@@ -145,7 +151,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
            <NoteCurrentKnowledge key={`${active}:${draft.note.revision}`} api={knowledgeContext} noteId={active} spaceId={draft.note.spaceId}/>
            <NoteKnowledgeContext api={knowledgeContext} note={draft.note}/>
         </div>}
-         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} onOpen={id => void open(id)} onRevision={note => update(active, value => acceptMetadata(value, note))} onRestore={note => { update(active, () => openDraft(note)); setEditorEpoch(value => value + 1); }}/></div>}
+         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} onOpen={id => void open(id)} onRevision={note => update(active, value => acceptMetadata(value, note))} onRestore={acceptRestore}/></div>}
       </Aside>}/>
     </div>}
   </section></DocmostPaneProvider>;

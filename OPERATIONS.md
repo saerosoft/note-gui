@@ -18,6 +18,10 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 ## Version policy
 
+The current `master` candidate is 0.7.1. It repairs draft loss during a pending
+history restore within the intended 0.7 contract. Its declared tag is reserved
+for a separate release session; existing 0.7.0 consumer pins remain unchanged.
+
 - Increment MAJOR for a substantial redesign of the library's concept or
   responsibility, then reset MINOR and PATCH.
 - Increment MINOR and reset PATCH for every public contract change, including
@@ -72,7 +76,7 @@ published assets.
    production builds, distribution verification and `make import-check`. The
    import check builds the library and runs a fresh package-name consumer with
    strict declarations (`skipLibCheck: false`) and root/KMS/CSS export resolution.
-3. Run `pnpm test:independent`. Its nine Chromium scenarios use built assets and
+3. Run `pnpm test:independent`. Its Chromium scenarios use built assets and
    real revision-checked browser persistence without KMS or Vite. They include
    reloads, comments/files, competing Web Locks writers, retained drafts, access
    revalidation, both named extensions, desktop/narrow layouts and configured

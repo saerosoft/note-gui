@@ -53,6 +53,29 @@ it('edits a core-only document without context controls or an implicit authored 
   fireEvent.click(screen.getByRole('button', { name: '저장' }));
   await waitFor(() => expect(screen.queryByText(/저장하지 않은 변경/)).toBeNull());
 });
+it.each([false, true])('accepts a delayed restore without discarding a later draft (edited: %s)', async edited => {
+  const access = createNoteAccess(); const client = core();
+  let finish!: (value: Note) => void;
+  const restored = { ...note, title: 'Restored document', revision: 2 };
+  client.history = async () => ({ items: [{ id: 'revision-1', revision: 1, title: 'Restored document', bodyJson: note.bodyJson, createdAt: '2026-11-01T00:00:00Z' }], nextCursor: null });
+  const restore = vi.fn(() => new Promise<Note>(resolve => { finish = resolve; }));
+  client.restore = restore;
+  render(<MantineProvider env="test"><NoteHostProvider api={client} host={{ access, destinations: {} }}>
+    <Pane api={client} paneId="Independent" requestedId="note" onLocation={() => {}} onDirty={() => {}} onActivate={() => {}}/>
+  </NoteHostProvider></MantineProvider>);
+  await screen.findByDisplayValue('Independent document');
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' }));
+  fireEvent.click(await screen.findByRole('menuitem', { name: '페이지 이력' }));
+  await screen.findByRole('textbox', { name: '개정 원문' });
+  vi.spyOn(window, 'confirm').mockReturnValue(true);
+  fireEvent.click(screen.getByRole('button', { name: /^복원$/ }));
+  await waitFor(() => expect(restore).toHaveBeenCalledExactlyOnceWith('note', 1, 1));
+  if (edited) fireEvent.change(screen.getByLabelText('Draft title'), { target: { value: 'Written while restoring' } });
+  await act(async () => finish(restored));
+  expect(screen.getByLabelText<HTMLInputElement>('Draft title').value).toBe(edited ? 'Written while restoring' : 'Restored document');
+  expect(document.querySelector('.note-body-status')?.textContent).toContain(`개정 ${edited ? 1 : 2}`);
+  expect(screen.getByRole('button', { name: /^저장$/ }).hasAttribute('disabled')).toBe(!edited);
+});
 it('shows supported context denial honestly while preserving an unsaved core draft', async () => {
   show({ provenance: async () => { throw new Error('Context permission denied'); }, currentKnowledge: async () => { throw new Error('Context unavailable'); }, accumulations: async () => { throw new Error('History unavailable'); }, accumulationChange: async () => { throw new Error('Comparison unavailable'); } });
   await screen.findByDisplayValue('Independent document');

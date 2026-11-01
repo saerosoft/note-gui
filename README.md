@@ -10,7 +10,8 @@ Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
 knowledge-context and relation extensions retain the full product experience.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
-qualification and consumer pins. `release.json` declares the 0.7.0 release identity.
+qualification and consumer pins. `release.json` declares the 0.7.1 development
+candidate; it does not establish release qualification or publication.
 The product hosts this library inside Next.js; Vite is an optional development
 and demo harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than

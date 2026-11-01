@@ -1,6 +1,8 @@
 # Note GUI host contract
 
-This contract accompanies package 0.7.0 on the `version/0.7` release line.
+This contract accompanies the 0.7.1 development candidate for the `version/0.7`
+release line. It preserves the intended 0.7 contract. Candidate metadata on
+`master` does not establish release qualification or publication.
 The core/context/relations split and explicit host bindings added to the former
 0.6 package establish this new minor contract. Release identity and qualification
 follow [OPERATIONS.md](OPERATIONS.md) and `release.json`; no blanket compatibility
@@ -291,6 +293,14 @@ uncertain write outcome. Only documented idempotent operations may replay their
 same key without first resolving that uncertainty.
 
 ## KMS compatibility and migration
+
+The 0.7.1 repair preserves edits made while a history restore is pending. A
+clean pane still opens the restored revision. A pane edited before delivery
+keeps its draft and editor instance; its existing content revision remains the
+save guard when restored content differs. Saving then reports the normal
+revision conflict, and the member can inspect the latest server version.
+No host API, import or storage migration is required. Consumers remain on their
+qualified pin until a separate release promotion and adoption review.
 
 ```ts
 import {
