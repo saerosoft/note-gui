@@ -22,6 +22,15 @@ it('reads revision authored text and preserves its legacy classification for res
   expect(JSON.stringify(history.items[0].bodyJson)).not.toContain('AI text');
   expect(history.items[0].bodyOrigin).toBe('LEGACY_UNCLASSIFIED');
 });
+it('requests the authoritative revision editor name and preserves an unavailable name', async () => {
+  vi.mocked(graphql).mockResolvedValueOnce({ noteRevisions: [
+    { id: 'revision', revision: 2, title: 'Original', createdAt: '2026-10-23T08:00:00Z', richBody: null, authoredBody: 'Authored', body: 'Authored', bodyOrigin: 'HUMAN', editorName: 'Peer editor' },
+    { id: 'earlier', revision: 1, title: 'Original', createdAt: '2026-10-22T08:00:00Z', richBody: null, authoredBody: 'Earlier', body: 'Earlier', bodyOrigin: 'HUMAN', editorName: null },
+  ] });
+  const history = await api.history('note', null);
+  expect(graphql).toHaveBeenLastCalledWith(expect.stringContaining('editorName'), { noteId: 'note', offset: 0 });
+  expect(history.items.map(item => item.editorName)).toEqual(['Peer editor', null]);
+});
 it('reads bounded authorized accumulation pages with source scope and dates intact', async () => {
   const items = Array.from({ length: 20 }, (_, index) => ({ id: `item-${index}`, evidence: [{ visibility: 'ADMINISTRATORS', occurredAt: null, effectiveAt: null }] }));
   vi.mocked(graphql).mockResolvedValueOnce({ knowledgeAccumulations: items });

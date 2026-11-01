@@ -18,9 +18,11 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 ## Version policy
 
-The current `master` candidate is 0.7.1. It repairs draft loss during a pending
-history restore within the intended 0.7 contract. Its declared tag is reserved
-for a separate release session; existing 0.7.0 consumer pins remain unchanged.
+The current `master` candidate is 0.8.0. Optional collaboration capabilities and
+mount-local dirty reporting establish the new minor contract. Its declared tag
+is reserved for separately authorized publication; existing 0.7.0 consumer pins
+remain unchanged. Human review is not an acceptance gate. Exact-source automated
+qualification, authorized-environment evidence and immutable identity still apply.
 
 - Increment MAJOR for a substantial redesign of the library's concept or
   responsibility, then reset MINOR and PATCH.

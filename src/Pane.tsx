@@ -11,7 +11,7 @@ import { createPropertyDraft, type PropertyDraft } from './NoteProperties';
 import { NoteKnowledgeContext } from './NoteKnowledgeContext';
 import { NoteCurrentKnowledge } from './NoteCurrentKnowledge';
 import { ApiError } from './access';
-import { useNoteAccess, useNoteCore, useKnowledgeContext, useRelations } from './hostRuntime';
+import { useNoteAccess, useNoteCore, useKnowledgeContext, useRelations, useNotePolicy, useNoteContentAccess, useNoteAssociations } from './hostRuntime';
 import { NativeDraftContext } from './docmost/nativeDraft';
 
 interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void }
@@ -19,6 +19,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const api = useNoteCore(suppliedApi);
   const knowledgeContext = useKnowledgeContext();
   const relations = useRelations();
+  const associations = useNoteAssociations();
   const { onAccessLost, onAccessRefresh } = useNoteAccess();
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState<string | null>(null);
@@ -90,13 +91,17 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   }, [api, onLocation]);
   useEffect(() => { if (requestedId) void open(requestedId); }, [requestedId]);
   const draft = active ? drafts[active] : undefined;
+  const policyApi = useNotePolicy();
+  const policy = useNoteContentAccess(draft?.note.spaceId ?? '');
+  const canEdit = !!draft?.note.canEdit && (!policyApi || !!(policy?.capabilities.read && policy.capabilities.write));
+  const audience = policy?.mode === 'SHARED' ? '조직 구성원 공유' : policyApi && !policy ? '공개 범위 확인 중' : draft?.note.visibility === 'PRIVATE' ? '나만 보기' : draft?.note.visibility === 'ADMINISTRATORS' ? '관리자 전용' : '공간 공유';
   const activeOwner = active ? tabOwners.current[active] : undefined;
   const ownsTab = () => active !== null && tabOwners.current[active] === activeOwner;
   useEffect(() => { setLatest(undefined); }, [active]);
   useEffect(() => { onDirty(nativeDirty || Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy) || Object.values(propertyDrafts).some(value => value.dirty || value.busy)); }, [nativeDirty, drafts, commentDrafts, propertyDrafts, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
   async function save() {
-    if (!active || !draft || invalid[active] || saving.current) return;
+    if (!active || !draft || !canEdit || invalid[active] || saving.current) return;
     const id = active; const prepared = prepareSave(draft); const pending = prepared.pending!; const epoch = sessionEpoch.current;
     setDrafts(values => ({ ...values, [id]: prepared })); setBusy(true); saving.current = true; setError('');
     try { const note = await api.save(id, pending.input); if (epoch === sessionEpoch.current) { update(id, value => acceptSave(value, note, pending.version)); window.dispatchEvent(new Event('note-changed')); } }
@@ -146,15 +151,16 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
         <Group gap="xs" wrap="nowrap" className="note-page-breadcrumb"><IconFileText size={17} stroke={1.5}/><Text size="sm" truncate>{draft.title || '제목 없음'}</Text></Group>
         <Group gap="xs" wrap="nowrap" className="note-page-actions">
         <Tooltip label="최신 버전 확인" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="최신 버전 확인" disabled={busy} onClick={async () => { const id = active; const epoch = sessionEpoch.current; setError(''); try { const note = await api.note(id); if (epoch === sessionEpoch.current && activeRef.current === id && ownsTab()) setLatest(openDraft(note)); } catch (e) { if (epoch === sessionEpoch.current && ownsTab()) setError((e as Error).message); } }}><IconRefresh size={18}/></ActionIcon></Tooltip>
-        <Button size="xs" disabled={!draft.note.canEdit || !draft.dirty || busy || invalid[active]} onClick={() => void save()}>저장</Button>
+        <Button size="xs" disabled={!canEdit || !draft.dirty || busy || invalid[active]} onClick={() => void save()}>저장</Button>
         <Tooltip label="댓글" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="댓글 및 노트 상세" aria-expanded={details === 'details'} onClick={() => { if (details === 'details') setDetails(null); else openDetails('comments'); }}><IconMessage size={20} stroke={1.5}/></ActionIcon></Tooltip>
          {knowledgeContext && <Tooltip label="현재 정리·근거·누적 이력" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="지식 정보" aria-expanded={details === 'knowledge'} onClick={toggleKnowledge}><IconInfoCircle size={20} stroke={1.5}/></ActionIcon></Tooltip>}
         <Menu position="bottom-end" withinPortal={false}><Menu.Target><ActionIcon variant="subtle" color="gray" aria-label="페이지 메뉴"><IconDots size={20}/></ActionIcon></Menu.Target>
           <Menu.Dropdown>
-            <Menu.Label>{draft.note.visibility === 'PRIVATE' ? '나만 보기' : draft.note.visibility === 'ADMINISTRATORS' ? '관리자 전용' : '공간 공유'} · 개정 {draft.note.revision}</Menu.Label>
+            <Menu.Label>{audience} · 개정 {draft.note.revision}</Menu.Label>
             <Menu.Item leftSection={<IconHistory size={16}/>} onClick={() => openDetails('history')}>페이지 이력</Menu.Item>
             <Menu.Item onClick={() => openDetails('properties')}>속성</Menu.Item>
              {relations && <Menu.Item onClick={() => openDetails('relations')}>관계</Menu.Item>}
+             {associations && <Menu.Item onClick={() => openDetails('associations')}>노트 연결</Menu.Item>}
             <Menu.Item leftSection={<IconPaperclip size={16}/>} onClick={() => openDetails('attachments')}>첨부파일</Menu.Item>
              {knowledgeContext && <Menu.Item onClick={() => { setOpenedKnowledge(true); setDetails('knowledge'); }}>현재 정리·근거·누적 이력</Menu.Item>}
             <Menu.Divider/>
@@ -162,8 +168,8 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
           </Menu.Dropdown>
         </Menu>
       </Group></>} editor={{
-        api, pageId: active, title: draft.title, content: draft.body, showToolbar, editable: draft.note.canEdit && !invalid[active],
-         byline: <Text size="xs" c="dimmed" className="note-body-status">{(draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'HUMAN' ? '사람이 작성한 본문 · ' : (draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'LEGACY_UNCLASSIFIED' ? '기존 본문 · ' : ''}{draft.note.visibility === 'PRIVATE' ? '나만 보기' : draft.note.visibility === 'ADMINISTRATORS' ? '관리자 전용' : '공간 공유'} · 개정 {draft.note.revision} · {draft.dirty ? '저장하지 않은 변경' : '저장됨'}</Text>,
+        api, pageId: active, title: draft.title, content: draft.body, showToolbar, editable: canEdit && !invalid[active],
+         byline: <Text size="xs" c="dimmed" className="note-body-status">{(draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'HUMAN' ? '사람이 작성한 본문 · ' : (draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'LEGACY_UNCLASSIFIED' ? '기존 본문 · ' : ''}{audience} · 개정 {draft.note.revision} · {draft.dirty ? '저장하지 않은 변경' : '저장됨'}</Text>,
         onTitleChange: title => update(active, value => editDraft(value, { title })),
         onInvalid: () => setInvalid(values => ({ ...values, [active]: true })),
         onChange: body => update(active, value => editDraft(value, { body })),
@@ -174,7 +180,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
            <NoteCurrentKnowledge key={`${active}:${draft.note.revision}`} api={knowledgeContext} noteId={active} spaceId={draft.note.spaceId}/>
            <NoteKnowledgeContext api={knowledgeContext} note={draft.note}/>
         </div>}
-         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} isCurrent={ownsTab} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} propertyDraft={propertyDrafts[active]} onPropertyDraftChange={transform => setPropertyDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => { if (ownsTab()) update(active, value => acceptMetadata(value, note)); }} onRestore={note => { if (ownsTab()) acceptRestore(note); }}/></div>}
+         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={{ ...draft.note, canEdit }} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} isCurrent={ownsTab} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} propertyDraft={propertyDrafts[active]} onPropertyDraftChange={transform => setPropertyDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => { if (ownsTab()) update(active, value => acceptMetadata(value, note)); }} onRestore={note => { if (ownsTab()) acceptRestore(note); }}/></div>}
       </Aside>}/>
     </div>}
   </section></DocmostPaneProvider></NativeDraftContext.Provider>;

@@ -56,6 +56,13 @@ it('renders the selected immutable revision in the real core history editor and 
   await waitFor(() => expect(value.restore).toHaveBeenCalledExactlyOnceWith('note', 2, 7));
   expect(value.restored).toHaveBeenCalledWith(expect.objectContaining({ revision: 8 }));
 });
+it('displays supplied revision editors without attributing an unknown editor to the current account', async () => {
+  const history = async () => ({ items: [{ ...revisions[0], editorName: 'Peer editor' }, { ...revisions[1], editorName: null }], nextCursor: null });
+  render(<DocmostPaneProvider><NotePanels api={{ ...api, history }} note={note} panel="history" dirty={false} onRestore={vi.fn()} onOpen={vi.fn()} onRevision={vi.fn()}/></DocmostPaneProvider>);
+  await screen.findByText('편집자: Peer editor');
+  expect(screen.getByText('편집자 정보 없음')).toBeTruthy();
+  expect(screen.queryByText('편집자: 나')).toBeNull();
+});
 
 it('keeps the revision viewer read-only and blocks restore while the current pane has an unsaved draft', async () => {
   const value = show(true);

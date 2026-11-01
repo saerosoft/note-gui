@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState, type MouseEvent } from 'react';
 import { Alert, Button, Modal, Text } from '@mantine/core';
 import type { NoteCoreApi } from './model';
 import { NoteTree } from './NoteTree';
 import { NotePicker } from './NotePicker';
 import { Pane } from './Pane';
-import { useNoteAccess, useNoteCore, useNoteDestination, useNoteHost } from './hostRuntime';
+import { NoteDirtyContext, NotePolicyContext, useNoteAccess, useNoteCore, useNoteDestination, useNoteHost } from './hostRuntime';
 import { useSpaceAccess } from './useSpaceAccess';
 import GlobalAppShell from './vendor/docmost/client/components/layouts/global/global-app-shell';
 import { SpaceSidebar } from './vendor/docmost/client/features/space/components/sidebar/space-sidebar';
@@ -25,15 +25,17 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
   const [searchOpened, setSearchOpened] = useState(false);
   const [error, setError] = useState('');
   const dirty = useRef({ left: false, right: false });
+  const reportDirty = useContext(NoteDirtyContext);
   const accessLost = useRef(false);
-  const leftDirty = useCallback((value: boolean) => { dirty.current.left = value; }, []);
-  const rightDirty = useCallback((value: boolean) => { dirty.current.right = value; }, []);
+  const leftDirty = useCallback((value: boolean) => { dirty.current.left = value; reportDirty(value || dirty.current.right); }, [reportDirty]);
+  const rightDirty = useCallback((value: boolean) => { dirty.current.right = value; reportDirty(value || dirty.current.left); }, [reportDirty]);
   useEffect(() => {
     if (access.ready && !accessLost.current) setSpaceId(current => spaces.some(value => value.id === current) ? current : spaces[0]?.id || null);
   }, [spaces, access.ready]);
   useEffect(() => onAccessLost(() => {
     accessLost.current = true; setSpaceId(null); setLeft(null); setRight(null); setSearchOpened(false);
     dirty.current = { left: false, right: false };
+    reportDirty(false);
     setError('로그인 또는 공간 접근 권한을 확인해 주세요. 메인 화면에서 같은 계정으로 로그인한 뒤 새로고침하면 요청한 공간과 노트를 다시 엽니다.');
   }), []);
   useEffect(() => {
@@ -74,17 +76,18 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
     if ((dirty.current.left || dirty.current.right) && !window.confirm('공간을 바꾸고 저장하지 않은 변경을 버릴까요?')) return;
     setSpaceId(value); setLeft(null); setRight(null); setSearchOpened(false); setTarget('left');
     dirty.current = { left: false, right: false };
+    reportDirty(false);
   }
   function toggleSplit() {
     if (split && dirty.current.right && !window.confirm('오른쪽 창의 저장하지 않은 변경을 버릴까요?')) return;
-    if (split) dirty.current.right = false;
+    if (split) { dirty.current.right = false; reportDirty(dirty.current.left); }
     setSplit(value => !value); setTarget('left');
   }
   function open(id: string) {
     if (target === 'right' && split) setRight(id); else setLeft(id);
   }
   const currentSpace = spaces.find(value => value.id === spaceId);
-  return <>
+  return <NotePolicyContext.Provider value={access.policies}>
     {access.failure && <Alert color="red" role="alert">{access.failure.message} <Button onClick={() => void access.recheck()}>접근 권한 다시 확인</Button></Alert>}
     {(!access.ready || access.refreshing) && <Text p="md" role="status">접근 권한 확인 중…</Text>}
     <div hidden={!access.ready || access.refreshing || !!access.failure}>
@@ -113,5 +116,5 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
           onSelect={note => { if (note) { open(note.id); setSearchOpened(false); } }}/>
       </Modal>}
     </div>
-  </>;
+  </NotePolicyContext.Provider>;
 }

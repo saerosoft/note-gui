@@ -11,12 +11,16 @@ import { SpaceTreeRow } from './vendor/docmost/client/features/page/tree/compone
 import type { TreeNode } from './vendor/docmost/client/features/page/tree/model/tree-model.types';
 import treeStyles from './docmost/TreeLayout.module.css';
 import { ApiError } from './access';
-import { useNoteAccess } from './hostRuntime';
+import { useNoteAccess, useNotePolicy, useNoteContentAccess, NotePolicyContext } from './hostRuntime';
+import { useContext } from 'react';
 
 interface Props { api: NoteCoreApi; spaceId: string; activeNoteId: string | null; onOpen: (id: string) => void }
 interface BranchPage { cursor: string | null; previous: (string | null)[] }
 export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   const { onAccessLost, onAccessRefresh } = useNoteAccess();
+  const policyApi = useNotePolicy();
+  const policy = useNoteContentAccess(spaceId);
+  const policies = useContext(NotePolicyContext);
   const narrow = useMediaQuery('(max-width: 47.99em)');
   const [parentId, setParentId] = useState<string | null>(null);
   const [ancestors, setAncestors] = useState<{ id: string | null; title: string }[]>([]);
@@ -32,7 +36,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   const [moveSpace, setMoveSpace] = useState(spaceId);
   const [moved, setMoved] = useState<{ id: string; spaceId: string } | null>(null);
   const [spaces, setSpaces] = useState<Space[]>([]);
-  const writableSpaces = spaces.filter(value => value.myRole === 'OWNER' || value.myRole === 'EDITOR');
+  const writableSpaces = spaces.filter(value => policyApi ? policies?.get(value.id)?.capabilities.write : value.myRole === 'OWNER' || value.myRole === 'EDITOR');
   const canWrite = writableSpaces.some(value => value.id === spaceId);
   const [title, setTitle] = useState('');
   const [visibility, setVisibility] = useState<Visibility>('SPACE');
@@ -192,9 +196,10 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   }
   async function create() {
     if (!canWrite || busy || locating || !title.trim() || parentId !== null) return;
+    const createVisibility = policy?.mode === 'SHARED' ? 'SPACE' : visibility;
     const previous = pendingCreate.current;
-    const input = previous && previous.spaceId === spaceId && previous.title === title.trim() && previous.parentId === parentId && previous.visibility === visibility
-      ? previous : { spaceId, title: title.trim(), parentId, visibility, idempotencyKey: crypto.randomUUID() };
+    const input = previous && previous.spaceId === spaceId && previous.title === title.trim() && previous.parentId === parentId && previous.visibility === createVisibility
+      ? previous : { spaceId, title: title.trim(), parentId, visibility: createVisibility, idempotencyKey: crypto.randomUUID() };
     pendingCreate.current = input;
     const start = epoch.current;
     await perform(async () => {
@@ -239,7 +244,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
     />
     {!page.items.length && !busy && !locating && !locationError && <p>이 경로에 노트가 없습니다.</p>}
     <Group justify="space-between"><Button size="xs" disabled={!previous.length || busy || locating} onClick={() => { setCursor(previous.at(-1) || null); setPrevious(values => values.slice(0, -1)); }}>이전</Button><Button size="xs" disabled={!page.nextCursor || busy || locating} onClick={() => { setPrevious(values => [...values.slice(-30), cursor]); setCursor(page.nextCursor); }}>다음</Button></Group>
-    {canWrite && <>{createOpen && <form aria-label="새 페이지" onSubmit={event => { event.preventDefault(); void create(); }}><Select comboboxProps={{ withinPortal: false }} label="공유 범위" value={visibility} disabled={busy || locating} data={[{value:"SPACE",label:"공간 공유"},{value:"PRIVATE",label:"나만 보기"}]} onChange={value => setVisibility(value === "PRIVATE" ? "PRIVATE" : "SPACE")}/><TextInput label="새 노트 제목" value={title} disabled={busy || locating} required maxLength={300} onChange={event => setTitle(event.currentTarget.value)}/>{parentId && <p>새 노트는 루트에 만든 뒤 이동할 수 있습니다.</p>}<Button type="submit" size="xs" disabled={busy || locating || !title.trim() || parentId !== null}>현재 경로에 만들기</Button></form>}
+    {canWrite && <>{createOpen && <form aria-label="새 페이지" onSubmit={event => { event.preventDefault(); void create(); }}>{policy?.mode === 'SHARED' ? <Text size="sm">조직 구성원 공유</Text> : <Select comboboxProps={{ withinPortal: false }} label="공유 범위" value={visibility} disabled={busy || locating} data={[{value:"SPACE",label:"공간 공유"},{value:"PRIVATE",label:"나만 보기"}]} onChange={value => setVisibility(value === "PRIVATE" ? "PRIVATE" : "SPACE")}/>}<TextInput label="새 노트 제목" value={title} disabled={busy || locating} required maxLength={300} onChange={event => setTitle(event.currentTarget.value)}/>{parentId && <p>새 노트는 루트에 만든 뒤 이동할 수 있습니다.</p>}<Button type="submit" size="xs" disabled={busy || locating || !title.trim() || parentId !== null}>현재 경로에 만들기</Button></form>}
     <details><summary>선택한 노트 이동 · {selected.length}</summary><form onSubmit={event => { event.preventDefault(); if (destination && selected.includes(destination.id)) { setError('선택한 노트를 자기 하위로 이동할 수 없습니다.'); return; } void perform(() => move(selected, destination?.id ?? null, moveSpace)); }}>
       <Select comboboxProps={{ withinPortal: false }} label="대상 공간" data={writableSpaces.map(value => ({ value: value.id, label: value.name }))} value={moveSpace} disabled={busy} onChange={value => { if (value) { setMoveSpace(value); setDestination(null); } }}/>
       <NotePicker api={api} spaceId={moveSpace} label="대상 상위 노트 (선택하지 않으면 루트)" selected={destination} onSelect={setDestination} exclude={selected} disabled={busy}/>

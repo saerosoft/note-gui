@@ -1,5 +1,6 @@
 import type { NoteApi, NoteCoreApi, NoteKnowledgeContextApi, NoteRelationsApi } from './model';
 import type { NoteAccessLifecycle } from './access';
+import type { NotePolicyApi, NoteAssociationsApi } from './collaboration';
 
 export type NoteDestination =
   | { kind: 'home' }
@@ -22,18 +23,24 @@ export interface NoteCoreGuiOptions {
   host: NoteHost;
   knowledgeContext?: NoteKnowledgeContextApi;
   relations?: NoteRelationsApi;
+  policy?: NotePolicyApi;
+  associations?: NoteAssociationsApi;
   timeZone?: string;
+  onDirtyChange?: (dirty: boolean) => void;
 }
 
 export interface NoteGuiOptions {
   api?: NoteApi;
+  policy?: NotePolicyApi;
+  associations?: NoteAssociationsApi;
   /** IANA time zone for evidence and application timestamps; defaults to the browser clock. */
   timeZone?: string;
   /** Return true when the host handles a confirmed, unmodified product-link navigation. */
   onNavigate?: (href: string) => boolean;
+  onDirtyChange?: (dirty: boolean) => void;
 }
 
-export interface MountedNoteGui { unmount: () => void }
+export interface MountedNoteGui { unmount: () => void; hasUnsavedChanges: () => boolean }
 
 /** The framework-neutral contract used by browser hosts of the ESM distribution. */
 export interface NoteGuiHostModule {

@@ -13,6 +13,7 @@ import { NotePicker } from './NotePicker';
 import type { Note, NoteCoreApi, NoteKnowledgeContextApi, NoteRelationsApi } from './model';
 import { useDiagramUnload } from './docmost/useDiagramUnload';
 import type { JSONContent } from '@tiptap/core';
+import type { NoteContentAccess, NoteAssociationsApi } from './collaboration';
 
 function NativeDraftProbe() { useDiagramUnload(true); return <p>Unapplied native fixture</p>; }
 vi.mock('./vendor/docmost/client/pages/page/page', () => ({ default: ({ header, editor, panels }: { header: React.ReactNode; editor: { title: string; content?: JSONContent; onTitleChange: (title: string) => void; byline: React.ReactNode }; panels: React.ReactNode }) => <>{header}<input aria-label="Draft title" value={editor.title} onChange={event => editor.onTitleChange(event.target.value)}/>{editor.content?.content?.some(node => node.type === 'mermaid') && <NativeDraftProbe/>}{editor.byline}{panels}</> }));
@@ -35,11 +36,11 @@ beforeEach(() => {
   window.history.replaceState(null, '', '/independent?space=space&note=note');
 });
 afterEach(() => { cleanup(); vi.restoreAllMocks(); vi.unstubAllGlobals(); });
-function show(knowledgeContext?: NoteKnowledgeContextApi, relations?: NoteRelationsApi) {
+function show(knowledgeContext?: NoteKnowledgeContextApi, relations?: NoteRelationsApi, associations?: NoteAssociationsApi) {
   const access = createNoteAccess();
   const client = core();
   const host = { access, destinations: {} };
-  const view = render(<MantineProvider env="test"><NoteHostProvider api={client} host={host} knowledgeContext={knowledgeContext} relations={relations}>
+  const view = render(<MantineProvider env="test"><NoteHostProvider api={client} host={host} knowledgeContext={knowledgeContext} relations={relations} associations={associations}>
     <Pane api={client} paneId="Independent" requestedId="note" onLocation={() => {}} onDirty={() => {}} onActivate={() => {}}/>
   </NoteHostProvider></MantineProvider>);
   return { access, client, ...view };
@@ -117,6 +118,206 @@ it('uses only supplied host destinations and preserves dirty/native navigation b
   fireEvent.click(home); expect(navigate).not.toHaveBeenCalled();
   window.addEventListener('click', event => event.preventDefault(), { once: true });
   fireEvent.click(home, { ctrlKey: true }); expect(navigate).not.toHaveBeenCalled();
+});
+const sharedAccess: NoteContentAccess = {
+  organizationId: 'organization', spaceId: 'space', mode: 'SHARED', policyRevision: 1, accessEpoch: '9007199254740993123',
+  capabilities: { read: true, write: true, review: true, manageSource: true, manageRule: true },
+};
+it('uses actual record-space policy instead of selected-space role or original private visibility', async () => {
+  const api = { ...core(), spaces: async () => [
+    { id: 'space', name: 'Selected controlled space', accessEpoch: 1, myRole: 'VIEWER' as const },
+    { id: 'record-space', name: 'Actual shared space', accessEpoch: 1, myRole: 'VIEWER' as const },
+  ], note: async () => ({ ...note, spaceId: 'record-space' }) };
+  render(<MantineProvider env="test"><NoteHostProvider api={api} policy={{ contentAccess: async spaceId => ({ ...sharedAccess, spaceId, mode: spaceId === 'space' ? 'CONTROLLED' : 'SHARED' }) }} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByDisplayValue('Independent document');
+  expect(screen.getByText(/조직 구성원 공유/)).toBeTruthy();
+  expect(screen.queryByText(/나만 보기/)).toBeNull();
+});
+it('uses shared write capability for creation without administrator promotion or private choices', async () => {
+  const api = { ...core(), spaces: async () => [{ id: 'space', name: 'Shared viewer', accessEpoch: 1, myRole: 'VIEWER' as const }] };
+  const create = vi.spyOn(api, 'create');
+  render(<MantineProvider env="test"><NoteHostProvider api={api} policy={{ contentAccess: async () => sharedAccess }} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  fireEvent.click(await screen.findByRole('button', { name: '새 페이지' }));
+  expect(screen.queryByRole('combobox', { name: '공유 범위' })).toBeNull();
+  fireEvent.change(screen.getByRole('textbox', { name: '새 노트 제목' }), { target: { value: 'Shared creation' } });
+  fireEvent.click(screen.getByRole('button', { name: '현재 경로에 만들기' }));
+  await waitFor(() => expect(create).toHaveBeenCalledWith(expect.objectContaining({ visibility: 'SPACE', title: 'Shared creation' })));
+  expect(document.querySelector('a[href*="settings"]')).toBeNull();
+});
+it('fails closed on a supplied policy error and recovers without discarding a dirty editor', async () => {
+  const api = core(); const access = createNoteAccess(); let fail = true;
+  render(<MantineProvider env="test"><NoteHostProvider api={api} policy={{ contentAccess: async () => { if (fail) throw new Error('Policy unavailable'); return sharedAccess; } }} host={{ access, destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByText(/Policy unavailable/);
+  expect(screen.queryByRole('textbox', { name: 'Draft title' })).toBeNull();
+  fail = false; fireEvent.click(screen.getByRole('button', { name: '접근 권한 다시 확인' }));
+  const editor = await screen.findByRole('textbox', { name: 'Draft title' });
+  fireEvent.change(editor, { target: { value: 'Policy recovery draft' } });
+  fail = true; fireEvent.focus(window); await screen.findByText(/Policy unavailable/);
+  expect(screen.queryByRole('textbox', { name: 'Draft title' })).toBeNull();
+  fail = false; fireEvent.click(screen.getByRole('button', { name: '접근 권한 다시 확인' }));
+  await waitFor(() => expect(screen.getByRole('textbox', { name: 'Draft title' })).toBe(editor));
+  expect(screen.getByDisplayValue('Policy recovery draft')).toBeTruthy();
+});
+it('guards optional policy and association operations by the same mount generation', async () => {
+  let resolve!: (value: NoteContentAccess) => void;
+  const associations: NoteAssociationsApi = {
+    targets: async noteId => ({ noteId, total: 0, items: [], nextCursor: null }), list: async noteId => ({ noteId, total: 0, items: [], nextCursor: null }),
+    state: async () => null, set: async (noteId, input) => ({ id: 'link', noteId, targetNoteId: input.targetNoteId, revision: 1, linked: input.linked }),
+  };
+  const access = createNoteAccess();
+  const session = createNoteSession({ api: core(), host: { access, destinations: {} }, policy: { contentAccess: () => new Promise(finish => { resolve = finish; }) }, associations });
+  expect(session.policy).toBeDefined(); expect(session.associations).toBeDefined();
+  session.connect(); const pending = session.policy!.contentAccess('space');
+  await access.refresh(); resolve(sharedAccess);
+  await expect(pending).rejects.toMatchObject({ code: 'STALE_ACCESS' });
+  session.dispose(); await expect(session.associations!.list('note', null)).rejects.toMatchObject({ code: 'ACCESS_DENIED' });
+});
+it('connects an authoritative association target and shows the original creator without inventing a name', async () => {
+  let linked = false;
+  const set = vi.fn(async (noteId, input) => { linked = input.linked; return { id: 'global-link', noteId, targetNoteId: input.targetNoteId, revision: 1, linked }; });
+  show(undefined, undefined, {
+    targets: async noteId => ({ noteId, total: linked ? 0 : 1, nextCursor: null, items: linked ? [] : [{ id: 'target', title: 'Shared association target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] }),
+    list: async noteId => ({ noteId, total: linked ? 1 : 0, nextCursor: null, items: linked ? [{ id: 'global-link', targetNoteId: 'target', targetNoteRevision: 1, title: 'Shared association target', revision: 1, authoredBody: '', authoredBodyTruncated: false, bodyOrigin: 'HUMAN', creatorId: 'original-creator-id', creatorName: null, createdAt: '2026-11-01T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z' }] : [] }),
+    state: async () => null, set,
+  });
+  await screen.findByDisplayValue('Independent document');
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' }));
+  fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Shared association target' }));
+  fireEvent.click(await screen.findByRole('button', { name: /^연결$/ }));
+  await screen.findByText(/original-creator-id/);
+  expect(set).toHaveBeenCalledExactlyOnceWith('note', expect.objectContaining({ targetNoteId: 'target', expectedRevision: 0, linked: true, requestId: expect.any(String) }));
+  expect(screen.queryByText(/작성자: 나/)).toBeNull();
+});
+it('replays the exact uncertain association command and never repeats an accepted write to recover its list', async () => {
+  let linked = false; let listUnavailable = false;
+  const set = vi.fn(async (noteId, input) => {
+    linked = input.linked;
+    if (set.mock.calls.length === 1) throw new ApiError('Link acknowledgement unavailable', 'NETWORK');
+    listUnavailable = true;
+    return { id: 'global-link', noteId, targetNoteId: input.targetNoteId, revision: 1, linked };
+  });
+  show(undefined, undefined, {
+    targets: async noteId => ({ noteId, total: 1, nextCursor: null, items: [{ id: 'target', title: 'Uncertain association target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] }),
+    list: async noteId => { if (listUnavailable) throw new Error('Link list unavailable'); return { noteId, total: 0, nextCursor: null, items: [] }; },
+    state: async () => linked ? { id: 'global-link', noteId: 'note', targetNoteId: 'target', revision: 1, linked: true } : null,
+    set,
+  });
+  const editor = await screen.findByDisplayValue('Independent document');
+  fireEvent.change(editor, { target: { value: 'Draft survives association failure' } });
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' }));
+  fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Uncertain association target' }));
+  fireEvent.click(await screen.findByRole('button', { name: /^연결$/ }));
+  await screen.findByText('Link acknowledgement unavailable');
+  fireEvent.click(screen.getByRole('button', { name: '동일 요청 다시 시도' }));
+  await screen.findByText('Link list unavailable');
+  expect(set.mock.calls[1]).toEqual(set.mock.calls[0]);
+  listUnavailable = false; fireEvent.click(screen.getByRole('button', { name: '연결 목록 다시 읽기' }));
+  await waitFor(() => expect(screen.queryByText('Link list unavailable')).toBeNull());
+  expect(set).toHaveBeenCalledTimes(2);
+  expect(screen.getByDisplayValue('Draft survives association failure')).toBe(editor);
+});
+it('revalidates an opaque policy epoch change even when the legacy space epoch is unchanged', async () => {
+  const api = core(); let epoch = sharedAccess.accessEpoch;
+  const reads = vi.spyOn(api, 'note');
+  render(<MantineProvider env="test"><NoteHostProvider api={api} policy={{ contentAccess: async () => ({ ...sharedAccess, accessEpoch: epoch }) }} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  const editor = await screen.findByRole('textbox', { name: 'Draft title' });
+  fireEvent.change(editor, { target: { value: 'Opaque policy draft' } });
+  const before = reads.mock.calls.length; epoch = '9007199254740993124'; fireEvent.focus(window);
+  await waitFor(() => expect(reads.mock.calls.length).toBeGreaterThan(before));
+  await waitFor(() => expect(screen.getByRole('textbox', { name: 'Draft title' })).toBe(editor));
+  expect(screen.getByDisplayValue('Opaque policy draft')).toBeTruthy();
+});
+it('rejects an injected policy for another space without falling back to a writable role', async () => {
+  const api = core();
+  render(<MantineProvider env="test"><NoteHostProvider api={api} policy={{ contentAccess: async () => ({ ...sharedAccess, spaceId: 'wrong-space' }) }} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByText(/policy response does not match/);
+  expect(screen.queryByRole('button', { name: '새 페이지' })).toBeNull();
+  expect(screen.queryByRole('textbox', { name: 'Draft title' })).toBeNull();
+});
+it('reads the current association revision after conflict before permitting a fresh request identity', async () => {
+  let revision = 7;
+  const set = vi.fn<NoteAssociationsApi['set']>(async (noteId, input) => {
+    if (revision === 7) { revision = 8; throw new ApiError('Association revision changed', 'CONFLICT'); }
+    return { id: 'retained-link', noteId, targetNoteId: input.targetNoteId, revision: 9, linked: input.linked };
+  });
+  const state = vi.fn<NoteAssociationsApi['state']>(async () => ({ id: 'retained-link', noteId: 'note', targetNoteId: 'target', revision, linked: false }));
+  show(undefined, undefined, {
+    targets: async noteId => ({ noteId, total: 1, nextCursor: null, items: [{ id: 'target', title: 'Conflict association target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] }),
+    list: async noteId => ({ noteId, total: 0, nextCursor: null, items: [] }), state, set,
+  });
+  await screen.findByDisplayValue('Independent document');
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' })); fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Conflict association target' })); fireEvent.click(await screen.findByRole('button', { name: /^연결$/ }));
+  await screen.findByText('Association revision changed');
+  expect(screen.queryByRole('button', { name: '동일 요청 다시 시도' })).toBeNull();
+  expect(screen.getByRole('button', { name: /^연결$/ })).toHaveProperty('disabled', true);
+  fireEvent.click(screen.getByRole('button', { name: '연결 상태 다시 읽기' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: /^연결$/ })).toHaveProperty('disabled', false));
+  fireEvent.click(screen.getByRole('button', { name: /^연결$/ }));
+  await waitFor(() => expect(set).toHaveBeenCalledTimes(2));
+  expect(set.mock.calls[0][1].expectedRevision).toBe(7); expect(set.mock.calls[1][1].expectedRevision).toBe(8);
+  expect(set.mock.calls[1][1].requestId).not.toBe(set.mock.calls[0][1].requestId); expect(state).toHaveBeenCalledTimes(2);
+});
+it('keeps association paging on the applied query until a new search is submitted', async () => {
+  const targets = vi.fn<NoteAssociationsApi['targets']>(async (noteId, query, cursor) => ({
+    noteId, total: query ? 1 : 21, nextCursor: query || cursor ? null : '20',
+    items: query && cursor === null ? [{ id: 'match', title: 'First matching target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] : [],
+  }));
+  show(undefined, undefined, {
+    targets, list: async (noteId, cursor) => ({ noteId, total: 21, nextCursor: cursor ? null : '20', items: [] }),
+    state: async () => null, set: async () => { throw new Error('No association write expected'); },
+  });
+  await screen.findByDisplayValue('Independent document');
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' })); fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: '대상 다음' })).toHaveProperty('disabled', false));
+  fireEvent.change(screen.getByRole('textbox', { name: '연결 대상 검색' }), { target: { value: 'needle' } });
+  fireEvent.click(screen.getByRole('button', { name: '대상 다음' }));
+  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', '20'));
+  fireEvent.click(screen.getByRole('button', { name: '대상 이전' }));
+  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', null));
+  await waitFor(() => expect(screen.getByRole('button', { name: '연결 다음' })).toHaveProperty('disabled', false));
+  fireEvent.click(screen.getByRole('button', { name: '연결 다음' }));
+  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', null));
+  await waitFor(() => expect(screen.getByRole('button', { name: '대상 검색' })).toHaveProperty('disabled', false));
+  fireEvent.click(screen.getByRole('button', { name: '대상 검색' }));
+  await screen.findByRole('button', { name: 'First matching target' });
+  expect(targets).toHaveBeenLastCalledWith('note', 'needle', null);
+  expect(screen.getByRole('button', { name: '대상 이전' })).toHaveProperty('disabled', true);
+});
+it('retries a failed new association search from its first page rather than the previous query cursor', async () => {
+  let unavailable = false;
+  const targets = vi.fn<NoteAssociationsApi['targets']>(async (noteId, query, cursor) => {
+    if (unavailable && query) throw new Error('Target search unavailable');
+    return { noteId, total: query ? 1 : 21, nextCursor: query || cursor ? null : '20', items: query && cursor === null ? [{ id: 'match', title: 'Recovered first target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] : [] };
+  });
+  show(undefined, undefined, { targets, list: async noteId => ({ noteId, total: 0, items: [], nextCursor: null }), state: async () => null, set: async () => { throw new Error('No write expected'); } });
+  await screen.findByDisplayValue('Independent document'); fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' })); fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  await waitFor(() => expect(screen.getByRole('button', { name: '대상 다음' })).toHaveProperty('disabled', false));
+  fireEvent.click(screen.getByRole('button', { name: '대상 다음' }));
+  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', '20'));
+  await waitFor(() => expect(screen.getByRole('button', { name: '대상 검색' })).toHaveProperty('disabled', false));
+  fireEvent.change(screen.getByRole('textbox', { name: '연결 대상 검색' }), { target: { value: 'needle' } });
+  unavailable = true; fireEvent.click(screen.getByRole('button', { name: '대상 검색' })); await screen.findByText('Target search unavailable');
+  unavailable = false; fireEvent.click(screen.getByRole('button', { name: '연결 목록 다시 읽기' }));
+  await screen.findByRole('button', { name: 'Recovered first target' });
+  expect(targets).toHaveBeenLastCalledWith('note', 'needle', null);
+});
+it('allows a controlled member to link its writable private target without edit authority on the shared anchor', async () => {
+  const api = { ...core(), note: async () => ({ ...note, visibility: 'SPACE' as const, canEdit: false }) };
+  const set = vi.fn<NoteAssociationsApi['set']>(async (noteId, input) => ({ id: 'link', noteId, targetNoteId: input.targetNoteId, revision: 1, linked: input.linked }));
+  const associations: NoteAssociationsApi = {
+    targets: async noteId => ({ noteId, total: 1, nextCursor: null, items: [{ id: 'own-private', title: 'My authorized private target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] }),
+    list: async noteId => ({ noteId, total: 0, nextCursor: null, items: [] }), state: async () => null, set,
+  };
+  render(<MantineProvider env="test"><NoteHostProvider api={api} associations={associations} policy={{ contentAccess: async () => ({ ...sharedAccess, mode: 'CONTROLLED' }) }} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByDisplayValue('Independent document');
+  expect(screen.getByRole('button', { name: '저장' })).toHaveProperty('disabled', true);
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' })); fireEvent.click(await screen.findByRole('menuitem', { name: '노트 연결' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'My authorized private target' }));
+  fireEvent.click(await screen.findByRole('button', { name: /^연결$/ }));
+  await waitFor(() => expect(set).toHaveBeenCalledWith('note', expect.objectContaining({ targetNoteId: 'own-private', expectedRevision: 0, linked: true })));
 });
 it('retires all core, context, relation and media results after revocation and disposal', async () => {
   const access = createNoteAccess();

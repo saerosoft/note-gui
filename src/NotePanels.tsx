@@ -7,13 +7,15 @@ import { NoteProperties, type PropertyDraft } from './NoteProperties';
 import { NoteRelations } from './NoteRelations';
 import { NoteAttachments } from './NoteAttachments';
 import type { AddComment, Comment, Note, NoteCoreApi, Page, Revision } from './model';
-import { useNoteAccess, useRelations } from './hostRuntime';
+import { useNoteAccess, useRelations, useNoteAssociations } from './hostRuntime';
+import { NoteAssociations } from './NoteAssociations';
 
-export type NotePanel = 'comments' | 'history' | 'properties' | 'relations' | 'attachments';
+export type NotePanel = 'comments' | 'history' | 'properties' | 'relations' | 'attachments' | 'associations';
 export interface CommentDraft { body: string; busy: boolean; error?: string; pending?: { noteId: string; input: AddComment } }
 interface Props { api: NoteCoreApi; note: Note; dirty: boolean; panel?: NotePanel; onPanelChange?: (panel: NotePanel) => void; isCurrent?: () => boolean; commentDraft?: CommentDraft; onCommentDraftChange?: (transform: (draft: CommentDraft) => CommentDraft) => void; propertyDraft?: PropertyDraft; onPropertyDraftChange?: (transform: (draft: PropertyDraft) => PropertyDraft) => void; onRestore: (note: Note) => void; onOpen: (id: string) => void; onRevision: (note: Note) => void }
 export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChange, isCurrent, commentDraft: suppliedCommentDraft, onCommentDraftChange, propertyDraft, onPropertyDraftChange, onRestore, onOpen, onRevision }: Props) {
   const relations = useRelations();
+  const associations = useNoteAssociations();
   const access = useNoteAccess();
   const [localPanel, setLocalPanel] = useState<NotePanel>('comments');
   const panel = selectedPanel || localPanel;
@@ -83,7 +85,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   }
   return <aside className="note-panels" aria-label="노트 상세">
     <Tabs value={panel} onChange={select}><Tabs.List aria-label="노트 상세 패널">
-       <Tabs.Tab value="comments">댓글</Tabs.Tab><Tabs.Tab value="history">이력</Tabs.Tab><Tabs.Tab value="properties">속성</Tabs.Tab>{relations && <Tabs.Tab value="relations">관계</Tabs.Tab>}<Tabs.Tab value="attachments">첨부</Tabs.Tab>
+       <Tabs.Tab value="comments">댓글</Tabs.Tab><Tabs.Tab value="history">이력</Tabs.Tab><Tabs.Tab value="properties">속성</Tabs.Tab>{relations && <Tabs.Tab value="relations">관계</Tabs.Tab>}<Tabs.Tab value="attachments">첨부</Tabs.Tab>{associations && <Tabs.Tab value="associations">노트 연결</Tabs.Tab>}
     </Tabs.List></Tabs>
     {(error || commentDraft.error) && <p role="alert">{error || commentDraft.error}</p>}{busy && <p role="status">처리 중…</p>}
     {(error || commentDraft.error) && !busy && !commentDraft.busy && <Button variant="subtle" onClick={() => void retryRead()}>노트 상세 다시 읽기</Button>}
@@ -97,6 +99,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
     </div>}
     {visited.includes('properties') && <div hidden={panel !== 'properties'} className="note-panel-content"><NoteProperties api={api} note={note} dirty={dirty} draft={propertyDraft} onDraftChange={onPropertyDraftChange} isCurrent={ownsTab} onRevision={onRevision}/></div>}
     {visited.includes('attachments') && <div hidden={panel !== 'attachments'} className="note-panel-content"><NoteAttachments api={api} noteId={note.id} revision={note.revision}/></div>}
-     {visited.includes('relations') && relations && <div hidden={panel !== 'relations'} className="note-panel-content"><NoteRelations api={api} relations={relations} note={note} onOpen={onOpen} onRevision={onRevision}/></div>}
+      {visited.includes('relations') && relations && <div hidden={panel !== 'relations'} className="note-panel-content"><NoteRelations api={api} relations={relations} note={note} onOpen={onOpen} onRevision={onRevision}/></div>}
+      {visited.includes('associations') && associations && <div hidden={panel !== 'associations'} className="note-panel-content"><NoteAssociations api={associations} note={note} onOpen={onOpen}/></div>}
   </aside>;
 }

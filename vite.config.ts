@@ -39,6 +39,7 @@ export default defineConfig({
   },
   build: { sourcemap: true },
   test: {
+    maxWorkers: 2,
     exclude: [...configDefaults.exclude, 'e2e/**'],
     setupFiles: ['./src/test/browserLayout.ts'],
     server: { deps: { inline: [/@excalidraw\//, /roughjs/] } },

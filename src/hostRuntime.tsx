@@ -3,11 +3,14 @@ import { flushSync } from 'react-dom';
 import { ApiError, createNoteAccess, legacyAccess } from './access';
 import type { NoteCoreGuiOptions, NoteDestination, NoteHost } from './host';
 import type { NoteCoreApi, NoteKnowledgeContextApi, NoteRelationsApi } from './model';
+import type { NoteContentAccess } from './collaboration';
 
 const Runtime = createContext<ReturnType<typeof createNoteSession> | null>(null);
 const emptyHost: NoteHost = { access: legacyAccess, destinations: {} };
 export const NoteHostContext = createContext<NoteHost>(emptyHost);
-const readOperations = new Set(['spaces', 'tree', 'ancestors', 'note', 'findNotes', 'history', 'comments', 'properties', 'files', 'attachment', 'provenance', 'accumulations', 'currentKnowledge', 'accumulationChange', 'findRelationNotes', 'relations', 'relationEvidence']);
+export const NoteDirtyContext = createContext<(dirty: boolean) => void>(() => {});
+export const NotePolicyContext = createContext<ReadonlyMap<string, NoteContentAccess> | undefined>(undefined);
+const readOperations = new Set(['spaces', 'tree', 'ancestors', 'note', 'findNotes', 'history', 'comments', 'properties', 'files', 'attachment', 'provenance', 'accumulations', 'currentKnowledge', 'accumulationChange', 'findRelationNotes', 'relations', 'relationEvidence', 'contentAccess', 'targets', 'list', 'state']);
 
 /** Guards every adapter result, including extension data and attachment bytes, by mount/access generation. */
 export function createNoteSession(options: NoteCoreGuiOptions) {
@@ -73,6 +76,8 @@ export function createNoteSession(options: NoteCoreGuiOptions) {
     api: guard(options.api, true),
     knowledgeContext: options.knowledgeContext && guard(options.knowledgeContext),
     relations: options.relations && guard(options.relations),
+    policy: options.policy && guard(options.policy),
+    associations: options.associations && guard(options.associations),
     host: options.host, access,
     refreshAuthority: () => refresh('authority'),
     connect() {
@@ -85,7 +90,7 @@ export function createNoteSession(options: NoteCoreGuiOptions) {
 
 export type NoteSession = ReturnType<typeof createNoteSession>;
 export function NoteHostProvider({ children, session: suppliedSession, ...options }: NoteCoreGuiOptions & { children: ReactNode; session?: NoteSession }) {
-  const session = useMemo(() => suppliedSession ?? createNoteSession(options), [suppliedSession, options.api, options.host, options.knowledgeContext, options.relations]);
+  const session = useMemo(() => suppliedSession ?? createNoteSession(options), [suppliedSession, options.api, options.host, options.knowledgeContext, options.relations, options.policy, options.associations]);
   useLayoutEffect(() => { if (!suppliedSession) { session.connect(); return () => session.dispose(); } }, [session, suppliedSession]);
   return <Runtime.Provider value={session}>{children}</Runtime.Provider>;
 }
@@ -97,6 +102,9 @@ export function useNoteCore(api: NoteCoreApi | undefined): NoteCoreApi | undefin
 export function useNoteCore(api: NoteCoreApi | undefined) { return useContext(Runtime)?.api ?? api; }
 export function useKnowledgeContext(api?: NoteKnowledgeContextApi) { const runtime = useContext(Runtime); return runtime ? runtime.knowledgeContext : api; }
 export function useRelations(api?: NoteRelationsApi) { const runtime = useContext(Runtime); return runtime ? runtime.relations : api; }
+export function useNotePolicy() { return useContext(Runtime)?.policy; }
+export function useNoteAssociations() { return useContext(Runtime)?.associations; }
+export function useNoteContentAccess(spaceId: string) { return useContext(NotePolicyContext)?.get(spaceId); }
 export function useNoteDestination() {
   const host = useNoteHost();
   return (value: NoteDestination) => value.kind === 'home' || value.kind === 'login'

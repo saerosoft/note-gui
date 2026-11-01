@@ -6,7 +6,7 @@ import { NoteHostProvider } from './hostRuntime';
 import { Workspace } from './Workspace';
 
 /** Compatibility entry for the existing complete KMS adapter. */
-export function App({ api = defaultApi, onNavigate }: NoteGuiOptions) {
+export function App({ api = defaultApi, onNavigate, policy, associations }: NoteGuiOptions) {
   const host = useMemo(() => createKmsNoteHost(onNavigate), [onNavigate]);
-  return <NoteHostProvider api={api} host={host} knowledgeContext={api} relations={api}><Workspace api={api}/></NoteHostProvider>;
+  return <NoteHostProvider api={api} host={host} knowledgeContext={api} relations={api} policy={policy} associations={associations}><Workspace api={api}/></NoteHostProvider>;
 }

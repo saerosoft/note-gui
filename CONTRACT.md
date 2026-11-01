@@ -1,7 +1,8 @@
 # Note GUI host contract
 
-This contract accompanies the 0.7.1 development candidate for the `version/0.7`
-release line. It preserves the intended 0.7 contract. Candidate metadata on
+This contract accompanies the 0.8.0 development candidate for the `version/0.8`
+release line. It adds optional collaboration capabilities and mount-local dirty
+reporting to the existing core/context/relations contract. Candidate metadata on
 `master` does not establish release qualification or publication.
 The core/context/relations split and explicit host bindings added to the former
 0.6 package establish this new minor contract. Release identity and qualification
@@ -33,13 +34,16 @@ the source offer. This entry bundles the pinned React runtime.
 ```ts
 function mountNoteCoreGui(container: HTMLElement, options: NoteCoreGuiOptions): MountedNoteGui;
 function mountNoteGui(container: HTMLElement, options?: NoteGuiOptions | NoteCoreGuiOptions): MountedNoteGui;
-interface MountedNoteGui { unmount(): void }
+interface MountedNoteGui { unmount(): void; hasUnsavedChanges(): boolean }
 interface NoteCoreGuiOptions {
   api: NoteCoreApi;
   host: NoteHost;
   knowledgeContext?: NoteKnowledgeContextApi;
   relations?: NoteRelationsApi;
+  policy?: NotePolicyApi;
+  associations?: NoteAssociationsApi;
   timeZone?: string;
+  onDirtyChange?: (dirty: boolean) => void;
 }
 ```
 
@@ -54,6 +58,14 @@ Injected mounts subscribe to the host lifecycle before returning their handle,
 so a same-stack `mountNoteCoreGui(...); access.revoke()` cannot lose the event
 while the initial React commit is pending. Unmount also retires that synchronous
 subscription when no React commit has occurred yet.
+
+`hasUnsavedChanges()` reports the aggregate state of this mount, including every
+retained tab in both panes, authored edits, comment/property drafts and unapplied
+native diagram edits. Optional `onDirtyChange` runs on boolean transitions, not
+on every keystroke or an initial clean mount. It is also accepted by the legacy
+`NoteGuiOptions` overload. Revocation and disposal clear the state; after unmount
+the handle always returns false. The host owns router confirmation. Neither the
+query nor unmount saves content, confirms departure or cancels committed writes.
 
 `mountNoteCoreGui` requires the core API, lifecycle and destinations. The
 `mountNoteGui` overload with these same options selects the same reusable path.
@@ -81,6 +93,9 @@ document. `Revision` contains `id`, `revision`, `title`, `createdAt` and
 remains readable for complete adapters. Presentation metadata takes precedence.
 Missing classification implies neither HUMAN nor legacy status and produces no
 authorship notice. The core save request never supplies a classification.
+`Revision.editorName` optionally carries the nullable authoritative editor name;
+absence or null does not identify the current account as the editor. KMS history
+reads its existing `NoteRevision.editorName` field rather than deriving an actor.
 
 `Space` retains `id`, `name`, `accessEpoch` and `myRole`
 (`OWNER | EDITOR | VIEWER`). `Visibility` retains `SPACE | PRIVATE |
@@ -179,6 +194,77 @@ duplicate handling are host-owned and uncertain writes require rereading.
 nonempty reason atomically. `relationEvidence` uses the relation ID and returns
 only currently readable source proof. A target-specific rejection may use
 `ApiError.field = 'toNoteId'` so the picker requests a new selection.
+
+## Optional collaboration capabilities
+
+The root exports the types in `src/collaboration.ts`. The `/kms` entry additionally
+exports `kmsNotePolicy` and `kmsNoteAssociations`; importing the root does not
+select these adapters. Both capabilities are optional in core and legacy mount
+options. Their absence preserves the existing controlled/core-only host and
+does not issue policy or association requests.
+
+`NotePolicyApi.contentAccess(spaceId)` returns `NoteContentAccess` with exact
+`organizationId`, `spaceId`, `mode: CONTROLLED | SHARED`, positive
+`policyRevision`, opaque decimal-string `accessEpoch` and boolean capabilities
+`read`, `write`, `review`, `manageSource`, `manageRule`. Never convert the epoch
+to a JavaScript number. A supplied policy must match the requested space and
+contain every capability. Failure blocks that workspace until revalidation;
+it does not silently fall back to roles. Each note uses its actual `spaceId`.
+Policy changes join the existing access-generation refresh barrier, including
+changes to the opaque epoch while the legacy numeric space epoch is unchanged.
+Per-record backend `canEdit` and current server authorization remain required.
+
+```ts
+interface NoteAssociationsApi {
+  targets(noteId: string, query: string, cursor: string | null): Promise<NoteAssociationPage<NoteAssociationTarget>>;
+  list(noteId: string, cursor: string | null): Promise<NoteAssociationPage<NoteAssociation>>;
+  state(noteId: string, targetNoteId: string): Promise<NoteAssociationState | null>;
+  set(noteId: string, input: SetNoteAssociation): Promise<NoteAssociationState>;
+}
+interface SetNoteAssociation {
+  targetNoteId: string; expectedRevision: number; linked: boolean; requestId: string;
+}
+interface NoteAssociationState {
+  id: string; noteId: string; targetNoteId: string; revision: number; linked: boolean;
+}
+```
+
+Association pages have `noteId`, `total`, `items` and `nextCursor`. Each page
+replaces at most 20 rows; authorized target filtering/search precedes paging.
+Targets contain note `id`, `title`, `revision`, `bodyOrigin` and `updatedAt`.
+List items contain global association `id`/`revision`, `targetNoteId`,
+`targetNoteRevision`, `title`, nullable `authoredBody`, `authoredBodyTruncated`,
+`bodyOrigin`, `createdAt`, `updatedAt`, original `creatorId` and nullable
+`creatorName`. A missing name does not change the creator identity. Authored
+previews are bounded to 2,000 characters and never use combined compatibility
+content. Unlink/relink retains association identity, revision and original creator.
+
+Null `state` means no link has ever existed. Its first linked command uses
+`expectedRevision: 0`; later commands use the retained association revision,
+not the target note content revision. `requestId` is a UUID scoped to the actor.
+Association writes authorize the target independently of editing the anchor.
+With supplied policy, controls follow current content write capability; a
+CONTROLLED member may link its own writable private target while the shared
+anchor remains read-only. The backend still validates the actual target write.
+Identical request ID and input replay the original accepted result even after
+another command advances state, provided current authorization still permits
+the operation. A changed payload with the same ID conflicts. Unknown outcomes
+keep the exact intent for explicit retry or require state readback. A conflict
+requires fresh state before a new request identity. Accepted writes followed by
+read failure recover through reads only. Paging cannot bypass unresolved writes.
+
+The KMS adapter maps `targetNoteId` to the established `privateNoteId` wire key
+and maps 20-row offset/`hasNext` results to cursors without changing backend
+operation names. No organization-admin role, record audience DTO or missing
+actor field is synthesized by these adapters. Missing wider fields remain an
+explicit integration requirement rather than an inferred guarantee.
+
+The new KMS policy/association adapters distinguish scoped permission denial
+from identity loss: GraphQL `FORBIDDEN | ACCESS_DENIED` and HTTP 403 reject the
+extension without emitting global access loss. HTTP 401 and GraphQL
+`UNAUTHENTICATED | UNAUTHORIZED` still revoke identity. Existing core transport
+semantics are unchanged. A failed supplied policy still blocks the workspace
+until it can revalidate; this distinction never grants authority.
 
 ## Host destinations and access
 

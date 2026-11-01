@@ -10,12 +10,13 @@ import './vendor/docmost/client/styles/a11y-overrides.css';
 import { theme, mantineCssResolver } from './vendor/docmost/client/theme';
 import './integration.css';
 import { Workspace } from './Workspace';
-import { createNoteSession, NoteHostProvider, type NoteSession } from './hostRuntime';
+import { createNoteSession, NoteDirtyContext, NoteHostProvider, type NoteSession } from './hostRuntime';
 import { createNoteDateTimeFormatter, NoteDateTimeContext } from './dateTime';
 import type { MountedNoteGui, NoteGuiOptions, NoteCoreGuiOptions } from './host';
 export type { MountedNoteGui, NoteGuiHostModule, NoteGuiOptions, NoteCoreGuiOptions, NoteHost, NoteDestination } from './host';
 
 export type * from './model';
+export type * from './collaboration';
 export { ApiError, createNoteAccess } from './access';
 export type { NoteAccessLifecycle, NoteAccessController } from './access';
 export { createLocalNoteApi } from './localPersistence';
@@ -39,10 +40,24 @@ export function mountNoteGui(container: HTMLElement, options: NoteGuiOptions | N
   const dateTime = createNoteDateTimeFormatter(options.timeZone);
   const root = createRoot(container);
   const session = 'host' in options ? createNoteSession(options) : undefined;
-  session?.connect();
-  root.render(<NoteDateTimeContext.Provider value={dateTime}><NoteGui {...options} session={session}/></NoteDateTimeContext.Provider>);
   let disposed = false;
-  return { unmount: () => { if (!disposed) { disposed = true; session?.dispose(); root.unmount(); } } };
+  let dirty = false;
+  const reportDirty = (value: boolean) => {
+    if (disposed || value === dirty) return;
+    dirty = value; options.onDirtyChange?.(value);
+  };
+  session?.connect();
+  root.render(<NoteDirtyContext.Provider value={reportDirty}><NoteDateTimeContext.Provider value={dateTime}><NoteGui {...options} session={session}/></NoteDateTimeContext.Provider></NoteDirtyContext.Provider>);
+  return {
+    hasUnsavedChanges: () => !disposed && dirty,
+    unmount: () => {
+      if (disposed) return;
+      disposed = true;
+      const wasDirty = dirty; dirty = false;
+      session?.dispose(); root.unmount();
+      if (wasDirty) options.onDirtyChange?.(false);
+    },
+  };
 }
 /** Mounts only supplied capabilities; never imports the compatibility HTTP adapter. */
 export function mountNoteCoreGui(container: HTMLElement, options: NoteCoreGuiOptions): MountedNoteGui {

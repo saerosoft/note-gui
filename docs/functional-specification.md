@@ -45,6 +45,11 @@ Navigation/close protect all unsaved content, including unapplied native diagram
 changes. Cancellation retains the selection, URL and draft. Explicit discard
 affects only the requested scope. Host-external dirty reporting follows the
 agreed public contract; the host owns its router and confirmation.
+Each mount exposes `hasUnsavedChanges()` and accepts optional
+`onDirtyChange(boolean)` notifications when its aggregate dirty state changes.
+Notifications cover both panes and every retained tab, including comment,
+property and unapplied native drafts. Access loss and disposal clear the state.
+Disposal is not an asynchronous save or a navigation confirmation.
 
 ## F04: History
 
@@ -53,6 +58,8 @@ selected structured content into a new revision under the current expected
 revision and preserves supplied origin metadata. Pending responses cannot erase
 later edits or remount another tab/pane; dirty content retains its conflict base.
 Uncertain restoration requires readback before another restore intent.
+History rows show the supplied revision editor name. An unavailable editor is
+explicitly unknown, never substituted with the current account or note owner.
 
 ## F05: Trees and bounded resources
 
@@ -129,6 +136,8 @@ checks. Associations retain IDs/history, authorized targets and actual creators;
 shared associations are not owner-only. Authors/editors/commenters/uploaders/
 reviewers remain actual identities. Policy/epoch changes fence stale open panes.
 No mode, effective audience or actor is inferred from selected organization/role.
+In controlled mode, an authorized member can link its own writable private target
+without gaining edit authority over the shared anchor.
 
 ## F10: Fidelity and delivery
 
@@ -139,3 +148,6 @@ Shipped CJK fallback covers Korean controls/code/comparisons without replacing
 retained Latin/monospace character ranges or requiring a font CDN. Native-platform,
 consumer-host and workload acceptance uses actual authorized environments and
 matching delivered artifacts, not types or producer fixtures alone.
+Linux is the qualified host operating system. Windows support and native Windows
+qualification are outside the required scope. No human-review gate is required;
+automated checks and actual authorized-environment evidence still apply.

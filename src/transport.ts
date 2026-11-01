@@ -23,7 +23,7 @@ function token() {
   return issuing;
 }
 
-export async function request(path: string, init: RequestInit = {}) {
+export async function request(path: string, init: RequestInit = {}, scope: 'core' | 'extension' = 'core') {
   if (!(path.startsWith('/api/') || path === '/graphql')) throw new ApiError('허용되지 않은 요청입니다.', 'INVALID_PATH');
   const epoch = legacyAccess.generation;
   const deadline = AbortSignal.timeout(REQUEST_DEADLINE);
@@ -36,8 +36,8 @@ export async function request(path: string, init: RequestInit = {}) {
   try { response = await fetch(path, { ...init, headers, signal, credentials: 'same-origin', cache: 'no-store' }); }
   catch { throw new ApiError(NETWORK_MESSAGE, 'NETWORK'); }
   if (response.status === 401 || response.status === 403) {
-    clearAccess();
-    throw new ApiError('로그인 또는 접근 권한을 확인해 주세요. 열린 자료를 지웠습니다.', 'ACCESS_DENIED');
+    if (response.status === 401 || scope === 'core') clearAccess();
+    throw new ApiError(scope === 'extension' && response.status === 403 ? '이 기능의 접근 권한을 확인해 주세요.' : '로그인 또는 접근 권한을 확인해 주세요. 열린 자료를 지웠습니다.', 'ACCESS_DENIED');
   }
   if (epoch !== legacyAccess.generation) throw new ApiError('접근 권한이 변경되었습니다.', 'ACCESS_DENIED');
   if (!response.ok) {
@@ -47,9 +47,9 @@ export async function request(path: string, init: RequestInit = {}) {
   return response;
 }
 
-export async function graphql<T>(query: string, variables: object = {}): Promise<T> {
+export async function graphql<T>(query: string, variables: object = {}, scope: 'core' | 'extension' = 'core'): Promise<T> {
   const epoch = legacyAccess.generation;
-  const response = await request('/graphql', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, variables }) });
+  const response = await request('/graphql', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query, variables }) }, scope);
   let body: { data?: T; errors?: { message: string; extensions?: { code?: string; classification?: string; field?: string } }[] };
   try { body = await response.json(); } catch (error) {
     if (epoch !== legacyAccess.generation) throw new ApiError('접근 권한이 변경되었습니다.', 'ACCESS_DENIED');
@@ -61,7 +61,7 @@ export async function graphql<T>(query: string, variables: object = {}): Promise
   if (body.errors?.length) {
     const failure = body.errors[0];
     const code = failure.extensions?.code || failure.extensions?.classification || 'GRAPHQL';
-    if (['UNAUTHORIZED', 'UNAUTHENTICATED', 'FORBIDDEN', 'ACCESS_DENIED'].includes(code)) clearAccess();
+    if (['UNAUTHORIZED', 'UNAUTHENTICATED'].includes(code) || (scope === 'core' && ['FORBIDDEN', 'ACCESS_DENIED'].includes(code))) clearAccess();
     throw new ApiError(failure.message, code, failure.extensions?.field);
   }
   if (!body.data) throw new ApiError('서버 응답이 비어 있습니다.', 'EMPTY_RESPONSE');

@@ -10,6 +10,18 @@ repair is committed as candidate 0.7.1. KMS owns product policy, migration, its 
 dependency adoption and whole-product acceptance. No consumer source or runtime
 is changed by this record.
 
+The current candidate advances to 0.8.0 for the user-approved optional policy,
+association and mount-local dirty APIs. Windows support/qualification is
+NOT_APPLICABLE by the user's explicit decision. Human review is not a gate;
+automated checks and current authorized-environment evidence remain required.
+`verify-20.log` now passes 305 tests/34 files plus three source tests, types,
+build/distribution and strict package checking. Automated review's applied-query
+finding was reproduced and repaired; real transport additionally verifies that
+scoped collaboration denial preserves identity while authentication loss revokes
+it. Existing backend revision editor names are now queried and displayed, with
+unknown editors left explicitly unknown. Final matching browser/native/package
+receipts and actual KMS adoption remain separate gates.
+
 ## Source reconciliation
 
 Read on 2026-11-01: the current session assignment; KMS's release completion
@@ -37,13 +49,13 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G01 | KNOWLEDGE-002/010/064, F08; `src/vendor/docmost`, `upstream-manifest.json` | Retained shell/editor/tree/CSS, 115 provenance entries. Populated packed-browser 1600/390 views preserve the composition and shipped Korean glyphs. Actual slash/toolbar/link/code/table/file-chooser edits persist after reload at both widths; initial menu lifetime failures are repaired. | KMS QA01, approved deployment and current `/notes/` visual acceptance remain separate. PARTIAL. |
 | G02 | KNOWLEDGE-001/003/004/011; `src/index.tsx`, `hostRuntime.tsx`, `host.ts` | Core-only persistence and full named-extension tests pass. Actual tarball root/KMS imports, CSS, strict declarations and byte checks pass. Actual two-root late/unmount check retains the other draft with zero retired subscriptions. | KMS selects compatible released adapter/session and verifies its host. PARTIAL. |
 | G03 | KNOWLEDGE-005–009/027, F04/F05; `Pane.tsx`, `paneState.ts`, `NotePanels.tsx`, `localPersistence.ts` | Delayed restore loss repaired. Complete gate 266 pass; Chromium/Chrome each 35 pass. Exact lost-ack create/save/comment replay preserves identity and later drafts. Property readback detects torn reads, withholds uncertain writes and resolves panel-only conflicts without losing the body draft. | KMS canonical transaction, plain/proposal/MCP rich-node and application semantics. PARTIAL. |
-| G04 | KNOWLEDGE-012/013/015; `Pane.tsx`, `DocmostPaneProvider.tsx`, `Workspace.tsx` | Same-note panes, delayed restore, tab switching/closure and actual native diagram restore preserve independent DOM editors/drafts. Comment/property text, errors and write identity belong to their tabs; closed/reopened tab owners fence old replies. Packed IAB reorder/cancel/save retains rich JSON. | Product navigation/Back and imported corpus remain KMS acceptance; proposed mount-external dirty-state contract is unagreed. PARTIAL. |
+| G04 | KNOWLEDGE-012/013/015; `Pane.tsx`, `DocmostPaneProvider.tsx`, `Workspace.tsx` | Same-note panes, delayed restore, tab switching/closure and actual native diagram restore preserve independent DOM editors/drafts. Comment/property text, errors and write identity belong to their tabs; closed/reopened tab owners fence old replies. Approved mount-local dirty query/notifications pass actual body/comment/property/native, two-pane, two-root and disposal cases. | Product router/Back and imported corpus remain KMS acceptance; the public dirty contract is implemented rather than awaiting design approval. PARTIAL. |
 | G05 | KNOWLEDGE-019–022/058, F06; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Actual hierarchy/current authority, sustained mixed workload and scale envelope owned by KMS P14. Historical million-note results retain their older workload. PARTIAL. |
 | G06 | KNOWLEDGE-023–026/030/032–038, F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Actual populated KMS business projections and shared associations require the authoritative accepted host/contract. PARTIAL. |
 | G07 | KNOWLEDGE-016–018/027/065, F09; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Actual approved Draw.io application passes five desktop/narrow/viewer/restore/held-refresh cases, including inline edit and undo retention. Real API peer XML successor preserves original bytes and denies outsider/anonymous bytes. | Qualified Draw.io deployment, integrated all-format co-editor/storage acceptance and independent consumer inventory remain open. PARTIAL. |
 | G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Host refresh/revocation, optional-failure separation and delayed delivery/media tests pass. Four actual API cases verify private/admin/session separation, administrator demotion, membership removal and viewer draft retention with writes disabled. | Current 0.7 ambiguous core FORBIDDEN/UNAUTHENTICATED retires the mount; target NOT_FOUND is absence. Narrower denial needs an agreed signal. Lease-specific SQL inventory was not independently captured. PARTIAL. |
-| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | `make verify`: three source tests, 266 tests/32 files, declarations/build/distribution and strict copied-package resolution pass; 234 Excalidraw font files plus shipped CJK-only Noto fallback/OFL. Actual extracted tarball imports/declarations/CSS and 677 dist-file comparisons pass, with matching source ZIP. | Native Windows command environment and final authenticated packaged KMS candidate unavailable here. PARTIAL. |
-| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Current 0.7 exports do not carry shared policy, effective audience, shared associations or complete actor attribution. No mode is inferred from role/admin flags. R01 settled; SC01 base fields pushed in `59bc415`. | Exact SC02–SC06 effective-audience/creator/shared-association transport packet and GUI agreement remain pending. BLOCKED; no speculative exports. |
+| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Current 0.8.0 `verify-19.log`: three source tests, 300 tests/33 files, declarations/build/distribution and strict copied-package resolution pass; 234 Excalidraw font files plus CJK fallback/OFL. Earlier byte receipts retain their original source scope; the final 0.8 tarball must be requalified. | Linux host scope; Windows is NOT_APPLICABLE and its workflow is removed. Final authenticated packaged KMS acceptance remains separate. PARTIAL. |
+| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Approved optional policy/associations are integrated into guarded sessions and reachable panels. Actual record-space shared labels, capability-based creation, exact request replay, original creator, conflict/read recovery and opaque-epoch refresh are implemented. Three actual browser cases pass at desktop/narrow and across a delayed save. | Wider per-record audience and actor fields plus actual KMS shared/controlled integration still require backend-owned evidence. Continue implementation/qualification; no role or actor inference. PARTIAL. |
 | G11 | R02–R06; factual docs, seven journals, source distribution | Seven journals read/reconciled below. Final facts/consumer packet and durable sanitized evidence are being prepared. | Retirement waits for accepted carried criteria, readable archived evidence and final source/link checks. Prompt and this record remain until last. PARTIAL. |
 
 ## Individual original criterion accounting
@@ -221,7 +233,7 @@ limits have been reconciled, not relabeled as current integrated acceptance.
 | Existing record | Facts retained | Current reconciliation / retirement condition |
 | --- | --- | --- |
 | `docs/2026-10-25-note-library-corrections.md` | Files/history/editor corrections, original byte checks and bounded imported-data actions | G03–G08; source is older. Reuse unaffected behavior, repeat changed lifecycle paths before retirement. |
-| `docs/capacity-and-access-acceptance.md` | Warm million-note fixture, 50-row reads, cache/retained heap, real role changes | G05/G08; not cold/peak/sustained/current-host or Windows acceptance. |
+| `docs/capacity-and-access-acceptance.md` | Warm million-note fixture, 50-row reads, cache/retained heap, real role changes | G05/G08; not cold/peak/sustained/current-host acceptance. Windows is outside the required scope. |
 | `docs/current-knowledge-acceptance.md` | Authored/current/legacy distinction, historical source ordering and exact pinned rule evidence | G06; server semantic results remain KMS-owned, later history-label repairs preserved. |
 | `docs/drawio-acceptance.md` | Real approved native Draw.io, forged-window/origin refusal, immutable bytes and viewer | G07/G08; offline protocol fixture does not replace this native editor or current deployment acceptance. |
 | `docs/move-and-large-document-acceptance.md` | Two-note private move, retained panes, 1,000 paragraphs and 20 MiB download | G04/G05/G07; not million-node moves or peak-memory/sustained load. |
@@ -254,6 +266,17 @@ limits have been reconciled, not relabeled as current integrated acceptance.
   `independent-chrome-04.log`, 35/35 each; actual native Draw.io 5/5 in
   `native-drawio-06.log`. Earlier setup/selector failures and the shell-timeout
   partial run are not acceptance evidence.
+- Latest continuation gate: `.tmp/gui-completion/verify-16.log` passes three
+  source tests, 291 tests/33 files, types/build/distribution and strict package
+  consumer checks. The extra 24 cases cover the internal SC01/SC02 adapter,
+  not a public shared-mode feature. Eight malformed policy/association response
+  cases failed before the boundary repair and then passed in
+  `collaboration-boundary-{red,green}.log`. Public host/GUI integration and its
+  new MINOR contract remain open pending the requested agreement.
+- Native Windows run `41324344742` on `1183c88d` failed before runner allocation.
+  Job `124901031268` has no executed steps; its check annotation states that the
+  account is locked due to a billing issue. Unlocking billing or supplying an
+  alternative authorized native runner is required before qualification.
 - Restore repair review found no Critical/Important regression. Added native
   tab-switch/close and diagram lifecycle checks pass. Arbitrary interleavings,
   current backend authority and target-platform performance are not inferred.
@@ -274,8 +297,8 @@ limits have been reconciled, not relabeled as current integrated acceptance.
   resources removed at fixed expiry, but did not capture an independent SQL
   inventory before deletion. Preserve this limitation; no integrated consumer
   storage or shared-mode acceptance follows from the producer result.
-- Native Windows needs an authorized reachable native command environment and
-  pinned toolchain. Final KMS acceptance needs a qualified producer release,
+- Windows qualification is NOT_APPLICABLE under the current user scope. Final
+  KMS acceptance needs a qualified producer release,
   coordinator-owned asset/pin adoption and isolated authenticated product cases.
 - G11 deletion is blocked until every carried criterion has accepted evidence or
   an authorized non-applicable disposition and the final manifest is retrievable.
@@ -317,10 +340,10 @@ subsequent native-modal navigation reproduction. That repair now passes its
 complete current-source gates. `GOAL.md` tracks the full remaining objective;
 this unit alone does not complete it.
 
-The remaining gates also need the settled SC02–SC06/SC09 transport agreement, an
-authorized native Windows runner, qualified release/adoption and current KMS
-deployment/context/storage/workload acceptance. R01 is resolved and SC01 base
-transport published. No shared fields are inferred in the GUI, and no release,
-consumer adoption or journal retirement is claimed. Resume G10 implementation
-when KMS supplies the exact packet; qualify its new MINOR as a separate contract
-change while preserving the controlled core-only host.
+The remaining gates require final 0.8 package/browser/native qualification,
+wider backend-supplied audience/actor fields and current KMS context/storage/
+workload evidence. The core SC01/SC02 GUI and dirty APIs no longer await user
+approval. Windows is not required and human review is not a gate. Release
+publication/deployment remain separately authorized operations. Preserve the
+controlled core-only host and retire only journals whose carried criteria have
+actually been resolved.

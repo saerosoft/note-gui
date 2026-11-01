@@ -2,6 +2,13 @@
 
 Submit this task to the GUI project session. Reading the file alone grants no command authorization.
 
+Current user decisions supersede earlier waiting conditions: implement the
+recommended optional policy/association and mount-local dirty APIs as 0.8.0;
+coordinate isolated KMS acceptance without modifying its source or deployment;
+no human review is required. Windows OS support/qualification is not required.
+Builds, tests, development commits and pushes are authorized for this session.
+Release publication and deployment remain separately authorized operations.
+
 ## Objective and source requirements
 
 Work in `/home/saerosoft/Projects/note-gui` on `master`, the library's development branch. Complete the reusable GUI lane of the original KMS completion program, continuing through all unfinished unblocked units. A core-host audit or one pane patch does not complete this task. Preserve the existing Docmost GUI; no replacement editor, redesign or style-pack engine is requested.

@@ -10,7 +10,7 @@ Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
 knowledge-context and relation extensions retain the full product experience.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
-qualification and consumer pins. `release.json` declares the 0.7.1 development
+qualification and consumer pins. `release.json` declares the 0.8.0 development
 candidate; it does not establish release qualification or publication.
 The product hosts this library inside Next.js; Vite is an optional development
 and demo harness. Preserve the retained original Docmost stylesheets;
@@ -59,8 +59,9 @@ acceptance.
 
 Use Node.js 26, pnpm 10.29.2 and Python 3.11 or later. The package manifest pins
 the Node major and package manager; the release lockfile and dependency patch
-must be retained. Set `PYTHON` if Python uses a different command. The wrappers
-otherwise select `py -3` on Windows and `python3` elsewhere.
+must be retained. Set `PYTHON` if Python uses a different command; on the supported
+Linux host the default is `python3`. Windows OS support is outside the required
+scope.
 
 ```sh
 pnpm install --frozen-lockfile

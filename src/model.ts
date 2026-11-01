@@ -13,7 +13,7 @@ export interface Space { id: string; name: string; accessEpoch: number; myRole: 
 export interface NoteSummary { id: string; title: string }
 export interface RelationTargetPage extends Page<NoteSummary> { noteId: string; total: number }
 export interface NotePresentation { bodyOrigin?: KnowledgeBodyOrigin }
-export interface Revision { id: string; revision: number; title: string; createdAt: string; bodyJson: JSONContent; bodyOrigin?: KnowledgeBodyOrigin; presentation?: NotePresentation }
+export interface Revision { id: string; revision: number; title: string; createdAt: string; bodyJson: JSONContent; editorName?: string | null; bodyOrigin?: KnowledgeBodyOrigin; presentation?: NotePresentation }
 export interface Comment { id: string; body: string; createdAt: string; authorName: string }
 export type PropertyValue = { id?: string; key: string; valueType: 'TEXT' | 'NUMBER' | 'BOOLEAN' | 'DATE'; value: string };
 export type RelationPredicate = 'DERIVED_FROM' | 'SUPPORTS' | 'SUPERSEDES' | 'RELATED_TO';

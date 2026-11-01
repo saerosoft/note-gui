@@ -110,7 +110,7 @@ export const api: NoteApi = {
   },
   async history(noteId, cursor) {
     const offset = Number(cursor || 0);
-    const values = (await graphql<{ noteRevisions: { id: string; revision: number; title: string; createdAt: string; richBody: string | null; authoredBody: string | null; bodyOrigin: KnowledgeBodyOrigin; body: string }[] }>('query($noteId:UUID!,$offset:Int!){noteRevisions(noteId:$noteId,offset:$offset,limit:20){id revision title createdAt richBody body authoredBody bodyOrigin}}', { noteId, offset })).noteRevisions;
+    const values = (await graphql<{ noteRevisions: { id: string; revision: number; title: string; createdAt: string; editorName: string | null; richBody: string | null; authoredBody: string | null; bodyOrigin: KnowledgeBodyOrigin; body: string }[] }>('query($noteId:UUID!,$offset:Int!){noteRevisions(noteId:$noteId,offset:$offset,limit:20){id revision title createdAt editorName richBody body authoredBody bodyOrigin}}', { noteId, offset })).noteRevisions;
     return { items: values.map(value => ({ ...value, presentation: { bodyOrigin: value.bodyOrigin }, bodyJson: parseBody(value.richBody, value.authoredBody ?? value.body) })), nextCursor: values.length === 20 ? String(offset + 20) : null } as Page<Revision>;
   },
   async restore(id, revision, expectedRevision) { return mapNote((await graphql<{ restoreNote: WireNote }>(`mutation($id:UUID!,$input:RestoreNoteInput!){restoreNote(id:$id,input:$input){${fields}}}`, { id, input: { sourceRevision: revision, expectedRevision, idempotencyKey: key() } })).restoreNote); },
