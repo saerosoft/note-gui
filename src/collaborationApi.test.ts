@@ -40,7 +40,7 @@ const association = {
 };
 it('maps the authorized association page and preserves original creator attribution without manufacturing a name', async () => {
   vi.mocked(graphql).mockResolvedValueOnce({ knowledgePersonalNotes: { noteId: 'anchor', total: 21, hasNext: true, items: [association] } });
-  expect(await kmsNoteAssociations.list('anchor', '20')).toEqual({ noteId: 'anchor', total: 21, nextCursor: '40', items: [{
+  expect(await kmsNoteAssociations.list('anchor', '20')).toEqual({ noteId: 'anchor', total: 21, nextCursor: '21', items: [{
     id: 'link', revision: 4, targetNoteId: 'target', targetNoteRevision: 9,
     title: 'Original associated note', authoredBody: 'Authored preview only.', authoredBodyTruncated: false,
     bodyOrigin: 'HUMAN', createdAt: '2026-10-25T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
@@ -52,9 +52,15 @@ it('maps the authorized association page and preserves original creator attribut
 it('uses association-specific targets and the server continuation flag instead of generic note search or page length', async () => {
   const items = [{ id: 'target', title: 'Readable organization target', revision: 2, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }];
   vi.mocked(graphql).mockResolvedValueOnce({ knowledgePersonalNoteOptions: { noteId: 'anchor', total: 25, hasNext: true, items } });
-  expect(await kmsNoteAssociations.targets('anchor', '  needle  ', null)).toEqual({ noteId: 'anchor', total: 25, nextCursor: '20', items });
+  const first = await kmsNoteAssociations.targets('anchor', '  needle  ', null);
+  expect(first).toEqual({ noteId: 'anchor', total: 25, nextCursor: '1', items });
   expect(graphql).toHaveBeenLastCalledWith(expect.stringContaining('knowledgePersonalNoteOptions(noteId:$noteId,query:$query,offset:$offset,limit:20)'), { noteId: 'anchor', query: 'needle', offset: 0 }, 'extension');
   expect(vi.mocked(graphql).mock.calls[0][0]).not.toContain('knowledgeNotes(');
+  vi.mocked(graphql).mockResolvedValueOnce({ knowledgePersonalNoteOptions: { noteId: 'anchor', total: 25, hasNext: false, items: [{ ...items[0], id: 'next-target', title: 'Next authorized target' }] } });
+  const next = await kmsNoteAssociations.targets('anchor', 'needle', first.nextCursor);
+  expect(next.items.map(item => item.id)).toEqual(['next-target']);
+  expect(next.nextCursor).toBeNull();
+  expect(graphql).toHaveBeenLastCalledWith(expect.any(String), { noteId: 'anchor', query: 'needle', offset: 1 }, 'extension');
 });
 it('keeps a null initial link state and maps retained unlinked state without creating a per-reader identity', async () => {
   vi.mocked(graphql).mockResolvedValueOnce({ knowledgePersonalNoteLink: null });

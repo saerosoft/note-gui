@@ -254,10 +254,13 @@ requires fresh state before a new request identity. Accepted writes followed by
 read failure recover through reads only. Paging cannot bypass unresolved writes.
 
 The KMS adapter maps `targetNoteId` to the established `privateNoteId` wire key
-and maps 20-row offset/`hasNext` results to cursors without changing backend
+and maps bounded offset/`hasNext` results to cursors without changing backend
 operation names. No organization-admin role, record audience DTO or missing
 actor field is synthesized by these adapters. Missing wider fields remain an
 explicit integration requirement rather than an inferred guarantee.
+When `hasNext` is true, the next offset is the requested offset plus the number
+of returned rows, not the maximum page size. A short authorized page must not
+skip the following records.
 
 The new KMS policy/association adapters distinguish scoped permission denial
 from identity loss: GraphQL `FORBIDDEN | ACCESS_DENIED` and HTTP 403 reject the

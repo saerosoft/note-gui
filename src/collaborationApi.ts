@@ -11,7 +11,7 @@ function offset(cursor: string | null) {
 interface WirePage<T> { noteId: string; total: number; hasNext: boolean; items: T[] }
 function associationPage<T>(value: WirePage<T>, noteId: string, start: number): NoteAssociationPage<T> {
   if (!value || value.noteId !== noteId || !Number.isInteger(value.total) || value.total < 0 || typeof value.hasNext !== 'boolean' || !Array.isArray(value.items) || value.items.length > 20) mismatch();
-  return { noteId, total: value.total, items: value.items, nextCursor: value.hasNext ? String(start + 20) : null };
+  return { noteId, total: value.total, items: value.items, nextCursor: value.hasNext ? String(start + value.items.length) : null };
 }
 interface WireState { id: string; noteId: string; privateNoteId: string; revision: number; linked: boolean }
 function associationState(value: WireState, noteId: string, targetNoteId: string): NoteAssociationState {
