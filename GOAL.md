@@ -90,6 +90,8 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   Native close regression was observed failing without the guard, then passing.
   Full normal gate passes 267/32; Chromium and Chrome pass 36/36 each; actual
   native Draw.io passes 5/5. Host-external routing remains its separate item below.
+- [x] Qualify the native-modal unit's actual tarball: root/KMS/CSS imports,
+  strict declarations and all 678 distribution/288 source entries match.
 - [ ] Obtain exact G10 policy/audience/actor/association agreement from KMS.
 - [ ] Implement agreed shared policy/controls/attribution/associations with
   failing-before/passing-after tests.
@@ -120,6 +122,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 | `verify-15.log` | 3 source tests, 267 tests/32 files, types/build/distribution/strict package consumer passed. | Current implementation and extended regression. |
 | `independent-13.log`, `independent-chrome-05.log` | Chromium 36/36; Chrome 36/36. | Current native navigation/discard/reopen/refresh/revocation and pane isolation pass. |
 | `native-drawio-07.log` | Actual native Draw.io 5/5. | Current implementation, isolated approved HTTPS fixture. |
+| `packed-check-14.log` | Root/KMS/CSS runtime exports and strict declarations passed; 678 dist/288 source entries matched byte-for-byte. | Native-modal repair plus goal/specification source snapshot. |
 | Expired real-API lease | Producer core 5/access 4/peer XML successor-byte checks passed; owner reported eight resources removed. | Independent SQL inventory absent before deletion; no consumer acceptance inferred. |
 
 Log names above are under `.tmp/gui-completion/`. Package/source/archive hashes
@@ -144,9 +147,9 @@ remain external qualification output to avoid self-referential source archives.
 
 ## Immediate next step
 
-The native-modal navigation implementation and current regression gates are
-complete. Qualify its actual package/source and publish that coherent unit under
-the user's grant. Continue feature-document consolidation and the exact G10
+The native-modal navigation implementation, regression and actual package/source
+checks are complete. Publish that coherent unit under the user's grant. Continue
+feature-document consolidation and the exact G10
 contract agreement; do not create a completion handoff or claim the objective
 is done after this unit. Completed work documents retire only after their own
 carried criteria and evidence conditions are resolved.

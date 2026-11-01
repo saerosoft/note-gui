@@ -11,8 +11,11 @@ import { AttachmentContext } from './editor/attachmentContext';
 import { useAuthorizedFile } from './docmost/useAuthorizedFile';
 import { NotePicker } from './NotePicker';
 import type { Note, NoteCoreApi, NoteKnowledgeContextApi, NoteRelationsApi } from './model';
+import { useDiagramUnload } from './docmost/useDiagramUnload';
+import type { JSONContent } from '@tiptap/core';
 
-vi.mock('./vendor/docmost/client/pages/page/page', () => ({ default: ({ header, editor, panels }: { header: React.ReactNode; editor: { title: string; onTitleChange: (title: string) => void; byline: React.ReactNode }; panels: React.ReactNode }) => <>{header}<input aria-label="Draft title" value={editor.title} onChange={event => editor.onTitleChange(event.target.value)}/>{editor.byline}{panels}</> }));
+function NativeDraftProbe() { useDiagramUnload(true); return <p>Unapplied native fixture</p>; }
+vi.mock('./vendor/docmost/client/pages/page/page', () => ({ default: ({ header, editor, panels }: { header: React.ReactNode; editor: { title: string; content?: JSONContent; onTitleChange: (title: string) => void; byline: React.ReactNode }; panels: React.ReactNode }) => <>{header}<input aria-label="Draft title" value={editor.title} onChange={event => editor.onTitleChange(event.target.value)}/>{editor.content?.content?.some(node => node.type === 'mermaid') && <NativeDraftProbe/>}{editor.byline}{panels}</> }));
 const note: Note = { id: 'note', spaceId: 'space', title: 'Independent document', revision: 1, bodyJson: { type: 'doc', content: [] }, visibility: 'PRIVATE', canEdit: true, parentId: null };
 function core(): NoteCoreApi {
   return {
@@ -52,6 +55,23 @@ it('edits a core-only document without context controls or an implicit authored 
   fireEvent.change(screen.getByLabelText('Draft title'), { target: { value: 'Saved independently' } });
   fireEvent.click(screen.getByRole('button', { name: '저장' }));
   await waitFor(() => expect(screen.queryByText(/저장하지 않은 변경/)).toBeNull());
+});
+it('cancels closure of a tab with only an unapplied native draft and unregisters it after explicit discard', async () => {
+  const access = createNoteAccess(); const client = core(); const onLocation = vi.fn();
+  client.note = async () => ({ ...note, bodyJson: { type: 'doc', content: [{ type: 'mermaid', attrs: { source: 'graph TD; A --> B' } }] } });
+  render(<MantineProvider env="test"><NoteHostProvider api={client} host={{ access, destinations: {} }}>
+    <Pane api={client} paneId="Independent" requestedId="note" onLocation={onLocation} onDirty={() => {}} onActivate={() => {}}/>
+  </NoteHostProvider></MantineProvider>);
+  await screen.findByRole('tab', { name: 'Independent document •' });
+  onLocation.mockClear(); const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+  fireEvent.click(screen.getByRole('button', { name: 'Independent document 탭 닫기' }));
+  expect(confirm).toHaveBeenCalledOnce(); expect(onLocation).not.toHaveBeenCalled();
+  expect(screen.getByText('Unapplied native fixture')).toBeTruthy();
+  const before = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(before); expect(before.defaultPrevented).toBe(true);
+  confirm.mockReturnValue(true); fireEvent.click(screen.getByRole('button', { name: 'Independent document 탭 닫기' }));
+  await waitFor(() => expect(screen.queryByText('Unapplied native fixture')).toBeNull());
+  expect(onLocation).toHaveBeenLastCalledWith(null);
+  const after = new Event('beforeunload', { cancelable: true }); window.dispatchEvent(after); expect(after.defaultPrevented).toBe(false);
 });
 it.each([false, true])('accepts a delayed restore without discarding a later draft (edited: %s)', async edited => {
   const access = createNoteAccess(); const client = core();

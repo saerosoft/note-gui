@@ -1,6 +1,10 @@
 # GUI completion work record
 
 This is the active G01–G11 requirement record, not a lane acceptance report.
+`GOAL.md` owns the complete objective, acceptance checklist, command gates,
+immediate next step and retirement inventory. Lasting feature behavior belongs
+to `docs/functional-specification.md`. This record remains until its individual
+carried criteria are verified and its evidence is preserved.
 The development baseline is `b9ecad5b` on `master`; the preserved history-restore
 repair is committed as candidate 0.7.1. KMS owns product policy, migration, its Next host,
 dependency adoption and whole-product acceptance. No consumer source or runtime
@@ -119,11 +123,26 @@ Current independent execution has reproduced and repaired two additional gaps:
   gate; `independent-11.log` and `independent-chrome-04.log` each pass 35/35;
   `native-drawio-06.log` passes 5/5. The earlier combined command hit the shell
   timeout during browser execution; its partial run is not acceptance evidence.
+- G04/G07 native-modal navigation: COMPLETED reproduction, implementation and
+  focused regression. Ctrl+K search previously opened another note without
+  confirming loss of unapplied Mermaid source. Pane-local native-draft
+  registration now retains the draft, dirty tab marker and URL on cancellation.
+  `native-modal-navigation-red.log` failed with zero confirmations; the green
+  focused run passes 1/1. Explicit discard/reopen, refresh/revocation, unload
+  cleanup and independent other-pane DOM/draft preservation now pass in the
+  extended browser case. Native-only tab closure also failed without its guard,
+  then passed all 26 host-boundary tests after repair. COMPLETED current gates:
+  `verify-15.log` passes 267/32 plus the complete normal gate;
+  `independent-13.log` and `independent-chrome-05.log` pass 36/36 each;
+  `native-drawio-07.log` passes 5/5. The interrupted earlier combined command and
+  partial `independent-12.log` are not counted as successful verification.
+  COMPLETED actual-package check: `packed-check-14.log` verifies root/KMS/CSS
+  runtime imports, strict declarations and matching 678 dist/288 source entries.
 
-Current implementation gates: `verify-11.log` (266 tests/32 files plus the full
-normal gate), `independent-11.log` and `independent-chrome-04.log` (35/35 each),
-`native-drawio-06.log` (5/5), and actual tarball
-imports/source-byte checks. These files are in `.tmp/gui-completion`. Work
+Current implementation gates: `verify-15.log` (267 tests/32 files plus the full
+normal gate), `independent-13.log` and `independent-chrome-05.log` (36/36 each),
+and `native-drawio-07.log` (5/5). `packed-check-14.log` verifies the actual native
+unit tarball and corresponding source. These files are in `.tmp/gui-completion`. Work
 continues on the other original criteria; these results do not close G01–G11.
 
 The prefixes in this table are `KNOWLEDGE-`. Every row retains its original
@@ -293,7 +312,12 @@ is readable with 37 byte-checked entries and verified screenshot dimensions;
 release-owner archival remains separate. Package/source/archive hashes stay in
 external qualification output to avoid self-reference.
 
-The remaining gates need the settled SC02–SC06/SC09 transport agreement, an
+The earlier assessment that only external gates remained is superseded by the
+subsequent native-modal navigation reproduction. That repair now passes its
+complete current-source gates. `GOAL.md` tracks the full remaining objective;
+this unit alone does not complete it.
+
+The remaining gates also need the settled SC02–SC06/SC09 transport agreement, an
 authorized native Windows runner, qualified release/adoption and current KMS
 deployment/context/storage/workload acceptance. R01 is resolved and SC01 base
 transport published. No shared fields are inferred in the GUI, and no release,

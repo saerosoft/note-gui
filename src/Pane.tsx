@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActionIcon, Alert, Box, Button, Group, Menu, Tabs, Text, Tooltip } from '@mantine/core';
 import { IconDots, IconFileText, IconHistory, IconInfoCircle, IconMessage, IconPaperclip, IconRefresh } from '@tabler/icons-react';
 import Aside from './vendor/docmost/client/components/layouts/global/aside';
@@ -12,6 +12,7 @@ import { NoteKnowledgeContext } from './NoteKnowledgeContext';
 import { NoteCurrentKnowledge } from './NoteCurrentKnowledge';
 import { ApiError } from './access';
 import { useNoteAccess, useNoteCore, useKnowledgeContext, useRelations } from './hostRuntime';
+import { NativeDraftContext } from './docmost/nativeDraft';
 
 interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void }
 export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate }: Props) {
@@ -41,10 +42,17 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const activeRef = useRef(active); activeRef.current = active;
   const saving = useRef(false);
   const tabOwners = useRef<Record<string, symbol>>({});
+  const nativeDrafts = useRef(new Set<symbol>());
+  const [nativeDirty, setNativeDirty] = useState(false);
+  const reportNativeDraft = useCallback((owner: symbol, dirty: boolean) => {
+    if (dirty) nativeDrafts.current.add(owner); else nativeDrafts.current.delete(owner);
+    setNativeDirty(nativeDrafts.current.size > 0);
+  }, []);
   useEffect(() => () => { tabOwners.current = {}; }, []);
   useEffect(() => onAccessLost(() => { sessionEpoch.current++; tabOwners.current = {}; state.current = {}; setDrafts({}); setCommentDrafts({}); setPropertyDrafts({}); setTabs([]); setActive(null); setLatest(undefined); setDetails(null); setOpenedDetails(false); setOpenedKnowledge(false); setError('접근 권한을 확인해 주세요. 열린 노트가 삭제되었습니다.'); }), []);
   const update = (id: string, transform: (draft: Draft) => Draft) => setDrafts(values => values[id] ? { ...values, [id]: transform(values[id]) } : values);
   async function open(id: string) {
+    if (id !== activeRef.current && nativeDrafts.current.size && !window.confirm('적용하지 않은 다이어그램 변경을 버리고 다른 노트를 열까요?')) { onLocation(activeRef.current); return; }
     const sequence = ++openSequence.current;
     if (state.current[id]) { setActive(id); onLocation(id); return; }
     if (Object.keys(state.current).length >= 12) { setError('한 창에서 최대 12개 노트를 열 수 있습니다. 사용하지 않는 탭을 닫아 주세요.'); return; }
@@ -85,7 +93,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const activeOwner = active ? tabOwners.current[active] : undefined;
   const ownsTab = () => active !== null && tabOwners.current[active] === activeOwner;
   useEffect(() => { setLatest(undefined); }, [active]);
-  useEffect(() => { onDirty(Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy) || Object.values(propertyDrafts).some(value => value.dirty || value.busy)); }, [drafts, commentDrafts, propertyDrafts, onDirty]);
+  useEffect(() => { onDirty(nativeDirty || Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy) || Object.values(propertyDrafts).some(value => value.dirty || value.busy)); }, [nativeDirty, drafts, commentDrafts, propertyDrafts, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
   async function save() {
     if (!active || !draft || invalid[active] || saving.current) return;
@@ -103,7 +111,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   }
   function close(id: string) {
     const draft = drafts[id];
-    if (saving.current || !canClose(draft && { ...draft, dirty: draft.dirty || !!commentDrafts[id]?.body.trim() || !!commentDrafts[id]?.busy || !!propertyDrafts[id]?.dirty || !!propertyDrafts[id]?.busy }, () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
+    if (saving.current || !canClose(draft && { ...draft, dirty: draft.dirty || (id === active && nativeDrafts.current.size > 0) || !!commentDrafts[id]?.body.trim() || !!commentDrafts[id]?.busy || !!propertyDrafts[id]?.dirty || !!propertyDrafts[id]?.busy }, () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
     const remaining = tabs.filter(value => value !== id); setTabs(remaining);
     delete tabOwners.current[id];
     setDrafts(values => { const next = { ...values }; delete next[id]; return next; });
@@ -117,11 +125,11 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   function toggleKnowledge() {
     setOpenedKnowledge(true); setDetails(value => value === 'knowledge' ? null : 'knowledge');
   }
-  return <DocmostPaneProvider><section className="pane note-gui-pane" aria-label={`${paneId} 편집 창`} onFocusCapture={onActivate} onPointerDownCapture={onActivate}>
-    <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) { setActive(id); onLocation(id); } }}>
+  return <NativeDraftContext.Provider value={reportNativeDraft}><DocmostPaneProvider><section className="pane note-gui-pane" aria-label={`${paneId} 편집 창`} onFocusCapture={onActivate} onPointerDownCapture={onActivate}>
+    <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) void open(id); }}>
       <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
         {tabs.map((id, index) => <Group key={id} gap={0} wrap="nowrap">
-          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
+          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || (id === active && nativeDirty) || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
           <ActionIcon variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
@@ -169,5 +177,5 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
          {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} isCurrent={ownsTab} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} propertyDraft={propertyDrafts[active]} onPropertyDraftChange={transform => setPropertyDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => { if (ownsTab()) update(active, value => acceptMetadata(value, note)); }} onRestore={note => { if (ownsTab()) acceptRestore(note); }}/></div>}
       </Aside>}/>
     </div>}
-  </section></DocmostPaneProvider>;
+  </section></DocmostPaneProvider></NativeDraftContext.Provider>;
 }
