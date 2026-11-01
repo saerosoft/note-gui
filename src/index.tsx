@@ -1,10 +1,11 @@
 import { createRoot } from 'react-dom/client';
 import { lazy, Suspense } from 'react';
-import { MantineProvider } from '@mantine/core';
+import { DEFAULT_THEME, MantineProvider } from '@mantine/core';
 import { I18nextProvider } from 'react-i18next';
 import { docmostI18n } from './docmost/i18n';
 import '@mantine/core/styles.css';
 import '@excalidraw/excalidraw/index.css';
+import '@fontsource-variable/noto-sans-kr/wght.css';
 import './vendor/docmost/client/styles/a11y-overrides.css';
 import { theme, mantineCssResolver } from './vendor/docmost/client/theme';
 import './integration.css';
@@ -23,7 +24,7 @@ const LegacyApp = lazy(() => import('./App').then(module => ({ default: module.A
 
 /** The extracted Docmost workspace, including its original theme and editor styles. */
 function NoteGui(options: (NoteGuiOptions | NoteCoreGuiOptions) & { session?: NoteSession }) {
-  return <I18nextProvider i18n={docmostI18n}><MantineProvider theme={theme} cssVariablesResolver={mantineCssResolver} defaultColorScheme="light">
+  return <I18nextProvider i18n={docmostI18n}><MantineProvider theme={{ ...theme, fontFamily: `"Noto Sans KR Variable", ${DEFAULT_THEME.fontFamily}` }} cssVariablesResolver={mantineCssResolver} defaultColorScheme="light">
     {'host' in options ? <NoteHostProvider {...options}><Workspace api={options.api}/></NoteHostProvider> : <Suspense fallback={<p role="status">Loading notes…</p>}><LegacyApp {...options}/></Suspense>}
   </MantineProvider></I18nextProvider>;
 }

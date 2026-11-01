@@ -17,6 +17,10 @@ and demo harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than
 redesigning the workspace.
 
+The distributed stylesheet includes a local Noto Sans KR fallback for Korean
+and CJK glyphs, including hosts without a system Korean font. Its character
+ranges preserve the retained Latin font stack. No font CDN is required.
+
 The upstream baseline is **Docmost v0.96.0**, commit
 [`9b3e5dd3dc21588fa20c02c5b8646d2f46ee73af`](https://github.com/docmost/docmost/commit/9b3e5dd3dc21588fa20c02c5b8646d2f46ee73af).
 The initial extracted client comes from Knowledge Engine commit
@@ -171,6 +175,15 @@ For a KMS-free persistence example, run `pnpm example` after building and open
 revision-checked browser storage and Web Locks, and supplies no contextual stubs.
 `pnpm test:independent` runs its isolated browser checks. The example is
 single-user, subject to browser quota/eviction and separate from product storage.
+
+`pnpm test:native-drawio` additionally exercises the actual approved Draw.io
+static application over an isolated HTTPS loopback host. Supply
+`NOTE_GUI_DRAWIO_WEB_ROOT`, `NOTE_GUI_DRAWIO_CERT`, `NOTE_GUI_DRAWIO_KEY` and
+`NOTE_GUI_DRAWIO_SPKI` for that fixture. The browser trusts only the supplied
+certificate public-key pin and grants local-network permission only to the
+isolated example origin. The fixture gate edits, saves, reloads and reopens
+native canvas content at desktop/narrow widths and checks the read-only viewer.
+It neither configures nor qualifies a production Draw.io deployment.
 
 The product host serves this module and CSS and uses the existing same-origin
 `/graphql` and `/api` endpoints. The current product host imports this module

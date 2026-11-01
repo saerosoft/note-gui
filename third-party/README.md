@@ -22,6 +22,11 @@ notices for source copied through Docmost.
   [Google Fonts](https://github.com/google/fonts/tree/main/ofl) license files.
 - `Cascadia-LICENSE.txt`: [Microsoft Cascadia Code](https://github.com/microsoft/cascadia-code/blob/main/LICENSE).
 - `Liberation-LICENSE.txt`: [Liberation Fonts](https://github.com/liberationfonts/liberation-fonts/blob/main/LICENSE).
+- Noto Sans KR Variable 5.3.1 is supplied by the exact
+  `@fontsource-variable/noto-sans-kr` dependency under SIL OFL 1.1, copyright
+  Google Inc. Its unchanged WOFF2 bytes and license travel with the stylesheet
+  and dependency notices. The build limits its CSS character ranges to CJK so
+  the retained Latin font stack is unchanged.
 - `RecreateTransform-LICENSE.txt` and `RecreateTransform-NOTICE.txt`: full
   Apache-2.0 license and Atypon notice from
   [prosemirror-recreate-transform](https://github.com/sueddeutsche/prosemirror-recreate-transform).

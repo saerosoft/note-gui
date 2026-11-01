@@ -47,6 +47,29 @@ test('built core host persists authored rich content, comments and attachments w
   expect(forbidden).toEqual([]); expect(loaded.some(url => /\/(kms\.js|assets\/(App|legacyHost)-)/.test(url))).toBe(false);
 });
 
+test('renders Korean controls from shipped same-origin fonts without an installed Korean fallback', async ({ page, context }) => {
+  const note = await create(page, 'Portable Korean labels'); await open(page, note.id);
+  const save = page.getByRole('button', { name: '저장', exact: true });
+  await save.evaluate(element => element.setAttribute('data-korean-font-probe', 'true'));
+  await save.evaluate(async element => { await document.fonts.load(`${getComputedStyle(element).fontWeight} 14px "Noto Sans KR Variable"`, element.textContent!.trim()); await document.fonts.ready; });
+  const cdp = await context.newCDPSession(page); await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+  const { root } = await cdp.send('DOM.getDocument');
+  const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '[data-korean-font-probe] .mantine-Button-label' });
+  const { fonts } = await cdp.send('CSS.getPlatformFontsForNode', { nodeId });
+  expect(fonts).toEqual(expect.arrayContaining([expect.objectContaining({ isCustomFont: true, familyName: expect.stringMatching(/Noto Sans KR/), glyphCount: expect.any(Number) })]));
+  expect(fonts.filter(font => font.isCustomFont && /Noto Sans KR/.test(font.familyName)).reduce((count, font) => count + font.glyphCount, 0)).toBeGreaterThanOrEqual(2);
+  const titleNode = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '[aria-label="노트 제목"] h1' });
+  const latin = await cdp.send('CSS.getPlatformFontsForNode', { nodeId: titleNode.nodeId });
+  expect(latin.fonts.some(font => /Noto Sans KR/.test(font.familyName))).toBe(false);
+  const sources = await page.evaluate(() => [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).filter(rule => rule instanceof CSSFontFaceRule && rule.style.fontFamily.includes('Noto Sans KR')).map(rule => (rule as CSSFontFaceRule).style.getPropertyValue('src')));
+  expect(sources.length).toBeGreaterThan(0);
+  for (const source of sources) {
+    const url = new URL(source.match(/url\(["']?([^"')]+)/)![1], page.url());
+    expect(url.protocol === 'data:' || url.origin === new URL(page.url()).origin).toBe(true);
+  }
+  await page.screenshot({ path: '.tmp/portable-korean-controls.png', fullPage: true });
+});
+
 test('real cross-tab persistence serializes competing writes and preserves the losing draft', async ({ page, context }) => {
   const note = await create(page, 'Concurrent base'); await open(page, note.id);
   const other = await context.newPage(); await open(other, note.id);
@@ -348,6 +371,34 @@ test('preserves a thousand rich paragraphs and exact downloaded attachment bytes
   expect(bytes.length).toBe(1024 * 1024);
   expect(createHash('sha256').update(bytes).digest('hex')).toBe(createHash('sha256').update(Buffer.alloc(1024 * 1024, 83)).digest('hex'));
   await writeFile('.tmp/independent-large-document.json', JSON.stringify({ paragraphs: 1000, jsonBytes: Buffer.byteLength(JSON.stringify(saved.bodyJson)), browserOpenEditSaveReloadMs: Date.now() - start, saveMs: savedMs, downloadBytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), boundary: 'Warm single-user localStorage example; not KMS 20 MiB native-download or peak-memory acceptance' }, null, 2));
+});
+
+for (const panel of ['comments', 'history'] as const) test(`retries an unavailable ${panel} projection without showing an empty success`, async ({ page }) => {
+  const note = await create(page, 'Projection recovery'); await open(page, note.id);
+  await page.evaluate(async panel => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    let unavailable = true;
+    window.addEventListener('fixture-recover-projection', () => { unavailable = false; });
+    const client: NoteCoreApi = { ...api, [panel]: async () => { if (unavailable) throw new gui.ApiError('Projection unavailable', 'NETWORK'); return { items: [], nextCursor: null }; } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  }, panel);
+  const body = page.getByRole('textbox', { name: '노트 본문', exact: true }); await body.fill('Keep the independent body draft.');
+  await page.getByRole('button', { name: '댓글 및 노트 상세', exact: true }).click();
+  if (panel === 'history') await page.getByRole('tab', { name: '이력', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveText('Projection unavailable');
+  const empty = panel === 'comments' ? '아직 댓글이 없습니다.' : '아직 저장된 페이지 기록이 없습니다.';
+  const projection = page.locator('.note-detail-panels .note-panel-content').filter({ visible: true });
+  await expect(projection).not.toContainText(empty);
+  const comment = page.getByRole('textbox', { name: '댓글', exact: true });
+  if (panel === 'comments') await comment.fill('Retain the unsent comment through read retry.');
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-recover-projection')));
+  await page.getByRole('button', { name: '노트 상세 다시 읽기', exact: true }).click();
+  await expect(projection).toContainText(empty);
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(body).toHaveText('Keep the independent body draft.');
+  if (panel === 'comments') await expect(comment).toHaveText('Retain the unsent comment through read retry.');
+  expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).revision).toBe(1);
 });
 
 test('retains an unsaved comment editor through an injected access refresh', async ({ page }) => {

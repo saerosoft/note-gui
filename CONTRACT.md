@@ -302,6 +302,12 @@ revision conflict, and the member can inspect the latest server version.
 No host API, import or storage migration is required. Consumers remain on their
 qualified pin until a separate release promotion and adoption review.
 
+The same candidate distinguishes failed comment/history reads from authorized
+empty results and offers an explicit read retry without replaying mutations or
+clearing an unsent comment. Its stylesheet supplies the Korean/CJK glyph fallback
+on hosts without a Korean font; the existing Latin font stack and native layout
+are preserved. The font bytes remain under their original SIL OFL license.
+
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,
