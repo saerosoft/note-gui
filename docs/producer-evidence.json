@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "candidate": "0.7.1",
+  "developmentBranch": "master",
+  "baselineCommit": "b9ecad5bcf99799b53cd6ef0d47cd15d5f1c912b",
+  "releaseQualified": false,
+  "wholeGuiLaneAccepted": false,
+  "sourceSha256": {
+    "src/Pane.tsx": "4ca9bdb6b49a5bca86e87c39d658e98fccff98e27fe699725bc4da8d9d6a5e24",
+    "src/hostBoundary.test.tsx": "16b18f41663c8362cb811644cbff0e9690106ad4aead6faea7e5ff2ad930f49a",
+    "e2e/independent.spec.ts": "f3559460753bc376765923ca82824b676bdfb11d429771c76fda7272bab47c93"
+  },
+  "runtimeSha256": {
+    "dist/note-gui.js": "e9da2b6b9a9bba65ad2d2ff32fc52d48cdf984c9162de6d81b00e63b36764a49",
+    "dist/note-gui.css": "16c2d02b2ff29b1eb2534fa6658145fe24adb484349ac741549a694deec820b9",
+    "dist/assets/Workspace-TeCOCKGB.js": "27e1eff1f2f0f9e27223c351b3f47de87a69207128c7e9ddcd9669c872bd1e6b"
+  },
+  "verification": {
+    "sourceOfferTests": 3,
+    "unitComponentTests": 262,
+    "unitComponentFiles": 32,
+    "independentBrowserTests": 17,
+    "independentBrowserFailures": 0,
+    "browserLogSha256": "624230868cf2441bbcf96c759a81135dca82c83cf413d5fd7b752b3524ac7e8b",
+    "pinnedSources": 115,
+    "localFontAssets": 234,
+    "packedDistributionFilesCompared": 677,
+    "packedRuntimeImports": [".", "./kms"],
+    "packedCssExportResolved": true,
+    "strictDeclarationsSkipLibCheck": false
+  },
+  "boundedMeasurements": {
+    "rootNotes": 1300,
+    "totalNotes": 1302,
+    "traversedRootPages": 26,
+    "maximumRowsPerRead": 50,
+    "maximumRenderedTreeRows": 29,
+    "navigationP95Ms": 145,
+    "retainedHeapBytes": { "baseline": 8920264, "after25Pages": 10303788, "afterReturn": 10482320 },
+    "largeDocumentParagraphs": 1000,
+    "savedDocumentJsonBytes": 168001,
+    "openEditSaveReloadMs": 2320,
+    "saveMs": 262,
+    "actualDownloadBytes": 1048576,
+    "downloadSha256": "844b0df82fccb18c9abd93af5714be1dce7fc7b9cbacfee5bc718a017baccb44",
+    "scope": "Warm Linux Chromium, real localStorage and Web Locks, explicit GC. Not peak memory, KMS scale or sustained product workload."
+  },
+  "visualEvidence": [
+    { "path": ".tmp/session-2026-11-01/iab-packed-1600.png", "width": 1600, "height": 1000, "sha256": "45b9b67ba5748415a61cb7f07fa8ec09b887f142eac5a385fa2c405d5b53247e", "scope": "Actual extracted-package populated native shell, document and comments; host Korean font unavailable." },
+    { "path": ".tmp/session-2026-11-01/iab-packed-390.png", "width": 390, "height": 844, "sha256": "94db41d3489a8ca187b5955d83c2e73f9a2679b128a57bf710c419a4ce8aa12d", "scope": "Actual tab navigation/property follow-up; no document overflow; host Korean font unavailable." },
+    { "path": ".tmp/native-excalidraw-1600.png", "width": 1600, "height": 1000, "sha256": "9c941dadd2d2e2a719dff1a8f16cb267452b37665fb460544b0623249e017ff6", "scope": "Actual native local Excalidraw after edit/reopen/refresh; isolated Noto CJK environment." }
+  ],
+  "remainingInputs": [
+    "KMS R01/SC01/SC09 exact generated shared-mode host contract agreement",
+    "Approved actual native Draw.io installation and current cross-editor file-authority fixture",
+    "Qualified immutable GUI release followed by KMS-owned actual host adoption and contextual/storage acceptance",
+    "Reachable authorized native Windows command environment",
+    "Agreed KMS sustained workload/platform/scale qualification and durable release evidence archive"
+  ],
+  "retirement": { "historicalAcceptanceJournalsReconciled": 7, "journalsDeleted": 0, "promptRetired": false, "reason": "Carried host/platform/shared criteria and release evidence archival remain open." }
+}
