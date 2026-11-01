@@ -3,7 +3,7 @@
 ## Candidate and compatibility
 
 The development candidate is 0.8.0 on `master`, building on the verified 0.7
-repairs through `8946d40b`. Optional policy/association adapters and mount-local
+repairs through `8946d40b`, implemented and pushed in `bd28c292`. Optional policy/association adapters and mount-local
 dirty reporting establish a new MINOR contract. The local store version and
 public root, KMS and stylesheet export paths remain unchanged.
 The candidate repairs pending restore ownership, tab-owned comment/property
@@ -28,7 +28,7 @@ gitlink and asset distribution together. Never consume a moving master tip.
 
 ## Producer checks
 
-- `verify-22.log` passes three source-offer exclusion tests, 307 unit/component tests
+- `verify-23.log` passes three source-offer exclusion tests, 307 unit/component tests
   in 34 files, TypeScript/declarations, the production module/CSS/assets build,
   distribution verification and strict package-name declaration/export checks.
   This includes the 24 transport cases plus actual policy/association UI,
@@ -52,24 +52,29 @@ gitlink and asset distribution together. Never consume a moving master tip.
   The 0.8 suite additionally verifies aggregate dirty state and mount isolation
   in two actual browser cases; the combined 38-case run passes. Three additional
   collaboration cases pass desktop/narrow association paging/creator/unlink and
-  delayed-save fencing across a policy epoch change. The final combined run is
-  qualified as 41/41 in `independent-16.log` before the final controlled-target
-  permission repair. Real KMS tests additionally passed cross-actor receipt
+  delayed-save fencing across a policy epoch change. The final combined run
+  passes 41/41 in `independent-19.log` on the current built runtime. Earlier
+  run 17/18 failures and focused repairs remain recorded in GOAL.md. Real KMS tests additionally passed cross-actor receipt
   replay/global identity and controlled private-target links on the new lease.
-  The full rich-edit/comment/property/file flow is still being qualified; neither
-  static-byte mounting nor producer fixtures establish adopted product-host acceptance.
+   `kms-08-fixture/real-collaboration-03.log` now passes all three real-backend
+   cases, including shared rich create/save, comments, properties, authoritative
+   history editors, exact protected-file bytes and outsider403. Neither static-byte
+   mounting nor producer fixtures establish adopted product-host acceptance.
 - `pnpm test:native-drawio` passes five cases against the actual approved Draw.io
   v32.6.1 static artifact, commit `84487b4891cbc0f32d7e30f34cf878c87cb1f414`.
   An isolated HTTPS loopback fixture trusts only its certificate SPKI pin. It
   verifies desktop/narrow canvas edits, immutable successors, a read-only viewer,
   same-note restore isolation and inline edits/undo through held refresh.
+  The final matching runtime passes 5/5 in `native-drawio-10.log`; final source/
+  test TypeScript checking passes in `types-26.log`.
 - An actual `npm pack --ignore-scripts` tarball was extracted into a fresh
   consumer. Root and KMS runtime imports execute; CSS export resolution and
   public imports pass with `skipLibCheck: false`. All 682 distribution files
   match the build, and every library source entry in its source ZIP matches
   the working source. The Noto Sans KR OFL license is in the source offer.
-  The 0.8 snapshot includes 296 matching source files and actual KMS policy/
-  association runtime exports; final journal updates require a repeat byte check.
+  The final 0.8 snapshot includes 295 matching source files after completed-unit
+  retirement and actual KMS policy/association runtime exports. The final
+  documentation-only recording receives a repeat source-byte check.
   Final artifact hashes are external qualification output;
   do not embed a package's own hash inside its source offer.
 - The in-app browser loaded the extracted package through package-name import
@@ -95,17 +100,38 @@ by the consumer. This is finite producer browser/API evidence, not integrated
 product, shared-mode or storage acceptance. Protected fixture material remains
 outside the public source offer.
 
+The new isolated 0.8 lease captured independent SQL counts for all 135 public
+tables and a complete storage inventory after the three browser cases, before
+cleanup. Its recovered supervisor runs outside the OpenCode cgroup after an OOM;
+the owned database/storage and authenticated sessions were preserved. Final
+independent role/link/receipt and actual object-byte verification passes 34
+assertions across 28 categories with zero mismatches. Roles match baseline/post/
+current SQL exactly; three active accounts/original sessions remain; 16 association
+receipts/audits show no replay transition. All three actual S3 objects match their
+26-byte database size/checksum and synthetic payload. The final current-adapter
+browser run passes 3/3 in `real-collaboration-05.log`. The original and final
+sanitized proofs are retained. Another complete inventory preceded owned-only
+cleanup, and exact Docker inspection confirms seven containers and their network
+absent. No existing product runtime or consumer pin was changed.
+The old expired lease's missing inventory does not apply to this new snapshot.
+
 The sanitized [producer evidence](producer-evidence.json) records the finite
 results, source/runtime hashes and visual evidence hashes. Raw logs, package
 bytes and synthetic screenshots remain under `.tmp/session-2026-11-01`,
 `.tmp/gui-completion` and the named browser-output paths; they
-must be archived with the separately authorized release qualification before
-the active records or historical acceptance journals are retired.
+   must be archived with the separately authorized release qualification before
+   final product/release acceptance records retire. A completed bounded correction
+   diary may retire after its own evidence is readable and every separate parent
+   dependency remains in the active ledger.
 
 [GOAL.md](../GOAL.md) tracks the complete remaining objective and document
 retirement. Lasting behavior belongs to the
 [functional specification](functional-specification.md); this packet records
 verification and adoption conditions only.
+The local producer archive has 93 readable byte-checked entries, including both
+sanitized real-backend proofs, final role/storage cleanup verification, synthetic
+screenshots and the completed correction unit's four-entry archive. Qualification
+records its hash externally; release-owner archival remains a separate action.
 
 ## Consumer acceptance cases
 
@@ -135,14 +161,23 @@ experimental-localStorage warnings remain.
 KMS settled R01 and pushed SC01 base policy/capability transport in `59bc415`.
 Its subsequent SC02 packet confirms original creator identity/nullable name,
 global association identity and the existing paging/request protocol; the current
-SDL contains those fields. The internal adapter preserves them. Exact GUI
+   SDL contains those fields. The public adapter preserves them. Exact GUI
 wrapper and dirty-state designs were approved by the user. Current source
 confirms CONTROLLED MEMBER write, first-creation revision zero and exact receipt
 replay; these are not pending technical questions. Wider effective-audience and
 actor data still need exact backend fields. No missing authority or actor was
 inferred. Public 0.8 policy/association and mount-local dirty APIs are implemented;
 host router integration remains consumer-owned. Human review is not a gate.
-G11 retirement also remains open: all seven historical journals are reconciled
-in `COMPLETION_STATUS.md`, and their evidence is preserved with its original
-source/topology limits. Keep required licenses, provenance and all active
-criteria. Retire the session prompt and completion record last.
+KMS records the agreed wrappers in its `docs/frontend-architecture.md:25-31`
+(owner commit `115cfbd`). Its coordinator confirms the current `/notes/` host
+still uses the existing locked library, with no implemented optional binding;
+its packaged-host harness requires assets matching that lock. This does not
+authorize a producer-side pin/config/runtime/release change or broader business
+fixture seeding. The remaining host/release conditions cannot be closed by the
+new isolated producer checks.
+G11 retirement remains open. Seven historical journals are reconciled in
+`COMPLETION_STATUS.md`; the completed 2026-10-25 correction unit is removed after
+53 current tests and a readable four-entry archive. Six journals still retain
+unfinished dependencies. Historical evidence keeps its original source/topology
+limits. Keep licenses, provenance and active criteria; retire the session prompt
+and completion record last.

@@ -20,6 +20,8 @@ without KMS routes/cookies/context stubs. Knowledge context and relations are
 complete optional named capabilities: absent means no controls/calls; supplied
 failure is visible and recoverable. Every mount owns its root/listeners/timers/
 portals. Idempotent disposal fences retired results without undoing backend writes.
+Demo same-host links retain the configured web port; embedded navigation uses
+the host's exact destinations rather than substituting the demo origin.
 
 ## F02: Rich editing and mutation recovery
 
@@ -60,6 +62,8 @@ later edits or remount another tab/pane; dirty content retains its conflict base
 Uncertain restoration requires readback before another restore intent.
 History rows show the supplied revision editor name. An unavailable editor is
 explicitly unknown, never substituted with the current account or note owner.
+History node views update after the React commit. A changed selection or disposed
+viewer cancels obsolete work so it cannot mount the previous revision later.
 
 ## F05: Trees and bounded resources
 
@@ -92,11 +96,18 @@ records. Current knowledge and accumulation history replace their 20-row pages.
 Authored content, authoritative current membership and accumulation history stay
 separate. Claim labels distinguish confirmed fact/request/inference/unclassified
 statements; legacy mixed documents/revisions retain their supplied origin.
+The main column presents the authored document and current knowledge. Adjacent
+context presents source policy, provenance and initially collapsed accumulation
+history. Evidence, pinned rules and saved comparisons expand within their item.
+A collected note may have an empty authored editor and separate current items;
+an empty classified projection stays distinct from an ordinary empty human note.
 Evidence includes authorized immutable originals, locators, quote truncation,
 occurrence/effective/application times and supplied audience. Applied rules select
 exact versions. Comparisons select exact operations/saved before-after revisions;
 proposals remain separate. Source/rule/review/action links use injected exact
 destinations. The GUI neither computes business truth nor copies private proof.
+Generic policy guidance stays distinct from the actual policy snapshot recorded
+on a change. Returned continuation controls paging even on a short authorized page.
 
 ## F08: Native diagrams and files
 
@@ -120,6 +131,10 @@ Attachment lists include superseded/unembedded authorized versions with bounded
 pages and native authorized downloads; unchecked external URLs grant no access.
 Attachment pages replace at most 50 rows. Large native downloads use the browser
 download manager instead of buffering complete editor blobs.
+The attachment list shows file metadata, including name, media type, size,
+checksum, revision and creation time. It provides explicit refresh
+and distinguishes loading, an authoritative empty result and read failure with
+retry. Stale pages cannot replace another note's list or restore revoked links.
 
 ## F09: Current authority and shared collaboration
 

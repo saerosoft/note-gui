@@ -14,13 +14,62 @@ The current candidate advances to 0.8.0 for the user-approved optional policy,
 association and mount-local dirty APIs. Windows support/qualification is
 NOT_APPLICABLE by the user's explicit decision. Human review is not a gate;
 automated checks and current authorized-environment evidence remain required.
-`verify-20.log` now passes 305 tests/34 files plus three source tests, types,
+`verify-23.log` now passes 307 tests/34 files plus three source tests, types,
 build/distribution and strict package checking. Automated review's applied-query
 finding was reproduced and repaired; real transport additionally verifies that
 scoped collaboration denial preserves identity while authentication loss revokes
 it. Existing backend revision editor names are now queried and displayed, with
 unknown editors left explicitly unknown. Final matching browser/native/package
 receipts and actual KMS adoption remain separate gates.
+
+COMPLETED bounded 0.8 real-backend verification: implementation `bd28c292` is
+pushed. `real-collaboration-03.log` passes 3/3 shared create/save/comment/property/
+history actor/file-byte/outsider cases, peer unlink/original receipt replay/relink
+and CONTROLLED own-private-target links on a read-only shared anchor. A post-write
+snapshot independently counts all 135 SQL tables and inventories storage before
+cleanup. Independent read-only proof now passes 28/28 postconditions: exact roles
+unchanged, three active accounts/original sessions, eight association receipts and
+audits with no replay transition, and actual S3 object bytes equal database size/
+checksum/expected payload. `real-collaboration-08-proof.json` contains only safe
+counts, booleans and digests. This does not accept
+the consumer's unchanged release pin, `/notes/` deployment or sustained workload.
+
+The exact agreement audit reproduced a short-page cursor defect: association
+list/target pages advanced by the maximum 20 instead of the returned row count.
+Both regression expectations fail first; the minimal adapter correction passes
+all 24 transport cases in `association-short-page-green.log`. Full qualification
+of this final delta remains in progress.
+`suite-23.log` passes the full 307/34 unit/component suite. Browser run 17 passes
+40/41 but exposes a harness race: disabled Save also represents an in-flight
+mutation, so the native case reloaded before acknowledgement. The retained trace
+shows the reload 26 ms after click completion and revision 3 without the scene.
+That helper now waits for the existing saved-state indicator as well. It retains
+all exact scene/byte/reload assertions and unchanged timeouts.
+The focused case now also checks actual undo readiness and the same canvas across
+refresh, then passes 1/1 with exact rectangle/ellipse/original-byte assertions.
+On the final real-backend rerun, an old anchor's multiple links exposed an
+unscoped test locator; `bc3a07e0` targets the freshly created row. All three real
+cases then pass in `real-collaboration-05.log`; the new independent snapshot is
+captured. Final aggregate SQL/S3 validation passes 34 assertions across 28
+categories: 17 notes, 27 revisions, eight links, 16 receipts/audits and three
+actual stored objects. The original proof remains unchanged. A further complete
+inventory was saved before owned-only cleanup; exact Docker inspection confirms
+all seven owned containers and the network absent. Existing runtimes are untouched.
+The full browser run 18 found another harness assumption: a refresh can reject
+with STALE_ACCESS when authority changes during it. `6a52fe15` accepts only that
+specific outcome and retains body/cache-removal assertions; its focused case
+passes. Final combined browser qualification remains in progress.
+COMPLETED final combined browser qualification: `independent-19.log` passes
+41/41 on the current runtime. `native-drawio-10.log` passes actual native 5/5;
+`types-26.log` passes the final test/source types. Linux desktop/narrow/native
+producer qualification is complete. Separate product-host/workload/release
+obligations remain open.
+COMPLETED producer source-byte/archive checks: `packed-check-09.log` passes the
+actual 0.8 package imports/CSS/strict types and all 682 distribution/295 source
+entries. `evidence-check-18.json` verifies 93 readable byte-matching local archive
+entries, including the final proof and completed correction archive. A final
+documentation-only source refresh preserves this matching snapshot; no qualified
+release, consumer adoption or whole-lane completion is inferred.
 
 ## Source reconciliation
 
@@ -53,10 +102,10 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G05 | KNOWLEDGE-019–022/058, F06; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Actual hierarchy/current authority, sustained mixed workload and scale envelope owned by KMS P14. Historical million-note results retain their older workload. PARTIAL. |
 | G06 | KNOWLEDGE-023–026/030/032–038, F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Actual populated KMS business projections and shared associations require the authoritative accepted host/contract. PARTIAL. |
 | G07 | KNOWLEDGE-016–018/027/065, F09; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Actual approved Draw.io application passes five desktop/narrow/viewer/restore/held-refresh cases, including inline edit and undo retention. Real API peer XML successor preserves original bytes and denies outsider/anonymous bytes. | Qualified Draw.io deployment, integrated all-format co-editor/storage acceptance and independent consumer inventory remain open. PARTIAL. |
-| G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Host refresh/revocation, optional-failure separation and delayed delivery/media tests pass. Four actual API cases verify private/admin/session separation, administrator demotion, membership removal and viewer draft retention with writes disabled. | Current 0.7 ambiguous core FORBIDDEN/UNAUTHENTICATED retires the mount; target NOT_FOUND is absence. Narrower denial needs an agreed signal. Lease-specific SQL inventory was not independently captured. PARTIAL. |
-| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Current 0.8.0 `verify-19.log`: three source tests, 300 tests/33 files, declarations/build/distribution and strict copied-package resolution pass; 234 Excalidraw font files plus CJK fallback/OFL. Earlier byte receipts retain their original source scope; the final 0.8 tarball must be requalified. | Linux host scope; Windows is NOT_APPLICABLE and its workflow is removed. Final authenticated packaged KMS acceptance remains separate. PARTIAL. |
-| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Approved optional policy/associations are integrated into guarded sessions and reachable panels. Actual record-space shared labels, capability-based creation, exact request replay, original creator, conflict/read recovery and opaque-epoch refresh are implemented. Three actual browser cases pass at desktop/narrow and across a delayed save. | Wider per-record audience and actor fields plus actual KMS shared/controlled integration still require backend-owned evidence. Continue implementation/qualification; no role or actor inference. PARTIAL. |
-| G11 | R02–R06; factual docs, seven journals, source distribution | Seven journals read/reconciled below. Final facts/consumer packet and durable sanitized evidence are being prepared. | Retirement waits for accepted carried criteria, readable archived evidence and final source/link checks. Prompt and this record remain until last. PARTIAL. |
+| G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
+| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Current 0.8.0 `verify-23.log`: three source tests, 307 tests/34 files, declarations/build/distribution and strict copied-package resolution pass; 234 Excalidraw font files plus CJK fallback/OFL. Actual tarball 682 dist/295 source entries match after correction-unit retirement; readable local evidence has 93 entries. | Linux producer qualification passes; Windows is NOT_APPLICABLE. Exact immutable release and adopted KMS host qualification remain separate. PARTIAL. |
+| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Bounded optional policy/association/dirty agreement confirmed by KMS; implemented in `bd28c292`. Desktop/narrow and opaque-epoch cases pass. Real API 3/3 plus independent SQL/S3 28/28 verify shared/controlled controls, real actors, global creator and exact replay. | Wider per-record audience/actor transport and adopted product host still require backend-owned inputs. No new DTO or role/actor inference. PARTIAL. |
+| G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; one completed correction unit is archived/removed. Current producer packet, sanitized proof and 93-entry readable evidence archive are verified. Duplicate current/screen contracts move to the lasting specification. | Six journals retain unfinished host/workload/release criteria. Prompt and this record remain until last. PARTIAL. |
 
 ## Individual original criterion accounting
 
@@ -151,7 +200,7 @@ Current independent execution has reproduced and repaired two additional gaps:
   COMPLETED actual-package check: `packed-check-14.log` verifies root/KMS/CSS
   runtime imports, strict declarations and matching 678 dist/288 source entries.
 
-Current implementation gates: `verify-15.log` (267 tests/32 files plus the full
+Earlier native-modal implementation gates: `verify-15.log` (267 tests/32 files plus the full
 normal gate), `independent-13.log` and `independent-chrome-05.log` (36/36 each),
 and `native-drawio-07.log` (5/5). `packed-check-14.log` verifies the actual native
 unit tarball and corresponding source. These files are in `.tmp/gui-completion`. Work
@@ -225,20 +274,46 @@ core/CSS restoration supersedes the old custom client; F09 co-editor storage
 authority remains a KMS acceptance dependency. None is reopened solely from the
 old code-audit status.
 
-## Seven acceptance records
+## Acceptance-record retirement
 
-All seven files remain readable in Git and the working tree. Their facts and
-limits have been reconciled, not relabeled as current integrated acceptance.
+The seven original records retain their historical facts and limits. Completed
+correction units can retire after their behavior has one specification owner,
+their evidence is readable and every separate parent dependency remains here.
+This does not waive final release archival or accept the current product host.
 
 | Existing record | Facts retained | Current reconciliation / retirement condition |
 | --- | --- | --- |
-| `docs/2026-10-25-note-library-corrections.md` | Files/history/editor corrections, original byte checks and bounded imported-data actions | G03–G08; source is older. Reuse unaffected behavior, repeat changed lifecycle paths before retirement. |
+| `docs/2026-10-25-note-library-corrections.md` | COMPLETED six correction items; historical import/byte observations remain in Git at `bd28c292` and the local retirement archive. Current 53/53 tests pass in seven files. | RETIRE this correction unit. F01/F04/F08 own its behavior. Managed Draw.io deployment, populated current knowledge and the rest of the product matrix remain open in G01/G06/G07 and GOAL AC08/AC09. |
 | `docs/capacity-and-access-acceptance.md` | Warm million-note fixture, 50-row reads, cache/retained heap, real role changes | G05/G08; not cold/peak/sustained/current-host acceptance. Windows is outside the required scope. |
-| `docs/current-knowledge-acceptance.md` | Authored/current/legacy distinction, historical source ordering and exact pinned rule evidence | G06; server semantic results remain KMS-owned, later history-label repairs preserved. |
+| `docs/current-knowledge-acceptance.md` | Authored/current/legacy distinction, historical source ordering and exact pinned rule evidence | COMPLETED duplicate-contract transfer to F02/F04/F06/F07. Retain dated evidence; G06 server/current-host acceptance remains KMS-owned. |
 | `docs/drawio-acceptance.md` | Real approved native Draw.io, forged-window/origin refusal, immutable bytes and viewer | G07/G08; offline protocol fixture does not replace this native editor or current deployment acceptance. |
 | `docs/move-and-large-document-acceptance.md` | Two-note private move, retained panes, 1,000 paragraphs and 20 MiB download | G04/G05/G07; not million-node moves or peak-memory/sustained load. |
-| `docs/note-gui-acceptance.md` | Canonical scope and historical rich editor/pane/access cases | G01–G09; original standalone topology superseded by library-inside-WEB, no whole-screen completion inferred. |
+| `docs/note-gui-acceptance.md` | Canonical scope and historical rich editor/pane/access cases | COMPLETED contract transfer to F01/F07/F09. Retain G01–G09 current-screen dependencies; standalone topology is superseded by library-inside-WEB, with no whole-screen completion inferred. |
 | `docs/populated-data-acceptance.md` | Applied history/proof, exact rule links and restricted evidence | G06/G08; history is not current membership or model quality. |
+
+Completed correction-item mapping (`correction-retirement-01.log`, 53/53):
+
+| Item | Current verification | Lasting owner |
+| --- | --- | --- |
+| Configured same-host web port | `src/webOrigin.test.ts`, `src/api.test.ts` | F01/F07; exact destination protocol in CONTRACT |
+| Immutable file list/pages/native downloads/loading/failure/access | `src/NoteAttachments.test.tsx`, `src/api.test.ts` | F08 |
+| Local Excalidraw preview/embedded bytes/remote omission/stale render/revoke | `src/docmost/ExcalidrawPreview.test.tsx`, `src/docmost/excalidraw.test.ts` | F08 |
+| Bundled Korean Excalidraw locale | `src/docmost/excalidrawLocale.test.ts` | F08 |
+| Escape retained by canvas; explicit dirty-exit confirmation | `src/docmost/ExcalidrawPreview.test.tsx` | F03/F08 |
+| Deferred history node-view updates; cancelled obsolete/unmounted work | `src/docmost/history.test.tsx` | F04 |
+
+Ruling: retire the explicitly completed correction unit independently of its
+separate parent acceptance. The original record says those parent checks are
+separate, and they remain individually open above. Requiring a release before
+removing this completed work diary would contradict the user's per-document
+retirement request. If this boundary is wrong, restore that one record from Git;
+no test, original evidence or parent obligation is deleted.
+
+Final review: the retirement diff initially omitted attachment metadata, explicit
+refresh and loading/empty/error/retry requirements from F08. Regraded as a required
+specification-ownership fix, since otherwise deleting the diary loses their
+lasting owner. Existing `NoteAttachments` tests verify the behavior; F08 now
+retains it. No production code or test expectation was changed for this finding.
 
 ## Evidence, versions and continuation
 
@@ -258,6 +333,11 @@ limits have been reconciled, not relabeled as current integrated acceptance.
 | Review property generation/readback/torn-read and relation recovery combinations | `f971775e` |
 | Fixture-independent actual authorization assertions | `673d7b6f` |
 | First-input slash and stable link-menu lifecycle | `ced912a8` |
+| Remove Windows-only qualification under the approved scope | `a360b725` |
+| Optional policy/association and mount-local dirty contract; actor/denial fixes | `bd28c292` |
+| Advance short association pages by the returned count | `05a6f5d5` |
+| Await acknowledged native saves and actual drawing readiness | `96540023` |
+| Scope repeated CONTROLLED checks to the newly created target | `bc3a07e0` |
 
 - Current implementation gate: `.tmp/gui-completion/verify-11.log`, 266/32 plus three source
   tests, build/distribution and strict copied-package consumer pass. The missing
@@ -266,7 +346,7 @@ limits have been reconciled, not relabeled as current integrated acceptance.
   `independent-chrome-04.log`, 35/35 each; actual native Draw.io 5/5 in
   `native-drawio-06.log`. Earlier setup/selector failures and the shell-timeout
   partial run are not acceptance evidence.
-- Latest continuation gate: `.tmp/gui-completion/verify-16.log` passes three
+- Historical internal-adapter gate: `.tmp/gui-completion/verify-16.log` passes three
   source tests, 291 tests/33 files, types/build/distribution and strict package
   consumer checks. The extra 24 cases cover the internal SC01/SC02 adapter,
   not a public shared-mode feature. Eight malformed policy/association response
@@ -275,19 +355,22 @@ limits have been reconciled, not relabeled as current integrated acceptance.
   new MINOR contract remain open pending the requested agreement.
 - Native Windows run `41324344742` on `1183c88d` failed before runner allocation.
   Job `124901031268` has no executed steps; its check annotation states that the
-  account is locked due to a billing issue. Unlocking billing or supplying an
-  alternative authorized native runner is required before qualification.
+  account is locked due to a billing issue. The later user scope removes Windows
+  qualification, so no billing recovery or alternative runner is now required.
 - Restore repair review found no Critical/Important regression. Added native
   tab-switch/close and diagram lifecycle checks pass. Arbitrary interleavings,
   current backend authority and target-platform performance are not inferred.
-- Package/release metadata: 0.7.1 PATCH development candidate; public 0.7
+- Historical package/release metadata: 0.7.1 PATCH development candidate; public 0.7
   signatures unchanged. G10 requires a new MINOR once agreed. No tag, assets,
-  release-branch integration or consumer pin update is authorized here.
+  release-branch integration or consumer pin update is authorized here. The
+  approved 0.8 contract is now implemented; these earlier waiting conditions are
+  superseded by the current ledger, not still-open design tasks.
 - G10 schema request sent to the KMS coordinator on 2026-11-01. Needed inputs:
   authoritative effective audience/capabilities and policy revision, association
   operations, real actor identities and epoch/failure semantics, then SC09/SC10
   consumer cases. R01 settled and SC01 base transport was pushed in `59bc415`;
-  the remaining exact SC02–SC06 packet and GUI agreement are pending. SC01 uses
+  the wider SC02–SC06 packet was then pending. The later bounded policy/
+  association/dirty agreement is confirmed and implemented. SC01 uses
   positive policy revisions, an opaque decimal-string access epoch and separate
   read/write/review/manageSource/manageRule capabilities. It does not replace
   record authorization or turn an organization viewer into an administrator.
@@ -303,20 +386,24 @@ limits have been reconciled, not relabeled as current integrated acceptance.
 - G11 deletion is blocked until every carried criterion has accepted evidence or
   an authorized non-applicable disposition and the final manifest is retrievable.
   `SESSION_PROMPT.md` and this record are retired last, never to hide blockers.
+  The explicitly completed correction unit is separately retired with all parent
+  criteria retained in the active ledger.
 
 The maintained consumer packet is `docs/consumer-acceptance.md`; sanitized
 source/runtime/test/measurement/visual hashes are in `docs/producer-evidence.json`.
 Package hashes and complete raw evidence remain qualification output outside the
 distributed source to avoid self-referential archive hashes. Archive readability
-must be established by the release owner before journal retirement.
+must be established by the release owner before final product/release-record
+retirement. The bounded completed correction diary has its own readable archive.
 
 ## Checked deviations and remaining inputs
 
 - Ruling: repair existing 0.7 guarantees with PATCH 0.7.1; a shared-mode contract
   requires a new MINOR after exact agreement. A wrong compatibility ruling would
   require a new version decision before consumer adoption.
-- Ruling: retain the seven journals and execution files while their carried
-  criteria remain open. Deleting them now would erase host/platform obligations.
+- Ruling: retain unfinished journals and execution files while their carried
+  criteria remain open. The completed correction unit retires separately; its
+  parent host/workload obligations remain explicit in this record.
 - Ruling: independent 1,300-root/1 MiB measurements complement, not replace,
   historical million-note/20 MiB receipts and KMS sustained-load acceptance.
 - Test-harness corrections included an unsupported Testing Library `exact`

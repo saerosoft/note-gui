@@ -1,29 +1,13 @@
 # Current knowledge and authored-document acceptance
 
-## Contract and design
+## Specification ownership and status
 
-This unit follows `KN02-note-detail.html`: the authored document and currently
-valid knowledge occupy the main column; accumulation history, source policy
-and provenance occupy the adjacent context column. Current items show explicit
-claim classifications. Evidence, rule versions and saved comparisons expand
-inside the item; history rows remain collapsed until opened. The original
-screen specification is unchanged.
-
-`knowledgeCurrentItems` owns current membership and pagination. The client
-does not reconstruct current statements from accumulation history or source
-arrival order. Each page replaces the previous 20-row page. The returned
-`hasNext` controls continuation even when permissions filter some entries.
-
-The editor prefers `richBody`, then the nullable `authoredBody`, then the
-compatibility `body`. An empty authored body stays empty. Current-item text is
-never inserted into the editor. API changes, human saves and history restores
-retain their normal revision checks.
-
-Existing mixed documents and revisions retain `LEGACY_UNCLASSIFIED` rather
-than being silently classified as human or current knowledge. The GUI labels
-the preserved body and distinguishes an empty classified current projection
-from an ordinary empty human note. Restoring a legacy revision retains that
-origin. New accepted current items can coexist with a preserved legacy body.
+COMPLETED specification consolidation: the [functional specification](functional-specification.md)
+F02/F04/F06/F07 owns authored-body fallback, legacy origin, current membership,
+layout, expanded proof and paging. `CONTRACT.md` owns the exact transport. This
+record retains the dated workload/evidence below; its current-host G06/G08 and
+GOAL AC08/AC09 dependencies remain open. The historical run does not qualify the
+new locked consumer or authorize business-fixture seeding.
 
 ## Real-API workload
 

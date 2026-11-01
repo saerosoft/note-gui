@@ -8,21 +8,12 @@ the Knowledge Engine screen specification. The public design is available at
 [the screen index](https://static.saerosoft.com/knowledge-engine/#implementation-plan).
 The original design files are unchanged.
 
-The note application owns editing, navigation and note context. Knowledge
-Engine owns authentication, authorization, revisions, file access, sources,
-rules, review and actions. Links to those capabilities open the product web
-application. This fork does not include their management screens.
-
-KN-02 uses `knowledgeCurrentItems` for currently valid statements,
-`knowledgeAccumulations` for bounded history and `knowledgeAccumulationChange`
-for an expanded comparison. The main column separates the authored document
-from current knowledge; the adjacent context column contains policy,
-provenance and collapsed history. The API selects current membership. Claim
-labels distinguish confirmed facts, requests, inference and unspecified
-classification. Private and administrator evidence carry explicit labels.
-Expanded records show original/effective timestamps, application time, actors,
-reviewer and applied rule versions. The generic policy explanation is distinct
-from the actual policy snapshot attached to a recorded change.
+COMPLETED specification consolidation: the [functional specification](functional-specification.md)
+owns host responsibilities and F01/F07/F09 behavior; `CONTRACT.md` owns exact
+current/history/comparison operations. Historical standalone topology is
+superseded by the library mounted inside WEB. This record retains the dated
+acceptance evidence, not a second feature contract. Current G01 through G09 and
+GOAL AC08/AC09 screen/host/release dependencies remain open.
 
 ## Repeatable checks
 
