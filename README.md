@@ -29,23 +29,12 @@ The initial extracted client comes from Knowledge Engine commit
 `upstream-manifest.json` records the retained upstream paths, original hashes
 and modifications. Upstream history remains available in Git.
 
-## Scope
+## Functional scope
 
-- Rich note editing: titles, structured ProseMirror documents, slash commands,
-  toolbars, tables, code, links, images and attachments.
-- Note navigation: reorderable tabs, two independent editing panes, paginated
-  trees, keyboard navigation, multi-select moves and subtree focus.
-- Note context: comments, revision history and restore, typed properties,
-  relationships, backlinks and authorized provenance links. KN-02 separates
-  the authored document, currently valid knowledge and accumulation history.
-  Current items distinguish confirmed facts, requests, inference and
-  unclassified statements. Expand an item to inspect its original evidence,
-  source and application times, applied rule versions and before/after records.
-  Applied-history labels identify the proposal type: older material may remain
-  in history without changing current content. The recorded proposal stays
-  separate from its saved comparison, and review links select the exact operation.
-- Editable Draw.io XML, Excalidraw scenes and Mermaid source, with attachment
-  revision references and authorized file access.
+[The functional specification](docs/functional-specification.md) owns the
+required editor, tab/pane/navigation, context/proof, native diagram/file,
+authority/shared-collaboration and delivery behavior. [GOAL.md](GOAL.md) records
+which requirements have current verification and which remain unfinished.
 
 The working tree excludes Docmost's server, Enterprise modules, account and
 organization management, workspace setup, cloud integration, email templates
@@ -248,23 +237,10 @@ CORS_ALLOWED_ORIGINS=http://localhost:9088,http://127.0.0.1:9088,http://localhos
 Restart the API after changing that setting. The development proxy preserves
 the browser's Origin and the API's CSRF checks.
 
-`VITE_DRAWIO_ORIGIN` may select an approved HTTPS embed origin. No third-party
-Draw.io frame loads unless configured. Without an embed, XML is editable;
-with an embed, the XML view follows graphical edits and is read-only to avoid
-two editors overwriting each other's drafts. The
-API's read-only permission selects the graphical viewer instead of the editor.
-The Excalidraw editor and its pinned fonts run locally. Preserve the SDK patch
-that removes automatic font CDN fallback. Saved Excalidraw scenes render as
-sanitized SVG image previews with embedded local fonts and image data. Remote
-media and embeddables are not fetched for previews. Escape remains with the
-canvas and its text tools; explicit Close or Exit confirms any unsaved edits.
-The drawing controls follow the note GUI language. The loader explicitly enables
-its pinned SDK's bundled Korean locale, which the upstream completion filter
-otherwise hides; untranslated SDK strings retain the upstream English fallback.
-Mermaid uses strict, sanitized SVG.
-A diagram upload creates a file revision; save the note to commit its reference.
-The [self-hosted graphical acceptance record](docs/drawio-acceptance.md)
-describes the verified embed, message checks and live attachment revocation.
+`VITE_DRAWIO_ORIGIN` selects an approved HTTPS embed origin. Preserve the pinned
+SDK patch and local font assets when building. Native diagram behavior belongs
+to [F08](docs/functional-specification.md#f08-native-diagrams-and-files);
+[CONTRACT.md](CONTRACT.md) defines the exact configured-origin/file protocol.
 
 ## Browser verification
 
@@ -313,33 +289,10 @@ root, browser chunk or process is not a claimed host exemption. Assess the
 actual integration and distribution and provide the corresponding source
 required for that delivered work.
 
-## Behavior and acceptance limits
+## Acceptance and work status
 
-Each pane has its own editor, title, toolbar, comments, history and in-memory
-tab drafts. A pane ID is independent of the note ID. Saves use
-`expectedRevision` and idempotency keys; stale edits must report a conflict.
-There is no Hocuspocus/Yjs provider. KMS keeps canonical persistence in its API;
-the independent example explicitly selects its own browser store.
-
-The tree requests 50 siblings at a time and retains at most 24 pages.
-The attachment tab reads 50 authorized file records per page, including earlier
-file revisions and imported files that do not appear inside the document. It
-replaces each page, clears rows when access changes, and downloads the selected
-immutable file through the same-origin authenticated API. Large downloads use
-the browser download manager; the client does not buffer them as editor blobs.
-Comments, history and relationships use 20-row pages with at most 100 visible
-records. Current knowledge and accumulation history replace their 20-row pages;
-evidence and comparisons expand inside the selected item. Location restoration
-and file access remain subject to the API's
-current authorization. Property deletion is revision checked. Tree moves can
-target another authorized space in the same organization; the API checks
-subtrees, attachment history and external relationships before accepting them.
-The [capacity and account-access run](docs/capacity-and-access-acceptance.md)
-measured bounded navigation and revision-checked editing against one million
-notes in a separate local database, including live account permission changes.
-Its workload and hardware limits remain explicit.
-
-See [the acceptance record](docs/note-gui-acceptance.md) and
-[current-knowledge checks](docs/current-knowledge-acceptance.md) for the canonical
-design units, observed browser behavior and workload limits. Passing component
-tests or a production build alone does not establish screen acceptance.
+[GOAL.md](GOAL.md) owns the remaining checklist and verification boundaries.
+[The consumer packet](docs/consumer-acceptance.md) records the named integration
+inputs. Historical acceptance records retain their dated workloads until their
+carried criteria and evidence are resolved; they do not establish current whole
+screen, platform, workload or release acceptance.
