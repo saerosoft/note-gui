@@ -22,7 +22,7 @@ export interface PageEditorProps {
 
 export default function PageEditor({ pageId, editable, content, onChange, onInvalid }: PageEditorProps) {
   const setEditor = useSetAtom(pageEditorAtom);
-  const menuContainerRef = useRef<HTMLDivElement>(null);
+  const [menuContainer, setMenuContainer] = useState<HTMLDivElement | null>(null);
   const change = useRef(onChange); change.current = onChange;
   const invalidate = useRef(onInvalid); invalidate.current = onInvalid;
   const [initialValid] = useState(() => validateDocument(content, getSchema(editorExtensions())));
@@ -63,13 +63,13 @@ export default function PageEditor({ pageId, editable, content, onChange, onInva
 
   return <div className="editor-container" style={{ position: "relative" }}>
     {error && <p role="alert">{error}</p>}
-    <div ref={menuContainerRef}>
+    <div ref={setMenuContainer}>
       <EditorContent editor={editor} />
-      {editor && editable && menuContainerRef.current && <>
-        <EditorLinkMenu editor={editor} appendTo={menuContainerRef.current}/>
-        <EditorBubbleMenu editor={editor} appendTo={menuContainerRef.current}/>
-        <TableMenu editor={editor} appendTo={menuContainerRef.current}/>
-        <CalloutMenu editor={editor} appendTo={menuContainerRef.current}/>
+      {editor && editable && menuContainer && <>
+        <EditorLinkMenu editor={editor} appendTo={menuContainer}/>
+        <EditorBubbleMenu editor={editor} appendTo={menuContainer}/>
+        <TableMenu editor={editor} appendTo={menuContainer}/>
+        <CalloutMenu editor={editor} appendTo={menuContainer}/>
       </>}
     </div>
     <div onClick={() => { if (editor && !editor.isDestroyed) editor.commands.focus("end"); }} style={{ minHeight: 32 }} />

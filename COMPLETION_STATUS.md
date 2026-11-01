@@ -107,6 +107,18 @@ Current independent execution has reproduced and repaired two additional gaps:
   keep the property input and can reset only that panel after confirmation,
   retaining an independent authored draft. Baseline package failures and traces
   are retained under `.tmp/gui-completion/baseline-results`.
+- G01/G03: the first typed slash command disappeared when delayed menu
+  registration rebuilt the editor's plugins. Actual desktop/narrow regressions
+  reproduced it. Menu-container attachment now mounts the native menus before
+  editing. Opening the link editor also rebuilt the bubble plugins and closed
+  the new input; stable plugins and explicit show/hide intent now preserve the
+  selection and allow reopening with a fresh URL input. Native heading, bold,
+  link, code, table and file-chooser edits persist after reload with exact
+  downloaded bytes. No public signature changed.
+  Verification: `verify-11.log` passes 266 tests/32 files and the full package
+  gate; `independent-11.log` and `independent-chrome-04.log` each pass 35/35;
+  `native-drawio-06.log` passes 5/5. The earlier combined command hit the shell
+  timeout during browser execution; its partial run is not acceptance evidence.
 
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball

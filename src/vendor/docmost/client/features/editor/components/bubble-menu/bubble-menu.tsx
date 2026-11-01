@@ -109,8 +109,6 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
     },
   };
 
-  if (showLinkMenu) return null;
-
   return (
     <BubbleMenu
       {...bubbleMenuProps}

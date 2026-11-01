@@ -1,10 +1,10 @@
-import { FC, useCallback, useEffect, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { BubbleMenu } from "@tiptap/react/menus";
 import type { Editor } from "@tiptap/react";
 import { useAtom } from "jotai";
 import { showLinkMenuAtom } from "@/features/editor/atoms/editor-atoms";
 import { LinkEditorPanel } from "@/features/editor/components/link/link-editor-panel";
-import { TextSelection } from "@tiptap/pm/state";
+import { PluginKey, TextSelection } from "@tiptap/pm/state";
 import { Paper } from "@mantine/core";
 
 type EditorLinkMenuProps = {
@@ -14,6 +14,7 @@ type EditorLinkMenuProps = {
 
 export const EditorLinkMenu: FC<EditorLinkMenuProps> = ({ editor, appendTo }) => {
   const [showLinkMenu, setShowLinkMenu] = useAtom(showLinkMenuAtom);
+  const [pluginKey] = useState(() => new PluginKey("noteLinkMenu"));
   const showLinkMenuRef = useRef(showLinkMenu);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,8 @@ export const EditorLinkMenu: FC<EditorLinkMenuProps> = ({ editor, appendTo }) =>
     if (showLinkMenu) {
       editor.commands.focus();
     }
-  }, [showLinkMenu, editor]);
+    editor.view.dispatch(editor.state.tr.setMeta(pluginKey, showLinkMenu && editor.isEditable ? "show" : "hide"));
+  }, [showLinkMenu, editor, pluginKey]);
 
   const focusInput = useCallback(() => {
     requestAnimationFrame(() => {
@@ -82,11 +84,10 @@ export const EditorLinkMenu: FC<EditorLinkMenuProps> = ({ editor, appendTo }) =>
     };
   }, [showLinkMenu, setShowLinkMenu, editor, appendTo]);
 
-  if (!showLinkMenu) return null;
-
   return (
     <BubbleMenu
       editor={editor}
+      pluginKey={pluginKey}
       appendTo={appendTo}
       shouldShow={({ editor }) => {
         return showLinkMenuRef.current && editor.isEditable;
@@ -101,9 +102,9 @@ export const EditorLinkMenu: FC<EditorLinkMenuProps> = ({ editor, appendTo }) =>
       }}
       style={{ zIndex: 198, position: "relative" }}
     >
-      <Paper ref={containerRef} w={320} p="sm" shadow="md" radius={6} withBorder>
+      {showLinkMenu && <Paper ref={containerRef} w={320} p="sm" shadow="md" radius={6} withBorder>
         <LinkEditorPanel onSetLink={onSetLink} />
-      </Paper>
+      </Paper>}
     </BubbleMenu>
   );
 };

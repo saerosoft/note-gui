@@ -147,7 +147,8 @@
       "upstreamSha256": "113e84ac1563672ed35b885f67f4264030602fcc8ec34de5be3d33399f063f4d",
       "changes": [
         "Keeps the core Tiptap editor and menus with canonical extensions and local draft updates; removes Hocuspocus, Yjs, IndexedDB, global saving and Enterprise code. Unknown structured content blocks saving.",
-        "Identified the body editing surface for scoped sizing and replaced the extra viewport-sized focus area with a compact focus target beside the KN-02 context."
+        "Identified the body editing surface for scoped sizing and replaced the extra viewport-sized focus area with a compact focus target beside the KN-02 context.",
+        "Mounts pane-local menus when their container attaches, preventing first-edit plugin registration from retiring an active slash command."
       ]
     },
     {
@@ -463,7 +464,8 @@
       "destination": "src/vendor/docmost/client/features/editor/components/bubble-menu/bubble-menu.tsx",
       "upstreamSha256": "c548cd2d69f7740282c91e7436996bc52593bc6870200a69981ba17dbb1c5163",
       "changes": [
-        "Keeps canonical core mark and link controls inside the current pane; removes Enterprise AI, upstream comment marks and unsupported formatting."
+        "Keeps canonical core mark and link controls inside the current pane; removes Enterprise AI, upstream comment marks and unsupported formatting.",
+        "Keeps the bubble plugin registered while the link editor is open and uses the pane state to hide it without recreating other menus."
       ]
     },
     {
@@ -515,7 +517,8 @@
       "destination": "src/vendor/docmost/client/features/editor/components/link/link-menu.tsx",
       "upstreamSha256": "a4a13c596f5ce50483e0f6fbe89d845015ad0f5914d1f59eb02e69e14252921b",
       "changes": [
-        "Keeps the core link edit flow with pane atoms, local URL validation and canonical link commands; removes upstream page search and global state."
+        "Keeps the core link edit flow with pane atoms, local URL validation and canonical link commands; removes upstream page search and global state.",
+        "Keeps a stable pane-local plugin and explicitly shows or hides it on link intent, resetting the URL input between openings without registration churn."
       ]
     },
     {
