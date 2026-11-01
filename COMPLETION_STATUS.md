@@ -81,11 +81,18 @@ release archives the readable producer evidence and initial browser failure.
 
 Consumer adoption is PARTIAL: KMS's version declaration, exact tuple/contract
 lock and gitlink now select that release. Product policy/association/dirty
-bindings pass 11 focused tests; the full WEB suite passes 934 tests in 147 files,
-and typecheck, production build and exact import check pass. Current-source root
-verification awaits coordination with concurrent backend work. Actual packaged
-host/control/shared/workload acceptance remains open; no G-unit is closed by
-these bounded checks. GOAL.md records the user's later external execution grant.
+bindings pass 15 focused tests/three files; the final WEB suite passes938/148,
+with types, production build, lint and exact import checking. Final current-source
+CONTROLLED host run `0caa51d9e802` passes375/900/1440px: native Back cancellation,
+single/multiple Forward cancellation and explicit leave preserve draft/editor/
+history, dispose styles and reopen stored content. Actual login, rich save/reload,
+file download, denials and tree move pass. Independent proof verifies12 dialogs,
+SQL3 notes/9 tree records, S3 LIST3 objects/166 bytes, both135-table inventories,
+original organization/role preservation and owned-only cleanup. No direct S3 GET
+is claimed. The current API is independently bound to backend tree `e26efe6a`.
+Root pre-push/push awaits exact committed source freeze. SHARED, populated
+context, integrated native formats and sustained workload remain open; no whole
+G-unit is closed by these bounded checks.
 
 ## Source reconciliation
 
@@ -126,6 +133,15 @@ acceptance. No whole G-unit is accepted solely from component tests.
 ## Individual original criterion accounting
 
 Current independent execution has reproduced and repaired two additional gaps:
+
+- G02/G04/G09 bounded host integration is verified at current source: run10
+  `0caa51d9e802` passes ordinary authenticated direct entry, draft-preserving
+  Back/Forward cancellation and explicit leave/reopen at375/900/1440px. Final
+  mount/navigation/login15/3, WEB938/148, production build/types/lint and supplier
+  source3/unit307/34 pass. Early beforeInteractive dispatch repairs actual Window
+  listener ordering; native fragment distance regressions also fail first/pass.
+  Source freeze/root pre-push/push and SHARED/populated/native/workload remain
+  open. This supplements G02/G04/G09 without closing their original wider scope.
 
 - G03/G08: failed comments/history reads displayed empty-success text and had
   no local retry. Regression RED showed both false empty messages. The repair
@@ -230,7 +246,7 @@ G-unit ledger; it does not accept the backend or current integrated screen.
 | --- | --- | --- |
 | 001 | Domain-owned canonical notes and revisions | G02/G09 producer partial; KMS persistence acceptance |
 | 002 | Native Docmost editor/tree/panels/diagrams | G01 producer partial; corrected library topology, reference comparison |
-| 003 | Stable note identity and authenticated navigation | G02 partial; KMS host/session acceptance |
+| 003 | Stable note identity and authenticated navigation | G02 bounded CONTROLLED current-host login/direct entry/save/reload passes in run10 at three widths; wider mode/session acceptance remains open |
 | 004 | Authorized snapshot/revision/edit capability | G02/G08 partial; G10 effective capabilities missing |
 | 005 | Structured save/revision/exact replay intent | G03 partial; server schema/transaction validation KMS-owned |
 | 006 | Atomic note/revision/change-event commit | KMS K02, not implemented by the GUI |
@@ -240,7 +256,7 @@ G-unit ledger; it does not accept the backend or current integrated screen.
 | 010 | Slash/table/code/link/file rich editor | G01/G03 producer native control roundtrip passed at 1600/390; first-edit slash and link lifetime defects repaired |
 | 011 | API save replaces upstream collaborative persistence | G02 implemented; independent real persistence passes |
 | 012 | Dirty tab open/switch/close/reorder | G04 producer browser passed switch/reorder/cancel and delayed restore target closure; actual host acceptance separate |
-| 013 | Location restoration and dirty departure confirmation | G02/G04 partial; actual KMS router/Back owned by consumer |
+| 013 | Location restoration and dirty departure confirmation | G02/G04 bounded current KMS host passes native Back and single/multiple Forward cancellation, explicit leave/reopen and editor/history retention; same-document Back/multi-Back RED/GREEN units pass; wider mode/native-draft matrix remains open |
 | 014 | Access change invalidates cached note/tree/file | G05/G08 partial; wider finite browser matrix pending |
 | 015 | Pane-local editor/toolbar/comments/history/save | G04 partial; same-note delayed restore browser passes |
 | 016 | Editable XML/scene/Mermaid source | G07 producer native Excalidraw, Mermaid and XML roundtrips passed; remote Draw.io acceptance separate |

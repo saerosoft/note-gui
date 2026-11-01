@@ -136,6 +136,15 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   downloaded assets match; all six checksum entries pass. Published qualification
   and evidence retain the first browser failure and unchanged successful reruns.
   AC09 remains open until KMS adopts and verifies this exact tuple.
+- [x] Reproduce and repair KMS native-fragment dirty-history rollback. Three
+  regressions fail first, then all 14 focused mount/navigation cases pass.
+  Exact-tuple import, types, production WEB/library build and frontend lint pass.
+  Final focused mount/navigation/login15/3 and full WEB938/148 pass. Current-source
+  CONTROLLED host run10 `0caa51d9e802` passes375/900/1440px with diagnostics
+  removed: Back/Forward cancellation, explicit leave/reopen, rich save/download/
+  denials/tree move and12 dialogs. Independent proof verifies both135-table
+  inventories, preserved original roles and owned resource cleanup. These bounded
+  checks do not close AC04/AC08/AC09 or authorize journal retirement.
 - [x] Confirm this repository's GitHub Actions is enabled and add a SHA-pinned,
   manual-only native Windows producer workflow without consumer secrets/resources.
 - [x] Disposition of native Windows qualification: NOT_APPLICABLE. The user
@@ -212,8 +221,8 @@ remain external qualification output to avoid self-referential source archives.
 
 1. RESOLVED for this goal: the user explicitly approved necessary build,
    compilation, regression/full/browser/package tests and verified master
-   commits/pushes in the current session. Release publication, deployment and KMS
-   changes remain excluded. This records that grant; the file alone does not
+    commits/pushes in the current session. The later unlimited grant includes
+    goal-related KMS changes and release publication. This file alone does not
    authorize a future session to bypass its current instructions.
 2. RESOLVED design approval: the user accepted the recommended optional policy/
    association and mount-local dirty APIs for 0.8.0, with no human-review gate.
@@ -223,10 +232,12 @@ remain external qualification output to avoid self-referential source archives.
    same global link identity, same-space shared targets and unchanged 20-row
    paging/request semantics. Current source confirms first creation revision
    zero and exact actor-keyed receipt replay, with current authorization checked
-   before replay. A per-record effective-audience descriptor
-    and wider actor fields remain unagreed; do not invent them. Existing
-    authoritative history editor/comment author/association creator fields are
-    implemented. The later bounded wrapper agreement is recorded above.
+    before replay. KMS's later source-checked reply confirms actual-record-space
+    policy and existing history editor/comment author/association creator fields
+    suffice for the bounded adapter. No wider descriptor/actor DTO is agreed;
+    retain any concrete unrepresentable actor case instead of inventing fields
+    or accepting all G10/SC09 screens. The bounded wrapper agreement is recorded
+    above.
 3. COMPLETED isolated fixture use: owned lease `48d1a4374b4a` recovered after
     the supervisor's OOM termination. All three real API cases and a post-write
     SQL/storage snapshot pass. Final independent 34 assertions pass. Its complete
@@ -256,11 +267,16 @@ reuse its consumed fixture.
 
 The user has now authorized the remaining external work for this session:
 
-1. Qualify and publish the exact new `version/0.8` / `release/v0.8.0` tuple with
-   matching package/source/evidence and verified downloaded asset bytes.
-2. Adopt that immutable tuple in KMS, connect the agreed policy/association/dirty
-   boundary in the existing `/notes/` host, and prove the host behavior with
-   failing-before/passing-after tests. Preserve unrelated work and retained data.
+1. COMPLETED producer release: `version/0.8` / `release/v0.8.0` selects
+   `b9c1ae1d`, with matching package/source/evidence and seven verified downloaded
+   assets. Do not republish or overwrite that immutable identity.
+2. PARTIAL KMS adoption: exact lock/gitlink/version declaration and agreed
+   policy/association/dirty bindings are implemented. Final WEB938/148,
+   focused15/3, types/build/lint and sequential supplier307/34/source3 pass.
+   Current-source CONTROLLED host run10 passes three widths with independently
+   bound API7eaaac... and backend treee26efe6a. Commit the exact slice and send
+   explicit clean source freeze to the KMS owner for its single normal root
+   pre-push/push. Do not start a competing root gate or repeat API packaging.
 3. Verify actual packaged CONTROLLED/SHARED host, current/history/proof/actors,
    native files and agreed bounded workload using new owned isolated fixtures.
    Resolve any wider transport requirement against canonical server fields;

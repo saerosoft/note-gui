@@ -30,6 +30,14 @@ qualification/evidence preserve the first 40/41 browser attempt and unchanged
 successful reruns. KMS adoption must verify this exact tuple, lock/gitlink and
 complete asset distribution. Never consume a moving master tip.
 
+KMS's normal build rebuilds the locked source rather than copying the release
+tarball. All 804 ZIP entries in its rebuilt corresponding source match the
+published source entry bytes. Archive metadata and generated chunk names differ;
+this is a separately built consumer distribution, not byte-identical adoption of
+the published binary. Its current-source parent and actual-host gates remain
+required. The seven release-download byte checks above concern the published
+assets only.
+
 ## Producer checks
 
 - `verify-23.log` passes three source-offer exclusion tests, 307 unit/component tests
@@ -170,16 +178,27 @@ global association identity and the existing paging/request protocol; the curren
 wrapper and dirty-state designs were approved by the user. Current source
 confirms CONTROLLED MEMBER write, first-creation revision zero and exact receipt
 replay; these are not pending technical questions. Wider effective-audience and
-actor data still need exact backend fields. No missing authority or actor was
-inferred. Public 0.8 policy/association and mount-local dirty APIs are implemented;
+actor transport is not agreed; current actual-space policy and existing history
+editor/comment author/association creator suffice for the bounded adapter. Any
+concrete unrepresentable actor requirement stays open. No authority is inferred.
+Public 0.8 policy/association and mount-local dirty APIs are implemented;
 host router integration remains consumer-owned. Human review is not a gate.
 KMS records the agreed wrappers in its `docs/frontend-architecture.md:25-31`
 (owner commit `115cfbd`). The user's later session grant authorized the external
 release/adoption work. KMS now selects the exact published 0.8 tuple and has the
 optional bindings and persistent dirty-navigation guard in its development
-tree. Eleven focused and 934 full WEB tests, types, production build and the
-exact release import check pass. Current-source parent gates and actual
-CONTROLLED/SHARED, populated/native/workload evidence remain open. Existing
+tree. Final focused15/3 and full WEB938/148, types, production build, lint and the
+exact release import check pass. Current-source CONTROLLED run10 `0caa51d9e802`
+passes375/900/1440px with diagnostics removed: native Back and single/multiple
+Forward cancellation, explicit leave/reopen, unchanged draft/editor/history,
+style disposal, rich save/reload, actual download, denials and tree move.
+Independent proof verifies12 dialogs, SQL3 notes/9 tree records, S3 LIST3 objects/
+166 bytes, both135-table inventories and owned-only cleanup. Original organization
+and roles remain preserved; no separate direct S3 GET is claimed. The API SHA-256
+`7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0` is
+independently bound to frozen backend source. Exact commits, clean freeze and the
+single normal parent pre-push/push remain open, together with SHARED,
+populated/native/workload evidence. Existing
 runtime/data and unrelated concurrent backend work are preserved. The remaining
 host conditions cannot be closed by producer-only checks.
 G11 retirement remains open. Seven historical journals are reconciled in
