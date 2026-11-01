@@ -7,6 +7,8 @@ importable browser library, with a typed adapter to the existing domain API.
 Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
 knowledge-context and relation extensions retain the full product experience.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
+See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
+qualification and consumer pins. `release.json` declares the 0.7.0 release identity.
 The product hosts this library inside Next.js; Vite is an optional development
 and demo harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than
@@ -76,12 +78,14 @@ variable to the available Python command when needed. The build generates the
 source offer, checks TypeScript, emits declarations, runs
 `vite.library.config.ts`, copies declaration support files and verifies the
 distribution. Tests remain a separate required step in `make verify`. That gate
-also runs `pnpm test:package`: a fresh consumer resolves the root, KMS and CSS
+also runs `make import-check`, which builds and runs `pnpm test:package`:
+a fresh consumer resolves the root, KMS and CSS
 package exports from copied distribution files and type-checks public imports
 with `skipLibCheck: false`.
 
 The package is `private: true`; these instructions do not describe an npm
-publication. Consume a verified build from the pinned public repository and
+publication. Consume a qualified release pinned by version branch, immutable tag
+and exact commit as described in [OPERATIONS.md](OPERATIONS.md), and
 retain its lockfile, notices and matching corresponding-source offer.
 
 ## Host the public library

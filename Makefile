@@ -1,7 +1,7 @@
 PNPM ?= pnpm
 PYTHON ?= python3
 
-.PHONY: bootstrap start-all build test verify
+.PHONY: bootstrap start-all build test import-check verify
 
 bootstrap:
 	@$(PNPM) install --frozen-lockfile
@@ -16,5 +16,7 @@ test:
 	@$(PYTHON) scripts/test_source_offer.py
 	@$(PNPM) test
 
-verify: test build
+import-check: build
 	@$(PNPM) test:package
+
+verify: test import-check

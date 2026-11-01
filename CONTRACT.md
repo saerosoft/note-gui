@@ -1,6 +1,10 @@
 # Note GUI host contract
 
-This additive contract accompanies package 0.6.0. The public declarations are
+This contract accompanies package 0.7.0 on the `version/0.7` release line.
+The core/context/relations split and explicit host bindings added to the former
+0.6 package establish this new minor contract. Release identity and qualification
+follow [OPERATIONS.md](OPERATIONS.md) and `release.json`; no blanket compatibility
+across minor versions is promised. The public declarations are
 emitted from `src/index.tsx`, `src/model.ts`, `src/host.ts` and `src/access.ts`.
 The legacy complete API remains supported. KMS integration and its pinned release
 are accepted separately by the product owner.
