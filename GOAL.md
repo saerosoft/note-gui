@@ -129,6 +129,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   result. Adopted product-host acceptance remains AC08/AC09.
 - [ ] Obtain current KMS host/storage/workload/
   release/adoption evidence.
+- [x] Qualify and publish the producer 0.8.0 release. The exact release snapshot
+  `b9c1ae1d` passes source3, unit307/34, browser41/41, native5/5 and extracted
+  package682/source295 checks. Annotated tag object
+  `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749` peels to that snapshot. All seven
+  downloaded assets match; all six checksum entries pass. Published qualification
+  and evidence retain the first browser failure and unchanged successful reruns.
+  AC09 remains open until KMS adopts and verifies this exact tuple.
 - [x] Confirm this repository's GitHub Actions is enabled and add a SHA-pinned,
   manual-only native Windows producer workflow without consumer secrets/resources.
 - [x] Disposition of native Windows qualification: NOT_APPLICABLE. The user
