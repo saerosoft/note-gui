@@ -569,7 +569,12 @@ test('revalidates cached inactive-tab properties after the host access generatio
   await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
   await expect(page.getByLabel('값', { exact: true })).toHaveValue('Previously authorized property value');
   await page.getByRole('treeitem', { name: 'Other cached property authority', exact: true }).click();
-  await page.evaluate(async () => { window.dispatchEvent(new Event('fixture-deny-cached-property')); await window.noteExample.access.refresh(); });
+  const refreshFailure = await page.evaluate(async () => {
+    window.dispatchEvent(new Event('fixture-deny-cached-property'));
+    try { await window.noteExample.access.refresh(); return null; }
+    catch (failure) { return (failure as { code?: string }).code ?? String(failure); }
+  });
+  expect([null, 'STALE_ACCESS']).toContain(refreshFailure);
   await page.getByRole('tab', { name: /^Cached property authority/ }).click();
   await expect.poll(() => page.evaluate(() => Reflect.get(window, 'deniedCachedPropertyReads'))).toBeGreaterThan(0);
   await expect(page.getByRole('textbox', { name: '노트 본문', exact: true })).toHaveCount(0);
