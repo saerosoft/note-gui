@@ -44,7 +44,7 @@ test('navigates controlled current/history and relation proof pages through exac
     const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
     const { api, access, mounted } = window.noteExample; mounted.unmount();
     const note = await api.create({ spaceId: 'local', title: 'Controlled full-context host', parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() });
-    const authored = 'Authored document stays separate from current knowledge.';
+    const authored = 'Authored document stays separate from current knowledge. 한글 원문';
     const saved = await api.save(note.id, { title: note.title, expectedRevision: 1, idempotencyKey: crypto.randomUUID(), bodyJson: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: authored, marks: [{ type: 'bold' }] }] }] } });
     const targets: Note[] = [];
     for (let index = 0; index < 21; index++) targets.push(await api.create({ spaceId: 'local', title: `Fixture relation target ${String(index).padStart(2, '0')}`, parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() }));
@@ -92,6 +92,11 @@ test('navigates controlled current/history and relation proof pages through exac
   await expect(item.getByText('Fixture authorized quote 0', { exact: true })).toBeVisible();
   await item.getByRole('button', { name: '변경 전후·반영 기준 보기', exact: true }).click();
   await expect(item.getByRole('region', { name: '변경 전후와 반영 기준', exact: true })).toContainText('Recorded older proposal');
+  await page.evaluate(async () => { await document.fonts.load('400 14px "Noto Sans KR Variable"', '한글 원문'); await document.fonts.ready; });
+  const cdp = await context.newCDPSession(page); await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+  const { root } = await cdp.send('DOM.getDocument'); const comparisonNode = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '.accumulation-comparison pre' });
+  const comparisonFonts = await cdp.send('CSS.getPlatformFontsForNode', { nodeId: comparisonNode.nodeId });
+  expect(comparisonFonts.fonts.filter(font => font.isCustomFont && /Noto Sans KR/.test(font.familyName)).reduce((count, font) => count + font.glyphCount, 0)).toBeGreaterThanOrEqual(4);
   const historyPanel = page.getByRole('region', { name: '누적 이력', exact: true });
   await historyPanel.getByRole('button', { name: '다음 반영 내역', exact: true }).click(); await expect(historyPanel.locator('.accumulation-item')).toHaveCount(1);
   await historyPanel.getByRole('button', { name: '이전 반영 내역', exact: true }).click(); await expect(historyPanel.locator('.accumulation-item')).toHaveCount(20);

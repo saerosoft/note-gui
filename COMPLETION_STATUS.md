@@ -92,6 +92,11 @@ Current independent execution has reproduced and repaired two additional gaps:
   remain unchanged until an explicit save. No diagram implementation change was
   needed for those current-source checks.
 
+- G01/G06/G09: native monospace code and textual comparison blocks still fell
+  back to missing system glyphs. Actual platform-font regressions reproduced
+  both cases. They now inherit the retained code font stack with the same
+  CJK-only fallback; the Latin and monospace font choices remain retained.
+
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball
 imports/source-byte checks. These files are in `.tmp/gui-completion`. Work

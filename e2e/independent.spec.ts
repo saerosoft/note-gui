@@ -48,7 +48,9 @@ test('built core host persists authored rich content, comments and attachments w
 });
 
 test('renders Korean controls from shipped same-origin fonts without an installed Korean fallback', async ({ page, context }) => {
-  const note = await create(page, 'Portable Korean labels'); await open(page, note.id);
+  const note = await create(page, 'Portable Korean labels');
+  await page.evaluate(async id => { const note = await window.noteExample.api.note(id); await window.noteExample.api.save(id, { title: note.title, expectedRevision: note.revision, idempotencyKey: crypto.randomUUID(), bodyJson: { type: 'doc', content: [{ type: 'codeBlock', attrs: { language: 'typescript' }, content: [{ type: 'text', text: 'const code = 1; // 한글 코드' }] }] } }); }, note.id);
+  await open(page, note.id);
   const save = page.getByRole('button', { name: '저장', exact: true });
   await save.evaluate(element => element.setAttribute('data-korean-font-probe', 'true'));
   await save.evaluate(async element => { await document.fonts.load(`${getComputedStyle(element).fontWeight} 14px "Noto Sans KR Variable"`, element.textContent!.trim()); await document.fonts.ready; });
@@ -61,6 +63,13 @@ test('renders Korean controls from shipped same-origin fonts without an installe
   const titleNode = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '[aria-label="노트 제목"] h1' });
   const latin = await cdp.send('CSS.getPlatformFontsForNode', { nodeId: titleNode.nodeId });
   expect(latin.fonts.some(font => /Noto Sans KR/.test(font.familyName))).toBe(false);
+  await expect(page.locator('pre code')).toContainText('한글 코드');
+  await expect(page.locator('pre code .hljs-comment')).toHaveText('// 한글 코드');
+  await page.evaluate(async () => { await document.fonts.load('400 14px "Noto Sans KR Variable"', '한글 코드'); await document.fonts.ready; });
+  const codeDocument = await cdp.send('DOM.getDocument');
+  const codeNode = await cdp.send('DOM.querySelector', { nodeId: codeDocument.root.nodeId, selector: 'pre code .hljs-comment' });
+  const codeFonts = await cdp.send('CSS.getPlatformFontsForNode', { nodeId: codeNode.nodeId });
+  expect(codeFonts.fonts.filter(font => font.isCustomFont && /Noto Sans KR/.test(font.familyName)).reduce((count, font) => count + font.glyphCount, 0)).toBeGreaterThanOrEqual(4);
   const sources = await page.evaluate(() => [...document.styleSheets].flatMap(sheet => [...sheet.cssRules]).filter(rule => rule instanceof CSSFontFaceRule && rule.style.fontFamily.includes('Noto Sans KR')).map(rule => (rule as CSSFontFaceRule).style.getPropertyValue('src')));
   expect(sources.length).toBeGreaterThan(0);
   for (const source of sources) {

@@ -12,7 +12,8 @@
 .note-panel-content[hidden], .note-detail-panels[hidden], .note-knowledge-panels[hidden] { display: none; }
 .note-panels [role=tablist] { flex-wrap: wrap; }
 .note-gui-pane .preserve { white-space: pre-wrap; overflow-wrap: anywhere; }
-.note-gui-pane pre { max-width: 100%; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.note-gui-pane pre { max-width: 100%; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-family: "JetBrainsMono", var(--mantine-font-family-monospace); }
+.note-gui-pane pre code { font-family: inherit; }
 .note-attachments { overflow-wrap: anywhere; }
 .excalidraw-preview img { display: block; max-width: 100%; height: auto; max-height: 480px; }
 /* Non-portaled native dialogs still use the viewport as their horizontal origin. */

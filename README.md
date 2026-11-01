@@ -19,7 +19,8 @@ redesigning the workspace.
 
 The distributed stylesheet includes a local Noto Sans KR fallback for Korean
 and CJK glyphs, including hosts without a system Korean font. Its character
-ranges preserve the retained Latin font stack. No font CDN is required.
+ranges preserve the retained Latin and monospace font stacks, including code
+blocks and textual revision comparisons. No font CDN is required.
 
 The upstream baseline is **Docmost v0.96.0**, commit
 [`9b3e5dd3dc21588fa20c02c5b8646d2f46ee73af`](https://github.com/docmost/docmost/commit/9b3e5dd3dc21588fa20c02c5b8646d2f46ee73af).

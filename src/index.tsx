@@ -21,10 +21,15 @@ export type { NoteAccessLifecycle, NoteAccessController } from './access';
 export { createLocalNoteApi } from './localPersistence';
 export type { LocalNoteStoreOptions } from './localPersistence';
 const LegacyApp = lazy(() => import('./App').then(module => ({ default: module.App })));
+const noteTheme = {
+  ...theme,
+  fontFamily: `"Noto Sans KR Variable", ${DEFAULT_THEME.fontFamily}`,
+  fontFamilyMonospace: `"Noto Sans KR Variable", ${DEFAULT_THEME.fontFamilyMonospace}`,
+};
 
 /** The extracted Docmost workspace, including its original theme and editor styles. */
 function NoteGui(options: (NoteGuiOptions | NoteCoreGuiOptions) & { session?: NoteSession }) {
-  return <I18nextProvider i18n={docmostI18n}><MantineProvider theme={{ ...theme, fontFamily: `"Noto Sans KR Variable", ${DEFAULT_THEME.fontFamily}` }} cssVariablesResolver={mantineCssResolver} defaultColorScheme="light">
+  return <I18nextProvider i18n={docmostI18n}><MantineProvider theme={noteTheme} cssVariablesResolver={mantineCssResolver} defaultColorScheme="light">
     {'host' in options ? <NoteHostProvider {...options}><Workspace api={options.api}/></NoteHostProvider> : <Suspense fallback={<p role="status">Loading notes…</p>}><LegacyApp {...options}/></Suspense>}
   </MantineProvider></I18nextProvider>;
 }
