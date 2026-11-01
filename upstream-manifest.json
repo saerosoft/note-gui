@@ -291,7 +291,8 @@
       "changes": [
         "Keeps core comment list/input presentation and explicit bounded-page callbacks. Removes unsupported thread resolution, user queries and upstream mutations.",
         "Labeled the plain-text comment list without implying public visibility and gave its inner tab a distinct accessible name.",
-        "Shows authorized emptiness only after a successful projection read, preserving the comment input during read failure and retry."
+        "Shows authorized emptiness only after a successful projection read, preserving the comment input during read failure and retry.",
+        "Accepts a tab-owned comment draft so tab switches preserve text, pending write identity and acknowledgment state."
       ]
     },
     {
@@ -307,7 +308,8 @@
       "destination": "src/vendor/docmost/client/features/comment/components/comment-editor.tsx",
       "upstreamSha256": "8d5c6e7c989b0a09f60b9c80564638c8454a341972f2fedbdecd57d9f08f9bf8",
       "changes": [
-        "Keeps the core Tiptap comment input with the API-supported plain-text schema and local callbacks; preserves drafts until mutation acknowledgment."
+        "Keeps the core Tiptap comment input with the API-supported plain-text schema and local callbacks; preserves drafts until mutation acknowledgment.",
+        "Synchronizes restored tab draft text without emitting a new edit or resetting matching editor content."
       ]
     },
     {

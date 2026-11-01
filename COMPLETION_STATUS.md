@@ -44,6 +44,30 @@ acceptance. No whole G-unit is accepted solely from component tests.
 
 ## Individual original criterion accounting
 
+Current independent execution has reproduced and repaired two additional gaps:
+
+- G03/G08: failed comments/history reads displayed empty-success text and had
+  no local retry. Regression RED showed both false empty messages. The repair
+  retains the input and retries only reads; component and browser checks pass.
+- G01/G09: the shipped GUI could display Korean boxes without an OS CJK font.
+  The exact Noto Sans KR Variable 5.3.1 dependency now supplies CJK-only CSS
+  ranges while retaining Latin typography. Actual Chromium platform-font checks
+  fail on the old build and pass without the temporary fontconfig workaround.
+- G01/G07: a new opt-in reproducible gate runs the actual approved Draw.io
+  v32.6.1 static artifact (`84487b4891cbc0f32d7e30f34cf878c87cb1f414`), not a
+  protocol substitute. Three desktop/narrow/viewer cases pass, including native
+  graphical edits, reloads, immutable bytes, message forgery and revocation.
+- G03/G04/G08: switching tabs erased unsent comments and retired their uncertain
+  mutation identity/error state. A real browser regression reproduced the loss.
+  Draft text, busy state, exact pending key and safe failure now belong to the
+  cached note tab. Other tab drafts survive a delayed committed/lost reply;
+  comment-only dirty departure and tab-close cancellation are checked.
+
+Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
+`independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball
+imports/source-byte checks. These files are in `.tmp/gui-completion`. Work
+continues on the other original criteria; these results do not close G01–G11.
+
 The prefixes in this table are `KNOWLEDGE-`. Every row retains its original
 identity. `Producer partial` includes current code and the finite tests in the
 G-unit ledger; it does not accept the backend or current integrated screen.
@@ -134,6 +158,8 @@ limits have been reconciled, not relabeled as current integrated acceptance.
 | Updated complete G01–G11 assignment, separate policy documentation | `b3380daf` |
 | Restore acceptance preserves dirty drafts/conflict base and other active editor | `cbb75603` |
 | Persistent-host, native diagram, retry, bounded-resource and restore-lifetime browser qualification | `3f06cff8` |
+| Failed detail projection truth and local read retry | `a9266605` |
+| Portable CJK glyphs with retained Latin stack; actual native Draw.io qualification | `442305e5` |
 
 - Current full gate: `.tmp/session-2026-11-01/verify-final.log`, 262/32 plus three source
   tests, build/distribution and strict copied-package consumer pass. The missing
@@ -181,10 +207,10 @@ must be established by the release owner before journal retirement.
 - No additional producer defect was confirmed in the existing diagram refresh
   boundary. Further changes there require a reproducible current failure.
 
-The lane is paused, not complete. The inspected independent implementation and
-verification work is delivered; no additional current producer defect was
-confirmed by these checks. Resume on the agreed SC01/SC09 transport projection,
-approved native Draw.io/file-authority fixture, reachable native Windows runner,
-or coordinator-owned qualified-release/host/workload acceptance inputs. Those
-conditions block the named criteria only; any newly reproduced independent
-producer defect remains actionable on master under the development task.
+Execution is active. The prior pause did not establish that all independent
+criteria were exhausted. Remaining producer behavior is being checked directly:
+read-failure recovery, pane/tab draft ownership, populated contextual projections,
+nested tree operations, native Draw.io and portable Korean glyph delivery.
+External contract/platform dependencies block only their named criteria. KMS has
+reported that R01's milestone/contract decision is resolved; the precise SC01
+transport packet is still pending. No shared fields are inferred in the GUI.

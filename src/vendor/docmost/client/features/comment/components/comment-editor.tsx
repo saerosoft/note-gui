@@ -40,7 +40,7 @@ const CommentEditor = forwardRef<CommentEditorHandle, CommentEditorProps>(({ def
     content: plainDocument(defaultContent), editable, immediatelyRender: true, shouldRerenderOnTransaction: false,
   });
   useEffect(() => {
-    if (!onUpdate && !editable && commentEditor && !commentEditor.isDestroyed) commentEditor.commands.setContent(plainDocument(defaultContent), { emitUpdate: false });
+    if (commentEditor && !commentEditor.isDestroyed && commentEditor.getText({ blockSeparator: "\n" }) !== defaultContent) commentEditor.commands.setContent(plainDocument(defaultContent), { emitUpdate: false });
   }, [defaultContent, editable, commentEditor, onUpdate]);
   useEffect(() => { commentEditor?.setEditable(editable, false); }, [editable, commentEditor]);
   useImperativeHandle(ref, () => ({ clearContent: () => { if (commentEditor && !commentEditor.isDestroyed) commentEditor.commands.clearContent(); } }), [commentEditor]);

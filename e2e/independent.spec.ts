@@ -401,6 +401,49 @@ for (const panel of ['comments', 'history'] as const) test(`retries an unavailab
   expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).revision).toBe(1);
 });
 
+test('retains per-tab comments and their uncertain write identity while another tab stays dirty', async ({ page }) => {
+  const first = await create(page, 'First discussion tab'); const second = await create(page, 'Second discussion tab'); await open(page, first.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    const attempts: unknown[] = []; Reflect.set(window, 'tabCommentAttempts', attempts); Reflect.set(window, 'tabCommentNavigation', false);
+    let release!: () => void; const delivery = new Promise<void>(resolve => { release = resolve; });
+    window.addEventListener('fixture-release-tab-comment', () => release(), { once: true });
+    const client: NoteCoreApi = { ...api, comment: async (id, input) => { attempts.push(structuredClone({ id, input })); await api.comment(id, input); if (attempts.length === 1) { Reflect.set(window, 'tabCommentCommitted', true); await delivery; Reflect.set(window, 'tabCommentDelivered', true); throw new gui.ApiError('Comment acknowledgement lost across tabs', 'NETWORK'); } } };
+    const bindings = { ...host, onNavigate: () => { Reflect.set(window, 'tabCommentNavigation', true); return true; } };
+    window.noteExample = { api: client, access, host: bindings, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host: bindings }) };
+  });
+  await page.getByRole('button', { name: '댓글 및 노트 상세', exact: true }).click();
+  const comment = page.getByRole('textbox', { name: '댓글', exact: true });
+  await comment.fill('Unsent first-tab comment.');
+  await page.getByRole('treeitem', { name: 'Second discussion tab', exact: true }).click();
+  await comment.fill('Independent second-tab comment.');
+  await page.getByRole('tab', { name: /^First discussion tab/ }).click();
+  await expect(comment).toHaveText('Unsent first-tab comment.');
+  page.once('dialog', dialog => dialog.dismiss());
+  await page.getByRole('link', { name: '홈', exact: true }).click();
+  expect(await page.evaluate(() => Reflect.get(window, 'tabCommentNavigation'))).toBe(false);
+  page.once('dialog', dialog => dialog.dismiss());
+  await page.getByRole('button', { name: 'First discussion tab 탭 닫기', exact: true }).click();
+  await expect(comment).toHaveText('Unsent first-tab comment.');
+  await page.getByRole('button', { name: '댓글 남기기', exact: true }).click();
+  await page.waitForFunction(() => Reflect.get(window, 'tabCommentCommitted'));
+  await page.getByRole('tab', { name: /^Second discussion tab/ }).click();
+  await expect(comment).toHaveText('Independent second-tab comment.');
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-release-tab-comment')));
+  await page.waitForFunction(() => Reflect.get(window, 'tabCommentDelivered'));
+  await page.getByRole('tab', { name: /^First discussion tab/ }).click();
+  await expect(page.getByRole('alert')).toHaveText('Comment acknowledgement lost across tabs');
+  await expect(comment).toHaveText('Unsent first-tab comment.');
+  await page.getByRole('button', { name: '댓글 남기기', exact: true }).click();
+  await expect(comment).toHaveText('');
+  const result = await page.evaluate(async ({ first, second }) => ({ attempts: Reflect.get(window, 'tabCommentAttempts') as unknown[], first: await window.noteExample.api.comments(first, null), second: await window.noteExample.api.comments(second, null) }), { first: first.id, second: second.id });
+  expect(result.attempts).toHaveLength(2); expect(result.attempts[1]).toEqual(result.attempts[0]);
+  expect(result.first.items).toHaveLength(1); expect(result.second.items).toHaveLength(0);
+  await page.getByRole('button', { name: 'First discussion tab 탭 닫기', exact: true }).click();
+  await expect(comment).toHaveText('Independent second-tab comment.');
+});
+
 test('retains an unsaved comment editor through an injected access refresh', async ({ page }) => {
   const note = await create(page, 'Comment draft'); await open(page, note.id);
   await page.getByRole('button', { name: '댓글 및 노트 상세', exact: true }).click();

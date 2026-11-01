@@ -11,11 +11,13 @@ interface Props {
   canComment: boolean;
   isLoading: boolean;
   showEmpty?: boolean;
+  draft?: string;
+  onDraftChange?: (body: string) => void;
   onSave: (body: string) => Promise<boolean>;
   onLoadMore: () => void;
 }
 
-export default function CommentListWithTabs({ comments, canComment, isLoading, showEmpty = true, onSave, onLoadMore }: Props) {
+export default function CommentListWithTabs({ comments, canComment, isLoading, showEmpty = true, draft, onDraftChange, onSave, onLoadMore }: Props) {
   const { t } = useTranslation();
   return <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
     <Tabs defaultValue="open" variant="default" style={{ flex: "1 1 auto", display: "flex", flexDirection: "column" }}>
@@ -26,20 +28,21 @@ export default function CommentListWithTabs({ comments, canComment, isLoading, s
         {comments.nextCursor && <Button disabled={isLoading} onClick={onLoadMore}>댓글 더 보기</Button>}
       </Tabs.Panel></ScrollArea>
     </Tabs>
-    {canComment && <PageCommentInput onSave={onSave} isLoading={isLoading}/>}
+    {canComment && <PageCommentInput onSave={onSave} isLoading={isLoading} draft={draft} onDraftChange={onDraftChange}/>}
   </div>;
 }
 
-function PageCommentInput({ onSave, isLoading }: { onSave: Props["onSave"]; isLoading: boolean }) {
-  const [content, setContent] = useState("");
+function PageCommentInput({ onSave, isLoading, draft, onDraftChange }: Pick<Props, 'onSave' | 'isLoading' | 'draft' | 'onDraftChange'>) {
+  const [localContent, setLocalContent] = useState("");
+  const content = draft ?? localContent;
   const commentEditorRef = useRef<CommentEditorHandle>(null);
   async function handleSave() {
     if (isLoading || !content.trim() || content.length > 10000) return;
-    if (await onSave(content)) { setContent(""); commentEditorRef.current?.clearContent(); }
+    if (await onSave(content) && draft === undefined) { setLocalContent(""); commentEditorRef.current?.clearContent(); }
   }
   return <div style={{ flex: "0 0 auto", borderTop: "1px solid var(--mantine-color-default-border)", paddingTop: "var(--mantine-spacing-sm)", paddingBottom: 25, position: "relative" }}>
     <Group wrap="nowrap" align="flex-start" gap="xs"><Avatar size="sm" style={{ flexShrink: 0, marginTop: 10 }}/><div style={{ flex: 1, minWidth: 0 }}>
-      <CommentEditor ref={commentEditorRef} onUpdate={setContent} onSave={() => void handleSave()} editable={!isLoading} placeholder="댓글" surface="muted"/>
+      <CommentEditor ref={commentEditorRef} defaultContent={content} onUpdate={body => { setLocalContent(body); onDraftChange?.(body); }} onSave={() => void handleSave()} editable={!isLoading} placeholder="댓글" surface="muted"/>
     </div></Group>
     {content.length > 10000 && <Text role="alert" c="red">댓글은 10,000자 이내로 입력해 주세요.</Text>}
     <ActionIcon variant="filled" radius="xl" size="sm" aria-label="댓글 남기기" onClick={() => void handleSave()} onMouseDown={event => event.preventDefault()}

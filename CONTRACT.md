@@ -308,6 +308,11 @@ clearing an unsent comment. Its stylesheet supplies the Korean/CJK glyph fallbac
 on hosts without a Korean font; the existing Latin font stack and native layout
 are preserved. The font bytes remain under their original SIL OFL license.
 
+Comment drafts, in-flight state and uncertain retry identities belong to their
+note tab inside each pane. Switching tabs does not abandon them or allocate a
+new key. Comment-only edits participate in tab-close and host-departure dirty
+confirmation. Revocation clears them together with the protected pane drafts.
+
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,

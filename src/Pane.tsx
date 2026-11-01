@@ -6,7 +6,7 @@ import type { Note, NoteCoreApi } from './model';
 import { acceptMetadata, acceptSave, canClose, editDraft, openDraft, prepareSave, reorder, type Draft } from './paneState';
 import Page from './vendor/docmost/client/pages/page/page';
 import { DocmostPaneProvider } from './docmost/DocmostPaneProvider';
-import { NotePanels, type NotePanel } from './NotePanels';
+import { NotePanels, type CommentDraft, type NotePanel } from './NotePanels';
 import { NoteKnowledgeContext } from './NoteKnowledgeContext';
 import { NoteCurrentKnowledge } from './NoteCurrentKnowledge';
 import { ApiError } from './access';
@@ -21,6 +21,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const [tabs, setTabs] = useState<string[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const [drafts, setDrafts] = useState<Record<string, Draft>>({});
+  const [commentDrafts, setCommentDrafts] = useState<Record<string, CommentDraft>>({});
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [editorEpoch, setEditorEpoch] = useState(0);
@@ -37,14 +38,14 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const openSequence = useRef(0);
   const activeRef = useRef(active); activeRef.current = active;
   const saving = useRef(false);
-  useEffect(() => onAccessLost(() => { sessionEpoch.current++; state.current = {}; setDrafts({}); setTabs([]); setActive(null); setLatest(undefined); setDetails(null); setOpenedDetails(false); setOpenedKnowledge(false); setError('접근 권한을 확인해 주세요. 열린 노트가 삭제되었습니다.'); }), []);
+  useEffect(() => onAccessLost(() => { sessionEpoch.current++; state.current = {}; setDrafts({}); setCommentDrafts({}); setTabs([]); setActive(null); setLatest(undefined); setDetails(null); setOpenedDetails(false); setOpenedKnowledge(false); setError('접근 권한을 확인해 주세요. 열린 노트가 삭제되었습니다.'); }), []);
   const update = (id: string, transform: (draft: Draft) => Draft) => setDrafts(values => values[id] ? { ...values, [id]: transform(values[id]) } : values);
   async function open(id: string) {
     const sequence = ++openSequence.current;
     if (state.current[id]) { setActive(id); onLocation(id); return; }
     if (Object.keys(state.current).length >= 12) { setError('한 창에서 최대 12개 노트를 열 수 있습니다. 사용하지 않는 탭을 닫아 주세요.'); return; }
     setBusy(true); setError(''); const epoch = sessionEpoch.current;
-    try { const note = await api.note(id); if (epoch !== sessionEpoch.current || sequence !== openSequence.current) return; setDrafts(values => ({ ...values, [id]: values[id] || openDraft(note) })); setTabs(values => values.includes(id) ? values : [...values, id]); setActive(id); onLocation(id); }
+    try { const note = await api.note(id); if (epoch !== sessionEpoch.current || sequence !== openSequence.current) return; setDrafts(values => ({ ...values, [id]: values[id] || openDraft(note) })); setCommentDrafts(values => values[id] ? values : { ...values, [id]: { body: '', busy: false } }); setTabs(values => values.includes(id) ? values : [...values, id]); setActive(id); onLocation(id); }
     catch (e) { if (epoch === sessionEpoch.current) setError((e as Error).message); } finally { setBusy(false); }
   }
   useEffect(() => {
@@ -60,6 +61,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
           if (epoch !== sessionEpoch.current) return;
           if (!(failure instanceof ApiError) || failure.code !== 'NOT_FOUND') throw failure;
           setDrafts(values => { const next = { ...values }; delete next[id]; state.current = next; return next; });
+          setCommentDrafts(values => { const next = { ...values }; delete next[id]; return next; });
           setTabs(values => values.filter(value => value !== id));
           if (activeRef.current === id) { setActive(null); onLocation(null); }
           setLatest(undefined);
@@ -74,7 +76,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   useEffect(() => { if (requestedId) void open(requestedId); }, [requestedId]);
   const draft = active ? drafts[active] : undefined;
   useEffect(() => { setLatest(undefined); }, [active]);
-  useEffect(() => { onDirty(Object.values(drafts).some(value => value.dirty)); }, [drafts, onDirty]);
+  useEffect(() => { onDirty(Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy)); }, [drafts, commentDrafts, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
   async function save() {
     if (!active || !draft || invalid[active] || saving.current) return;
@@ -91,9 +93,11 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     if (!current.dirty && activeRef.current === note.id) setEditorEpoch(value => value + 1);
   }
   function close(id: string) {
-    if (saving.current || !canClose(drafts[id], () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
+    const draft = drafts[id];
+    if (saving.current || !canClose(draft && { ...draft, dirty: draft.dirty || !!commentDrafts[id]?.body.trim() || !!commentDrafts[id]?.busy }, () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
     const remaining = tabs.filter(value => value !== id); setTabs(remaining);
     setDrafts(values => { const next = { ...values }; delete next[id]; return next; });
+    setCommentDrafts(values => { const next = { ...values }; delete next[id]; return next; });
     if (active === id) { const next = remaining.at(-1) || null; setActive(next); onLocation(next); }
   }
   function openDetails(panel: NotePanel) {
@@ -106,7 +110,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) { setActive(id); onLocation(id); } }}>
       <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
         {tabs.map((id, index) => <Group key={id} gap={0} wrap="nowrap">
-          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty ? ' •' : ''}</Tabs.Tab>
+          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
           <ActionIcon variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
@@ -151,7 +155,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
            <NoteCurrentKnowledge key={`${active}:${draft.note.revision}`} api={knowledgeContext} noteId={active} spaceId={draft.note.spaceId}/>
            <NoteKnowledgeContext api={knowledgeContext} note={draft.note}/>
         </div>}
-         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} onOpen={id => void open(id)} onRevision={note => update(active, value => acceptMetadata(value, note))} onRestore={acceptRestore}/></div>}
+         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => update(active, value => acceptMetadata(value, note))} onRestore={acceptRestore}/></div>}
       </Aside>}/>
     </div>}
   </section></DocmostPaneProvider>;

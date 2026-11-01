@@ -33,7 +33,7 @@ it.each([
   let unavailable = true;
   const read = async () => { if (unavailable) throw new Error('Projection unavailable'); return { items: [], nextCursor: null }; };
   const comment = vi.fn(); const restore = vi.fn();
-  const client = { ...api, comments: read, history: read, comment, restore };
+  const client = { ...api, note: async () => note, comments: read, history: read, comment, restore };
   render(<DocmostPaneProvider><NotePanels api={client} note={note} dirty={false} panel={panel} onRestore={vi.fn()} onOpen={vi.fn()} onRevision={vi.fn()}/></DocmostPaneProvider>);
   await screen.findByRole('alert');
   expect(screen.queryByText(empty)).toBeNull();
