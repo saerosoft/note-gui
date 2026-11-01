@@ -135,7 +135,8 @@ test('links a controlled member private target while its shared anchor remains r
     await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '노트 연결', exact: true }).click();
     const panel = page.getByRole('region', { name: '노트 연결', exact: true });
     await panel.getByRole('button', { name: targetNote.title, exact: true }).click(); await panel.getByRole('button', { name: '연결', exact: true }).click();
-    await expect(panel.getByRole('button', { name: '연결 해제', exact: true })).toBeVisible();
+    const linkedTarget = panel.getByRole('article').filter({ has: page.getByRole('button', { name: targetNote.title, exact: true }) });
+    await expect(linkedTarget.getByRole('button', { name: '연결 해제', exact: true })).toBeEnabled();
     const linked = await page.evaluate(id => window.realGui.associations.list(id, null), anchor);
     expect(linked.items.find(item => item.targetNoteId === targetNote.id)?.creatorId).toBe(fixture!.users.member.id);
     await expect(page.getByRole('button', { name: '저장', exact: true })).toBeDisabled();
