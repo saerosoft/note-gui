@@ -84,6 +84,13 @@ Current independent execution has reproduced and repaired two additional gaps:
   source/rule/review-operation/action popup destinations and retained authored
   JSON/drafts at a settled narrow viewport. These are producer fixture results,
   not KMS business-policy acceptance.
+- G07/G08: the actual native Draw.io gate now passes five cases. Additional
+  cases restore the original diagram revision while retaining the other
+  same-note pane's DOM/draft and conflict guard, and retain a real inline edit
+  plus both native undo entries through a held attachment refresh. The iframe
+  stays the same object with one navigation; the immutable file and saved note
+  remain unchanged until an explicit save. No diagram implementation change was
+  needed for those current-source checks.
 
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball
