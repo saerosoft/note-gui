@@ -3,59 +3,102 @@
   "candidate": "0.7.1",
   "developmentBranch": "master",
   "baselineCommit": "b9ecad5bcf99799b53cd6ef0d47cd15d5f1c912b",
+  "implementationCommit": "ced912a8",
   "releaseQualified": false,
   "wholeGuiLaneAccepted": false,
   "sourceSha256": {
-    "src/Pane.tsx": "4ca9bdb6b49a5bca86e87c39d658e98fccff98e27fe699725bc4da8d9d6a5e24",
-    "src/hostBoundary.test.tsx": "16b18f41663c8362cb811644cbff0e9690106ad4aead6faea7e5ff2ad930f49a",
-    "e2e/independent.spec.ts": "f3559460753bc376765923ca82824b676bdfb11d429771c76fda7272bab47c93"
+    "src/Pane.tsx": "5e614224ca178904de8bea46d42cc95be89b0c96cf48dded94c4f0d96c12d431",
+    "src/NotePanels.tsx": "2fd703b2345a6436cbcee970db2bb6c6aa3c3bb4495e88a86e38b1737e5a3b49",
+    "src/NoteProperties.tsx": "6abe09fe1115bae02390df81437706fba1a3b2c7f97659df2b522d515f469601",
+    "src/NoteRelations.tsx": "09c13de1c2edc85e429b484b4f1025ebf6daebd386080607eb7ab9d0f540acb1",
+    "src/index.tsx": "baf7cf200e29ce1994e9ae3f00c49e94b05746aef06b00eaa595d8ddefd19ccc",
+    "src/integration.css": "34aff0bb73aeb807b1cf329488657170de1625ce6bd41c6aa74f473c5691fbbf",
+    "src/vendor/docmost/client/features/editor/page-editor.tsx": "3a0da08aba8bae9a8fbc58023ae4434bbe20cd0873df5e1de39307ee7a7a2063",
+    "src/vendor/docmost/client/features/editor/components/link/link-menu.tsx": "63402fc2294bbe71963f807d0ca7d9dcf62df102059d4c575b34b5784eff2881",
+    "src/vendor/docmost/client/features/editor/components/bubble-menu/bubble-menu.tsx": "b99e587819306864a35c0037e1dca33ccf76e76f68777d77ccab7acba91910eb",
+    "e2e/independent.spec.ts": "a797eaf96b1c40ebbc7d3d121085ea02962eb5640abe867cb25ef4dc5d41ca29",
+    "e2e/nativeEditor.independent.spec.ts": "1bb84f8f46f61f189af5e474efd9ab5a499d5f5f03c2b8869f250ae9fd4f126c",
+    "e2e/authorization.spec.ts": "2bc46656a4fa84303a1d42bfab9686b7745b033f0c4391ab62f0e5b153101549"
   },
   "runtimeSha256": {
-    "dist/note-gui.js": "e9da2b6b9a9bba65ad2d2ff32fc52d48cdf984c9162de6d81b00e63b36764a49",
-    "dist/note-gui.css": "16c2d02b2ff29b1eb2534fa6658145fe24adb484349ac741549a694deec820b9",
-    "dist/assets/Workspace-TeCOCKGB.js": "27e1eff1f2f0f9e27223c351b3f47de87a69207128c7e9ddcd9669c872bd1e6b"
+    "dist/note-gui.js": "768d9dfda6b0eeebb3376c6e6b83f893d416bfc759cd1b77ca73fd7f4f58926c",
+    "dist/kms.js": "ac28a3cb0ad6ffde982bbc21bbfa912b36d2824ad90506c37bf5e4a2f5e67d7c",
+    "dist/note-gui.css": "b394688950c73e23cacdae28e665a749ab9026f0c99279ff35118240198d5b32",
+    "dist/assets/Workspace-DALbGkGP.js": "ee0b49599783f7bfbe8291ade49b8ccc6369fa6082489015b6c9da2cfc6ffdda"
   },
   "verification": {
     "sourceOfferTests": 3,
-    "unitComponentTests": 262,
+    "unitComponentTests": 266,
     "unitComponentFiles": 32,
-    "independentBrowserTests": 17,
+    "independentBrowserTests": 35,
     "independentBrowserFailures": 0,
-    "browserLogSha256": "624230868cf2441bbcf96c759a81135dca82c83cf413d5fd7b752b3524ac7e8b",
+    "installedChromeBrowserTests": 35,
+    "installedChromeBrowserFailures": 0,
+    "actualNativeDrawioTests": 5,
+    "actualNativeDrawioFailures": 0,
     "pinnedSources": 115,
     "localFontAssets": 234,
+    "fontAssetScope": "Byte-verified local Excalidraw SDK files; additional CJK-only Noto Sans KR Variable 5.3.1 font faces are embedded or same-origin in the stylesheet, with OFL in the source offer.",
     "packedDistributionFilesCompared": 677,
     "packedRuntimeImports": [".", "./kms"],
     "packedCssExportResolved": true,
     "strictDeclarationsSkipLibCheck": false
   },
+  "evidenceSha256": {
+    ".tmp/gui-completion/verify-11.log": "30bdccf6df6bf7dc7325ad732bc852ac392af20fa68d956e51cd20a78339a8a5",
+    ".tmp/gui-completion/independent-11.log": "f5e557f168e8a43a38edeb7e135845b385a3aad569013f2514768933c8afa398",
+    ".tmp/gui-completion/independent-chrome-04.log": "0d11886dc51b11af4efe6375e024c23c901633521f5cb9d6f5873ae8939e935b",
+    ".tmp/gui-completion/native-drawio-06.log": "5eeae87baa5c2904d971be8e7915902e6ef67f3fcd1ce04577701ae8af05dfc7",
+    ".tmp/gui-completion/real-api-73fb-core.log": "ce5015f5f5818c38a2ebd20767fcc1114cfbde06fea35d36df7f8e2c416f3d5a",
+    ".tmp/gui-completion/real-api-73fb-access-02.log": "e92da1d245b2d1df525e2020fcd1679979d24ef873b69af7d05ea7aaf447dd82",
+    ".tmp/gui-completion/real-api-73fb-peer-diagram.json": "15d3bad252f8bfdb199fa2aa57246dc3f7cce46762e0659a14f977c60afd2563",
+    ".tmp/gui-completion/native-editor-03.log": "7ae42bab735f3e34dcfa1c7e0af74fdd7b1bf8ddaa2ecfd3e4a573c3cb1f639a",
+    ".tmp/gui-completion/native-editor-04.log": "e4b5c16290598c99ce1a35cef25d7085839c1b79e51b7f0130d6bb7d666cb033",
+    ".tmp/gui-completion/native-editor-06.log": "80213c1197e7087b5e1e6b57f4b40b57d16daddd8473209834e8a087e8c87681"
+  },
+  "realApiProducerLease": {
+    "coreCasesPassed": 5,
+    "accessCasesPassed": 4,
+    "implementationBeforeMenuRepair": "f971775e",
+    "authorizationHarnessCommit": "673d7b6f",
+    "peerXmlSuccessor": { "distinctIdentity": true, "originalBytesUnchanged": true, "successorBytesExact": true, "outsiderStatus": 403, "anonymousStatus": 401, "noProtectedBytes": true, "createdNoteArchived": true },
+    "expiredAtUtc": "2026-11-01T13:22:39Z",
+    "ownerReportedOwnedResourcesRemoved": 8,
+    "independentConsumerSqlInventory": false,
+    "scope": "Bounded synthetic real API producer browser evidence. KMS reported cleanup before an independent row/count/role inventory was captured. Not consumer storage, integrated release or SHARED-mode acceptance. Protected fixture/auth material is excluded from public source."
+  },
+  "nativeDrawio": { "version": "32.6.1", "commit": "84487b4891cbc0f32d7e30f34cf878c87cb1f414", "transport": "Isolated HTTPS loopback, exact certificate SPKI pin", "cases": ["1600px canvas save/reload", "390px canvas save/reload", "read-only viewer", "same-note history restore isolation", "held refresh retains inline edit and undo"], "productionDeploymentAccepted": false },
   "boundedMeasurements": {
     "rootNotes": 1300,
     "totalNotes": 1302,
     "traversedRootPages": 26,
     "maximumRowsPerRead": 50,
     "maximumRenderedTreeRows": 29,
-    "navigationP95Ms": 145,
-    "retainedHeapBytes": { "baseline": 8920264, "after25Pages": 10303788, "afterReturn": 10482320 },
+    "navigationP95Ms": 118,
+    "retainedHeapBytes": { "baseline": 9013668, "after25Pages": 10445440, "afterReturn": 10638120 },
     "largeDocumentParagraphs": 1000,
     "savedDocumentJsonBytes": 168001,
-    "openEditSaveReloadMs": 2320,
-    "saveMs": 262,
+    "openEditSaveReloadMs": 2723,
+    "saveMs": 148,
     "actualDownloadBytes": 1048576,
     "downloadSha256": "844b0df82fccb18c9abd93af5714be1dce7fc7b9cbacfee5bc718a017baccb44",
-    "scope": "Warm Linux Chromium, real localStorage and Web Locks, explicit GC. Not peak memory, KMS scale or sustained product workload."
+    "scope": "Latest Linux Chrome run, real localStorage and Web Locks, explicit GC, 25 forward pages and return. Not peak memory, KMS scale or sustained product workload."
   },
   "visualEvidence": [
-    { "path": ".tmp/session-2026-11-01/iab-packed-1600.png", "width": 1600, "height": 1000, "sha256": "45b9b67ba5748415a61cb7f07fa8ec09b887f142eac5a385fa2c405d5b53247e", "scope": "Actual extracted-package populated native shell, document and comments; host Korean font unavailable." },
-    { "path": ".tmp/session-2026-11-01/iab-packed-390.png", "width": 390, "height": 844, "sha256": "94db41d3489a8ca187b5955d83c2e73f9a2679b128a57bf710c419a4ce8aa12d", "scope": "Actual tab navigation/property follow-up; no document overflow; host Korean font unavailable." },
-    { "path": ".tmp/native-excalidraw-1600.png", "width": 1600, "height": 1000, "sha256": "9c941dadd2d2e2a719dff1a8f16cb267452b37665fb460544b0623249e017ff6", "scope": "Actual native local Excalidraw after edit/reopen/refresh; isolated Noto CJK environment." }
+    { "path": ".tmp/gui-completion/iab-current-1600.png", "width": 1600, "height": 1000, "sha256": "cc6880f08a47a43b4d96ce6cfa2fb9c6944e8c887469d9abe0ac2b8310c9dbd3", "scope": "Actual extracted-package native shell/document/comments through f971775e; shipped custom Korean glyphs verified." },
+    { "path": ".tmp/gui-completion/iab-current-390.png", "width": 390, "height": 844, "sha256": "9f00c7e701b694ebad40831feb957c55c66838eb07734ea3eceba3d22898b613", "scope": "Actual packed Chrome at 390px, comment-only dirty tab and no page overflow; through f971775e." },
+    { "path": ".tmp/native-editor-controls-1600.png", "width": 1600, "height": 1000, "sha256": "14a3de4c99e0254d25b6b6a9aff4d475deb9193973f6b81cda448f9f9f4ec7fd", "scope": "Current native heading/bold/link/code/table/file-chooser content after reload, Linux Chrome." },
+    { "path": ".tmp/native-editor-controls-390.png", "width": 390, "height": 1000, "sha256": "1760e1484eb32d7225bb0f0e30fdc01c0bddd5722034910af47fdb60b8c6faf4", "scope": "Current native controls after reload, Linux Chrome; table scroll contained within the document." },
+    { "path": ".tmp/native-drawio-1600.png", "width": 1600, "height": 1000, "sha256": "af4d70aeac0451c232709d777233443c3e8b7d83e7e4918fb15edb43d4f1dadc", "scope": "Actual approved Draw.io graphical canvas through isolated HTTPS fixture." },
+    { "path": ".tmp/native-drawio-390.png", "width": 390, "height": 1000, "sha256": "e0f14d9d8a80c70598fefaa7c905445e7d143cbd05db4e054036573b1134fbe3", "scope": "Actual approved native Draw.io narrow graphical canvas." }
   ],
   "remainingInputs": [
-    "KMS R01/SC01/SC09 exact generated shared-mode host contract agreement",
-    "Approved actual native Draw.io installation and current cross-editor file-authority fixture",
+    "KMS SC02–SC06/SC09 effective-audience/creator/shared-association packet and exact GUI transport agreement; SC01 base fields settled in59bc415",
+    "Qualified Draw.io deployment and integrated all-format co-editor storage/access acceptance with independent inventory",
     "Qualified immutable GUI release followed by KMS-owned actual host adoption and contextual/storage acceptance",
     "Reachable authorized native Windows command environment",
-    "Agreed KMS sustained workload/platform/scale qualification and durable release evidence archive"
+    "Agreed KMS sustained workload/platform/scale qualification and durable release evidence archive",
+    "Host dirty-state/router contract agreement if mount-external navigation must query GUI drafts"
   ],
   "retirement": { "historicalAcceptanceJournalsReconciled": 7, "journalsDeleted": 0, "promptRetired": false, "reason": "Carried host/platform/shared criteria and release evidence archival remain open." }
 }
