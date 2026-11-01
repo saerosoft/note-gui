@@ -200,6 +200,7 @@ test('round-trips native local diagrams and revalidates their dirty media lifecy
   async function save() {
     await page.getByRole('button', { name: '저장', exact: true }).click();
     await expect(page.getByRole('button', { name: '저장', exact: true })).toBeDisabled();
+    await expect(page.locator('.note-body-status')).toContainText('저장됨');
   }
   await insert('mermaid');
   await page.getByRole('button', { name: '원본 편집', exact: true }).click();
@@ -238,8 +239,13 @@ test('round-trips native local diagrams and revalidates their dirty media lifecy
   const reopened = (await canvas.boundingBox())!;
   await page.mouse.move(reopened.x + reopened.width * .6, reopened.y + 380); await page.mouse.down();
   await page.mouse.move(reopened.x + reopened.width * .6 + 100, reopened.y + 460, { steps: 8 }); await page.mouse.up();
+  const undo = page.getByRole('dialog').getByRole('button', { name: /^(Undo|실행 취소)$/ });
+  await expect(undo).toBeEnabled();
+  const drawing = await canvas.elementHandle();
   await page.keyboard.press('Escape'); await expect(canvas).toBeVisible();
   await page.evaluate(async () => window.noteExample.access.refresh()); await expect(canvas).toBeVisible();
+  expect(await canvas.evaluate((element, previous) => element === previous, drawing)).toBe(true);
+  await expect(undo).toBeEnabled();
   await page.screenshot({ path: '.tmp/native-excalidraw-1600.png', fullPage: true });
   await page.getByRole('button', { name: '저장 후 나가기', exact: true }).click(); await save();
   const saved = await page.evaluate(async id => {
