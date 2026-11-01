@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Tabs } from '@mantine/core';
+import { Button, Tabs } from '@mantine/core';
 import './docmost/i18n';
 import CommentListWithTabs from './vendor/docmost/client/features/comment/components/comment-list-with-tabs';
 import { DocmostHistory } from './docmost/DocmostHistory';
@@ -27,22 +27,25 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   const [history, setHistory] = useState<Page<Revision>>({ items: [], nextCursor: null });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [reload, setReload] = useState(0);
   const pendingComment = useRef<{ noteId: string; input: AddComment } | undefined>(undefined);
   useEffect(() => {
     let alive = true; let sequence = 0;
     async function load() {
       const request = ++sequence;
-      setError(''); setBusy(true); setComments({ items: [], nextCursor: null }); setHistory({ items: [], nextCursor: null });
+      setError(''); setBusy(true); setLoaded(false); setComments({ items: [], nextCursor: null }); setHistory({ items: [], nextCursor: null });
       try {
         if (panel === 'comments') { const value = await api.comments(note.id, null); if (alive && request === sequence) setComments(value); }
         if (panel === 'history') { const value = await api.history(note.id, null); if (alive && request === sequence) setHistory(value); }
+        if (alive && request === sequence) setLoaded(true);
       } catch (failure) { if (alive && request === sequence) setError((failure as Error).message); }
       finally { if (alive && request === sequence) setBusy(false); }
     }
     void load();
     const stop = access.onAccessRefresh(load);
     return () => { alive = false; sequence++; stop(); };
-  }, [api, note.id, note.revision, panel, access]);
+  }, [api, note.id, note.revision, panel, access, reload]);
   async function perform(action: () => Promise<void>) {
     setBusy(true); setError('');
     try { await action(); } catch (e) { setError((e as Error).message); } finally { setBusy(false); }
@@ -69,11 +72,12 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
        <Tabs.Tab value="comments">댓글</Tabs.Tab><Tabs.Tab value="history">이력</Tabs.Tab><Tabs.Tab value="properties">속성</Tabs.Tab>{relations && <Tabs.Tab value="relations">관계</Tabs.Tab>}<Tabs.Tab value="attachments">첨부</Tabs.Tab>
     </Tabs.List></Tabs>
     {error && <p role="alert">{error}</p>}{busy && <p role="status">처리 중…</p>}
-    {visited.includes('comments') && <div hidden={panel !== 'comments'} className="note-panel-content"><CommentListWithTabs comments={comments} canComment={note.canEdit} isLoading={busy} onSave={comment}
+    {error && !loaded && !busy && <Button variant="subtle" onClick={() => setReload(value => value + 1)}>노트 상세 다시 읽기</Button>}
+    {visited.includes('comments') && <div hidden={panel !== 'comments'} className="note-panel-content"><CommentListWithTabs comments={comments} canComment={note.canEdit} isLoading={busy} showEmpty={loaded} onSave={comment}
       onLoadMore={() => void perform(async () => { const page = await api.comments(note.id, comments.nextCursor); setComments({ items: [...comments.items, ...page.items].slice(-100), nextCursor: page.nextCursor }); })}/></div>}
     {visited.includes('history') && <div hidden={panel !== 'history'} className="note-panel-content">
       {dirty && <p>현재 변경을 먼저 저장한 뒤 복원해 주세요.</p>}
-      <DocmostHistory api={api} noteId={note.id} history={history} busy={busy} canRestore={note.canEdit && !dirty && !busy}
+      <DocmostHistory api={api} noteId={note.id} history={history} busy={busy || !loaded} canRestore={note.canEdit && loaded && !dirty && !busy}
         onRestore={revision => { if (window.confirm(`개정 ${revision.revision}을 새 개정으로 복원할까요?`)) void perform(async () => onRestore(await api.restore(note.id, revision.revision, note.revision))); }}
         onLoadMore={() => void perform(async () => { const page = await api.history(note.id, history.nextCursor); setHistory({ items: [...history.items, ...page.items].slice(-100), nextCursor: page.nextCursor }); })}/>
     </div>}

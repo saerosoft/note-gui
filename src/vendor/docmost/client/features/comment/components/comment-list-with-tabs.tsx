@@ -10,17 +10,18 @@ interface Props {
   comments: Page<Comment>;
   canComment: boolean;
   isLoading: boolean;
+  showEmpty?: boolean;
   onSave: (body: string) => Promise<boolean>;
   onLoadMore: () => void;
 }
 
-export default function CommentListWithTabs({ comments, canComment, isLoading, onSave, onLoadMore }: Props) {
+export default function CommentListWithTabs({ comments, canComment, isLoading, showEmpty = true, onSave, onLoadMore }: Props) {
   const { t } = useTranslation();
   return <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
     <Tabs defaultValue="open" variant="default" style={{ flex: "1 1 auto", display: "flex", flexDirection: "column" }}>
       <Tabs.List justify="center"><Tabs.Tab value="open" aria-label="댓글 목록" leftSection={<Badge size="sm" variant="light" color="blue">{comments.items.length}</Badge>}>{t("Comments")}</Tabs.Tab></Tabs.List>
       <ScrollArea mah={400} scrollbarSize={5} type="scroll"><Tabs.Panel value="open" pt="xs">
-        {!comments.items.length && !isLoading ? <Center py="xl"><Stack align="center" gap="xs"><IconMessageOff size={32} stroke={1.5} color="var(--mantine-color-dimmed)"/><Text size="sm" c="dimmed">아직 댓글이 없습니다.</Text></Stack></Center>
+        {!comments.items.length && !isLoading && showEmpty ? <Center py="xl"><Stack align="center" gap="xs"><IconMessageOff size={32} stroke={1.5} color="var(--mantine-color-dimmed)"/><Text size="sm" c="dimmed">아직 댓글이 없습니다.</Text></Stack></Center>
           : comments.items.map(comment => <Paper shadow="sm" radius="md" p="sm" mb="sm" withBorder key={comment.id} data-comment-id={comment.id}><CommentListItem comment={comment}/></Paper>)}
         {comments.nextCursor && <Button disabled={isLoading} onClick={onLoadMore}>댓글 더 보기</Button>}
       </Tabs.Panel></ScrollArea>

@@ -290,7 +290,8 @@
       "upstreamSha256": "12804907ce4669740ee99f08bfb884d57032b056f6604f365e5fa31df2694537",
       "changes": [
         "Keeps core comment list/input presentation and explicit bounded-page callbacks. Removes unsupported thread resolution, user queries and upstream mutations.",
-        "Labeled the plain-text comment list without implying public visibility and gave its inner tab a distinct accessible name."
+        "Labeled the plain-text comment list without implying public visibility and gave its inner tab a distinct accessible name.",
+        "Shows authorized emptiness only after a successful projection read, preserving the comment input during read failure and retry."
       ]
     },
     {

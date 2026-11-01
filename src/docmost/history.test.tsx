@@ -26,6 +26,27 @@ function show(dirty = false) {
   return { history, restore, restored };
 }
 
+it.each([
+  { panel: 'comments' as const, empty: '아직 댓글이 없습니다.' },
+  { panel: 'history' as const, empty: '아직 저장된 페이지 기록이 없습니다.' },
+])('distinguishes a failed $panel read from an empty success and retries only the read', async ({ panel, empty }) => {
+  let unavailable = true;
+  const read = async () => { if (unavailable) throw new Error('Projection unavailable'); return { items: [], nextCursor: null }; };
+  const comment = vi.fn(); const restore = vi.fn();
+  const client = { ...api, comments: read, history: read, comment, restore };
+  render(<DocmostPaneProvider><NotePanels api={client} note={note} dirty={false} panel={panel} onRestore={vi.fn()} onOpen={vi.fn()} onRevision={vi.fn()}/></DocmostPaneProvider>);
+  await screen.findByRole('alert');
+  expect(screen.queryByText(empty)).toBeNull();
+  const draft = panel === 'comments' ? screen.getByRole('textbox', { name: '댓글' }) : null;
+  if (draft) { draft.textContent = 'Keep this unsent comment'; fireEvent.input(draft); }
+  unavailable = false;
+  fireEvent.click(screen.getByRole('button', { name: '노트 상세 다시 읽기' }));
+  await screen.findByText(empty);
+  expect(screen.queryByRole('alert')).toBeNull();
+  if (draft) { expect(screen.getByRole('textbox', { name: '댓글' })).toBe(draft); expect(draft.textContent).toBe('Keep this unsent comment'); }
+  expect(comment).not.toHaveBeenCalled(); expect(restore).not.toHaveBeenCalled();
+});
+
 it('renders the selected immutable revision in the real core history editor and restores through the current revision guard', async () => {
   const value = show(); vi.spyOn(window, 'confirm').mockReturnValue(true);
   const editor = await screen.findByRole('textbox', { name: '개정 원문' });
