@@ -1,5 +1,15 @@
 # Releases and consumption
 
+## Development-first, one-way promotion
+
+`master` is this repository's main development branch. All implementation, defect fixes, tests and documentation start there, including defects discovered in a released version. Do not develop fixes directly on `version/*` or create temporary work branches.
+
+The only promotion direction is `master -> version/MAJOR.MINOR`. The release operator works on the receiving version branch, selects reviewed master-origin commits compatible with that line, merges the eligible development snapshot, and records its source SHAs. Do not merge a newer contract into an older patch line; if unrelated development changes prevent a safe merge, select only eligible development-origin changes with explicit provenance or require a new minor line.
+
+`version/* -> master` is forbidden: never merge a release branch into master, rebase master onto it, or cherry-pick/copy release-branch commits into development. If release integration exposes a defect requiring implementation changes, fix and test it on master first, then promote forward again. Release conflict resolutions only integrate the selected development changes while preserving the receiving contract; they are not an independent development path.
+
+Qualify the exact clean release-branch result after promotion, not just its development source. Record selected development SHAs and the final release SHA. Only that tested result receives new immutable tags/assets. A release merge commit can differ from master; it must not flow back into development. Preserve the inherited upstream-style `main` and other legacy refs as history, not as development or consumer sources.
+
 `master` holds the latest development. `version/MAJOR.MINOR` holds a qualified
 minor contract and receives only patches that preserve it. Each release has an
 immutable annotated `release/vMAJOR.MINOR.PATCH` tag and matching GitHub assets.
@@ -14,8 +24,8 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
   additions, removed operations, limits, errors, defaults, timing and lifecycle
   guarantees. Compatibility across arbitrary minor versions is not promised.
 - Increment PATCH only for defect repairs within the unchanged intended minor
-  contract. Backport such repairs to their version line, rerun its complete
-  qualification and publish a new tag and assets.
+  contract. Bring master-origin repairs forward to their version line, rerun its
+  complete qualification and publish a new tag and assets.
 
 The core/context/relations split and explicit host contract added to package
 0.6 establish the 0.7.0 contract. Its line is `version/0.7` and its tag is
@@ -53,11 +63,12 @@ under `.tmp/release/` and keep credentials and local host configuration outside
 published assets.
 
 1. Update the package version, `CONTRACT.md`, release identity and operational
-   references on `master`. Review status, diff and recent history, then commit
-   the intended public files. A source change after qualification requires
-   another commit and another full qualification.
-2. On that exact clean commit, run `make verify`. This runs the source-offer
-   exclusion tests, all unit/component tests, TypeScript checks, declaration and
+   references on `master`. Review status, diff and history, then commit intended
+   public files. In the release session, promote eligible master-origin commits
+   into the receiving version branch; record their source SHAs. Implementation
+   corrections must return to master first and be promoted again.
+2. On that exact clean release-branch result, run `make verify`. This runs the
+   source-offer exclusion tests, all unit/component tests, TypeScript checks, declaration and
    production builds, distribution verification and `make import-check`. The
    import check builds the library and runs a fresh package-name consumer with
    strict declarations (`skipLibCheck: false`) and root/KMS/CSS export resolution.
@@ -72,8 +83,8 @@ published assets.
    public source-archive file with the qualified commit/build, and exercise the
    packed exports from a fresh external consumer. Exclude all KMS/private
    configuration, environment files, temporary files and unrelated applications.
-5. Record relative commands, exit codes, test counts, exact source commit,
-   tool versions, contract SHA-256 values and artifact SHA-256 values in
+5. Record selected master SHAs, the final release commit, relative commands,
+   exit codes, test counts, tool versions, contract SHA-256 values and artifact SHA-256 values in
    `.tmp/release/qualification.json`. Publish that file, the real package,
    corresponding-source archive, release identity and checksums. SHA-256
    checksums establish byte identity; they are not cryptographic signatures.
@@ -89,8 +100,10 @@ version branch/tag and the GitHub release. An unexpected existing identity or
 non-fast-forward rejection stops publication for review. Never force-push,
 rewrite a published tag, overwrite a release asset or delete unrelated refs.
 
-Create the version branch and annotated tag at the qualified commit. Push only
-`master` and the intended new release refs, then create the GitHub release with
+Create a new version line from an eligible master snapshot or advance its existing
+line only with reviewed master-origin changes. Qualify that result before tagging.
+Publish master development and the intended release refs separately, never in the
+reverse direction, then create the GitHub release with
 `gh release create --verify-tag`. For repositories whose SSH key is read-only,
 use direct HTTPS and the `gh auth git-credential` helper through command-local
 Git options; do not modify global or repository Git configuration or bypass hooks.

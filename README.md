@@ -1,5 +1,7 @@
 # Knowledge Engine note GUI
 
+[SESSION_PROMPT.md](SESSION_PROMPT.md) is the development-session template for `master`. [OPERATIONS.md](OPERATIONS.md#development-first-one-way-promotion) defines one-way development-to-release promotion; reading the template alone grants no command permission.
+
 This public fork of [docmost/docmost](https://github.com/docmost/docmost) adapts
 Docmost's AGPL core note client for Knowledge Engine. It distributes the
 original/adapted application shell, page editor, navigation and styles as an
