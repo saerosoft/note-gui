@@ -2,7 +2,7 @@
 
 ## Candidate and compatibility
 
-The development candidate is 0.8.0 on `master`, building on the verified 0.7
+The published release is 0.8.0, building on the verified 0.7
 repairs through `8946d40b`, implemented and pushed in `bd28c292`. Optional policy/association adapters and mount-local
 dirty reporting establish a new MINOR contract. The local store version and
 public root, KMS and stylesheet export paths remain unchanged.
@@ -18,13 +18,17 @@ editor instance and conflict base; another tab or pane is not remounted. Panel
 read recovery does not replay an acknowledged property or relation write. No
 storage migration is required. Hosts opt into the new named capabilities and
 dirty reporting; existing core-only mounts still work. The package remains private
-to npm publication. Qualification and KMS adoption are separate; existing
-consumers retain their reviewed 0.7.0 tag and exact commit.
+to npm publication. Qualification and KMS adoption are separate; deployed
+consumers retain their prior reviewed tuple until adoption is accepted.
 
-The release operator must separately promote the reviewed development commits
-to `version/0.8`, qualify that exact result, publish a new immutable tag/assets
-and verify downloaded bytes. KMS then reviews the tuple and updates its lock,
-gitlink and asset distribution together. Never consume a moving master tip.
+COMPLETED release qualification/publication: `version/0.8` and annotated
+`release/v0.8.0` select `b9c1ae1d544194fe9dc0bfe5490992be79182cbe`; tag object
+`a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`. Exact-source qualification passes
+unit307/34, source3, browser41/41, actual Draw.io5/5 and package682/source295.
+All seven downloaded assets match the local qualified bytes. The published
+qualification/evidence preserve the first 40/41 browser attempt and unchanged
+successful reruns. KMS adoption must verify this exact tuple, lock/gitlink and
+complete asset distribution. Never consume a moving master tip.
 
 ## Producer checks
 
@@ -131,7 +135,8 @@ verification and adoption conditions only.
 The local producer archive has 93 readable byte-checked entries, including both
 sanitized real-backend proofs, final role/storage cleanup verification, synthetic
 screenshots and the completed correction unit's four-entry archive. Qualification
-records its hash externally; release-owner archival remains a separate action.
+records its hash externally. Release 0.8.0 now archives this evidence with its
+exact-source logs, bounded SQL/S3 proofs and retained qualification attempts.
 
 ## Consumer acceptance cases
 
@@ -169,12 +174,14 @@ actor data still need exact backend fields. No missing authority or actor was
 inferred. Public 0.8 policy/association and mount-local dirty APIs are implemented;
 host router integration remains consumer-owned. Human review is not a gate.
 KMS records the agreed wrappers in its `docs/frontend-architecture.md:25-31`
-(owner commit `115cfbd`). Its coordinator confirms the current `/notes/` host
-still uses the existing locked library, with no implemented optional binding;
-its packaged-host harness requires assets matching that lock. This does not
-authorize a producer-side pin/config/runtime/release change or broader business
-fixture seeding. The remaining host/release conditions cannot be closed by the
-new isolated producer checks.
+(owner commit `115cfbd`). The user's later session grant authorized the external
+release/adoption work. KMS now selects the exact published 0.8 tuple and has the
+optional bindings and persistent dirty-navigation guard in its development
+tree. Eleven focused and 934 full WEB tests, types, production build and the
+exact release import check pass. Current-source parent gates and actual
+CONTROLLED/SHARED, populated/native/workload evidence remain open. Existing
+runtime/data and unrelated concurrent backend work are preserved. The remaining
+host conditions cannot be closed by producer-only checks.
 G11 retirement remains open. Seven historical journals are reconciled in
 `COMPLETION_STATUS.md`; the completed 2026-10-25 correction unit is removed after
 53 current tests and a readable four-entry archive. Six journals still retain

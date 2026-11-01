@@ -18,11 +18,12 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 ## Version policy
 
-The current `master` candidate is 0.8.0. Optional collaboration capabilities and
-mount-local dirty reporting establish the new minor contract. Its declared tag
-is reserved for separately authorized publication; existing 0.7.0 consumer pins
-remain unchanged. Human review is not an acceptance gate. Exact-source automated
-qualification, authorized-environment evidence and immutable identity still apply.
+The current minor contract is 0.8.0. Optional collaboration capabilities and
+mount-local dirty reporting establish this line. The qualified release is
+`release/v0.8.0` at `b9c1ae1d544194fe9dc0bfe5490992be79182cbe`, with annotated
+tag object `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`. Its published qualification
+records exact-source automated checks and limitations. Human review is not an
+acceptance gate. Consumer adoption and product acceptance remain separate.
 
 - Increment MAJOR for a substantial redesign of the library's concept or
   responsibility, then reset MINOR and PATCH.
@@ -40,14 +41,14 @@ it is unrelated to this release. Preserve inherited branches and tags.
 
 ## Consumer identity
 
-Pin all three values: `version/0.7`, `release/v0.7.0` and the tag's exact peeled
+Pin all three values: `version/0.8`, `release/v0.8.0` and the tag's exact peeled
 commit recorded in `qualification.json`. Verify that the selected checkout
 equals that commit, that the tag resolves to it, and that `release.json` and
 the contract digests match the release evidence. Later patches may advance the
 branch; a consumer stays on its reviewed tag and commit until explicitly upgraded.
 Never follow `master`, a caret range, `latest` or automatic remote updates.
 
-Download the release's `knowledge-engine-note-gui-0.7.0.tgz` and check it against
+Download the release's `knowledge-engine-note-gui-0.8.0.tgz` and check it against
 `SHA256SUMS`. It contains the package manifest and complete `dist/`, including
 the ES module entries, CSS, chunks, fonts, declarations, source offer and notices.
 The root, `/kms` and `/style.css` package exports retain their documented paths.

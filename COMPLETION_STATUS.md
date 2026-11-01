@@ -71,6 +71,22 @@ entries, including the final proof and completed correction archive. A final
 documentation-only source refresh preserves this matching snapshot; no qualified
 release, consumer adoption or whole-lane completion is inferred.
 
+## Published 0.8 and consumer adoption progress
+
+COMPLETED producer release: exact clean `version/0.8` snapshot `b9c1ae1d` passes
+source3, unit307/34, browser41/41, actual native Draw.io5/5 and extracted-package
+682/source295 comparisons. `release/v0.8.0` and all seven public assets are
+published; downloaded bytes match and all six checksummed assets pass. The
+release archives the readable producer evidence and initial browser failure.
+
+Consumer adoption is PARTIAL: KMS's version declaration, exact tuple/contract
+lock and gitlink now select that release. Product policy/association/dirty
+bindings pass 11 focused tests; the full WEB suite passes 934 tests in 147 files,
+and typecheck, production build and exact import check pass. Current-source root
+verification awaits coordination with concurrent backend work. Actual packaged
+host/control/shared/workload acceptance remains open; no G-unit is closed by
+these bounded checks. GOAL.md records the user's later external execution grant.
+
 ## Source reconciliation
 
 Read on 2026-11-01: the current session assignment; KMS's release completion

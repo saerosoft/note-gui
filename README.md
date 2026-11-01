@@ -10,8 +10,10 @@ Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
 knowledge-context and relation extensions retain the full product experience.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
-qualification and consumer pins. `release.json` declares the 0.8.0 development
-candidate; it does not establish release qualification or publication.
+qualification and consumer pins. [Release 0.8.0](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.0)
+contains the qualified package, corresponding source, evidence and checksums.
+`release.json` declares identity; the published `qualification.json` records the
+exact tested commit and limits. Consumer adoption remains a separate check.
 The product hosts this library inside Next.js; Vite is an optional development
 and demo harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than
