@@ -99,6 +99,10 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 - [ ] Verify final controlled/core/shared/native/package/source behavior.
 - [ ] Obtain authorized native Windows and current KMS host/storage/workload/
   release/adoption evidence.
+- [x] Confirm this repository's GitHub Actions is enabled and add a SHA-pinned,
+  manual-only native Windows producer workflow without consumer secrets/resources.
+- [ ] Execute that native workflow, inspect actual commands/results, repair any
+  platform defects and preserve its exact commit/toolchain evidence.
 - [ ] Mark each completed original item immediately; preserve evidence and links,
   consolidate feature behavior and remove each fully completed work document.
 - [ ] Review/fix defects, complete authorized publication and verify every
@@ -140,8 +144,10 @@ remain external qualification output to avoid self-referential source archives.
    were sent through the project inbox. No speculative exports are implemented.
 3. The earlier API fixture expired and was destroyed. A new authorized lease
    needs current accounts, limits and pre-cleanup independent inventory.
-4. No authorized reachable native Windows runner is available. Linux, Wine and
-   source inspection cannot replace that qualification.
+4. A native Windows GitHub Actions route is now available: repository Actions
+   permissions report enabled and the manual workflow is being qualified. No
+   native pass is claimed until its actual run is inspected. Linux, Wine and
+   source inspection do not replace that evidence.
 5. Release publication, consumer adoption/runtime changes and deployment need
    their separate owners/authorization.
 
