@@ -39,6 +39,27 @@ it('shows the recorded provenance and author of the relation', async () => {
   expect(screen.getByText('기록자: Relation author')).toBeTruthy();
   expect(screen.getByText('이 노트 → 연결된 노트')).toBeTruthy();
 });
+it('recovers a failed supported relation read without an empty success or a mutation', async () => {
+  const value = fixture(); value.relations.mockRejectedValueOnce(new ApiError('Relations unavailable', 'NETWORK'));
+  show(value);
+  expect((await screen.findByRole('alert')).textContent).toBe('Relations unavailable');
+  expect(screen.queryByText('아직 관계가 없습니다.')).toBeNull();
+  fireEvent.click(screen.getByRole('button', { name: '관계 다시 읽기' }));
+  expect(await screen.findAllByText('source-revision:raw')).toHaveLength(2);
+  expect(screen.queryByRole('alert')).toBeNull();
+  expect(value.relate).not.toHaveBeenCalled(); expect(value.decideRelation).not.toHaveBeenCalled();
+});
+it('retries an unavailable supporting proof in the open panel without replaying a relation write', async () => {
+  const value = fixture();
+  const relationEvidence = vi.fn().mockRejectedValueOnce(new ApiError('Proof unavailable', 'NETWORK')).mockResolvedValue({ items: [{ id: 'span', sourceRevisionId: 'original', sourceRevision: 2, spaceId: 'space', sourceTitle: 'Recovered original', locator: 'paragraph:3', excerpt: 'Recovered supporting proof', excerptTruncated: false }], nextCursor: null });
+  Object.assign(value.api, { relationEvidence }); show(value);
+  fireEvent.click(await screen.findByRole('button', { name: '관계 근거 보기' }));
+  expect((await screen.findByRole('alert')).textContent).toBe('Proof unavailable');
+  fireEvent.click(screen.getByRole('button', { name: '근거 다시 읽기' }));
+  await screen.findByText('Recovered supporting proof');
+  expect(screen.queryByRole('alert')).toBeNull();
+  expect(value.relate).not.toHaveBeenCalled(); expect(value.decideRelation).not.toHaveBeenCalled();
+});
 it('opens the actual source proof only when requested', async () => {
   const value = fixture();
   const relationEvidence = vi.fn().mockResolvedValue({ items: [{ id: 'span', sourceRevisionId: 'original', sourceRevision: 2, spaceId: 'space', sourceTitle: '계약서 원문', locator: 'paragraph:3', excerpt: '서명된 계약서가 초안을 대체합니다.', excerptTruncated: false }], nextCursor: null });
@@ -121,6 +142,7 @@ it('binds a stale target rejection to the selected note and preserves the other 
   fireEvent.click(screen.getByRole('button', { name: '관계 추가' }));
   expect(await screen.findByText('연결할 노트를 다시 선택해 주세요. 입력한 값을 확인해 주세요.')).toBeTruthy();
   expect(screen.getByLabelText('효력 시작')).toHaveProperty('value', '2026-03-01');
+  expect(screen.getByRole('button', { name: '관계 추가' })).toHaveProperty('disabled', true);
   expect(value.onRevision).not.toHaveBeenCalled();
   fireEvent.click(screen.getByRole('button', { name: '다시 선택' }));
   expect(screen.getByRole('textbox', { name: '연결할 노트' })).toBeTruthy();

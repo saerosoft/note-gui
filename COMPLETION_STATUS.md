@@ -71,6 +71,19 @@ Current independent execution has reproduced and repaired two additional gaps:
   actual browser tests. Tab-instance owners now fence cached updates and stop
   undispatched follow-up reads after retirement, while still allowing a cached
   inactive tab's own operation to finish.
+- G05: the real persistent nested-tree case passes child-page replacement,
+  sibling retention, direct ancestor lookup without a root crawl, keyboard
+  ArrowDown/Enter, multiselect subtree movement and native drag-to-root. The
+  active authored draft and descendant path remain unchanged except for the
+  requested move. No tree implementation change was needed.
+- G06/G08: supported relation/proof failures had no local retry, and an uncertain
+  keyless write could immediately be submitted again. Regressions reproduced
+  both boundaries. Read retry is explicit, failed targets require reselection,
+  and uncertain writes are withheld until readback. A controlled full extension
+  host checks 20/one current/history/proof pages, backlinks/attribution, exact
+  source/rule/review-operation/action popup destinations and retained authored
+  JSON/drafts at a settled narrow viewport. These are producer fixture results,
+  not KMS business-policy acceptance.
 
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball

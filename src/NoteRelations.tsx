@@ -65,7 +65,7 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       .catch(e => { if (alive && current(epoch)) setError(e.message); }).finally(() => { if (alive && current(epoch)) setBusy(false); });
     return () => { alive = false; };
   }, [relationApi, note.id, note.revision, refresh]);
-  async function perform(action: (isCurrent: () => boolean) => Promise<void>) {
+  async function perform(action: (isCurrent: () => boolean) => Promise<void>, mutation = false) {
     if (!current() || inFlight.current) return;
     const epoch = generation.current;
     const isCurrent = () => current(epoch);
@@ -75,14 +75,14 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       if (!isCurrent()) return;
       if (e instanceof ApiError && e.code === 'INVALID_INPUT' && e.field === 'toNoteId') {
         setTargetError('연결할 노트를 다시 선택해 주세요. ' + e.message);
-      } else setError((e as Error).message);
+      } else { if (mutation) { setLoaded(false); setTarget(null); } setError((e as Error).message); }
     } finally {
       inFlight.current = false;
       if (isCurrent()) setBusy(false);
     }
   }
   function decide(relation: Relation, decision: 'ACCEPTED' | 'REJECTED') {
-    if (!current() || !note.canEdit || inFlight.current) return;
+    if (!current() || !loaded || !note.canEdit || inFlight.current) return;
     const reason = window.prompt(decision === 'ACCEPTED' ? '확정 이유를 입력해 주세요.' : '거절 이유를 입력해 주세요.')?.trim();
     if (!reason) return;
     void perform(async isCurrent => {
@@ -90,11 +90,12 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       if (!isCurrent()) return;
       const page = await relationApi.relations(note.id, null);
       if (isCurrent()) setRelations(page);
-    });
+    }, true);
   }
   if (accessLost) return <p role="alert">접근 권한이 변경되었습니다. 노트를 다시 열어 주세요.</p>;
   return <>
     {error && <p role="alert">{error}</p>}{busy && <p role="status">처리 중…</p>}
+    {error && !busy && <Button variant="subtle" onClick={() => { if (current()) setRefresh(value => value + 1); }}>관계 다시 읽기</Button>}
     {relations.items.map(value => <article key={`${note.id}:${note.revision}:${value.id}`}>
       <Button variant="subtle" onClick={() => { if (current()) onOpen(value.targetNoteId); }}>{value.title}</Button>
       <p>
@@ -109,8 +110,8 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       <p style={{ whiteSpace: 'pre-wrap' }}>{value.provenance}</p>
       {value.evidenceCount > 0 && <SupportingEvidence api={relationApi} relationId={value.id}/>}
       {note.canEdit && value.reviewState === 'PROPOSED' && <Group>
-        <Button size="xs" disabled={busy} onClick={() => decide(value, 'ACCEPTED')}>관계 확정</Button>
-        <Button size="xs" variant="outline" disabled={busy} onClick={() => decide(value, 'REJECTED')}>관계 거절</Button>
+        <Button size="xs" disabled={busy || !loaded} onClick={() => decide(value, 'ACCEPTED')}>관계 확정</Button>
+        <Button size="xs" variant="outline" disabled={busy || !loaded} onClick={() => decide(value, 'REJECTED')}>관계 거절</Button>
       </Group>}
     </article>)}
     {!relations.items.length && !busy && !error && <p>아직 관계가 없습니다.</p>}
@@ -120,7 +121,7 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
     })}>관계 더 보기</Button>}
     {note.canEdit && formOpened.current && <form hidden={!loaded} onSubmit={event => {
       event.preventDefault();
-      if (!current() || !loaded || !note.canEdit || !target) return;
+      if (!current() || !loaded || !note.canEdit || !target || targetError) return;
       void perform(async isCurrent => {
         await relationApi.relate(note.id, target.id, predicate, { validFrom: validFrom ? new Date(validFrom).toISOString() : null, validTo: validTo ? new Date(validTo).toISOString() : null });
         if (!isCurrent()) return;
@@ -130,13 +131,13 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
         setRelations(page);
         const updated = await api.note(note.id);
         if (isCurrent()) onRevision(updated);
-      });
+      }, true);
     }}>
       <NotePicker api={api} relations={relationApi} spaceId={note.spaceId} relationNoteId={note.id} label="연결할 노트" selected={target} onSelect={value => { if (current()) { setTarget(value); setTargetError(''); } }} disabled={busy} error={targetError}/>
       <Select label="관계" data={PREDICATES} value={predicate} onChange={value => { if (value && current()) setPredicate(value as RelationPredicate); }} allowDeselect={false}/>
       <TextInput type="date" label="효력 시작" value={validFrom} onChange={event => { if (current()) setValidFrom(event.currentTarget.value); }}/>
       <TextInput type="date" label="효력 종료" value={validTo} min={validFrom || undefined} onChange={event => { if (current()) setValidTo(event.currentTarget.value); }}/>
-      <Button type="submit" disabled={busy || !target}>관계 추가</Button>
+      <Button type="submit" disabled={busy || !loaded || !target || !!targetError}>관계 추가</Button>
     </form>}
   </>;
 }
@@ -163,7 +164,7 @@ function SupportingEvidencePage({ api, relationId }: { api: NoteRelationsApi; re
       .catch(value => { if (alive) setError((value as Error).message); });
     return () => { alive = false; off(); };
   }, [api, relationId, cursor, refresh]);
-  if (error) return <p role="alert">{error}</p>;
+  if (error) return <div><p role="alert">{error}</p><Button size="xs" onClick={() => setRefresh(value => value + 1)}>근거 다시 읽기</Button></div>;
   if (!page) return <p role="status">근거를 읽는 중…</p>;
   return <section aria-label="관계 근거">
     {!page.items.length && <p>현재 볼 수 있는 근거가 없습니다.</p>}

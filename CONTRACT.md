@@ -321,6 +321,11 @@ Closing and reopening the same note creates a new tab owner. A retired
 acknowledgement cannot update that new tab or start its follow-up reads; a
 retired latest-version lookup likewise cannot install an old comparison.
 
+Supported relation-list and supporting-proof failures offer explicit read
+retries. After an uncertain keyless relation mutation, writes stay withheld
+until the list is reread; a rejected target must be explicitly selected again.
+Read recovery never replays a relation mutation or clears the authored draft.
+
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,
