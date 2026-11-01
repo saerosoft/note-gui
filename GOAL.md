@@ -24,8 +24,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   credentials, retained consumer content and private source from distribution.
 - Agree precise KMS transport before public shared-mode changes. Never infer
   authority from roles/admin flags or historical visibility.
-- No consumer pin/source/runtime edits, release publication, deployment or model
-  calls are authorized by this goal document.
+- The user explicitly authorized goal-related external changes, commits, pushes,
+  builds and tests without repeated approval for this session. This supersedes
+  earlier consumer/source/pin/release waiting conditions. Preserve existing data
+  and unrelated work; this document alone grants no authority in a future session.
+  No model/provider execution is needed for this GUI objective.
 - Do not waive a criterion or delete its only record to declare completion.
 
 ## Measurable acceptance criteria
@@ -227,28 +230,38 @@ remain external qualification output to avoid self-referential source archives.
    Windows run `41324344742` was rejected before any runner step:
    "The job was not started because your account is locked due to a billing
    issue." Do not retry, request billing recovery or require a Windows runner.
-5. Release publication, consumer adoption/runtime changes and deployment need
-    their separate owners/authorization. KMS message
+5. RESOLVED authorization: the user's later unlimited session grant includes the
+    external work required by this goal. The earlier KMS message
     `01a19869-2438-7dc0-8f9a-bf5c565170b9` and its current
     `docs/frontend-architecture.md:25-31` confirm the bounded contract but no
     implemented binding in the locked `/notes/` host. No pin/config/runtime/
-    release change or expanded source/rule/proposal seeding is authorized by
-    that coordination. These are concrete remaining inputs, not a human-review
-    or Windows gate.
+    release change or expanded source/rule/proposal seeding was authorized by
+    that coordination alone. Its technical contract remains evidence; the later
+    direct user grant supplies execution authority. Preserve current data and
+    perform new fixture writes only in specifically owned isolated resources.
 
 ## Immediate next step
 
-The approved contract, short-page correction, current producer gates and bounded
-real SQL/S3 proof are complete. Do not repeat them or reuse the consumed fixture.
-Final qualification output must verify the documentation-only source snapshot
-before the remaining evidence/retirement commit is pushed.
+The bounded producer unit is committed/pushed through `a95e719e`; final package
+and source checks pass in `packed-check-10.log`, with 93 readable evidence entries
+in `evidence-check-19.json`. Do not repeat this completed development unit or
+reuse its consumed fixture.
 
-Remaining AC04/AC08/AC09/AC10 work needs the KMS-owned wider transport, adopted
-`/notes/` binding, agreed populated/workload fixture and immutable release tuple.
-KMS confirmed that its locked host is unchanged and did not authorize broader
-source/rule/proposal seeding or pin/config/runtime/release changes. Those changes
-require explicit scope/authorization before implementation. The six unfinished
-journals, 11 G-units and 44 original criterion rows remain traceable.
+The user has now authorized the remaining external work for this session:
+
+1. Qualify and publish the exact new `version/0.8` / `release/v0.8.0` tuple with
+   matching package/source/evidence and verified downloaded asset bytes.
+2. Adopt that immutable tuple in KMS, connect the agreed policy/association/dirty
+   boundary in the existing `/notes/` host, and prove the host behavior with
+   failing-before/passing-after tests. Preserve unrelated work and retained data.
+3. Verify actual packaged CONTROLLED/SHARED host, current/history/proof/actors,
+   native files and agreed bounded workload using new owned isolated fixtures.
+   Resolve any wider transport requirement against canonical server fields;
+   never infer it from roles or invent an unneeded DTO.
+4. Mark each satisfied original criterion immediately, consolidate lasting
+   behavior and retire each fully completed record with readable evidence. Six
+   unfinished journals, 11 G-units and 44 original rows remain traceable until
+   their own acceptance evidence is complete.
 
 The user approved the recommendations, isolated verification and no human-review
 gate, and removed Windows support. This does not waive automated verification,
