@@ -7,8 +7,43 @@
   "qualificationCommit": "6a52fe15",
   "implementationBaseCommit": "a360b725",
   "workingTreeCandidate": false,
-  "candidateScope": "Committed 0.8 implementation and short-page cursor correction with verified native/authority/rerun harness fixes. Bounded producer qualification is complete; consumer host, immutable release and sustained workload remain separate.",
-  "releaseQualified": false,
+  "candidateScope": "Committed 0.8 implementation with qualified immutable release. Bounded current-source CONTROLLED consumer host passes; normal parent publication, SHARED, populated/native-format and sustained workload acceptance remain separate.",
+  "releaseQualified": true,
+  "publishedRelease": {
+    "branch": "version/0.8",
+    "tag": "release/v0.8.0",
+    "commit": "b9c1ae1d544194fe9dc0bfe5490992be79182cbe",
+    "tagObject": "a327c46c3c8ba92f81b6cb6bc911112eb9ae4749",
+    "downloadedAssetsByteMatched": 7,
+    "checksummedAssetsPassed": 6,
+    "url": "https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.0"
+  },
+  "boundedConsumerHost": {
+    "status": "CONTROLLED_PASS",
+    "hostImplementationCommit": "52ad8b48febcbdd93144e3b6aad7f14983ed43e7",
+    "run": "0caa51d9e802",
+    "apiSha256": "7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0",
+    "backendTree": "e26efe6a81e0d5456dcc640e59ac4e3d24f73357",
+    "widthsPassed": [375, 900, 1440],
+    "dialogDecisionsPassed": 12,
+    "webTestsPassed": 938,
+    "webTestFiles": 148,
+    "focusedTestsPassed": 15,
+    "focusedTestFiles": 3,
+    "sqlVerifiedNotes": 3,
+    "sqlVerifiedTreeRecords": 9,
+    "completeInventories": 2,
+    "publicTablesPerInventory": 135,
+    "fileObjects": 3,
+    "fileBytes": 166,
+    "originalOrganizationAndRolesPreserved": true,
+    "ownedContainersIndependentlyConfirmedAbsent": 7,
+    "ownedNetworkIndependentlyConfirmedAbsent": true,
+    "pageErrors": 0,
+    "diagnosticInstrumentationRemoved": true,
+    "rawReceiptSha256": "06f86b9a571531d152a486c279e1ee7a7649585e05db2c502f9169a02c28ae13",
+    "scope": "Actual Next host with Vite absent, native Back beforeunload and same-document Forward guard cancellation, explicit leave/reopen, editor/draft/history retention, rich save/reload, native download, authority denial and tree move. S3 LIST sizes match native download bytes; no separate direct S3 GET. Normal parent gate/publication, SHARED, populated context, native formats and sustained workload remain open."
+  },
   "wholeGuiLaneAccepted": false,
   "sourceSha256": {
     "src/Pane.tsx": "6c3fb7133adde6ae6675d853643c53cc4d99b980ac82afc1d031c351f26f4e17",
@@ -67,7 +102,7 @@
     "packedSourceFilesCompared": 295,
     "packedVerificationScope": "0.8.0 actual tarball passes collaboration/dirty declarations, runtime imports, matching CSS and all source bytes after completed-unit retirement; final documentation-only recording is rechecked against the extracted package.",
     "localEvidenceArchiveReadableEntries": 93,
-    "releaseOwnerArchivalAccepted": false,
+    "releaseOwnerArchivalAccepted": true,
     "packedRuntimeImports": [".", "./kms"],
     "packedCssExportResolved": true,
     "strictDeclarationsSkipLibCheck": false
@@ -212,11 +247,10 @@
     { "path": ".tmp/collaboration-390.png", "width": 390, "height": 1000, "sha256": "abb1ddc0aa976944902f28a4d600caa60f75c5d147fddcc564e63ebd24397933", "scope": "Actual 0.8 narrow association panel, no horizontal page overflow." }
   ],
   "remainingInputs": [
-    "Wider backend per-record audience/actor fields and complete actual KMS host acceptance; optional SC01/SC02 and dirty API designs are approved and implemented",
+    "Complete SHARED/populated/native/workload KMS host acceptance; actual-space policy and existing history editor/comment author/association creator suffice for the bounded adapter; retain concrete missing actor cases without inventing a DTO",
     "Qualified Draw.io deployment and integrated all-format co-editor storage/access acceptance with independent inventory",
-    "Qualified immutable GUI release followed by KMS-owned actual host adoption and contextual/storage acceptance",
-    "Agreed KMS sustained workload/platform/scale qualification and durable release evidence archive",
-    "Consumer integration of the implemented mount-local dirty contract; the host retains router confirmation"
+    "KMS normal root gate/publication and wider contextual/storage acceptance after the published immutable 0.8 release and bounded CONTROLLED host pass",
+    "Agreed KMS sustained workload/scale qualification; Linux is required and Windows is explicitly excluded"
   ],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,
