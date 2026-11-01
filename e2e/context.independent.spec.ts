@@ -8,10 +8,12 @@ test('requires relation readback before offering another keyless write after an 
     const { api, access, host, mounted } = window.noteExample; mounted.unmount();
     const anchor = await api.create({ spaceId: 'local', title: 'Uncertain relation anchor', parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() });
     const peer = await api.create({ spaceId: 'local', title: 'Uncertain relation peer', parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() });
-    const rows: Relation[] = []; let writes = 0; Reflect.set(window, 'uncertainRelationWrites', 0);
+    const rows: Relation[] = [];
+    for (let index = 0; index < 21; index++) { const target = await api.create({ spaceId: 'local', title: `Existing relation target ${index}`, parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() }); rows.push({ id: `existing-${index}`, targetNoteId: target.id, title: target.title, predicate: 'RELATED_TO', validFrom: null, validTo: null, legacyPredicate: null, kind: 'RECORDED', reviewState: 'ACCEPTED', revision: 1, evidenceCount: 0, provenance: `Existing controlled fixture ${index}`, actorLabel: 'Fixture editor', direction: 'OUTGOING' }); }
+    let writes = 0; Reflect.set(window, 'uncertainRelationWrites', 0);
     const relations: NoteRelationsApi = {
       findRelationNotes: async noteId => ({ noteId, total: 1, items: [{ id: peer.id, title: peer.title }], nextCursor: null }),
-      relations: async () => ({ items: rows, nextCursor: null }), relationEvidence: async () => ({ items: [], nextCursor: null }),
+      relations: async (_id, cursor) => { const start = Number(cursor ?? 0); return structuredClone({ items: rows.slice(start, start + 20), nextCursor: start + 20 < rows.length ? String(start + 20) : null }); }, relationEvidence: async () => ({ items: [], nextCursor: null }),
       relate: async (_id, targetNoteId, predicate, validity) => { writes++; Reflect.set(window, 'uncertainRelationWrites', writes); rows.push({ id: crypto.randomUUID(), targetNoteId, title: peer.title, predicate, ...validity, legacyPredicate: null, kind: 'RECORDED', reviewState: 'ACCEPTED', revision: 1, evidenceCount: 0, provenance: 'Committed controlled fixture relation', actorLabel: 'Fixture editor', direction: 'OUTGOING' }); throw new gui.ApiError('Relation acknowledgement lost after commit', 'NETWORK'); },
       decideRelation: async () => { throw new gui.ApiError('No proposed relation is present', 'INVALID_INPUT'); },
     };
@@ -24,7 +26,9 @@ test('requires relation readback before offering another keyless write after an 
   await page.getByRole('button', { name: '관계 추가', exact: true }).click();
   await expect(page.getByRole('alert')).toHaveText('Relation acknowledgement lost after commit');
   await expect(page.getByRole('button', { name: '관계 추가', exact: true, includeHidden: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '관계 더 보기', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: '관계 다시 읽기', exact: true }).click();
+  await expect(page.getByRole('button', { name: '관계 더 보기', exact: true })).toBeEnabled(); await page.getByRole('button', { name: '관계 더 보기', exact: true }).click();
   await expect(page.getByText('Committed controlled fixture relation', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: '관계 추가', exact: true })).toBeDisabled();
   expect(await page.evaluate(() => Reflect.get(window, 'uncertainRelationWrites'))).toBe(1);
@@ -61,7 +65,7 @@ test('navigates controlled current/history and relation proof pages through exac
     let relationUnavailable = true; let proofUnavailable = true;
     window.addEventListener('fixture-recover-relations', () => { relationUnavailable = false; });
     window.addEventListener('fixture-recover-proof', () => { proofUnavailable = false; });
-    function slice<T>(items: T[], cursor: string | null) { const start = Number(cursor ?? 0); return { items: items.slice(start, start + 20), nextCursor: start + 20 < items.length ? String(start + 20) : null }; }
+    function slice<T>(items: T[], cursor: string | null) { const start = Number(cursor ?? 0); return structuredClone({ items: items.slice(start, start + 20), nextCursor: start + 20 < items.length ? String(start + 20) : null }); }
     const knowledge: NoteKnowledgeContextApi = {
       provenance: async () => ({ sources: [{ revisionId: source.attachmentId, spaceId: 'local', title: 'Fixture immutable original' }], rules: [{ rulesetId: 'fixture-ruleset', versionId: 'fixture-rule-v3', spaceId: 'local', label: 'Fixture rule v3' }], reviews: [{ id: 'fixture-change-set', spaceId: 'local', title: 'Fixture accepted review', kind: 'changeSet', status: 'ACCEPTED' }], actions: [{ id: 'fixture-action', spaceId: 'local', title: 'Fixture recorded action' }] }),
       currentKnowledge: async (id, cursor) => { reads.push({ kind: 'current', cursor }); return { ...slice(currentItems, cursor), noteId: id, revision: (await api.note(id)).revision, bodyOrigin: 'HUMAN' }; },

@@ -326,6 +326,14 @@ retries. After an uncertain keyless relation mutation, writes stay withheld
 until the list is reread; a rejected target must be explicitly selected again.
 Read recovery never replays a relation mutation or clears the authored draft.
 
+Property readback also checks note revisions before and after reading values;
+an intervening commit withholds the inconsistent result for another read.
+After an uncertain property write, matching named/type/value content can be
+adopted from a consistent current snapshot without replaying the write. This
+confirms the observed content, not which request or actor committed it. A real
+property conflict preserves the input and offers an explicit property-only
+reset to the inspected snapshot without replacing an independent body draft.
+
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,

@@ -96,6 +96,17 @@ Current independent execution has reproduced and repaired two additional gaps:
   back to missing system glyphs. Actual platform-font regressions reproduced
   both cases. They now inherit the retained code font stack with the same
   CJK-only fallback; the Latin and monospace font choices remain retained.
+- Whole-producer review found three Important recovery combinations. Actual
+  regressions reproduced stale inactive-tab property authorization, lost
+  acknowledged revision during general read recovery, and relation pagination
+  bypassing uncertain-write recovery. Generation-stamped property projections,
+  acknowledged readback routing and blocked pagination now pass those cases.
+- Further G03 property tests reproduced a committed/lost acknowledgement and a
+  torn values/revision read across a second writer. Readback now checks the
+  revision around the values read and never replays the mutation. Conflicts
+  keep the property input and can reset only that panel after confirmation,
+  retaining an independent authored draft. Baseline package failures and traces
+  are retained under `.tmp/gui-completion/baseline-results`.
 
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball

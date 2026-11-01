@@ -549,6 +549,115 @@ test('does not install an old latest-version lookup into a reopened tab for the 
   await expect(page.locator('.note-body-status')).toContainText('개정 2');
 });
 
+test('revalidates cached inactive-tab properties after the host access generation changes', async ({ page }) => {
+  const first = await create(page, 'Cached property authority'); await create(page, 'Other cached property authority');
+  await page.evaluate(async id => { await window.noteExample.api.setProperties(id, [{ key: 'Cached protected property', valueType: 'TEXT', value: 'Previously authorized property value' }], 1); }, first.id);
+  await open(page, first.id);
+  await page.evaluate(async id => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount(); let denied = false;
+    window.addEventListener('fixture-deny-cached-property', () => { denied = true; }); Reflect.set(window, 'deniedCachedPropertyReads', 0);
+    const client: NoteCoreApi = { ...api, properties: async target => { if (target === id && denied) { Reflect.set(window, 'deniedCachedPropertyReads', Reflect.get(window, 'deniedCachedPropertyReads') + 1); throw new gui.ApiError('Current property authority denied', 'FORBIDDEN'); } return api.properties(target); } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  }, first.id);
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('Previously authorized property value');
+  await page.getByRole('treeitem', { name: 'Other cached property authority', exact: true }).click();
+  await page.evaluate(async () => { window.dispatchEvent(new Event('fixture-deny-cached-property')); await window.noteExample.access.refresh(); });
+  await page.getByRole('tab', { name: /^Cached property authority/ }).click();
+  await expect.poll(() => page.evaluate(() => Reflect.get(window, 'deniedCachedPropertyReads'))).toBeGreaterThan(0);
+  await expect(page.getByRole('textbox', { name: '노트 본문', exact: true })).toHaveCount(0);
+  await expect(page.locator('input[value="Previously authorized property value"]')).toHaveCount(0);
+});
+
+test('keeps an acknowledged property revision when general read recovery follows a failed refresh', async ({ page }) => {
+  const note = await create(page, 'Accepted property recovery');
+  await page.evaluate(async id => { await window.noteExample.api.setProperties(id, [{ key: 'Revision guarded value', valueType: 'NUMBER', value: '1' }], 1); }, note.id);
+  await open(page, note.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount(); let failReads = false; let writes = 0;
+    window.addEventListener('fixture-recover-accepted-property', () => { failReads = false; });
+    const client: NoteCoreApi = { ...api, properties: async id => { if (failReads) throw new gui.ApiError('Property readback unavailable during refresh', 'NETWORK'); return api.properties(id); }, setProperties: async (id, values, revision) => { await api.setProperties(id, values, revision); if (++writes === 1) failReads = true; } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  });
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByLabel('값', { exact: true }).fill('2'); await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByRole('button', { name: '속성 새로고침', exact: true })).toBeVisible();
+  await page.evaluate(async () => { try { await window.noteExample.access.refresh(); } catch {} });
+  await expect(page.getByRole('button', { name: '속성 다시 읽기', exact: true })).toBeVisible();
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-recover-accepted-property')));
+  await page.getByRole('button', { name: '속성 다시 읽기', exact: true }).click();
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('2');
+  await page.getByLabel('값', { exact: true }).fill('3'); await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByText('속성 변경을 저장했습니다.', { exact: true })).toBeVisible();
+  const saved = await page.evaluate(async id => ({ note: await window.noteExample.api.note(id), values: await window.noteExample.api.properties(id) }), note.id);
+  expect(saved.note.revision).toBe(4); expect(saved.values[0].value).toBe('3');
+});
+
+test('resolves a committed property mutation with a lost acknowledgement by reading instead of replaying it', async ({ page }) => {
+  const note = await create(page, 'Uncertain property write'); await open(page, note.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount(); let writes = 0;
+    Reflect.set(window, 'uncertainPropertyWrites', 0);
+    const client: NoteCoreApi = { ...api, setProperties: async (id, values, revision) => { await api.setProperties(id, values, revision); Reflect.set(window, 'uncertainPropertyWrites', ++writes); if (writes === 1) throw new gui.ApiError('Property acknowledgement lost after commit', 'NETWORK'); } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  });
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByRole('button', { name: '속성 추가', exact: true }).click(); await page.getByRole('textbox', { name: '속성 이름', exact: true }).fill('Exact uncertain property');
+  await page.getByLabel('값', { exact: true }).fill('Observed committed value'); await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveText('Property acknowledgement lost after commit');
+  await expect(page.getByRole('button', { name: '이 속성 저장', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: '속성 다시 읽기', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveCount(0); expect(await page.evaluate(() => Reflect.get(window, 'uncertainPropertyWrites'))).toBe(1);
+  await page.getByLabel('값', { exact: true }).fill('A deliberate next value'); await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByText('속성 변경을 저장했습니다.', { exact: true })).toBeVisible();
+  const current = await page.evaluate(async id => ({ note: await window.noteExample.api.note(id), values: await window.noteExample.api.properties(id) }), note.id);
+  expect(current.note.revision).toBe(3); expect(current.values).toHaveLength(1); expect(current.values[0].value).toBe('A deliberate next value');
+  expect(await page.evaluate(() => Reflect.get(window, 'uncertainPropertyWrites'))).toBe(2);
+});
+
+test('withholds a property readback whose values and note revision straddle another committed writer', async ({ page }) => {
+  const note = await create(page, 'Consistent property snapshot');
+  await page.evaluate(async id => { await window.noteExample.api.setProperties(id, [{ key: 'Snapshot value', valueType: 'TEXT', value: 'Before' }], 1); }, note.id);
+  await open(page, note.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount(); let tear = false; let started = false; let release!: () => void; const concurrent = new Promise<void>(resolve => { release = resolve; });
+    const client: NoteCoreApi = { ...api,
+      note: async id => { if (started) await concurrent; return api.note(id); },
+      properties: async id => { const shouldTear = tear; if (shouldTear) started = true; const values = await api.properties(id); if (shouldTear) { tear = false; const current = await api.note(id); await api.setProperties(id, [{ key: 'Snapshot value', valueType: 'TEXT', value: 'Concurrent committed value' }], current.revision); release(); } return values; },
+      setProperties: async (id, values, revision) => { await api.setProperties(id, values, revision); tear = true; },
+    };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  });
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByLabel('값', { exact: true }).fill('Acknowledged own value'); await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('다시 읽');
+  await expect(page.getByRole('button', { name: '이 속성 저장', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: '속성 새로고침', exact: true }).click();
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('Concurrent committed value');
+  expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).revision).toBe(4);
+});
+
+test('resolves only the conflicting property draft without discarding a separate authored body draft', async ({ page }) => {
+  const note = await create(page, 'Independent property conflict');
+  await page.evaluate(async id => { await window.noteExample.api.setProperties(id, [{ key: 'Conflicting value', valueType: 'TEXT', value: 'Original baseline' }], 1); }, note.id);
+  await open(page, note.id);
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByLabel('값', { exact: true }).fill('My preserved property draft');
+  await page.evaluate(async id => { await window.noteExample.api.setProperties(id, [{ key: 'Conflicting value', valueType: 'TEXT', value: 'Concurrent authoritative property' }], 2); }, note.id);
+  await page.getByRole('button', { name: '이 속성 저장', exact: true }).click(); await expect(page.getByRole('alert')).toBeVisible();
+  const body = page.getByRole('textbox', { name: '노트 본문', exact: true }); await body.fill('Keep this independent authored body draft.');
+  await page.getByRole('button', { name: '속성 다시 읽기', exact: true }).click();
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('My preserved property draft');
+  page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: '조회한 속성으로 되돌리기', exact: true }).click();
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('Concurrent authoritative property');
+  await expect(body).toHaveText('Keep this independent authored body draft.');
+  expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).revision).toBe(3);
+});
+
 test('recovers a failed property read without an empty success or a draft-erasing write', async ({ page }) => {
   const note = await create(page, 'Property read failure'); await open(page, note.id);
   await page.evaluate(async () => {

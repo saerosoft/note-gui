@@ -115,10 +115,10 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       </Group>}
     </article>)}
     {!relations.items.length && !busy && !error && <p>아직 관계가 없습니다.</p>}
-    {relations.nextCursor && <Button disabled={busy} onClick={() => void perform(async isCurrent => {
+    {relations.nextCursor && <Button disabled={busy || !loaded} onClick={() => { if (loaded) void perform(async isCurrent => {
       const page = await relationApi.relations(note.id, relations.nextCursor);
       if (isCurrent()) setRelations({ items: [...relations.items, ...page.items].slice(-100), nextCursor: page.nextCursor });
-    })}>관계 더 보기</Button>}
+    }); }}>관계 더 보기</Button>}
     {note.canEdit && formOpened.current && <form hidden={!loaded} onSubmit={event => {
       event.preventDefault();
       if (!current() || !loaded || !note.canEdit || !target || targetError) return;
