@@ -7,6 +7,7 @@ import { acceptMetadata, acceptSave, canClose, editDraft, openDraft, prepareSave
 import Page from './vendor/docmost/client/pages/page/page';
 import { DocmostPaneProvider } from './docmost/DocmostPaneProvider';
 import { NotePanels, type CommentDraft, type NotePanel } from './NotePanels';
+import { createPropertyDraft, type PropertyDraft } from './NoteProperties';
 import { NoteKnowledgeContext } from './NoteKnowledgeContext';
 import { NoteCurrentKnowledge } from './NoteCurrentKnowledge';
 import { ApiError } from './access';
@@ -22,6 +23,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const [active, setActive] = useState<string | null>(null);
   const [drafts, setDrafts] = useState<Record<string, Draft>>({});
   const [commentDrafts, setCommentDrafts] = useState<Record<string, CommentDraft>>({});
+  const [propertyDrafts, setPropertyDrafts] = useState<Record<string, PropertyDraft>>({});
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [editorEpoch, setEditorEpoch] = useState(0);
@@ -38,14 +40,16 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const openSequence = useRef(0);
   const activeRef = useRef(active); activeRef.current = active;
   const saving = useRef(false);
-  useEffect(() => onAccessLost(() => { sessionEpoch.current++; state.current = {}; setDrafts({}); setCommentDrafts({}); setTabs([]); setActive(null); setLatest(undefined); setDetails(null); setOpenedDetails(false); setOpenedKnowledge(false); setError('접근 권한을 확인해 주세요. 열린 노트가 삭제되었습니다.'); }), []);
+  const tabOwners = useRef<Record<string, symbol>>({});
+  useEffect(() => () => { tabOwners.current = {}; }, []);
+  useEffect(() => onAccessLost(() => { sessionEpoch.current++; tabOwners.current = {}; state.current = {}; setDrafts({}); setCommentDrafts({}); setPropertyDrafts({}); setTabs([]); setActive(null); setLatest(undefined); setDetails(null); setOpenedDetails(false); setOpenedKnowledge(false); setError('접근 권한을 확인해 주세요. 열린 노트가 삭제되었습니다.'); }), []);
   const update = (id: string, transform: (draft: Draft) => Draft) => setDrafts(values => values[id] ? { ...values, [id]: transform(values[id]) } : values);
   async function open(id: string) {
     const sequence = ++openSequence.current;
     if (state.current[id]) { setActive(id); onLocation(id); return; }
     if (Object.keys(state.current).length >= 12) { setError('한 창에서 최대 12개 노트를 열 수 있습니다. 사용하지 않는 탭을 닫아 주세요.'); return; }
     setBusy(true); setError(''); const epoch = sessionEpoch.current;
-    try { const note = await api.note(id); if (epoch !== sessionEpoch.current || sequence !== openSequence.current) return; setDrafts(values => ({ ...values, [id]: values[id] || openDraft(note) })); setCommentDrafts(values => values[id] ? values : { ...values, [id]: { body: '', busy: false } }); setTabs(values => values.includes(id) ? values : [...values, id]); setActive(id); onLocation(id); }
+    try { const note = await api.note(id); if (epoch !== sessionEpoch.current || sequence !== openSequence.current) return; tabOwners.current[id] = Symbol(id); setDrafts(values => ({ ...values, [id]: values[id] || openDraft(note) })); setCommentDrafts(values => values[id] ? values : { ...values, [id]: { body: '', busy: false } }); setPropertyDrafts(values => values[id] ? values : { ...values, [id]: createPropertyDraft(note.revision) }); setTabs(values => values.includes(id) ? values : [...values, id]); setActive(id); onLocation(id); }
     catch (e) { if (epoch === sessionEpoch.current) setError((e as Error).message); } finally { setBusy(false); }
   }
   useEffect(() => {
@@ -54,14 +58,17 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
       const epoch = ++sessionEpoch.current;
       openSequence.current++;
       await Promise.all(Object.keys(state.current).map(async id => {
+        const owner = tabOwners.current[id];
         try {
           const note = await api.note(id);
-          if (epoch === sessionEpoch.current) update(id, value => acceptMetadata(value, note));
+          if (epoch === sessionEpoch.current && owner === tabOwners.current[id]) update(id, value => acceptMetadata(value, note));
         } catch (failure) {
-          if (epoch !== sessionEpoch.current) return;
+          if (epoch !== sessionEpoch.current || owner !== tabOwners.current[id]) return;
           if (!(failure instanceof ApiError) || failure.code !== 'NOT_FOUND') throw failure;
+          delete tabOwners.current[id];
           setDrafts(values => { const next = { ...values }; delete next[id]; state.current = next; return next; });
           setCommentDrafts(values => { const next = { ...values }; delete next[id]; return next; });
+          setPropertyDrafts(values => { const next = { ...values }; delete next[id]; return next; });
           setTabs(values => values.filter(value => value !== id));
           if (activeRef.current === id) { setActive(null); onLocation(null); }
           setLatest(undefined);
@@ -75,8 +82,10 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   }, [api, onLocation]);
   useEffect(() => { if (requestedId) void open(requestedId); }, [requestedId]);
   const draft = active ? drafts[active] : undefined;
+  const activeOwner = active ? tabOwners.current[active] : undefined;
+  const ownsTab = () => active !== null && tabOwners.current[active] === activeOwner;
   useEffect(() => { setLatest(undefined); }, [active]);
-  useEffect(() => { onDirty(Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy)); }, [drafts, commentDrafts, onDirty]);
+  useEffect(() => { onDirty(Object.values(drafts).some(value => value.dirty) || Object.values(commentDrafts).some(value => !!value.body.trim() || value.busy) || Object.values(propertyDrafts).some(value => value.dirty || value.busy)); }, [drafts, commentDrafts, propertyDrafts, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
   async function save() {
     if (!active || !draft || invalid[active] || saving.current) return;
@@ -94,10 +103,12 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   }
   function close(id: string) {
     const draft = drafts[id];
-    if (saving.current || !canClose(draft && { ...draft, dirty: draft.dirty || !!commentDrafts[id]?.body.trim() || !!commentDrafts[id]?.busy }, () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
+    if (saving.current || !canClose(draft && { ...draft, dirty: draft.dirty || !!commentDrafts[id]?.body.trim() || !!commentDrafts[id]?.busy || !!propertyDrafts[id]?.dirty || !!propertyDrafts[id]?.busy }, () => window.confirm('저장하지 않은 변경을 버리고 탭을 닫을까요?'))) return;
     const remaining = tabs.filter(value => value !== id); setTabs(remaining);
+    delete tabOwners.current[id];
     setDrafts(values => { const next = { ...values }; delete next[id]; return next; });
     setCommentDrafts(values => { const next = { ...values }; delete next[id]; return next; });
+    setPropertyDrafts(values => { const next = { ...values }; delete next[id]; return next; });
     if (active === id) { const next = remaining.at(-1) || null; setActive(next); onLocation(next); }
   }
   function openDetails(panel: NotePanel) {
@@ -110,7 +121,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) { setActive(id); onLocation(id); } }}>
       <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
         {tabs.map((id, index) => <Group key={id} gap={0} wrap="nowrap">
-          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
+          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
           <ActionIcon variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
           <ActionIcon variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
@@ -126,7 +137,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
       <Page editorKey={`${paneId}:${active}:${editorEpoch}`} header={<>
         <Group gap="xs" wrap="nowrap" className="note-page-breadcrumb"><IconFileText size={17} stroke={1.5}/><Text size="sm" truncate>{draft.title || '제목 없음'}</Text></Group>
         <Group gap="xs" wrap="nowrap" className="note-page-actions">
-        <Tooltip label="최신 버전 확인" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="최신 버전 확인" disabled={busy} onClick={async () => { const id = active; const epoch = sessionEpoch.current; setError(''); try { const note = await api.note(id); if (epoch === sessionEpoch.current && activeRef.current === id) setLatest(openDraft(note)); } catch (e) { if (epoch === sessionEpoch.current) setError((e as Error).message); } }}><IconRefresh size={18}/></ActionIcon></Tooltip>
+        <Tooltip label="최신 버전 확인" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="최신 버전 확인" disabled={busy} onClick={async () => { const id = active; const epoch = sessionEpoch.current; setError(''); try { const note = await api.note(id); if (epoch === sessionEpoch.current && activeRef.current === id && ownsTab()) setLatest(openDraft(note)); } catch (e) { if (epoch === sessionEpoch.current && ownsTab()) setError((e as Error).message); } }}><IconRefresh size={18}/></ActionIcon></Tooltip>
         <Button size="xs" disabled={!draft.note.canEdit || !draft.dirty || busy || invalid[active]} onClick={() => void save()}>저장</Button>
         <Tooltip label="댓글" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="댓글 및 노트 상세" aria-expanded={details === 'details'} onClick={() => { if (details === 'details') setDetails(null); else openDetails('comments'); }}><IconMessage size={20} stroke={1.5}/></ActionIcon></Tooltip>
          {knowledgeContext && <Tooltip label="현재 정리·근거·누적 이력" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="지식 정보" aria-expanded={details === 'knowledge'} onClick={toggleKnowledge}><IconInfoCircle size={20} stroke={1.5}/></ActionIcon></Tooltip>}
@@ -155,7 +166,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
            <NoteCurrentKnowledge key={`${active}:${draft.note.revision}`} api={knowledgeContext} noteId={active} spaceId={draft.note.spaceId}/>
            <NoteKnowledgeContext api={knowledgeContext} note={draft.note}/>
         </div>}
-         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => update(active, value => acceptMetadata(value, note))} onRestore={acceptRestore}/></div>}
+         {openedDetails && <div hidden={details !== 'details'} className="note-detail-panels"><NotePanels key={active} api={api} note={draft.note} dirty={draft.dirty} panel={detailPanel} onPanelChange={setDetailPanel} isCurrent={ownsTab} commentDraft={commentDrafts[active]} onCommentDraftChange={transform => setCommentDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} propertyDraft={propertyDrafts[active]} onPropertyDraftChange={transform => setPropertyDrafts(values => ownsTab() && values[active] ? { ...values, [active]: transform(values[active]) } : values)} onOpen={id => void open(id)} onRevision={note => { if (ownsTab()) update(active, value => acceptMetadata(value, note)); }} onRestore={note => { if (ownsTab()) acceptRestore(note); }}/></div>}
       </Aside>}/>
     </div>}
   </section></DocmostPaneProvider>;

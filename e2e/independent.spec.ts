@@ -444,6 +444,122 @@ test('retains per-tab comments and their uncertain write identity while another 
   await expect(comment).toHaveText('Independent second-tab comment.');
 });
 
+test('retains tab-owned property drafts and retries accepted write readback without repeating the mutation', async ({ page }) => {
+  const first = await create(page, 'First property tab'); const second = await create(page, 'Second property tab'); await open(page, first.id);
+  await page.evaluate(async first => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    let readbackUnavailable = false; let writes = 0; Reflect.set(window, 'propertyWriteCount', 0); Reflect.set(window, 'propertyNavigation', false);
+    window.addEventListener('fixture-recover-properties', () => { readbackUnavailable = false; });
+    const client: NoteCoreApi = { ...api,
+      properties: async id => { if (id === first && readbackUnavailable) throw new gui.ApiError('Accepted property readback unavailable', 'NETWORK'); return api.properties(id); },
+      setProperties: async (id, values, revision) => { writes++; Reflect.set(window, 'propertyWriteCount', writes); await api.setProperties(id, values, revision); readbackUnavailable = true; },
+    };
+    const bindings = { ...host, onNavigate: () => { Reflect.set(window, 'propertyNavigation', true); return true; } };
+    window.noteExample = { api: client, access, host: bindings, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host: bindings }) };
+  }, first.id);
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
+  await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByRole('button', { name: '속성 추가', exact: true }).click();
+  await page.getByRole('textbox', { name: '속성 이름', exact: true }).fill('First property draft');
+  await page.getByLabel('값', { exact: true }).fill('First value');
+  await page.getByRole('treeitem', { name: 'Second property tab', exact: true }).click();
+  await page.getByRole('button', { name: '속성 추가', exact: true }).click();
+  await page.getByRole('textbox', { name: '속성 이름', exact: true }).fill('Second property draft');
+  await page.getByRole('tab', { name: /^First property tab/ }).click();
+  await expect(page.getByRole('textbox', { name: '속성 이름', exact: true })).toHaveValue('First property draft');
+  await expect(page.getByLabel('값', { exact: true })).toHaveValue('First value');
+  page.once('dialog', dialog => dialog.dismiss()); await page.getByRole('link', { name: '홈', exact: true }).click();
+  expect(await page.evaluate(() => Reflect.get(window, 'propertyNavigation'))).toBe(false);
+  await page.getByRole('button', { name: '이 속성 저장', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveText('Accepted property readback unavailable');
+  await page.getByRole('tab', { name: /^Second property tab/ }).click();
+  await expect(page.getByRole('textbox', { name: '속성 이름', exact: true })).toHaveValue('Second property draft');
+  await page.getByRole('tab', { name: /^First property tab/ }).click();
+  await expect(page.getByRole('button', { name: '속성 새로고침', exact: true })).toBeVisible();
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-recover-properties')));
+  await page.getByRole('button', { name: '속성 새로고침', exact: true }).click();
+  await expect(page.getByText('속성 변경을 저장했습니다.', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => Reflect.get(window, 'propertyWriteCount'))).toBe(1);
+  const saved = await page.evaluate(async id => ({ note: await window.noteExample.api.note(id), properties: await window.noteExample.api.properties(id) }), first.id);
+  expect(saved.note.revision).toBe(2); expect(saved.properties).toHaveLength(1); expect(saved.properties[0]).toMatchObject({ key: 'First property draft', value: 'First value' });
+  await page.getByRole('tab', { name: /^Second property tab/ }).click();
+  await expect(page.getByRole('textbox', { name: '속성 이름', exact: true })).toHaveValue('Second property draft');
+  expect((await page.evaluate(id => window.noteExample.api.properties(id), second.id))).toHaveLength(0);
+});
+
+test('retires an old property acknowledgement when its note tab is closed and reopened', async ({ page }) => {
+  const first = await create(page, 'Reopened property owner'); await create(page, 'Other property owner'); await open(page, first.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    let release!: () => void; const delivery = new Promise<void>(resolve => { release = resolve; });
+    window.addEventListener('fixture-release-retired-property', () => release(), { once: true });
+    Reflect.set(window, 'retiredPropertyReads', 0);
+    const client: NoteCoreApi = { ...api,
+      properties: async id => { Reflect.set(window, 'retiredPropertyReads', Reflect.get(window, 'retiredPropertyReads') + 1); return api.properties(id); },
+      setProperties: async (id, values, revision) => { await api.setProperties(id, values, revision); Reflect.set(window, 'retiredPropertyCommitted', true); await delivery; Reflect.set(window, 'retiredPropertyDelivered', true); },
+    };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  });
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await page.getByRole('button', { name: '속성 추가', exact: true }).click();
+  await page.getByRole('textbox', { name: '속성 이름', exact: true }).fill('Accepted old property');
+  await page.getByRole('button', { name: '이 속성 저장', exact: true }).click(); await page.waitForFunction(() => Reflect.get(window, 'retiredPropertyCommitted'));
+  await page.getByRole('treeitem', { name: 'Other property owner', exact: true }).click();
+  page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: 'Reopened property owner 탭 닫기', exact: true }).click();
+  await page.getByRole('treeitem', { name: 'Reopened property owner', exact: true }).click();
+  await page.getByRole('button', { name: '속성 추가', exact: true }).click();
+  await page.getByRole('textbox', { name: '속성 이름', exact: true }).last().fill('New independent property draft');
+  const reads = await page.evaluate(() => Reflect.get(window, 'retiredPropertyReads'));
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-release-retired-property'))); await page.waitForFunction(() => Reflect.get(window, 'retiredPropertyDelivered'));
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await expect(page.getByRole('textbox', { name: '속성 이름', exact: true }).last()).toHaveValue('New independent property draft');
+  expect(await page.evaluate(() => Reflect.get(window, 'retiredPropertyReads'))).toBe(reads);
+});
+
+test('does not install an old latest-version lookup into a reopened tab for the same note', async ({ page }) => {
+  const note = await create(page, 'Latest lookup owner'); await create(page, 'Other lookup owner'); await open(page, note.id);
+  await page.evaluate(async id => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    let hold = false; let release!: () => void; const delivery = new Promise<void>(resolve => { release = resolve; });
+    window.addEventListener('fixture-hold-latest', () => { hold = true; }); window.addEventListener('fixture-release-latest', () => release(), { once: true });
+    const client: NoteCoreApi = { ...api, note: async target => { const result = await api.note(target); if (target === id && hold) { hold = false; Reflect.set(window, 'oldLatestStarted', true); await delivery; Reflect.set(window, 'oldLatestDelivered', true); } return result; } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  }, note.id);
+  await expect(page.getByRole('textbox', { name: '노트 제목', exact: true })).toHaveText('Latest lookup owner');
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-hold-latest'))); await page.getByRole('button', { name: '최신 버전 확인', exact: true }).click();
+  await page.waitForFunction(() => Reflect.get(window, 'oldLatestStarted'));
+  await page.evaluate(async id => { const note = await window.noteExample.api.note(id); await window.noteExample.api.save(id, { title: 'New server revision', bodyJson: note.bodyJson, expectedRevision: note.revision, idempotencyKey: crypto.randomUUID() }); }, note.id);
+  await page.getByRole('treeitem', { name: 'Other lookup owner', exact: true }).click(); await page.getByRole('button', { name: 'Latest lookup owner 탭 닫기', exact: true }).click();
+  await page.getByRole('treeitem', { name: 'Latest lookup owner', exact: true }).click(); await expect(page.getByRole('textbox', { name: '노트 제목', exact: true })).toHaveText('New server revision');
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-release-latest'))); await page.waitForFunction(() => Reflect.get(window, 'oldLatestDelivered'));
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await expect(page.getByRole('button', { name: '서버 버전 열기', exact: true })).toHaveCount(0);
+  await expect(page.locator('.note-body-status')).toContainText('개정 2');
+});
+
+test('recovers a failed property read without an empty success or a draft-erasing write', async ({ page }) => {
+  const note = await create(page, 'Property read failure'); await open(page, note.id);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount(); let unavailable = true;
+    window.addEventListener('fixture-recover-property-read', () => { unavailable = false; });
+    const client: NoteCoreApi = { ...api, properties: async id => { if (unavailable) throw new gui.ApiError('Property projection unavailable', 'NETWORK'); return api.properties(id); } };
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host }) };
+  });
+  const body = page.getByRole('textbox', { name: '노트 본문', exact: true }); await body.fill('Retain this body through property recovery.');
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '속성', exact: true }).click();
+  await expect(page.getByRole('alert')).toHaveText('Property projection unavailable');
+  await expect(page.getByText('아직 속성이 없습니다.', { exact: true })).toHaveCount(0);
+  await page.evaluate(() => window.dispatchEvent(new Event('fixture-recover-property-read')));
+  await page.getByRole('button', { name: '속성 다시 읽기', exact: true }).click();
+  await expect(page.getByText('아직 속성이 없습니다.', { exact: true })).toBeVisible(); await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(body).toHaveText('Retain this body through property recovery.');
+  expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).revision).toBe(1);
+});
+
 test('retains an unsaved comment editor through an injected access refresh', async ({ page }) => {
   const note = await create(page, 'Comment draft'); await open(page, note.id);
   await page.getByRole('button', { name: '댓글 및 노트 상세', exact: true }).click();

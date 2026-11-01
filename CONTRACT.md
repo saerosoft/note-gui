@@ -313,6 +313,14 @@ note tab inside each pane. Switching tabs does not abandon them or allocate a
 new key. Comment-only edits participate in tab-close and host-departure dirty
 confirmation. Revocation clears them together with the protected pane drafts.
 
+Typed property drafts and acknowledged-write readback state have the same tab
+ownership. A tab switch retains unsaved values and their original revision
+guard. Retrying an acknowledged property's readback performs reads only;
+unavailable initial reads never claim that the property list is empty.
+Closing and reopening the same note creates a new tab owner. A retired
+acknowledgement cannot update that new tab or start its follow-up reads; a
+retired latest-version lookup likewise cannot install an old comparison.
+
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,

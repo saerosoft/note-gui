@@ -62,6 +62,15 @@ Current independent execution has reproduced and repaired two additional gaps:
   Draft text, busy state, exact pending key and safe failure now belong to the
   cached note tab. Other tab drafts survive a delayed committed/lost reply;
   comment-only dirty departure and tab-close cancellation are checked.
+- G04/G06/G08: tab switches also erased property drafts and acknowledged-write
+  readback state. Both failures were reproduced. Typed values, baseline revision,
+  accepted state and safe errors now belong to the tab; read retry does not
+  repeat the accepted mutation or erase an independent body/property draft.
+- G04/G08: a delayed property acknowledgement and a latest-version lookup could
+  target a newly reopened tab with the same note ID. Both were reproduced in
+  actual browser tests. Tab-instance owners now fence cached updates and stop
+  undispatched follow-up reads after retirement, while still allowing a cached
+  inactive tab's own operation to finish.
 
 Current gates: `verify-02.log` (264 tests/32 files plus the full normal gate),
 `independent-02.log` (20/20), `native-drawio-03.log` (3/3), and actual tarball

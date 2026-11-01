@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Tabs } from '@mantine/core';
 import './docmost/i18n';
 import CommentListWithTabs from './vendor/docmost/client/features/comment/components/comment-list-with-tabs';
 import { DocmostHistory } from './docmost/DocmostHistory';
-import { NoteProperties } from './NoteProperties';
+import { NoteProperties, type PropertyDraft } from './NoteProperties';
 import { NoteRelations } from './NoteRelations';
 import { NoteAttachments } from './NoteAttachments';
 import type { AddComment, Comment, Note, NoteCoreApi, Page, Revision } from './model';
@@ -11,8 +11,8 @@ import { useNoteAccess, useRelations } from './hostRuntime';
 
 export type NotePanel = 'comments' | 'history' | 'properties' | 'relations' | 'attachments';
 export interface CommentDraft { body: string; busy: boolean; error?: string; pending?: { noteId: string; input: AddComment } }
-interface Props { api: NoteCoreApi; note: Note; dirty: boolean; panel?: NotePanel; onPanelChange?: (panel: NotePanel) => void; commentDraft?: CommentDraft; onCommentDraftChange?: (transform: (draft: CommentDraft) => CommentDraft) => void; onRestore: (note: Note) => void; onOpen: (id: string) => void; onRevision: (note: Note) => void }
-export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChange, commentDraft: suppliedCommentDraft, onCommentDraftChange, onRestore, onOpen, onRevision }: Props) {
+interface Props { api: NoteCoreApi; note: Note; dirty: boolean; panel?: NotePanel; onPanelChange?: (panel: NotePanel) => void; isCurrent?: () => boolean; commentDraft?: CommentDraft; onCommentDraftChange?: (transform: (draft: CommentDraft) => CommentDraft) => void; propertyDraft?: PropertyDraft; onPropertyDraftChange?: (transform: (draft: PropertyDraft) => PropertyDraft) => void; onRestore: (note: Note) => void; onOpen: (id: string) => void; onRevision: (note: Note) => void }
+export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChange, isCurrent, commentDraft: suppliedCommentDraft, onCommentDraftChange, propertyDraft, onPropertyDraftChange, onRestore, onOpen, onRevision }: Props) {
   const relations = useRelations();
   const access = useNoteAccess();
   const [localPanel, setLocalPanel] = useState<NotePanel>('comments');
@@ -33,6 +33,9 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   const [localCommentDraft, setLocalCommentDraft] = useState<CommentDraft>({ body: '', busy: false });
   const commentDraft = suppliedCommentDraft ?? localCommentDraft;
   const updateCommentDraft = onCommentDraftChange ?? setLocalCommentDraft;
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const ownsTab = isCurrent ?? (() => mounted.current);
   useEffect(() => {
     let alive = true; let sequence = 0;
     async function load() {
@@ -55,7 +58,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
   }
   async function retryRead() {
     setBusy(true); setError('');
-    try { onRevision(await api.note(note.id)); setReload(value => value + 1); }
+    try { const current = await api.note(note.id); if (ownsTab()) { onRevision(current); setReload(value => value + 1); } }
     catch (failure) { setError((failure as Error).message); }
     finally { setBusy(false); }
   }
@@ -70,11 +73,12 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
     try {
       await api.comment(request.noteId, request.input);
       committed = true;
+      if (!ownsTab()) return true;
       updateCommentDraft(value => ({ ...value, pending: undefined, body: value.body === message ? '' : value.body }));
       const [comments, current] = await Promise.all([api.comments(request.noteId, null), api.note(request.noteId)]);
-      onRevision(current); setComments(comments);
+      if (ownsTab()) { onRevision(current); setComments(comments); }
     } catch (failure) { updateCommentDraft(value => ({ ...value, error: (failure as Error).message })); }
-    finally { setBusy(false); updateCommentDraft(value => ({ ...value, busy: false })); }
+    finally { if (ownsTab()) { setBusy(false); updateCommentDraft(value => ({ ...value, busy: false })); } }
     return committed;
   }
   return <aside className="note-panels" aria-label="노트 상세">
@@ -91,7 +95,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
         onRestore={revision => { if (window.confirm(`개정 ${revision.revision}을 새 개정으로 복원할까요?`)) void perform(async () => onRestore(await api.restore(note.id, revision.revision, note.revision))); }}
         onLoadMore={() => void perform(async () => { const page = await api.history(note.id, history.nextCursor); setHistory({ items: [...history.items, ...page.items].slice(-100), nextCursor: page.nextCursor }); })}/>
     </div>}
-    {visited.includes('properties') && <div hidden={panel !== 'properties'} className="note-panel-content"><NoteProperties api={api} note={note} dirty={dirty} onRevision={onRevision}/></div>}
+    {visited.includes('properties') && <div hidden={panel !== 'properties'} className="note-panel-content"><NoteProperties api={api} note={note} dirty={dirty} draft={propertyDraft} onDraftChange={onPropertyDraftChange} isCurrent={ownsTab} onRevision={onRevision}/></div>}
     {visited.includes('attachments') && <div hidden={panel !== 'attachments'} className="note-panel-content"><NoteAttachments api={api} noteId={note.id} revision={note.revision}/></div>}
      {visited.includes('relations') && relations && <div hidden={panel !== 'relations'} className="note-panel-content"><NoteRelations api={api} relations={relations} note={note} onOpen={onOpen} onRevision={onRevision}/></div>}
   </aside>;
