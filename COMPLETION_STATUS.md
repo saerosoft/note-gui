@@ -170,6 +170,28 @@ their present hashes are not execution-time proof of the original source bytes.
 The earlier ordered prerequisite receipt05 also has no source pre/post snapshot;
 later source hashes cannot retroactively provide that missing binding.
 
+COMPLETED additional focused-pane cache prerequisite diagnosis: holding the
+initial left tree response reproduces the exact expected2/observed3 page-count
+failure while both drafts remain intact. The pane change retires that pending
+response before it can populate the cache, so returning left correctly refetches.
+Waiting for the first left tree row before changing panes restores the intended
+cache-reuse precondition; the same held-response case then passes with exactly
+two requests. Expected counts, drafts and timeouts are unchanged. Full normal
+run40 passes307/34, exit0 in127.10seconds, with immutable source/config/lock
+snapshots and matching pre/post hashes; changed input paths are empty. First
+ancestor3868ms and focused-pane3850ms are observations, not resolution of the
+older deadline failure. Read-only review reports no actionable findings.
+Type checking, source-offer refresh, distribution verification and strict
+package imports43 pass with the same217 src/config/lock input hashes before
+and after execution. No production build is repeated for this test-only change.
+
+An earlier source-bound focused run at04:04 records history9/9 and ancestor5/7,
+exit1, with all216 preserved input files matching pre/post hashes. It predates
+the public repair commits and has the same original first-case timeout plus
+the second-case page-count failure. This is valid historical RED evidence;
+the controlled cache experiment does not establish the older run's exact causal
+sequence, and the original timeout remains open.
+
 ## Source reconciliation
 
 Read on 2026-11-01: the current session assignment; KMS's release completion

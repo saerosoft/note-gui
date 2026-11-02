@@ -215,6 +215,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   Full instrumented29 and one bounded normal31 each pass307/34 with matching
   pre/post input hashes; the normal first case takes4449ms. This verifies the
   separate move-order repair, not the original consumer failure's cause.
+- [x] Reproduce the focused-pane expected2/observed3 page-count failure by holding
+  only the initial tree response. Both drafts remain intact; the cancelled page
+  correctly refetches. Await the first row before switching panes to establish
+  the test's cache-reuse prerequisite, retaining the exact two-page assertion.
+  Controlled RED/GREEN sources are preserved; normal40 passes307/34 with
+  immutable src/config/lock snapshots and matching pre/post hashes. Original
+  first-case timeout remains separately unresolved. Review reports no findings.
 
 ## Verification results
 
