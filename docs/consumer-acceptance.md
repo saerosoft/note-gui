@@ -6,19 +6,14 @@ The published release is 0.8.0, building on the verified 0.7
 repairs through `8946d40b`, implemented and pushed in `bd28c292`. Optional policy/association adapters and mount-local
 dirty reporting establish a new MINOR contract. The local store version and
 public root, KMS and stylesheet export paths remain unchanged.
-The candidate repairs pending restore ownership, tab-owned comment/property
-drafts, retired-tab responses, property/relation recovery and native slash/link
-menu lifetimes and unapplied native-diagram navigation/close guards. It also
-ships a local CJK-only Noto Sans KR fallback, including
-code and comparison views, while retaining Latin and monospace font choices.
-Consumers must update the complete matching module, CSS and asset tree together.
+The [functional specification](functional-specification.md) owns restore and
+mutation recovery (F02/F04), pane/tab/native-draft ownership (F03/F08), panel
+recovery (F06) and native composition/font delivery (F10). The dated checks
+below provide evidence for those requirements without redefining them.
 
-A pending restore accepts only its original note. Later dirty content keeps its
-editor instance and conflict base; another tab or pane is not remounted. Panel
-read recovery does not replay an acknowledged property or relation write. No
-storage migration is required. Hosts opt into the new named capabilities and
-dirty reporting; existing core-only mounts still work. The package remains private
-to npm publication. Qualification and KMS adoption are separate; deployed
+No storage migration is required. Optional capability adoption and existing
+core-only compatibility follow [CONTRACT.md](../CONTRACT.md). The package remains
+private to npm publication. Qualification and KMS adoption are separate; deployed
 consumers retain their prior reviewed tuple until adoption is accepted.
 
 COMPLETED release qualification/publication: `version/0.8` and annotated
@@ -40,6 +35,13 @@ assets only.
 
 ## Producer checks
 
+- A later actual GNU Make `verify` on2026-11-02 passes in a private copy of all
+  current working tracked inputs: source3, unit307/34, normal type/declaration/
+  production build/distribution and strict package imports, exit0/73.158seconds.
+  All294 input copies and pre/post hashes match; all803 source/dependency-notice
+  ZIP entries match their inputs. Make4.4.1 is extracted locally without a system
+  install. This preserves the older exit127, original outputs and immutable0.8
+  assets. It qualifies this working-input snapshot, not a new release or KMS gate.
 - `verify-23.log` passes three source-offer exclusion tests, 307 unit/component tests
   in 34 files, TypeScript/declarations, the production module/CSS/assets build,
   distribution verification and strict package-name declaration/export checks.

@@ -18,9 +18,21 @@ private/administrator audience labels are also verified.
 Current-host rule-version and legacy-origin cases remain NOT YET VERIFIED.
 The historical cases below retain those obligations; this document is not ready
 for retirement. F07 in the functional specification owns lasting behavior.
-Normal rule validation requires the ordinary durable worker, which is absent
-from this pinned runtime. The rejected run04 is retained; approval records are
-not fabricated to bypass that prerequisite.
+Initial run04 lacks the ordinary durable worker required by normal rule
+validation. A later finite notifications/text-worker attempt `2b7136e2305b`
+reaches that validation and fails with `LOCATIONS_OUT_OF_SCOPE`: its fixture
+passes a space UUID instead of a shared note location. Both failures remain
+preserved, and neither attempt approves or activates a rule.
+
+Separate V2 run `aecb6a5a27ed` verifies the actual shared-note location through
+normal durable validation: hostPassed:true, findings:[], comparison PENDING,
+executionProfile:null. It deliberately stops at exit1/40.013seconds. No comparison
+observations, review, approval, activation, proposal or browser run occurs.
+Independent hashes, inventories, original roles and owned cleanup match.
+Genuine comparison observations and future target-subtree application remain
+required; no row-level post-validation rule-state SQL snapshot was captured.
+This bounded diagnosis does not qualify the rule-version case. Executed V1/V2
+inputs remain unchanged; further host cases need a new agreed interval.
 
 On 2026-10-24, both scenarios in `e2e/populated.spec.ts` passed against the
 isolated Knowledge Engine API and three account sessions. The database held

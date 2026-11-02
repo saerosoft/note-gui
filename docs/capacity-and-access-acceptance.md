@@ -85,12 +85,26 @@ the fix.
 The user approved the current GUI workload definition on 2026-11-02: one million
 isolated notes with actual Next/API/storage; paced20 requests/second steady load,
 three15-minute measured windows per authorized population,100 requests/second
-stress, and separate100%,10%,1%,0.1% authorized populations. Steady measurement
+stress for five minutes per population, and separate100%,10%,1%,0.1% authorized populations. Steady measurement
 therefore totals three hours, excluding warmup and stress. Record achieved rate,
 latency percentiles, errors and memory; no unagreed latency SLO or search/model
 quality claim is implied. This definition is COMPLETE; its execution is NOT YET
 VERIFIED. Unachieved scenarios remain open. Preserve the historical receipts
 above without relabeling them as this new workload.
+
+The user separately confirmed five-minute stress windows for all four
+populations. Measured steady/stress time totals three hours20minutes; four
+one-minute warmups and seed/drain/cleanup time are additional. A separate
+unexecuted workload candidate reflects that definition; the old900-second
+candidate remains unchanged. Definition checks pass3/3 and the unchanged
+scheduler checks pass4/4. Neither result is a capacity measurement.
+
+The user approved this exact isolated frozen-tuple seed and measurement scope
+within a maximum five-hour reservation. Keep20GiB available memory and10GiB
+disk headroom, container ceilings totaling15.25GiB and a separate2GiB
+driver/browser limit. This caps owned cgroups, not the whole host. Execution
+still requires a new independently coordinated interval and immediate guards;
+a finite note-host reservation cannot cover this workload.
 
 The owning backend prepares the isolated data and session files. It supplies
 `NOTE_GUI_E2E_FIXTURE`, a JSON object with UUID fields `space`, `destination`,

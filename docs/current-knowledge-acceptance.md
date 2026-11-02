@@ -27,6 +27,25 @@ proposal rejection after a newer human save. The bounded run above does not
 establish those cases or formatted-document diagram retention. Keep this
 record until each applicable current-host case has evidence.
 
+The finite text-worker attempt `2b7136e2305b` on2026-11-02 fails normal durable
+rule validation with `LOCATIONS_OUT_OF_SCOPE` before approval or application.
+The fixture supplies a space UUID where the host requires a shared note location
+and proposal targets within its subtree. Execution inputs remain unchanged;
+independent inventories, roles and owned-resource cleanup pass, with zero model
+calls. This failed attempt does not qualify the rule-version case. Prepare any
+correction separately from the executed inputs and obtain a new finite resource
+interval before rerunning; the prior reservation ends at05:22UTC.
+V2 run `aecb6a5a27ed` completes the location diagnosis: normal durable validation
+returns hostPassed:true, findings:[], comparison PENDING and no execution profile.
+It deliberately stops at exit1/40.013seconds until independent comparison
+observations exist. No review, approval, activation, proposal, browser or model
+call runs. Independent source/artifact/driver hashes, three135-table inventories,
+exact original roles and owned cleanup match. Future target-subtree enforcement
+and a row-level post-validation rule-state SQL snapshot remain unverified.
+Expected case values cannot supply comparison observations; rule acceptance
+remains open. The execution interval ended at10:25UTC and the next calendar
+request was declined because of the peer's conflicting QA01 work.
+
 The isolated database was migrated by creating a fresh database with strict
 Flyway history, then restoring only the retained application data. The source
 database stayed unchanged. Before any new cases were applied, all 1,000,055

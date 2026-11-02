@@ -83,6 +83,40 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 
 ## Remaining execution checklist
 
+- [x] Run actual GNU Make `verify` using a locally extracted checksum-verified
+  Make4.4.1 in a private source/dependency/output copy. Exit0 in73.158seconds:
+  source3, unit307/34, normal types/declarations/build/distribution and strict
+  package imports pass. All294 tracked input copies and pre/post hashes match;
+  all803 source/dependency-notice ZIP entries match their input bytes. Original
+  outputs and prior make-exit127 evidence remain unchanged. KMS gates stay open.
+- [x] Prepare matched-native inputs without building:2213 exact parent blobs,
+  295 exact GUI blobs, private dependency copies with matching installed locks,
+  and normal released-dependency check exit0. Declare the normal build command,
+  matching origin and independent external harness inputs. No response-header
+  override or post-build asset replacement is allowed; native acceptance is open.
+- [x] Independently pair immutable selected-before216 GUI Git blobs with the
+  actual frozen-after216 execution copies. Only history prerequisite waits and
+  the.tmp exclusion differ; all other input bytes, assertions and timeouts match.
+  After-run history9/9 is green while ancestor5/7 and the overall exit1 remain.
+  The original gate has no direct GUI execution-time pre/post digest; preserve
+  that limit and do not infer ancestor resolution or consumer acceptance.
+- [x] Confirm the remaining workload duration with the user:100rps for five
+  minutes per authorization profile. Preserve20rps/15minutes×3 across four
+  profiles. Measured time is3h20min; warmup/seed/drain/cleanup remain separate.
+  Verify the separate unexecuted candidate's definition3/3 and scheduler4/4,
+  preserving the original900-second candidate and all failed evidence.
+- [x] Obtain exact isolated native-build and workload execution scope approval:
+  old frozen tuple, new temporary inputs/outputs, no current source/pin/build
+  mutations. Resource reservations remain separate; neither workload nor native
+  acceptance is claimed from approval or preparation.
+- [x] Perform one explicitly approved normal shared-memory-service restart.
+  Command exits0; post-check shows the service active, CPUpressureavg10 at0.54%,
+  more than20GiB available and18130 unoccupied. No data/configuration change or
+  direct force-kill command occurs. This observation grants no resource interval
+  and does not establish the historical ancestor timeout's cause.
+- [x] Remove duplicated release-candidate behavior definitions from the consumer
+  packet. Map them to F02/F03/F04/F06/F08/F10 and CONTRACT instead; retain exact
+  release identity, dated evidence and unfinished consumer acceptance cases.
 - [x] Complete D07 bounded current-host verification, including source URL and
   both editor/draft lifetimes through access refresh, destination-link clearing,
   1,000 paragraphs, actual20MiB native download and oversized-write rejection.
@@ -95,6 +129,31 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   Eight NOT_FOUND reads each have the identical successful owner control and
   restricted-audience labels pass. Rule-version and legacy-origin remain open;
   normal rule validation requires a matching ordinary durable worker artifact.
+- [x] Record finite text-worker run `2b7136e2305b`: normal durable validation
+  rejects the fixture with `LOCATIONS_OUT_OF_SCOPE`, exit1 in71.534seconds.
+  All17 driver hashes remain unchanged; three135-table inventories, original
+  roles and owned-only cleanup are independently verified. No model call occurs.
+- [x] Prepare a separate V2 location diagnostic with a shared note location
+  and future target parents in that subtree. Match all2213 source blobs, complete
+  API/worker artifacts and2660 WEB file hashes; preserve V1 and its17 drivers.
+  Remove expectation-derived comparison observations and all review/approval/
+  activation mutations from V2. This preparation does not qualify rule acceptance.
+- [x] Verify V2 location validation in run `aecb6a5a27ed` within the agreed
+  09:25-10:25UTC interval. Normal durable validation returns hostPassed:true,
+  no findings, comparison PENDING and no execution profile. The diagnostic
+  deliberately stops with exit1/40.013seconds. All2213 source blobs,2660 WEB
+  files and20 captured driver/external/helper inputs match before/after; three
+  135-table inventories, exact original roles and owned cleanup are verified.
+- [x] Verify five execution-wrapper lifecycle fixes: alarm3 and final-evidence2
+  regression tests plus negative preflight3 pass with six input snapshots and
+  matching before/after hashes. Preserve the earlier verification73 setup failure.
+- [ ] Obtain genuine independent comparison observations before rule review,
+  approval, activation or target-subtree application. V2 verifies only location
+  validation; no row-level post-validation rule-state SQL snapshot was captured.
+- [ ] Execute legacy/session, normal matched-native build/acceptance and the
+  sustained workload in separately agreed future intervals. The09:25-10:25UTC
+  interval ended. The proposed next three intervals were all declined because
+  the peer's authorized QA01 work has no bounded pause. No new interval exists.
 
 - [x] Read all nine current docs records and root assignment/completion records.
 - [x] Create this goal without overwriting unrelated goals.

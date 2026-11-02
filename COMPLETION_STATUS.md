@@ -192,7 +192,114 @@ the second-case page-count failure. This is valid historical RED evidence;
 the controlled cache experiment does not establish the older run's exact causal
 sequence, and the original timeout remains open.
 
+Additional source pairing is COMPLETE: all216 immutable GUI Git blobs selected
+by the recorded parent878108b pinb9c1ae1d match reconstruction, and all216 actual
+04:04 execution copies match their recorded pre/post hashes. Exactly two files
+differ: the history prerequisite waits and Vite.tmp exclusion. Removing only
+those additions restores the original bytes; assertions/timeouts remain exact.
+The original selected-before reconstruction has no direct execution-time GUI
+snapshot. The actual after run is still exit1, history9/9 and ancestor5/7;
+this pairing neither retroactively binds the old diagnostics nor resolves the
+ancestor cause or failed consumer gate.
+
+## Finite text-worker fixture failure
+
+Run `2b7136e2305b` on2026-11-02 at05:15:56-05:17:08UTC uses the frozen
+`f40e7a2` source and matching complete API/worker/WEB artifacts. It exits1 after
+71.534seconds because normal durable rule validation returns
+`LOCATIONS_OUT_OF_SCOPE`, `hostPassed:false`, comparison `FAILED` and no
+execution profile. The deadline does not cause the failure. All17 driver
+hashes match before and after execution; model calls remain zero.
+That17-driver record excludes the imported public lease helper. No execution
+snapshot binds that external dependency to this run; current bytes cannot
+retroactively supply it. Keep this limit with the failure evidence.
+
+The fixture passes a space UUID as `allowedLocations`; the frozen host resolves
+note IDs there. Proposal enforcement also requires targets inside an allowed
+note subtree. A separate V2 fixture must satisfy both checks through normal API
+placement. Executed V1 inputs and the failed run remain unchanged.
+
+V2 location diagnosis is COMPLETE in actual run `aecb6a5a27ed` within the agreed
+09:25-10:25UTC interval. Normal durable validation returns hostPassed:true,
+findings:[], comparison PENDING and executionProfile:null. The diagnostic
+deliberately stops for independent comparison observations, exit1/40.013seconds;
+the whole run is FAIL. It performs no comparison review, approval, activation,
+proposal application, browser or model call. Future target-subtree enforcement
+has not executed, and no row-level post-validation rule-state SQL snapshot was
+captured before cleanup. An approved rule and populated rule-link acceptance
+remain open.
+
+Independent proof76 matches2213 source inputs,2660 WEB files, complete API/worker
+artifacts and20 driver/external/helper inputs before and after execution. All20
+driver/helper files were snapshotted before execution. Three135-table inventory
+hashes and exact original roles/organization policy match; six owned containers
+and their network are independently absent. V1 and executed V2 remain unchanged.
+
+The temporary execution wrappers' five lifecycle defects are reproduced and
+fixed: cleanup retains its reserve, expiry cannot be swallowed by ordinary retry
+handlers, the receipt and process share one verdict, malformed diagnostic JSON
+cannot abandon the terminal receipt, and delayed expiry updates the raw report.
+Verification74 passes alarm3, final-evidence2 and negative preflight3 with six
+source snapshots and matching pre/post hashes. Verification73's evidence-path
+collision is retained; it started no fixture. The first three fixes received
+follow-up review; the last two have regression evidence without a final re-review.
+
+Independent checks match all three135-table inventory hashes, preserve original
+roles and organization policy, and confirm absence of six owned containers and
+their network. At05:20:32UTC only87.27seconds remain in the reservation, below
+the210-second execution/cleanup floor, so no next fixture starts. That interval
+ends at05:22UTC. This historical V1 attempt leaves rule/legacy/session acceptance,
+native configuration builds and the sustained workload remain open. No current
+consumer gate, parent build output, retained backend XML or release is changed.
+
+The first new finite/native/workload coordination decisions are BLOCKED and
+reserve no interval. The user subsequently approves one normal shared-memory
+service restart and the exact isolated matched-native/workload scopes. The
+restart exits0; the following read-only sample observes an active service,
+CPUpressureavg10 at0.54%, more than20GiB available and18130 unoccupied. Fresh
+resource/calendar coordination is requested. Old blocked decisions and expired
+windows remain preserved; neither the restart nor this sample establishes the
+original ancestor timeout's cause or authorizes an unreserved fixture.
+
+The later09:25-10:25UTC own-session pledge covers the actual V2 diagnosis only;
+legacy/session are not started because their full900-second execution plus
+180-second cleanup budget no longer fits. The next proposed legacy/native/
+workload calendar is BLOCKED: the peer has authorized QA01 verification and
+implementation without an established pause boundary. None of the proposed
+10:35-11:35,11:45-13:15 or13:25-18:25UTC intervals is reserved. No new fixture,
+native build or workload starts under that declined request.
+
+Workload stress duration is now explicitly five minutes per profile at100rps.
+Steady measurement remains3h; stress adds20minutes and warmup adds4minutes.
+A separate unexecuted candidate retains all original data/authority/resource
+guards and adjusts only the duration and its independent request/revision
+accounting. Definition tests pass3/3 after failing against the old900-second
+candidate; unchanged scheduler tests pass4/4. No million-note seed or workload
+runtime has executed. The user's exact scope approval requires a maximum5h
+reservation, unchanged20GiB/10GiB preflight guards,15.25GiB combined container
+ceilings and a separate2GiB driver/browser ceiling.
+
 ## Source reconciliation
+
+COMPLETED first actual Make gate: GNU Make4.4.1 is extracted under.tmp from an
+Ubuntu package matching configured repository metadata; no system package is
+installed. A private source/dependency/output copy runs real `make verify` on
+2026-11-02 at09:00:44-09:01:58UTC, exit0/73.158seconds. Source3, unit307/34,
+normal types/declarations/build/distribution and strict package imports pass.
+All294 tracked execution-input copies and pre/post hashes match; every803
+source/dependency-notice archive entry is independently byte-matched. Original
+public/KMS outputs and the old make-exit127 remain preserved. Post-run record
+changes receive separate source-offer refresh rather than being attributed to
+that earlier execution. No original ancestor cause or KMS gate is accepted.
+
+Matched-native input preparation is COMPLETE; normal build/runtime is NOT YET
+DONE. Its new private source clone matches2213 parentf40e7a2 blobs and295
+GUIb9c1ae1d blobs, installed dependency locks match, and the ordinary released
+dependency checker exits0. The declared GUI/Next origin is
+`https://127.0.0.1:18143`. Existing outputs remain unchanged. The candidate
+requires normally matching built assets/CSP, forbids post-build replacement,
+and retains integrated co-editor/restore/undo and independent SQL/storage
+acceptance beyond any bounded four-case result.
 
 Read on 2026-11-01: the current session assignment; KMS's release completion
 handoff, document register, completion scope; completion-plan P03/P10/P11/P14–P16;

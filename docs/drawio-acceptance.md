@@ -18,6 +18,20 @@ F08 in the functional specification owns lasting native-editor behavior.
 The dated standalone observations below remain evidence; this record cannot
 retire until the current-host criteria are verified.
 
+The user has now approved the separate isolated matched-origin build scope:
+frozen KMS `f40e7a2`, GUI `b9c1ae1d`, existing matching API and approved
+`https://127.0.0.1:18143` origin, with new temporary source/output paths only.
+Current KMS sources, pins, build outputs and immutable0.8 assets remain preserved.
+This approval does not supply a resource reservation or a passing build/native
+result. Build and actual-host execution remain pending separate coordination.
+
+Input preparation now verifies2213 parent blobs and295 GUI blobs in new private
+clones, copies dependencies privately with matching installed locks, and passes
+the normal released-dependency check. The declared normal build has not run.
+Its candidate checks matching generated assets/CSP and forbids post-build asset
+replacement. A bounded four-case result would still require the remaining
+integrated native co-editor/restore/undo and independent SQL/storage checks.
+
 ## Historical standalone observations
 
 On 2026-10-24, the real-API Chrome suite initially passed both write/revocation scenarios in
