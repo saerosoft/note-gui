@@ -75,13 +75,24 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 | D04 | `docs/capacity-and-access-acceptance.md` | Preserve historical million-note warm receipts/limits; finish agreed current-host workload/platform acceptance. |
 | D05 | `docs/current-knowledge-acceptance.md` | Current-host authored/current/legacy/history/proof/rule and actor/access verification. |
 | D06 | `docs/drawio-acceptance.md` | Current integrated approved deployment and all required co-editor/storage/access cases. |
-| D07 | `docs/move-and-large-document-acceptance.md` | Current-host subtree/draft/long-document/large-byte/workload acceptance. |
+| D07 | `docs/move-and-large-document-acceptance.md` (removed) | COMPLETED bounded current-host move/document/byte checks in `e7bf9972a611`. Six-entry readable archive preserves the original, sanitized proof and F02/F03/F05/F08 mapping. Sustained workload remains D04/G05/AC08. |
 | D08 | `docs/note-gui-acceptance.md` | Close original screen criteria under library-inside-WEB topology individually. |
 | D09 | `docs/populated-data-acceptance.md` | Current populated current/history/proof/attribution/exact-link/access verification. |
 | D10 | `docs/consumer-acceptance.md`, `docs/producer-evidence.json` | COMPLETED bounded producer receipts and readable 93-entry local archive. Named consumer-host/workload/release cases remain open; this packet is not a feature-specification owner. |
 | D11 | `README.md`, `CONTRACT.md`, `OPERATIONS.md`, `release.json` | COMPLETED README feature-detail transfer to the functional specification. Exact protocol/procedures/identity need final G10 reconciliation. Retain factual/legal owners. |
 
 ## Remaining execution checklist
+
+- [x] Complete D07 bounded current-host verification, including source URL and
+  both editor/draft lifetimes through access refresh, destination-link clearing,
+  1,000 paragraphs, actual20MiB native download and oversized-write rejection.
+  Independent135-table inventories/roles/SHA/owned cleanup pass. Preserve the
+  six-entry archive `move-large-retirement-01.tgz` and remove only that completed
+  journal. The approved sustained workload and native-format cases remain open.
+- [x] Verify bounded populated current/history/comparison layout at375/1440px
+  in `1fde06b77a83`:43 controlled API applications preserve4 authored documents,
+  current/history pages20+5 and automatic administrator demotion clears context.
+  Rule-version, legacy-origin and exact denied-read controls remain open.
 
 - [x] Read all nine current docs records and root assignment/completion records.
 - [x] Create this goal without overwriting unrelated goals.

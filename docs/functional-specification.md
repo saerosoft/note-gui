@@ -35,6 +35,8 @@ Saves compare authoritative revisions. Conflicts preserve the draft and offer
 inspection/explicit replacement, without automatic merge. Create/save/comment
 retain exact intent/key after uncertain acknowledgement. Keyless mutations use
 readback before another write; read recovery never repeats an accepted mutation.
+Rejected oversized writes retain the local draft and leave the stored body and
+attachment references unchanged.
 
 ## F03: Tabs, panes and departure
 
@@ -74,6 +76,10 @@ drop and subtree moves preserve unrelated drafts. The host validates every
 source/destination/descendant. Cross-space completion uses actual placement and
 clears obsolete links after authority refresh. Bounded title lookup remains
 separate from full product search. Workload limits require actual measurements.
+Cross-space moves remove the source-tree entry while existing editing windows
+retain their source URL, editor instances and unsaved drafts. The destination
+opens separately; authority refresh clears its completion link without
+discarding readable drafts.
 Tree reads return at most 50 siblings and the cache retains at most 24 pages.
 
 ## F06: Properties and relationships

@@ -84,6 +84,26 @@
     "scope": "Actual Next optional-adapter acceptance with a SHARED organization viewer lacking space membership, real actors, original link identity/creator, native file authority and CONTROLLED private-target/epoch recovery. Populated source/rule/review context, native formats and workload remain open; whole SC09/G10 is not accepted."
   },
   "wholeGuiLaneAccepted": false,
+  "boundedLargeConsumerHost": {
+    "status": "PASS",
+    "run": "e7bf9972a611",
+    "documentParagraphs": 1000,
+    "documentTextCharacters": 92999,
+    "documentJsonBytes": 163026,
+    "nativeDownloadBytes": 20971520,
+    "nativeDownloadSha256": "7d6a5ad4e31c8f2dc018fce5621641b467d9131b462bbf1df3cb347dbf0f4801",
+    "oversizedRejectedDraftCharacters": 110000,
+    "storedBodyAndAttachmentPreserved": true,
+    "twoPrivateMovedNotesKeepOwnerAudienceHierarchy": true,
+    "originalUrlAndBothDomEditorsAndDraftsPreservedThroughRefresh": true,
+    "accessRefreshClearsDestinationLink": true,
+    "completeInventories": 2,
+    "publicTablesPerInventory": 135,
+    "originalOrganizationAndRolesPreserved": true,
+    "ownedResourcesIndependentlyAbsent": true,
+    "rawReceiptSha256": "d9de26716f4136cef1d56657b2aac1894ee6db571c79f7c81d77ceac9ee10250",
+    "scope": "Bounded single-document/native-download/two-note-subtree verification through the pinned published Next/API/storage. No direct S3 GET, peak memory, simultaneous uploads, million-node move or sustained-load claim."
+  },
   "sourceSha256": {
     "src/Pane.tsx": "6c3fb7133adde6ae6675d853643c53cc4d99b980ac82afc1d031c351f26f4e17",
     "src/NotePanels.tsx": "14ce40749d3919193c3a31e0a2c272c01cf844547a09006db54e2bb1f8ff50b5",
@@ -293,7 +313,7 @@
   ],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,
-    "journalsDeleted": 1,
+    "journalsDeleted": 2,
     "retiredDocuments": [{
       "path": "docs/2026-10-25-note-library-corrections.md",
       "status": "COMPLETED",
@@ -305,8 +325,17 @@
       "evidenceArchiveReadableEntries": 4,
       "specificationSections": ["F01", "F03", "F04", "F07", "F08"],
       "remainingParentCriteria": ["G01", "G06", "G07", "AC08", "AC09"]
+    }, {
+      "path": "docs/move-and-large-document-acceptance.md",
+      "status": "COMPLETED",
+      "run": "e7bf9972a611",
+      "evidenceArchive": ".tmp/gui-completion/move-large-retirement-01.tgz",
+      "evidenceArchiveSha256": "04e05f2623f6855b67c934ed3d5fa99f01bf87b95bb0bfdfae6678b8a1310f81",
+      "evidenceArchiveReadableEntries": 6,
+      "specificationSections": ["F02", "F03", "F05", "F08"],
+      "remainingParentCriteria": ["G05", "G07", "G08", "AC08", "AC10"]
     }],
     "promptRetired": false,
-    "reason": "Completed correction unit retired with readable evidence and specification mapping. Six other journals and execution records retain unfinished product-host, workload and release obligations."
+    "reason": "Completed correction and bounded move/large-document units retired with readable evidence and specification mapping. Five other journals and execution records retain unfinished contextual/native/workload and final archival obligations."
   }
 }

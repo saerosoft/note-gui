@@ -76,9 +76,14 @@ and removal of an open diagram when administrator access is revoked.
 The later [capacity and account-access run](capacity-and-access-acceptance.md)
 verified three account sessions, live role and membership revocation, and
 bounded browser navigation and editing with one million notes. The
-[move and document run](move-and-large-document-acceptance.md) also verified
+[move and document run](functional-specification.md#f05-trees-and-bounded-resources) also verified
 private subtree moves, retained pane drafts, a 1,000-paragraph document and a
 20 MiB attachment download. Populated evidence revocation passed separately.
+Its bounded current-host rerun `e7bf9972a611` also verifies source URL/editor
+retention and destination-link clearing after access refresh. The completed
+journal and sanitized proof are preserved in the six-entry local archive
+`.tmp/gui-completion/move-large-retirement-01.tgz`; lasting behavior belongs
+to F02/F03/F05/F08. Sustained workload remains in the capacity record.
 These runs cover the note client's named design units under the recorded local
 workloads. Source collection, model quality, search-index freshness and the
 linked product management screens remain owned by Knowledge Engine. The
