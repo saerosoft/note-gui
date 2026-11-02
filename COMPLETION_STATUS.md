@@ -106,6 +106,36 @@ Populated
 context, integrated native formats and sustained workload remain open; no whole
 G-unit is closed by these bounded checks.
 
+### Later consumer-gate failure diagnosis
+
+The later SC03-source gate at `878108b9` is FAIL and its push is blocked.
+Its preserved receipt and raw log hashes match. The GUI unit stage passes
+305/307 cases: the direct-ancestor case exceeds its unchanged 5-second test
+budget, and the failed-comments-read case loses its programmatically entered
+draft. These failures do not replace the earlier successful `f40e7a2` receipt.
+
+COMPLETED comment-test synchronization repair: real-component diagnostics
+reproduce draft loss even after `contenteditable=true`. The synthetic input
+and retry click run before the editor acknowledges input into its model.
+Waiting for the comment-submit control to become enabled preserves all 12
+diagnostic cases. The test retains its exact draft, editor identity and
+no-write assertions. Normal discovery also excludes `.tmp/` worktree copies;
+the initial diagnostic had accidentally collected six files instead of two.
+Neither change modifies runtime behavior or the public contract.
+
+Fresh development source3, unit307/34, type/declaration/build/distribution and
+package-import checks pass. The environment has no `make`: its invocation
+fails with exit127, so the four Makefile prerequisites are executed individually
+in dependency order and recorded with exit0. The independent browser suite
+passes41/41, including comment read recovery and real tree paging, with zero
+skips, unexpected failures or flaky outcomes. An independent read-only review
+reports no actionable findings.
+
+The ancestor timeout remains NOT YET RESOLVED. Current unchanged-source runs
+pass; a scoped-query experiment measures no improvement and is removed in full.
+Keep its original timeout and assertions. No new release, consumer gate,
+consumer pin change or backend verification is claimed by this repair.
+
 ## Source reconciliation
 
 Read on 2026-11-01: the current session assignment; KMS's release completion

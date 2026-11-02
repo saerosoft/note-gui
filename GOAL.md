@@ -197,6 +197,17 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   consolidate feature behavior and remove each fully completed work document.
 - [ ] Review/fix defects, complete authorized publication and verify every
   acceptance criterion above. Retire final execution records last.
+- [x] Repair the reproduced failed-comments-read test's input synchronization
+  without removing draft/editor/no-write assertions. A diagnostic fails even
+  with editable=true; waiting for model acknowledgement passes12/12. Exclude
+  temporary worktree tests from normal discovery. Fresh source3/unit307/34,
+  types/build/distribution/package checks pass through individual Makefile
+  prerequisites because `make` is absent. Independent browser41/41 passes with
+  no failures, skips or flaky outcomes. Read-only review reports no findings.
+- [ ] Resolve the later consumer gate's ancestor-test timeout. Current public
+  runs pass, but the original5-second failure is not explained. Remove the
+  ineffective scoped-query experiment; do not relax the timeout, rewrite the
+  immutable0.8 release or mark the failed `878108b9` consumer gate complete.
 
 ## Verification results
 
