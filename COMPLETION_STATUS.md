@@ -136,6 +136,40 @@ pass; a scoped-query experiment measures no improvement and is removed in full.
 Keep its original timeout and assertions. No new release, consumer gate,
 consumer pin change or backend verification is claimed by this repair.
 
+Additional diagnosis reproduces a separate post-move test-order defect.
+Holding only the post-move ancestor response lets the original observations
+reach the final assertion before the replacement tree request starts; the
+latest request still has parent-a/sibling-49. The unchanged expected root-a/null
+request passes when that final assertion is awaited. Exact RED/GREEN sources
+have pre-execution hashes. The original direct-ancestor timeout case remains
+unchanged. Full regression run24 FAILS302/307 across34 files: the original
+direct-ancestor timeout recurs, along with focused-pane timeout, an older-path
+case seeing the preceding unsaved title, Mermaid timeout and actual-font-SDK
+timeout. Preserve all five failures. The later full stage/scheduler collection29
+passes307/34, exit0, with matching pre/post hashes for the instrumented copy,
+its configuration and the canonical ancestor test. One bounded normal
+configuration run31 then passes307/34, exit0 in139.66seconds, with matching
+pre/post hashes for both test files and configuration. No competing owned build,
+browser or test is launched during those runs. The original direct-ancestor
+case takes4449ms; the one-line move-order repair is verified without changing
+its timeout or expectation. These later passes do not erase run24 or accept
+the original consumer gate. Source26 passes3/3; build27 passes type/declaration/
+distribution checks but has no execution-time source snapshot. Source-offer
+refresh, distribution and strict package imports33 pass with matching pre/post
+hashes for the two tests, configuration, package, lockfile and TypeScript configs;
+this does not retrospectively bind the older build or every unit-suite input.
+
+Stage/runqueue observation is COMPLETE: the first ancestor case reaches all
+final assertions at3348.46ms, including1253.04ms main-thread execution and
+1980.72ms runnable CPU-queue wait. All expected reads finish. That diagnostic
+run is still FAIL44/45 because of the separate move-order assertion above.
+The host observation records16 CPUs,487 runnable tasks and91.70% CPU pressure.
+These current samples do not establish the earlier consumer failure's cause.
+Historical comment diagnostic sources are reconstructed from session patches;
+their present hashes are not execution-time proof of the original source bytes.
+The earlier ordered prerequisite receipt05 also has no source pre/post snapshot;
+later source hashes cannot retroactively provide that missing binding.
+
 ## Source reconciliation
 
 Read on 2026-11-01: the current session assignment; KMS's release completion

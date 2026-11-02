@@ -21,6 +21,11 @@ and cleanup pass. Eight exact NOT_FOUND reads are paired with successful owner
 controls. Rule-version, legacy-origin and the approved sustained workload
 remain open. This does not requalify the older
 million-note migration or its target-device claims.
+Current-host evidence must also cover the collected note's empty human editor,
+human-history restore with unchanged independent current membership, and stale
+proposal rejection after a newer human save. The bounded run above does not
+establish those cases or formatted-document diagram retention. Keep this
+record until each applicable current-host case has evidence.
 
 The isolated database was migrated by creating a fresh database with strict
 Flyway history, then restoring only the retained application data. The source

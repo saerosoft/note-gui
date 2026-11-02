@@ -1,5 +1,25 @@
 # Self-hosted Draw.io acceptance
 
+## Current adopted-host status
+
+NOT YET VERIFIED. Current-host run `0b2c9892dd95` fails all four selected
+graphical/native cases before the actual shape becomes available. The normal
+Next response blocks the configured HTTPS iframe with its default frame policy.
+The GUI-only configuration build passes and all804 corresponding-source ZIP
+entries match, but the default WEB build has no matching graphical origin.
+Original roles and owned-resource cleanup pass on the failed run.
+
+The remaining prerequisite is a normal, separately identified Next/library
+build using the same approved origin, followed by actual graphical editing,
+immutable-byte, read-only-viewer and revocation checks. Preserve the default
+release and its qualification. Do not replace response security headers to
+make the fixture pass or count source-entry equality as graphical acceptance.
+F08 in the functional specification owns lasting native-editor behavior.
+The dated standalone observations below remain evidence; this record cannot
+retire until the current-host criteria are verified.
+
+## Historical standalone observations
+
 On 2026-10-24, the real-API Chrome suite initially passed both write/revocation scenarios in
 `e2e/drawio.spec.ts` against an isolated API, account sessions and storage.
 The graphical editor was the official Draw.io v32.6.1 static web application,

@@ -208,6 +208,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   runs pass, but the original5-second failure is not explained. Remove the
   ineffective scoped-query experiment; do not relax the timeout, rewrite the
   immutable0.8 release or mark the failed `878108b9` consumer gate complete.
+- [x] Diagnose the separate post-move final-page assertion race with a held
+  ancestor response and pre-execution RED/GREEN source hashes. Await the same
+  exact replacement-page assertion; keep the original direct-ancestor timeout
+  case unchanged. Preserve full run24's302/307 failure and all five named cases.
+  Full instrumented29 and one bounded normal31 each pass307/34 with matching
+  pre/post input hashes; the normal first case takes4449ms. This verifies the
+  separate move-order repair, not the original consumer failure's cause.
 
 ## Verification results
 
