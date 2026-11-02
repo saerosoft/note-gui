@@ -38,7 +38,11 @@ it.each([
   await screen.findByRole('alert');
   expect(screen.queryByText(empty)).toBeNull();
   const draft = panel === 'comments' ? screen.getByRole('textbox', { name: '댓글' }) : null;
-  if (draft) { draft.textContent = 'Keep this unsent comment'; fireEvent.input(draft); }
+  if (draft) {
+    await waitFor(() => expect(draft.getAttribute('contenteditable')).toBe('true'));
+    draft.textContent = 'Keep this unsent comment'; fireEvent.input(draft);
+    await waitFor(() => expect(screen.getByRole('button', { name: '댓글 남기기' }).hasAttribute('disabled')).toBe(false));
+  }
   unavailable = false;
   fireEvent.click(screen.getByRole('button', { name: '노트 상세 다시 읽기' }));
   await screen.findByText(empty);
