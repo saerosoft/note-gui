@@ -106,6 +106,7 @@ it('follows the focused pane while preserving both drafts and reusing only the b
   const value = server(); show(true);
   await screen.findByText('Private root A / Private folder A');
   await waitFor(() => expect(title('오른쪽').textContent).toBe('Private leaf B'));
+  await screen.findByRole('treeitem', { name: 'Sibling 0' });
   fireEvent.focus(title('왼쪽'));
   fireEvent.input(title('왼쪽'), { target: { innerHTML: '<h1>Unsaved left title</h1>' } });
   fireEvent.pointerDown(screen.getByRole('region', { name: '오른쪽 편집 창' }));
