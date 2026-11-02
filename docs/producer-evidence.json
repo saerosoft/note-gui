@@ -84,6 +84,26 @@
     "scope": "Actual Next optional-adapter acceptance with a SHARED organization viewer lacking space membership, real actors, original link identity/creator, native file authority and CONTROLLED private-target/epoch recovery. Populated source/rule/review context, native formats and workload remain open; whole SC09/G10 is not accepted."
   },
   "wholeGuiLaneAccepted": false,
+  "boundedPopulatedConsumerHost": {
+    "status": "BOUNDED_PASS_RULE_AND_LEGACY_OPEN",
+    "run": "024345c3b295",
+    "widthsPassed": [375, 1440],
+    "acceptedControlledChanges": 43,
+    "unchangedAuthoredDocuments": 4,
+    "currentMembershipCounts": [4, 25, 4, 4],
+    "currentAndHistoryPageSizes": [20, 5],
+    "exactOriginalAndSavedComparisonVerified": true,
+    "deniedReadsWithIdenticalAuthorizedControls": 8,
+    "deniedErrorCode": "NOT_FOUND",
+    "automaticDemotionClearsOpenContextAndComparison": true,
+    "completeInventories": 3,
+    "publicTablesPerInventory": 135,
+    "originalRolesPreserved": true,
+    "ownedResourcesIndependentlyAbsent": true,
+    "ruleVersionAndLegacyCasesVerified": false,
+    "rawReceiptSha256": "921b77e3d577ec9c66dc884426737559f659b59f3d8e1597334d4e32eff420e6",
+    "scope": "Actual Next with pinned published API and controlled stored proposals, not model output. Exact rule/legacy provenance, configured graphical native host, sustained workload and whole SC09 remain open."
+  },
   "boundedLargeConsumerHost": {
     "status": "PASS",
     "run": "e7bf9972a611",

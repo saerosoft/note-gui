@@ -11,6 +11,17 @@ new locked consumer or authorize business-fixture seeding.
 
 ## Real-API workload
 
+COMPLETED bounded adopted-host progress on 2026-11-02: run `024345c3b295`
+verifies43 controlled normal-API applications at 375/1440px through actual Next
+`/notes`. Four structured human documents remain unchanged; superseded and
+historical statements stay outside current membership, with current counts
+4/25/4/4. Current items and history page20+5; exact original/saved comparisons
+and automatic administrator demotion clearance pass. Independent inventories
+and cleanup pass. Eight exact NOT_FOUND reads are paired with successful owner
+controls. Rule-version, legacy-origin and the approved sustained workload
+remain open. This does not requalify the older
+million-note migration or its target-device claims.
+
 The isolated database was migrated by creating a fresh database with strict
 Flyway history, then restoring only the retained application data. The source
 database stayed unchanged. Before any new cases were applied, all 1,000,055

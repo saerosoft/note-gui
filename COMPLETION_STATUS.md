@@ -320,6 +320,16 @@ old code-audit status.
 
 ## Acceptance-record retirement
 
+Bounded current-host progress: `024345c3b295` verifies43 controlled normal-API
+applications, four unchanged authored documents, current counts4/25/4/4,
+current/history20+5 pages and exact saved comparisons at375/1440px. Eight
+NOT_FOUND reads have matching successful owner controls; restricted-audience
+labels and automatic administrator demotion clearance pass. Three135-table
+inventories, exact roles and owned cleanup are independently checked. G06/G08
+rule-version/legacy cases remain open: validation requires an ordinary durable
+worker absent from the pinned runtime. No approval records or model output are
+fabricated. Configured native host and sustained workload remain unverified.
+
 The seven original records retain their historical facts and limits. Completed
 correction units can retire after their behavior has one specification owner,
 their evidence is readable and every separate parent dependency remains here.

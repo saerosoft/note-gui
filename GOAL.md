@@ -90,9 +90,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   six-entry archive `move-large-retirement-01.tgz` and remove only that completed
   journal. The approved sustained workload and native-format cases remain open.
 - [x] Verify bounded populated current/history/comparison layout at375/1440px
-  in `1fde06b77a83`:43 controlled API applications preserve4 authored documents,
+  in `024345c3b295`:43 controlled API applications preserve4 authored documents,
   current/history pages20+5 and automatic administrator demotion clears context.
-  Rule-version, legacy-origin and exact denied-read controls remain open.
+  Eight NOT_FOUND reads each have the identical successful owner control and
+  restricted-audience labels pass. Rule-version and legacy-origin remain open;
+  normal rule validation requires a matching ordinary durable worker artifact.
 
 - [x] Read all nine current docs records and root assignment/completion records.
 - [x] Create this goal without overwriting unrelated goals.

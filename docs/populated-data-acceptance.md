@@ -1,5 +1,27 @@
 # Populated note-context acceptance
 
+## Current adopted-host progress
+
+COMPLETED bounded current-host comparison and paging checks: on 2026-11-02,
+run `024345c3b295` uses the published 0.8 GUI and pinned API through actual Next
+`/notes`. At 375/1440px, current membership and accumulation history page20+5,
+the original quote and saved before/after bodies match the API, and occurrence,
+effective and application times are shown separately. Automatic administrator
+demotion removes the open context/comparison. No page errors or model calls occur.
+
+Independent evidence verifies43 normal-API accepted controlled proposals, four
+unchanged authored documents, current membership counts4/25/4/4, complete
+135-table inventory hashes, original roles and owned-resource cleanup. These
+proposals are controlled test inputs, not model output. Eight NOT_FOUND reads
+each have an identical successful owner control with expected body text;
+private/administrator audience labels are also verified.
+Current-host rule-version and legacy-origin cases remain NOT YET VERIFIED.
+The historical cases below retain those obligations; this document is not ready
+for retirement. F07 in the functional specification owns lasting behavior.
+Normal rule validation requires the ordinary durable worker, which is absent
+from this pinned runtime. The rejected run04 is retained; approval records are
+not fabricated to bypass that prerequisite.
+
 On 2026-10-24, both scenarios in `e2e/populated.spec.ts` passed against the
 isolated Knowledge Engine API and three account sessions. The database held
 31 applied changes: 25 on a shared note and three each on private and
