@@ -82,6 +82,16 @@ the fix.
 
 ## Repeating the browser checks
 
+The user approved the current GUI workload definition on 2026-11-02: one million
+isolated notes with actual Next/API/storage; paced20 requests/second steady load,
+three15-minute measured windows per authorized population,100 requests/second
+stress, and separate100%,10%,1%,0.1% authorized populations. Steady measurement
+therefore totals three hours, excluding warmup and stress. Record achieved rate,
+latency percentiles, errors and memory; no unagreed latency SLO or search/model
+quality claim is implied. This definition is COMPLETE; its execution is NOT YET
+VERIFIED. Unachieved scenarios remain open. Preserve the historical receipts
+above without relabeling them as this new workload.
+
 The owning backend prepares the isolated data and session files. It supplies
 `NOTE_GUI_E2E_FIXTURE`, a JSON object with UUID fields `space`, `destination`,
 `corpus`, `owner`, `peer`, `outsider`, `sharedNote`, `privateNote`,

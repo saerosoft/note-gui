@@ -7,7 +7,7 @@
   "qualificationCommit": "6a52fe15",
   "implementationBaseCommit": "a360b725",
   "workingTreeCandidate": false,
-  "candidateScope": "Committed 0.8 implementation with qualified immutable release. Bounded current-source CONTROLLED consumer host passes; normal parent publication, SHARED, populated/native-format and sustained workload acceptance remain separate.",
+  "candidateScope": "Committed 0.8 implementation with qualified immutable release, bounded current-source CONTROLLED host and normal parent publication. SHARED, populated/native-format and approved sustained workload execution remain open.",
   "releaseQualified": true,
   "publishedRelease": {
     "branch": "version/0.8",
@@ -42,7 +42,17 @@
     "pageErrors": 0,
     "diagnosticInstrumentationRemoved": true,
     "rawReceiptSha256": "06f86b9a571531d152a486c279e1ee7a7649585e05db2c502f9169a02c28ae13",
-    "scope": "Actual Next host with Vite absent, native Back beforeunload and same-document Forward guard cancellation, explicit leave/reopen, editor/draft/history retention, rich save/reload, native download, authority denial and tree move. S3 LIST sizes match native download bytes; no separate direct S3 GET. Normal parent gate/publication, SHARED, populated context, native formats and sustained workload remain open."
+    "normalParentGate": "PASS",
+    "publishedParentCommit": "f40e7a2b64098d4e8ba295c75449dccf2f61b4b6",
+    "independentRemoteReadbackMatches": true,
+    "backendXmlCases": 2112,
+    "backendFreshCases": 2074,
+    "backendUpToDateCases": 38,
+    "backendOptInSkippedCases": 5,
+    "backendFailures": 0,
+    "backendErrors": 0,
+    "otherFrontendCacheReplayedTests": 70,
+    "scope": "Actual Next host with Vite absent, native Back beforeunload and same-document Forward guard cancellation, explicit leave/reopen, editor/draft/history retention, rich save/reload, native download, authority denial and tree move. S3 LIST sizes match native download bytes; no separate direct S3 GET. Normal parent gate/publication passes; SHARED, populated context, native formats and sustained workload remain open."
   },
   "wholeGuiLaneAccepted": false,
   "sourceSha256": {
@@ -249,8 +259,8 @@
   "remainingInputs": [
     "Complete SHARED/populated/native/workload KMS host acceptance; actual-space policy and existing history editor/comment author/association creator suffice for the bounded adapter; retain concrete missing actor cases without inventing a DTO",
     "Qualified Draw.io deployment and integrated all-format co-editor storage/access acceptance with independent inventory",
-    "KMS normal root gate/publication and wider contextual/storage acceptance after the published immutable 0.8 release and bounded CONTROLLED host pass",
-    "Agreed KMS sustained workload/scale qualification; Linux is required and Windows is explicitly excluded"
+    "Wider contextual/storage acceptance after the published immutable 0.8 release, normal parent gate/publication and bounded CONTROLLED host pass",
+    "Execution of the user-approved isolated million-note GUI workload:20rps steady, three15-minute windows per100/10/1/0.1% authorized profile,100rps stress; no model/relevance or whole-P14 claim. Linux is required and Windows is excluded"
   ],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,

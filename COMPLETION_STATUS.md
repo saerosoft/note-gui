@@ -10,7 +10,7 @@ repair is committed as candidate 0.7.1. KMS owns product policy, migration, its 
 dependency adoption and whole-product acceptance. No consumer source or runtime
 is changed by this record.
 
-The current candidate advances to 0.8.0 for the user-approved optional policy,
+The implemented 0.8.0 minor contract adds the user-approved optional policy,
 association and mount-local dirty APIs. Windows support/qualification is
 NOT_APPLICABLE by the user's explicit decision. Human review is not a gate;
 automated checks and current authorized-environment evidence remain required.
@@ -90,7 +90,11 @@ file download, denials and tree move pass. Independent proof verifies12 dialogs,
 SQL3 notes/9 tree records, S3 LIST3 objects/166 bytes, both135-table inventories,
 original organization/role preservation and owned-only cleanup. No direct S3 GET
 is claimed. The current API is independently bound to backend tree `e26efe6a`.
-Root pre-push/push awaits exact committed source freeze. SHARED, populated
+Root pre-push/push is COMPLETE at `f40e7a2` after clean committed source freeze;
+fresh HTTPS remote readback matches. The unchanged gate records backend XML2112
+with zero failures/errors and five opt-in skips (2074 fresh,38 up-to-date), fresh
+WEB938/148 and GUI source3/unit307/34. Other frontend70 tests are cache replay.
+SHARED, populated
 context, integrated native formats and sustained workload remain open; no whole
 G-unit is closed by these bounded checks.
 
@@ -126,7 +130,7 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G06 | KNOWLEDGE-023–026/030/032–038, F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Actual populated KMS business projections and shared associations require the authoritative accepted host/contract. PARTIAL. |
 | G07 | KNOWLEDGE-016–018/027/065, F09; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Actual approved Draw.io application passes five desktop/narrow/viewer/restore/held-refresh cases, including inline edit and undo retention. Real API peer XML successor preserves original bytes and denies outsider/anonymous bytes. | Qualified Draw.io deployment, integrated all-format co-editor/storage acceptance and independent consumer inventory remain open. PARTIAL. |
 | G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
-| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | Linux passes; Windows is NOT_APPLICABLE. Normal parent pre-push/publication remains open. PARTIAL. |
+| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | COMPLETED packaging/platform/release/adoption gate: normal parent pre-push publishes `f40e7a2` and independent remote readback matches. Linux passes; Windows is NOT_APPLICABLE. Wider GUI/context/native/workload stays in its own G-unit. |
 | G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Optional policy/association/dirty implementation and producer desktop/narrow/opaque-epoch/real-API creator/replay cases pass. Actual-record-space policy and existing history editor/comment author/association creator fields suffice for the agreed bounded adapter. | Actual SHARED and wider actor/context/epoch host cases remain open. Retain concrete unrepresentable cases; no blanket new DTO requirement or role/actor inference. PARTIAL. |
 | G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; one completed correction unit is archived/removed. Current producer packet, sanitized proof and 93-entry readable evidence archive are verified. Duplicate current/screen contracts move to the lasting specification. | Six journals retain unfinished host/workload/release criteria. Prompt and this record remain until last. PARTIAL. |
 

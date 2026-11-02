@@ -52,8 +52,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   decision; its failed historical run is not a remaining acceptance condition.
 - [ ] AC08: The current qualified KMS host verifies `/notes/`, actor/file/storage/
   access/context and the agreed sustained workload; fixtures do not substitute.
-- [ ] AC09: The release owner qualifies the exact immutable tuple, source and
+- [x] AC09: The release owner qualifies the exact immutable tuple, source and
   evidence, and the consumer adopts its reviewed tuple under separate authority.
+  The single normal KMS pre-push passes and publishes `f40e7a2`; fresh HTTPS
+  remote readback matches. Bounded current-source CONTROLLED host10 passes.
+  Wider mode/context/native/workload requirements remain AC04/AC08.
 - [ ] AC10: Feature behavior has one lasting specification owner. Every fully
   completed work document is marked complete and removed with evidence/links
   preserved; unfinished criteria remain traceable. Execution records retire last.
@@ -135,7 +138,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749` peels to that snapshot. All seven
   downloaded assets match; all six checksum entries pass. Published qualification
   and evidence retain the first browser failure and unchanged successful reruns.
-  AC09 remains open until KMS adopts and verifies this exact tuple.
+  KMS adoption is now verified by its normal gate and exact remote `f40e7a2`.
 - [x] Reproduce and repair KMS native-fragment dirty-history rollback. Three
   regressions fail first, then all 14 focused mount/navigation cases pass.
   Exact-tuple import, types, production WEB/library build and frontend lint pass.
@@ -152,6 +155,18 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   failed historical attempt only as dated evidence.
 - [x] Remove the Windows-only workflow; committed as `a360b725`. No billing
   recovery or Windows qualification remains required.
+- [x] Complete H1 consumer adoption: commits `56abaa8`/`52ad8b4`, clean source
+  freeze and the owner's single unchanged normal root pre-push/push pass at
+  `f40e7a2`. Backend XML2112/0 failures/0 errors/5 opt-in skips includes2074 fresh
+  cases and38 up-to-date cases; WEB938/148 and GUI source3/unit307/34 execute
+  freshly. Other frontend70 tests are cache replay, not fresh execution. Exact
+  remote readback matches. No retained rollout, provider call or whole-product
+  acceptance is claimed. Reported dependency advisories remain unresolved.
+- [x] Agree the GUI sustained workload: the user selected one million isolated
+  notes, actual Next/API/storage, paced20rps, three15-minute windows,100rps stress
+  and separate100/10/1/0.1% authorized populations. Three windows per profile mean
+  three hours of steady measurements. Model/search quality is excluded; execution
+  and unachieved conditions remain open. No latency SLO is invented.
 - [ ] Mark each completed original item immediately; preserve evidence and links,
   consolidate feature behavior and remove each fully completed work document.
 - [ ] Review/fix defects, complete authorized publication and verify every
@@ -270,13 +285,13 @@ The user has now authorized the remaining external work for this session:
 1. COMPLETED producer release: `version/0.8` / `release/v0.8.0` selects
    `b9c1ae1d`, with matching package/source/evidence and seven verified downloaded
    assets. Do not republish or overwrite that immutable identity.
-2. PARTIAL KMS adoption: exact lock/gitlink/version declaration and agreed
+2. COMPLETED bounded KMS adoption: exact lock/gitlink/version declaration and agreed
    policy/association/dirty bindings are implemented. Final WEB938/148,
    focused15/3, types/build/lint and sequential supplier307/34/source3 pass.
    Current-source CONTROLLED host run10 passes three widths with independently
-   bound API7eaaac... and backend treee26efe6a. Commit the exact slice and send
-   explicit clean source freeze to the KMS owner for its single normal root
-   pre-push/push. Do not start a competing root gate or repeat API packaging.
+   bound API7eaaac... and backend treee26efe6a. Exact commits and clean freeze led
+   to the owner's single normal root pre-push/push at `f40e7a2`, independently
+   confirmed by HTTPS remote readback. Do not repeat that completed gate/package.
 3. Verify actual packaged CONTROLLED/SHARED host, current/history/proof/actors,
    native files and agreed bounded workload using new owned isolated fixtures.
    Resolve any wider transport requirement against canonical server fields;

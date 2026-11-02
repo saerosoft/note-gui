@@ -197,8 +197,11 @@ Independent proof verifies12 dialogs, SQL3 notes/9 tree records, S3 LIST3 object
 and roles remain preserved; no separate direct S3 GET is claimed. The API SHA-256
 `7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0` is
 independently bound to frozen backend source. Exact commits, clean freeze and the
-single normal parent pre-push/push remain open, together with SHARED,
-populated/native/workload evidence. Existing
+single normal parent pre-push/push are now complete at `f40e7a2`, with fresh
+HTTPS remote readback matching. The normal gate freshly passes WEB938/148 and
+GUI source3/unit307/34; backend XML2112 has zero failures/errors and five opt-in
+skips (2074 fresh cases,38 up-to-date). Other frontend70 tests are cache replay.
+SHARED, populated/native/workload evidence remains open. Existing
 runtime/data and unrelated concurrent backend work are preserved. The remaining
 host conditions cannot be closed by producer-only checks.
 G11 retirement remains open. Seven historical journals are reconciled in
