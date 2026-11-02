@@ -171,7 +171,7 @@ it('recomputes the active path after moving a directly opened note to its parent
   await screen.findByRole('treeitem', { name: 'Private leaf A' });
   await waitFor(() => expect(value.ancestors).toEqual(['leaf-a', 'leaf-a']));
   expect(screen.queryByText('Private root A / Private folder A')).toBeNull();
-  expect(value.pages.at(-1)).toEqual({ spaceId: 'space', parentId: 'root-a', after: null, limit: 50 });
+  await waitFor(() => expect(value.pages.at(-1)).toEqual({ spaceId: 'space', parentId: 'root-a', after: null, limit: 50 }));
 });
 
 it('recomputes the active ancestor path after a note change while retaining the editor draft', async () => {
