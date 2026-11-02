@@ -201,7 +201,16 @@ single normal parent pre-push/push are now complete at `f40e7a2`, with fresh
 HTTPS remote readback matching. The normal gate freshly passes WEB938/148 and
 GUI source3/unit307/34; backend XML2112 has zero failures/errors and five opt-in
 skips (2074 fresh cases,38 up-to-date). Other frontend70 tests are cache replay.
-SHARED, populated/native/workload evidence remains open. Existing
+Bounded SHARED host run `c3d33e70ced0` now passes three widths: shared viewer
+without space membership, creation/rich saves, comments/properties/history actors,
+native downloads and file denial, original creators across peer unlink/replay/
+relink, CONTROLLED own-private links and real role/epoch2/3/4 recovery. The same
+readable local draft/editor survives downgrade/recovery; scoped denial preserves
+authentication. Independent SQL8 notes/20 revisions/3 comments/3 properties/
+2 links and exact4 association receipts/audits match; actual S3 GET3 objects/
+121 bytes match database/checksums/native downloads. Both135-table inventories,
+exact original roles and owned cleanup are independently verified. Wider
+populated/native/workload and whole SC09 acceptance remain open. Existing
 runtime/data and unrelated concurrent backend work are preserved. The remaining
 host conditions cannot be closed by producer-only checks.
 G11 retirement remains open. Seven historical journals are reconciled in

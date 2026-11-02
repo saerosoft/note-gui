@@ -7,7 +7,7 @@
   "qualificationCommit": "6a52fe15",
   "implementationBaseCommit": "a360b725",
   "workingTreeCandidate": false,
-  "candidateScope": "Committed 0.8 implementation with qualified immutable release, bounded current-source CONTROLLED host and normal parent publication. SHARED, populated/native-format and approved sustained workload execution remain open.",
+  "candidateScope": "Committed 0.8 implementation with qualified immutable release, normal parent publication and bounded actual CONTROLLED/SHARED host acceptance. Populated/native-format and approved sustained workload execution remain open.",
   "releaseQualified": true,
   "publishedRelease": {
     "branch": "version/0.8",
@@ -52,7 +52,36 @@
     "backendFailures": 0,
     "backendErrors": 0,
     "otherFrontendCacheReplayedTests": 70,
-    "scope": "Actual Next host with Vite absent, native Back beforeunload and same-document Forward guard cancellation, explicit leave/reopen, editor/draft/history retention, rich save/reload, native download, authority denial and tree move. S3 LIST sizes match native download bytes; no separate direct S3 GET. Normal parent gate/publication passes; SHARED, populated context, native formats and sustained workload remain open."
+    "scope": "Actual Next host with Vite absent, native Back beforeunload and same-document Forward guard cancellation, explicit leave/reopen, editor/draft/history retention, rich save/reload, native download, authority denial and tree move. S3 LIST sizes match native download bytes; no separate direct S3 GET in this CONTROLLED run. Normal parent publication passes. Separate SHARED evidence follows; populated context, native formats and sustained workload remain open."
+  },
+  "boundedSharedConsumerHost": {
+    "status": "PASS",
+    "run": "c3d33e70ced0",
+    "publishedParentCommit": "f40e7a2b64098d4e8ba295c75449dccf2f61b4b6",
+    "apiSha256": "7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0",
+    "widthsPassed": [375, 900, 1440],
+    "sqlNotes": 8,
+    "sqlRevisions": 20,
+    "sqlComments": 3,
+    "sqlProperties": 3,
+    "sqlLinks": 2,
+    "associationReceipts": 4,
+    "associationAudits": 4,
+    "actualS3GetObjects": 3,
+    "actualS3GetBytes": 121,
+    "publicTablesPerInventory": 135,
+    "inventories": 2,
+    "policyEpochs": ["2", "3", "4"],
+    "originalRolesAndCreatorsPreserved": true,
+    "receiptReplayAddsNoTransition": true,
+    "readableDraftAndEditorSurviveDowngradeRecovery": true,
+    "scopedDenialPreservesAuthentication": true,
+    "ownedResourcesIndependentlyAbsent": true,
+    "staticBytesOverridden": false,
+    "pageErrors": 0,
+    "modelCalls": 0,
+    "rawReceiptSha256": "a164d6a61e1f9a39e2061bbd2731bb48fc1fbebbcafed168bd008d260f7fb0cc",
+    "scope": "Actual Next optional-adapter acceptance with a SHARED organization viewer lacking space membership, real actors, original link identity/creator, native file authority and CONTROLLED private-target/epoch recovery. Populated source/rule/review context, native formats and workload remain open; whole SC09/G10 is not accepted."
   },
   "wholeGuiLaneAccepted": false,
   "sourceSha256": {
@@ -257,7 +286,7 @@
     { "path": ".tmp/collaboration-390.png", "width": 390, "height": 1000, "sha256": "abb1ddc0aa976944902f28a4d600caa60f75c5d147fddcc564e63ebd24397933", "scope": "Actual 0.8 narrow association panel, no horizontal page overflow." }
   ],
   "remainingInputs": [
-    "Complete SHARED/populated/native/workload KMS host acceptance; actual-space policy and existing history editor/comment author/association creator suffice for the bounded adapter; retain concrete missing actor cases without inventing a DTO",
+    "Wider SC09/populated/native/workload KMS host acceptance after bounded optional SHARED/CONTROLLED qualification; retain concrete missing actor cases without inventing a DTO",
     "Qualified Draw.io deployment and integrated all-format co-editor storage/access acceptance with independent inventory",
     "Wider contextual/storage acceptance after the published immutable 0.8 release, normal parent gate/publication and bounded CONTROLLED host pass",
     "Execution of the user-approved isolated million-note GUI workload:20rps steady, three15-minute windows per100/10/1/0.1% authorized profile,100rps stress; no model/relevance or whole-P14 claim. Linux is required and Windows is excluded"

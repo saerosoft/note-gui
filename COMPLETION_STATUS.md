@@ -94,7 +94,15 @@ Root pre-push/push is COMPLETE at `f40e7a2` after clean committed source freeze;
 fresh HTTPS remote readback matches. The unchanged gate records backend XML2112
 with zero failures/errors and five opt-in skips (2074 fresh,38 up-to-date), fresh
 WEB938/148 and GUI source3/unit307/34. Other frontend70 tests are cache replay.
-SHARED, populated
+Bounded SHARED run `c3d33e70ced0` now also passes375/900/1440px. Shared viewer
+without space membership can create/save/comment/set properties; actual owner/
+member history actors, original association creators, peer unlink/replay/relink,
+CONTROLLED own-private links and real epoch2/3/4 downgrade/recovery pass. Scoped
+denial retains identity and the same readable local draft/editor. Independent
+proof verifies SQL8 notes/20 revisions/3 comments/3 properties/2 links, exact4
+association receipts/audits, actual S3 GET3 objects/121 bytes, both135-table
+inventories, exact roles and independently absent owned resources. No model runs.
+Populated
 context, integrated native formats and sustained workload remain open; no whole
 G-unit is closed by these bounded checks.
 
@@ -131,7 +139,7 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G07 | KNOWLEDGE-016–018/027/065, F09; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Actual approved Draw.io application passes five desktop/narrow/viewer/restore/held-refresh cases, including inline edit and undo retention. Real API peer XML successor preserves original bytes and denies outsider/anonymous bytes. | Qualified Draw.io deployment, integrated all-format co-editor/storage acceptance and independent consumer inventory remain open. PARTIAL. |
 | G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
 | G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | COMPLETED packaging/platform/release/adoption gate: normal parent pre-push publishes `f40e7a2` and independent remote readback matches. Linux passes; Windows is NOT_APPLICABLE. Wider GUI/context/native/workload stays in its own G-unit. |
-| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Optional policy/association/dirty implementation and producer desktop/narrow/opaque-epoch/real-API creator/replay cases pass. Actual-record-space policy and existing history editor/comment author/association creator fields suffice for the agreed bounded adapter. | Actual SHARED and wider actor/context/epoch host cases remain open. Retain concrete unrepresentable cases; no blanket new DTO requirement or role/actor inference. PARTIAL. |
+| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Agreed optional adapter is verified in core-only/CONTROLLED/SHARED hosts. Three-width actual SHARED creation, real actors, original link creator/global receipt/relink, file authority and CONTROLLED role/epoch2/3/4 recovery pass in `c3d33e70ced0`, with independent SQL/S3/role/cleanup proof. | Wider populated actor/reviewer/source context, integrated native cases and whole SC09 remain open. No new DTO or actor inference is introduced. PARTIAL; bounded AC04 complete. |
 | G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; one completed correction unit is archived/removed. Current producer packet, sanitized proof and 93-entry readable evidence archive are verified. Duplicate current/screen contracts move to the lasting specification. | Six journals retain unfinished host/workload/release criteria. Prompt and this record remain until last. PARTIAL. |
 
 ## Individual original criterion accounting
@@ -274,7 +282,7 @@ G-unit ledger; it does not accept the backend or current integrated screen.
 | 024 | Relations/backlinks without private target leakage | G06/G08 partial; authorized fixture and server matrix KMS-owned |
 | 025 | Relation provenance and supporting proof | G06 controlled full-extension paged proof/backlink browser passed; actual KMS business fixture remains separate |
 | 026 | Exact source/rule/review/action destinations | G02/G06 partial; KMS actual destination acceptance |
-| 027 | Authorized comments/history/immutable files | G03/G07/G08 partial; actual multi-actor storage KMS-owned |
+| 027 | Authorized comments/history/immutable files | G03/G07/G08 actual shared comment/history actors, peer file read, outsider/anonymous denial and independent S3 GET bytes pass at three widths; integrated all-format/co-editor cases remain open |
 | 028 | Home space/tree/source/action/audience summaries | KMS KN01 home; G02 navigation and G10 audience dependency |
 | 029 | Home content search and updated/new/count metadata | KMS KN01 home; core GUI title lookup is a narrower operation |
 | 030 | Recent accepted changes and evidence | G06 projection partial; home/business acceptance KMS K02 |

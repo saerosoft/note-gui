@@ -40,9 +40,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   and complete normal gates.
 - [x] AC03: Bounded trees/moves, properties, relations/backlinks, proof/current/
   history and exact destinations pass with recovery and stale/access isolation.
-- [ ] AC04: G10 shared capabilities/audience, creation controls, real attribution,
+- [x] AC04: G10 shared capabilities/audience, creation controls, real attribution,
   associations and policy/epoch recovery are implemented against agreed transport
   and verified in controlled/core-only/shared hosts.
+  Final actual-host SHARED run `c3d33e70ced0` passes three widths, original actors,
+  cross-actor receipt/relink semantics, file authority and real epoch downgrade/
+  recovery. Core-only producer qualification and CONTROLLED host10 also pass.
+  Wider populated/native/workload and whole SC09/G10 remain AC08 dependencies.
 - [x] AC05: Host-external dirty navigation has an agreed mount-local contract
   covering body/comment/property/native drafts and disposal.
 - [x] AC06: Full verification and actual extracted-package imports, strict types,
@@ -114,7 +118,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   exact request identity pass 24 focused tests. Eight malformed-response cases
   failed before the response checks were repaired, then passed. This module is
   not connected to the host, GUI or public exports; G10 remains incomplete.
-- [ ] Implement agreed shared policy/controls/attribution/associations with
+- [x] Implement agreed shared policy/controls/attribution/associations with
   failing-before/passing-after tests.
 - [x] Implement the approved SC01/SC02 subset: typed optional extensions,
   guarded sessions, actual-record-space policy, capability-driven shared creation,
@@ -167,6 +171,15 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   and separate100/10/1/0.1% authorized populations. Three windows per profile mean
   three hours of steady measurements. Model/search quality is excluded; execution
   and unachieved conditions remain open. No latency SLO is invented.
+- [x] Complete the bounded actual SHARED adapter host in `c3d33e70ced0`: three
+  widths verify shared creation/rich save/comment/property/history actors, native
+  downloads, peer/outsider/anonymous file authority, original creator across peer
+  unlink/replay/relink and CONTROLLED own-private target authority. Real role
+  downgrade/recovery advances decimal epochs2/3/4 while preserving the readable
+  local draft/editor. Scoped denial retains authentication. Independent proof
+  checks SQL8 notes/20 revisions/3 comments/3 properties/2 links, exact4 receipts/
+  audits with no replay transition, actual S3 GET3 objects/121 bytes, both135-table
+  inventories, exact original roles and owned-only cleanup. No model is called.
 - [ ] Mark each completed original item immediately; preserve evidence and links,
   consolidate feature behavior and remove each fully completed work document.
 - [ ] Review/fix defects, complete authorized publication and verify every
