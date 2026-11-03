@@ -6,9 +6,11 @@ COMPLETED specification consolidation: the [functional specification](functional
 F02/F04/F06/F07 owns authored-body fallback, legacy origin, current membership,
 layout, expanded proof and paging. `CONTRACT.md` owns the exact transport. This
 record retains the dated workload/evidence below; its current-host G06/G08 and
-GOAL AC08 dependencies remain open. Bounded release/adoption AC09 is complete.
-The historical run does not qualify the
-new locked consumer or authorize business-fixture seeding.
+GOAL AC08 dependencies remain open. Producer0.8.1 publication and bounded
+adopted-host checks518/534 pass; whole AC09 remains open until KMS remote
+publication and its remaining tuple requirements are verified. The historical
+run does not qualify current-data semantics in the new locked consumer or
+authorize business-fixture seeding.
 
 ## Real-API workload
 
@@ -31,8 +33,11 @@ establish those cases. Separate actual-host formatted restore332 now passes
 375/1440px: heading/bold/table and exact original three-format references/bytes
 are retained, with an independent dirty pane unchanged. Proof336 verifies actual
 storage, roles/policy and owned cleanup. The separate pane-grid producer repair
-now passes Make365/browser43; integrated patched-host qualification remains open.
-Keep this record until every applicable current-host case has evidence.
+passes Make365/browser43. Published0.8.1 ordinary-host and split/native-modal
+checks518 and configured-native checks534 now pass on reviewed KMS2a33a2f.
+The new-tuple sustained workload532 is running and has no accepted final result.
+Those checks do not establish the collected/current, pipeline or rule cases
+below. Keep this record until every applicable current-host case has evidence.
 
 Bounded legacy run `d0445e4349d4` passes375/1440px using synthetic initial legacy
 rows inserted with immutable-history guards enabled. Rich save and restore retain
