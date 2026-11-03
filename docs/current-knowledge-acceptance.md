@@ -35,7 +35,10 @@ are retained, with an independent dirty pane unchanged. Proof336 verifies actual
 storage, roles/policy and owned cleanup. The separate pane-grid producer repair
 passes Make365/browser43. Published0.8.1 ordinary-host and split/native-modal
 checks518 and configured-native checks534 now pass on reviewed KMS2a33a2f.
-The new-tuple sustained workload532 is running and has no accepted final result.
+Fresh0.8.1/2a33a2f workload582 completes all16 measured windows/336000
+successful operations and4800 separate warmups, with zero errors or misses.
+Final proof595 verifies SQL/S3 preservation, source integrity, bounded memory
+and owned cleanup; interrupted run532 remains unaccepted.
 Those checks do not establish the collected/current, pipeline or rule cases
 below. Keep this record until every applicable current-host case has evidence.
 

@@ -101,9 +101,11 @@ to F02/F03/F05/F08. The declared frozen0.8.0/f40e7a2 sustained workload now pass
 all16 windows/336000 operations with independent preservation/cleanup proof477.
 The retired capacity record, historical limits/failures and six-criterion mapping
 remain readable in the six-entry capacity-retirement-481.tgz archive. Affected
-populated/current/rule acceptance remains open. New-tuple sustained run532
-uses the same declared workload on0.8.1/2a33a2f and is running without an
-accepted final result. KMS remote publication awaits Jenkins branch routing
+populated/current/rule acceptance remains open. Fresh0.8.1/2a33a2f run582
+completes the same declared workload: all16 measured windows/336000 successful
+operations,4800 separate warmups and zero errors/misses. Final proof595 verifies
+SQL/S3 preservation, source integrity, bounded memory and owned cleanup.
+Interrupted run532 remains unaccepted. KMS remote publication awaits Jenkins branch routing
 clarification because the current approval excludes deployment.
 These runs cover the note client's named design units under the recorded local
 workloads. Source collection, model quality, search-index freshness and the

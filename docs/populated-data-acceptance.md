@@ -24,8 +24,10 @@ The historical cases below retain their limits; this document is not ready
 for retirement. F07 in the functional specification owns lasting behavior.
 Published0.8.1 ordinary-host/split/native-modal checks518 and configured-native
 checks534 pass on reviewed KMS2a33a2f. They do not requalify the populated
-current/rule cases in this record. New-tuple sustained workload532 is running
-without an accepted final result; whole AC09 also awaits KMS remote publication.
+current/rule cases in this record. Fresh0.8.1/2a33a2f workload582 completes
+all16 measured windows/336000 successful operations and4800 separate warmups,
+with zero errors/misses and final preservation/cleanup proof595. Interrupted
+run532 remains unaccepted. Whole AC09 also awaits KMS remote publication.
 Initial run04 lacks the ordinary durable worker required by normal rule
 validation. A later finite notifications/text-worker attempt `2b7136e2305b`
 reaches that validation and fails with `LOCATIONS_OUT_OF_SCOPE`: its fixture
