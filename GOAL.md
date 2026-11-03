@@ -80,7 +80,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 | D01 | `docs/functional-specification.md` | COMPLETED initial lasting specification in this update; keep behavior current through implementation. This is not a work diary to retire. |
 | D02 | `SESSION_PROMPT.md`, `COMPLETION_STATUS.md` | Close individual G01–G11/original criteria and retire last. |
 | D03 | `docs/2026-10-25-note-library-corrections.md` (removed) | COMPLETED and retired: all six corrections pass current focused 53/53 in seven files. A readable four-entry retirement archive and Git `bd28c292` preserve evidence; F01/F04/F08 and the ledger retain the mapping. Separate product dependencies remain G01/G06/G07 and AC08/AC09. |
-| D04 | `docs/capacity-and-access-acceptance.md` | Preserve historical million-note warm receipts/limits; finish agreed current-host workload/platform acceptance. |
+| D04 | `docs/capacity-and-access-acceptance.md` (removed) | COMPLETED declared frozen0.8.0/f40e7a2 workload and platform disposition. Six-entry readable archive481 preserves historical limits/failures, six-criterion mapping and final/raw/warmup proofs. F01/F05/F08/F09 own behavior; patched-host/context/rule cases remain AC08/AC09. |
 | D05 | `docs/current-knowledge-acceptance.md` | Current-host authored/current/legacy/history/proof/rule and actor/access verification. |
 | D06 | `docs/drawio-acceptance.md` (removed) | COMPLETED bounded actual-host native4/ownership3/restore4. The readable10-entry `drawio-retirement-280.tgz` preserves the journal,12-criterion mapping, sanitized proofs, original restore failure/correction and graphical screenshots. F03/F04/F08/F09 retain behavior; wider peer/context/workload obligations remain G07/G08/AC08. |
 | D07 | `docs/move-and-large-document-acceptance.md` (removed) | COMPLETED bounded current-host move/document/byte checks in `e7bf9972a611`. Six-entry readable archive preserves the original, sanitized proof and F02/F03/F05/F08 mapping. Sustained workload remains D04/G05/AC08. |
@@ -197,29 +197,19 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   revisions and24 actual S3 objects/1663 bytes. Original schema-preparation failure
   stays preserved; inventories/original roles/settings and independent cleanup375
   pass. Genuine rule/current-membership cases remain separate.
-- [ ] Finish the approved sustained workload,
-  retaining every input, resource, contention and cleanup guard. Native's13:20
-  admission fails before build/fixture; proof129 preserves that result. Later
-  workload133/scoped d88bd5e5cebb seeds1000000 notes/revisions but fails before
-  warmup or measurement. Original inputs and FAIL remain unchanged; expected
-  final workload counts must not substitute for actual observations. Successor337
-  completes all16 windows with one error among336000 measured requests; proof361
-  independently confirms owned cleanup. Its zero-error criterion remains open.
-  Distinct corrected412 is now running in02688f9f0a08 after actual idle-pool
-  verification409 and cleanup regression400. It preserves the full12000 measured
-  seconds and existing frozen0.8.0/f40e7a2 tuple. Checkpoint420 verifies the live
-  scope/supervisor/tool handle. Proof423 verifies1200 successful first-warmup
-  samples and four actual readable populations. Proof427 preserves the first
-  window; proof432/439/451 preserve earlier windows. At12:55UTC, proof462 verifies
-  252000 successful samples across all twelve100%/10%/1% windows, including three
-  300-second100rps stress windows, with exact operation counts and zero unexpected
-  errors/missed. SQL463 confirms all three completed notes' original owners and
-  revision/history4261 each,12783 history rows combined. Only12/16 measured windows are complete; preserve original failures
-  and verify the remaining windows, final SQL/storage, input hashes and cleanup.
-  Independent read-only observer429 is running with baseline1000000 corpus notes
-  and actual16384-byte S3 object verified. Its final four-note/history and fresh
-  S3 checks remain pending before cleanup; additional reads are disclosed outside
-  the paced workload. Follow its existing tool session63099 as well as12890.
+- [x] Finish the approved frozen-tuple sustained workload in02688f9f0a08.
+  Final proof477 verifies16 windows/12000 measured seconds,336000 successful
+  operations and4800 separate successful warmup operations, with zero errors/
+  missed. Actual readable populations are1000000/100000/10000/1000. Fresh SQL
+  verifies1000000 notes/1017040 revisions and four original-owner notes at4261;
+  independent429 verifies17044 mutable histories and a fresh16384-byte S3 GET.
+  Three135-table inventories, original roles/policy and all declared source/API/
+  worker/WEB/driver/core inputs match. Both original tool handles exit0, with
+  zero OOM kills; seven owned containers/network are independently absent.
+  The six-entry readable capacity-retirement-481.tgz preserves historical limits,
+  original failures, six-criterion mapping and sanitized final/raw/warmup proofs.
+  F01/F05/F08/F09 own lasting behavior. This accepts published0.8.0/f40e7a2's
+  declared workload, not unpublished0.8.1 or the remaining AC08/AC09 host cases.
 - [x] Complete exact failed-workload owned cleanup with fresh SQL/S3 evidence159
   and independent absence proof161. Original organization/role rows and the
   declared new corpus organization are preserved in audit152 and fresh evidence.

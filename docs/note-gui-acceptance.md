@@ -82,7 +82,7 @@ Make365/browser43 with inspected1600/390px screenshots; its unpublished patched
 consumer qualification and wider populated-context/workload acceptance remain
 in G07/G08 and GOAL AC08.
 
-The later [capacity and account-access run](capacity-and-access-acceptance.md)
+The later [capacity and account-access behavior](functional-specification.md#f05-trees-and-bounded-resources)
 verified three account sessions, live role and membership revocation, and
 bounded browser navigation and editing with one million notes. The
 [move and document run](functional-specification.md#f05-trees-and-bounded-resources) also verified
@@ -92,7 +92,11 @@ Its bounded current-host rerun `e7bf9972a611` also verifies source URL/editor
 retention and destination-link clearing after access refresh. The completed
 journal and sanitized proof are preserved in the six-entry local archive
 `.tmp/gui-completion/move-large-retirement-01.tgz`; lasting behavior belongs
-to F02/F03/F05/F08. Sustained workload remains in the capacity record.
+to F02/F03/F05/F08. The declared frozen0.8.0/f40e7a2 sustained workload now passes
+all16 windows/336000 operations with independent preservation/cleanup proof477.
+The retired capacity record, historical limits/failures and six-criterion mapping
+remain readable in the six-entry capacity-retirement-481.tgz archive. Affected
+patched-host and populated/current/rule acceptance remain open.
 These runs cover the note client's named design units under the recorded local
 workloads. Source collection, model quality, search-index freshness and the
 linked product management screens remain owned by Knowledge Engine. The

@@ -5,8 +5,9 @@
 Latest authority: reply434 additionally approves current master commits/push,
 normal clean0.8.1 patch qualification/publication and the reviewed KMS dependency
 update/integration. Existing releases, services and data must remain. Deployment
-and model/provider calls remain excluded. Heavy release/integration gates follow
-the running workload. Earlier direct approval253 covers builds/tests and isolated
+and model/provider calls remain excluded. The approved workload is complete in
+proof477; heavy release/integration gates may now begin after fresh resource/input
+admission. Earlier direct approval253 covers builds/tests and isolated
 integration/workload checks. Fresh
 successors254/255/257 retain the original cases, guards and6390/4260/2130s budgets;
 focused259 passes18/18. The existing native interval ending06:45UTC is retained
@@ -203,47 +204,38 @@ cleanup once. Regression398 reproduces FileExistsError on original168; successor
 shared cleanup. Proof400 records zero Docker calls. Original failures, source and
 completed cleanup359 remain unchanged; this does not accept a new workload run.
 
-Corrected full workload412 is now running in `02688f9f0a08`. This distinct
-single-use execution follows the actual idle-reset correction409 and cleanup
-regression400. Preparation415 verifies unchanged seed/resource methods, operation
-logic and all measured window definitions; the new host's cleanup tests416 pass3/3.
-The HTTP client module has a pre-run digest and requires a matching post-run
-digest as well.
+Corrected full workload412 is COMPLETE in `02688f9f0a08`, with both original
+main12890 and independent-observer63099 handles exiting0. Final proof477 verifies
+all16 windows/12000 measured seconds and336000 successful operations, zero errors/
+missed. Raw audit422 verifies complete unique indexes, exact operation counts and
+unchanged raw hashes. Proof470 separately verifies all four warmups/4800 successes.
+Each100%/10%/1%/0.1% population completes three900-second20rps windows and one
+300-second100rps window. Actual readable populations are1000000/100000/10000/1000.
 
-The operator-selected five-hour bound is2026-11-03 10:11:54.073682–15:11:54.073682UTC
-under the existing direct isolated-testing approval253, without host exclusivity.
-Systemd scope `kms-gui-workload-retired-pool-412-20261103101154.scope` is active;
-supervisor413, its child and tool session12890 are live at checkpoint420. Actual
-SQL verifies1000000 corpus notes; API-readable populations match1000000/100000/
-10000/1000. Proof423 audits all1200 first-warmup samples:1200 successful, zero
-errors/missed and exact read/save/history/authority/storage operation counts.
-Proof427/432/439/451 preserve the earlier windows. At12:55UTC, proof462 verifies all
-twelve100%/10%/1% windows:252000 measured samples, all successful with zero unexpected
-errors/missed, complete unique request indexes and exact operation counts. Each
-population includes three900-second20rps and one300-second100rps window. Independent
-SQL463 confirms all three completed mutable notes retain their original owner,
-structured HUMAN body and revision/history4261 each,12783 history rows combined.
-This completes12/16 measured windows; the0.1% population's first steady window is
-active. Live checkpoint420 owns subsequent execution observations.
-Preserve the2GiB/zero-swap driver scope, container limits,12000 measured seconds,
-all four populations and authority/storage checks. Use a separate completed-window
-audit421/422; planned counts are not results.
+Fresh SQL verifies1000000 corpus notes/100000 roots/900000 children and1017040
+revisions. All four mutable notes retain original owners and revision4261.
+Read-only observer429 independently verifies17044 combined mutable histories and
+an actual fresh16384-byte S3 GET/checksum before cleanup. These observer reads
+are additional to the paced workload. All three135-table inventories, original
+roles/organization policy and the exact declared corpus addition are preserved.
+Normal cleanup removes only its seven containers/network; final collector476
+independently confirms all eight resources absent.
 
-This run uses only the frozen published GUI0.8.0/KMS f40e7a2 inputs. No rebuild,
-release, pin or deployment change occurs. It can qualify that workload tuple;
-unpublished0.8.1 adoption and affected-host qualification remain separate.
-Original337/394 failures and all their inputs are preserved. Follow the actual
-live handle to terminal state and verify SQL/storage, input hashes and owned
-cleanup before claiming any new capacity result.
+Every declared source/API/worker/WEB/driver and actual Playwright-core hash matches
+before/after. Scope peak equals its2147483648-byte limit, swap0,183 memory-max events
+and zero OOM/kill events. The harness retires344 free sockets and zero active
+sockets, observes340840 API requests and changes neither retries nor active
+deadlines. The run ends within its operator-selected10:11:54.073682–15:11:54.073682UTC
+bound under reply253, without host exclusivity. Earlier failures and their inputs
+remain intact; the corrected policy does not establish the original reset's cause.
 
-Read-only final observer429 is separately running under tool session63099 and
-the same15:11:54.073682UTC bound. Its baseline independently verifies1000000 notes,
-100000 roots/900000 children and an actual S3 LIST/GET of the single16384-byte
-object with matching checksum. These additional reads are outside the paced load.
-It watches the existing main scope, writes no fixture data and stops if that scope
-ends. Final four-note revision/history and a fresh S3 GET are still pending near
-the last stress window, before ordinary cleanup. Preserve its source/preparation430,
-receipt and private SQL/S3 evidence; do not launch another observer or workload.
+This accepts exactly the published GUI0.8.0/KMS f40e7a2 declared workload. It does
+not qualify unpublished0.8.1, a latency SLO, model/search quality or the whole GUI.
+Six-entry readable capacity-retirement-481.tgz preserves the completed journal,
+six-criterion mapping, historical failures/limits and sanitized final/raw/warmup
+proofs; retirement482 verifies every entry. F01/F05/F08/F09 retain lasting behavior.
+The completed capacity journal is removed; three original journals still retain
+unfinished context/rule/product-host requirements. Execution records retire last.
 
 Release preservation441 independently hashes the existing0.8.0 worktree's295
 tracked sources and682 distribution files at b9c1ae1d; no HEAD/file/build change
@@ -771,13 +763,13 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G02 | KNOWLEDGE-001/003/004/011; `src/index.tsx`, `hostRuntime.tsx`, `host.ts` | Core-only persistence, named extensions, actual package imports and isolated mount lifetimes pass. Current KMS CONTROLLED run10 passes authenticated direct entry, rich save/reload, draft-safe route lifecycle and style disposal at three widths. | Exact 0.8 adoption and the normal parent gate/publication are complete at `f40e7a2`; bounded session-loss/relogin also passes. Wider host/mode cases remain open. PARTIAL. |
 | G03 | KNOWLEDGE-005–009/027, F02/F04; `Pane.tsx`, `paneState.ts`, `NotePanels.tsx`, `localPersistence.ts` | Delayed restore loss repaired. Complete gate 266 pass; Chromium/Chrome each 35 pass. Exact lost-ack create/save/comment replay preserves identity and later drafts. Property readback detects torn reads, withholds uncertain writes and resolves panel-only conflicts without losing the body draft. | Actual plain/review/HTTP-MCP rich protection passes6 cases in c6c7161bf627 with SQL/byte/cleanup proof376. Genuine pipeline application/current-membership cases remain open. PARTIAL. |
 | G04 | KNOWLEDGE-012/013/015; `Pane.tsx`, `DocmostPaneProvider.tsx`, `Workspace.tsx` | Independent pane/tab/native draft ownership and mount-local dirty aggregation pass. Current KMS CONTROLLED run10 also verifies actual Back/Forward cancellation, explicit leave/reopen and the same editor/draft/history at three widths; fragment/distance regressions fail first/pass after repair. | Integrated same-note/native ownership3/restore4 and independent dirty-pane formatted restore2 pass in255/270/332. Pane-grid producer repair passes Make365/browser43. Imported current-context and integrated patched-host/whole mode acceptance remain open. PARTIAL. |
-| G05 | KNOWLEDGE-019–022/058, F05; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Actual hierarchy/current authority, sustained mixed workload and scale envelope owned by KMS P14. Historical million-note results retain their older workload. PARTIAL. |
+| G05 | KNOWLEDGE-019–022/058, F05; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Frozen0.8.0/f40e7a2 declared million-note workload passes16 windows/336000 operations with independent preservation/cleanup proof477. Historical warm measurements keep their limits; patched-host acceptance remains separate. PARTIAL. |
 | G06 | KNOWLEDGE-023–026/030/032–038, F06/F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Bounded populated43 applications and shared associations pass in024345c3b295/c3d33e70ced0. Collected-empty-authored/nonempty-current, human restore with independent nonempty current, pipeline stale-target and genuine rule-comparison/application cases remain open. PARTIAL. |
 | G07 | KNOWLEDGE-016–018/027/065, F08; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Producer native5 and actual matched-host native4/ownership3/restore4 pass, including inline edit/undo, co-editor successor attribution and pane/tab restore isolation. Current-host SQL/storage/role/cleanup proofs are preserved in261/274 and archive280. | Bounded approved-origin Draw.io journal is complete and retired. Additional all-format peer/storage cases323 and formatted restore332 pass with independent proofs327/336. Pane-grid producer repair passes normal Make365/browser43 with proof367. Wider integrated patched-host/product/context acceptance remains open. PARTIAL. |
 | G08 | KNOWLEDGE-014/027/036, F09; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
 | G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | Published0.8 release/adoption is complete at f40e7a2. Unpublished0.8.1 producer Make379/package380 passes; clean patch promotion/publication, reviewed consumer pin and integrated patched-host checks are authorized by reply434 and remain unexecuted pending normal qualification. Windows is NOT_APPLICABLE. PARTIAL for the current candidate. |
 | G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Agreed optional adapter is verified in core-only/CONTROLLED/SHARED hosts. Three-width actual SHARED creation, real actors, original link creator/global receipt/relink, file authority and CONTROLLED role/epoch2/3/4 recovery pass in `c3d33e70ced0`, with independent SQL/S3/role/cleanup proof. | Integrated native4/ownership3/restore4, peer4 and formatted restore2 pass in254/255/270/323/332. Wider populated actor/reviewer/source context, integrated patched-host layout and whole SC09 remain open. No new DTO or actor inference is introduced. PARTIAL; bounded AC04 complete. |
-| G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; correction, move/large-document and bounded Draw.io units are archived/removed. Current producer packet, sanitized proofs and readable evidence archives retain their limits. Duplicate current/screen contracts move to the lasting specification. | Four original journals retain unfinished host/workload criteria. Prompt and this record remain until last. PARTIAL. |
+| G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; correction, move/large-document, bounded Draw.io and declared capacity units are archived/removed. Current producer packet, sanitized proofs and readable evidence archives retain their limits. Duplicate current/screen contracts move to the lasting specification. | Three original journals retain unfinished host/context/rule criteria. Prompt and this record remain until last. PARTIAL. |
 
 ## Individual original criterion accounting
 
@@ -975,7 +967,7 @@ This does not waive final release archival or accept the current product host.
 | Existing record | Facts retained | Current reconciliation / retirement condition |
 | --- | --- | --- |
 | `docs/2026-10-25-note-library-corrections.md` | COMPLETED six correction items; historical import/byte observations remain in Git at `bd28c292` and the local retirement archive. Current 53/53 tests pass in seven files. | RETIRE this correction unit. F01/F04/F08 own its behavior. Managed Draw.io deployment, populated current knowledge and the rest of the product matrix remain open in G01/G06/G07 and GOAL AC08/AC09. |
-| `docs/capacity-and-access-acceptance.md` | Warm million-note fixture, 50-row reads, cache/retained heap, real role changes | G05/G08; not cold/peak/sustained/current-host acceptance. Windows is outside the required scope. |
+| `docs/capacity-and-access-acceptance.md` (removed) | COMPLETED frozen0.8.0/f40e7a2 declared workload:16 windows/336000 successful operations,4800 warmups, independent SQL/S3/input/role/cleanup proof477 | Six-entry readable archive481 preserves historical limits/failures, six-criterion mapping and final/raw/warmup proofs. F01/F05/F08/F09 own behavior. No cold/production/0.8.1 or whole-goal acceptance; remaining patched-host/context/rule criteria remain AC08/AC09. |
 | `docs/current-knowledge-acceptance.md` | Authored/current/legacy distinction, historical source ordering and exact pinned rule evidence | COMPLETED duplicate-contract transfer to F02/F04/F06/F07. Retain dated evidence; G06 server/current-host acceptance remains KMS-owned. |
 | `docs/drawio-acceptance.md` (removed) | COMPLETED actual matched-host native4/ownership3/restore4 with normal CSP, forged-message refusal, immutable bytes, viewer/revocation, undo, co-editor attribution and pane/tab restore | Ten-entry readable archive `drawio-retirement-280.tgz` preserves12-criterion mapping, journal, sanitized proofs, original257 failure/correction and screenshots. F03/F04/F08/F09 own behavior. Wider G07/G08 and AC08 context/workload remain open. |
 | `docs/move-and-large-document-acceptance.md` (removed) | COMPLETED in actual Next run `e7bf9972a611`: private subtree/peer denial, source URL and two DOM editors/drafts through refresh, link clearance, 1,000 paragraphs/20MiB native SHA and110,000-character rejection | Six-entry readable archive `move-large-retirement-01.tgz` preserves the completed original, sanitized proof and F02/F03/F05/F08 mapping. Wider G05/G07/G08 and sustained AC08 remain open. |

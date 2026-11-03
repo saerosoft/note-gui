@@ -247,7 +247,10 @@ G11 retirement remains open. Seven historical journals are reconciled in
 53 current tests and a readable four-entry archive. The completed move/large-document
 unit is also removed with its six-entry archive. The bounded actual-host Draw.io
 journal retires with its ten-entry archive280 after native4/ownership3/restore4
-and independent inventory/storage/role/cleanup verification. Four original journals still
-retain unfinished dependencies. Historical evidence keeps its original source/topology
+and independent inventory/storage/role/cleanup verification. The declared frozen
+0.8.0/f40e7a2 workload passes16 windows/336000 operations with final proof477;
+its completed capacity record retires with a readable six-entry archive481.
+Three original journals still retain unfinished host/context/rule dependencies.
+Historical evidence keeps its original source/topology
 limits. Keep licenses, provenance and active criteria; retire the session prompt
 and completion record last.

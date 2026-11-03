@@ -1781,11 +1781,9 @@
     "helperSha256": "5aafc5de1bda0c49ef0f7ba6d203d5a7e26c989787cfbbe339d15a09aa3c9bd0"
   },
   "correctedSustainedWorkload412": {
-    "status": "RUNNING_THREE_POPULATIONS_TWELVE_WINDOWS_VERIFIED",
+    "status": "PASS_DECLARED_FROZEN_TUPLE_WORKLOAD_AND_CLEANUP_VERIFIED",
     "run": "02688f9f0a08",
     "receiptPath": "scoped-workload-02688f9f0a08/receipt.json",
-    "liveCheckpoint": "live-corrected-workload-checkpoint-420.json",
-    "liveToolSession": 12890,
     "systemdUnit": "kms-gui-workload-retired-pool-412-20261103101154.scope",
     "supervisorPid": 4158001,
     "childPid": 4158003,
@@ -1806,7 +1804,7 @@
     "clientModulePrePostHashRequired": true,
     "newHostCleanupRegressionTests": 3,
     "originalFailurePreserved": true,
-    "wholeWorkloadAccepted": false,
+    "wholeWorkloadAccepted": true,
     "firstWarmupProof": "corrected-workload-first-warmup-proof-423.json",
     "firstWarmupActualSamples": 1200,
     "firstWarmupActualSuccesses": 1200,
@@ -1818,12 +1816,12 @@
       10000,
       1000
     ],
-    "measuredWindowsCompletedAtCheckpoint": 12,
+    "measuredWindowsCompletedAtCheckpoint": 16,
     "firstMeasuredWindowProof": "corrected-workload-first-window-proof-427.json",
     "firstMeasuredWindowProofSha256": "3f9b2a54ad78edb58c76d04f9e1320fb60f6adb00738152bed5387841aa32d2a",
     "cumulativeRawSampleProof": "corrected-workload-completed-windows-proof-422.json",
-    "verifiedMeasuredRawSamples": 252000,
-    "verifiedMeasuredSuccessfulSamples": 252000,
+    "verifiedMeasuredRawSamples": 336000,
+    "verifiedMeasuredSuccessfulSamples": 336000,
     "observedMeasuredErrors": 0,
     "observedMeasuredMissed": 0,
     "firstMeasuredWindowOperationCounts": {
@@ -1839,13 +1837,13 @@
     "independentFinalObserver": "workload-independent-final-watch-429.json",
     "independentFinalObserverToolSession": 63099,
     "independentFinalObserverPid": 286022,
-    "independentFinalObserverStatus": "RUNNING_BASELINE_VERIFIED_FINAL_ROWS_PENDING",
+    "independentFinalObserverStatus": "FINAL_OWNED_SQL_AND_STORAGE_OBSERVED",
     "independentObserverSourceSha256": "e7481e79fe877ce5ca5ae7c77cf6d9782ac6ce95a6c668da51fc0537b73aed42",
     "independentObserverBaselineCorpusNotes": 1000000,
     "independentObserverBaselineS3GetBytes": 16384,
     "independentObserverReadsOutsidePacedLoad": true,
-    "independentFinalMutableRowProofAccepted": false,
-    "independentFinalS3ProofAccepted": false,
+    "independentFinalMutableRowProofAccepted": true,
+    "independentFinalS3ProofAccepted": true,
     "secondMeasuredWindowProof": "corrected-workload-second-window-proof-432.json",
     "secondMeasuredWindowProofSha256": "fbe322326c62764f33583bd7201a7cdb8b8a21460ddcbb50fb34e1195c4681ea",
     "firstCompletedPopulationRawProof": "corrected-workload-first-population-proof-439.json",
@@ -1855,7 +1853,8 @@
     "completedPopulationPercentages": [
       100,
       10,
-      1
+      1,
+      0.1
     ],
     "firstPopulationActualFinalMutableRevision": 4261,
     "twoCompletedPopulationsRawProof": "corrected-workload-second-population-proof-451.json",
@@ -1865,13 +1864,37 @@
     "completedPopulationActualMutableRevisions": [
       4261,
       4261,
+      4261,
       4261
     ],
-    "completedPopulationMutableHistoryRows": 12783,
+    "completedPopulationMutableHistoryRows": 17044,
     "threeCompletedPopulationsRawProof": "corrected-workload-third-population-proof-462.json",
     "threeCompletedPopulationsRawProofSha256": "4709c3e821b2185eab20fac8b487bd591bc61f31a3acabf2cd95ae89a800d5e4",
     "threeCompletedPopulationsIndependentSqlProof": "corrected-workload-three-population-sql-463.json",
-    "threeCompletedPopulationsIndependentSqlProofSha256": "4ec691e7544275a72f14d7b9cfc3d40493495ea14bd7d8282f093eab155a04e4"
+    "threeCompletedPopulationsIndependentSqlProofSha256": "4ec691e7544275a72f14d7b9cfc3d40493495ea14bd7d8282f093eab155a04e4",
+    "executionEnded": true,
+    "executionExitCode": 0,
+    "independentObserverExitCode": 0,
+    "allWarmupActualSuccesses": 4800,
+    "scopeMemoryPeakBytes": 2147483648,
+    "scopeMemoryEvents": {
+      "low": 0,
+      "high": 0,
+      "max": 183,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "ownedContainersIndependentlyAbsent": 7,
+    "ownedNetworkIndependentlyAbsent": true,
+    "wholeGuiGoalAccepted": false,
+    "executionToolSession": 12890,
+    "terminalCheckpoint": "live-corrected-workload-checkpoint-420.json",
+    "finalProof": "corrected-workload-final-proof-477.json",
+    "finalProofSha256": "7e557bf4077db4a33dfc2c1cc6547a30befda669332eecd15de9b00c3227cec8",
+    "allWarmupProof": "corrected-workload-all-warmups-proof-470.json",
+    "allWarmupProofSha256": "03e2f43f59cad94c9e63092b470afaee43d674c70a5d99382bbd8995e8ce9866"
   },
   "currentPublicationAuthority434": {
     "status": "DIRECT_USER_APPROVAL_GRANTED_NOT_RELEASE_QUALIFICATION",
@@ -1916,5 +1939,22 @@
     "proof": "original-ancestor-evidence-route-460.json",
     "proofSha256": "8f28300bab5b0a50c2c69a0dbc2dbde55904eaeb09e6233e60b2723ac33f8ff9",
     "scope": "Read-only relocation and original hash verification. The wrapper exit does not establish gate success; the original timeout cause remains open."
+  },
+  "completedCapacityRecordRetirement482": {
+    "status": "COMPLETED_CAPACITY_RECORD_ARCHIVED_NOT_WHOLE_GOAL_ACCEPTANCE",
+    "archive": "capacity-retirement-481.tgz",
+    "archiveSha256": "02d1e70e98aff5ce1f16c251f0d9746c456b4ddf4844cd68d417e63615eb0370",
+    "entries": 6,
+    "criterionCount": 6,
+    "entryBytesVerified": true,
+    "lastingSpecificationOwners": [
+      "F01",
+      "F05",
+      "F08",
+      "F09"
+    ],
+    "historicalFailuresAndLimitsPreserved": true,
+    "unfinishedPatchedHostContextAndRuleCriteriaRemainOpen": true,
+    "wholeGoalAccepted": false
   }
 }

@@ -19,7 +19,8 @@ historical statements stay outside current membership, with current counts
 4/25/4/4. Current items and history page20+5; exact original/saved comparisons
 and automatic administrator demotion clearance pass. Independent inventories
 and cleanup pass. Eight exact NOT_FOUND reads are paired with successful owner
-controls. Rule-version and the approved sustained workload remain open. Bounded
+controls. The declared frozen0.8.0/f40e7a2 sustained workload now passes in proof477;
+rule-version and affected patched-host cases remain open. Bounded
 legacy-origin verification follows below. This does not requalify the older
 million-note migration or its target-device claims.
 Current-host evidence must also cover the collected note's empty human editor,
