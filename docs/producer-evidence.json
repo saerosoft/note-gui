@@ -2518,5 +2518,64 @@
     "proof": "patched-workload-retry-final-v2-preparation-601.json",
     "proofSha256": "53e0bcf9cbc6f9a71833830eaf5e4ae70123907bc16f103e8d3c21f900880f23",
     "wholeGoalAccepted": false
+  },
+  "firstFresh081WorkloadProfile607": {
+    "status": "FIRST_FRESH_RETRY_PROFILE_ALL_FOUR_MEASURED_WINDOWS_AND_SQL_VERIFIED_FULL_RUN_LIVE",
+    "observedAtUtc": "2026-11-03T19:50:48.269669+00:00",
+    "run": "ff7327b40baa",
+    "kmsCommit": "2a33a2f81b5742b405a9c2a7a7148723febe9ce6",
+    "guiCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "completedProfiles": [
+      100
+    ],
+    "remainingProfiles": [
+      10,
+      1,
+      0.1
+    ],
+    "measuredWindows": 4,
+    "measuredSeconds": 3000,
+    "measuredSuccessfulOperations": 84000,
+    "unexpectedErrors": 0,
+    "missed": 0,
+    "warmupSuccessesExcludedFromMeasurement": 1200,
+    "warmupRawSha256": "ddce5bfa2ea50bf42ba87023b9b3bf038c7382aa142929561f826eccd6ef7551",
+    "readOnlySqlObservation": {
+      "revision": 4261,
+      "originalOwnerPreserved": true,
+      "historyRows": 4261,
+      "firstRevision": 1,
+      "lastRevision": 4261,
+      "initialEditorPreserved": true,
+      "workloadActorEdits": 4260,
+      "otherLaterEditors": 0
+    },
+    "readOnlySqlProofSha256": "1a5b5138aa245990796a97493374984083884a00ef7baa9b7e02d7f10848dcea",
+    "actualApiReadablePopulation": 1000000,
+    "actualBrowserObservations": 562,
+    "scopeMemoryEventsObserved": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "scopeMemoryPeakBytes": 1123545088,
+    "mainAndThreeObserversConfirmedActive": true,
+    "currentActiveWindow": {
+      "percent": 10,
+      "phase": "steady",
+      "index": 0,
+      "rate": 20,
+      "seconds": 900,
+      "began": "2026-11-03T19:50:13.688Z"
+    },
+    "remainingTwelveMeasuredWindowsAndFinalEvidenceRequired": true,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "proof": "patched-workload-retry-first-profile-proof-607.json",
+    "proofSha256": "e871dac8e22af2c5795748686ec1eb7786e0903e44a7e9ebbf61a9c31d8f3725"
   }
 }

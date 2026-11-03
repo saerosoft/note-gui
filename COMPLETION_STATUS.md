@@ -110,6 +110,15 @@ Memory limits, zero-OOM, measured-window and cleanup requirements are unchanged;
 all measured windows and final proof595 remain required. No host exclusivity,
 deployment, model execution or whole-goal acceptance is claimed.
 
+First-profile proof607 verifies all four measured windows of fresh run582's
+100% readable population: 3,000 measured seconds and 84,000 successes, with zero
+unexpected errors/missed operations and 1,200 separate warmup successes. The
+API checks confirm 1,000,000 readable notes; the driver records 562 browser observations.
+Read-only SQL confirms revision/history 4,261, original ownership/initial editor
+and 4,260 later edits by the actual workload actor. Twelve measured windows,
+three readable profiles and all final checks remain required. Whole-workload
+and current/pipeline/rule acceptance remain open.
+
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without
 rebuilding. Graphical edit/reopen, access revocation, read-only viewer and native
