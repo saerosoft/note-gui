@@ -12,13 +12,14 @@ successors254/255/257 retain the original cases, guards and6390/4260/2130s budge
 focused259 passes18/18. The existing native interval ending06:45UTC is retained
 as an additional bound, without claiming a new interval approval or exclusivity.
 
-Master now contains pane repair `5d19c469` and candidate metadata `1d65cba2`.
-All three executed runtime/regression source hashes match proof367. Public API
-declarations match the published0.8.0 release. Remote master inspection matches
-the previous local `dee61e9e`; release/v0.8.1 and its GitHub release do not exist.
-Documentation and current approval434 are being recorded before the authorized
-development push. Clean release qualification/publication and KMS adoption are
-still pending; no heavy gate is started alongside the workload.
+Master publication is VERIFIED at `ad985bf0`, containing pane repair `5d19c469`,
+candidate metadata `1d65cba2` and current work records. Proof438 checks the normal
+fast-forward push, matching remote head and clean development tree at publication.
+All three executed runtime/regression source hashes match proof367; public API
+declarations match published0.8.0. The existing annotated0.8.0 tag/peeled commit
+and version branch remain unchanged; release/v0.8.1 is not published. Clean
+receiving-branch qualification and KMS adoption remain pending after the workload.
+No heavy release/integration gate has started.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without
@@ -216,10 +217,12 @@ supervisor413, its child and tool session12890 are live at checkpoint420. Actual
 SQL verifies1000000 corpus notes; API-readable populations match1000000/100000/
 10000/1000. Proof423 audits all1200 first-warmup samples:1200 successful, zero
 errors/missed and exact read/save/history/authority/storage operation counts.
-Proof427 preserves the first18000-sample window. Proof432 now verifies both
-completed900-second20rps windows:36000 measured samples, all successful, zero
-unexpected errors/missed and exact operation counts. This completes2/16 measured
-windows; the third steady window is active.
+Proof427/432 preserve the first two windows. Proof439 now verifies all four100%
+windows:three900-second20rps and one300-second100rps,84000 measured samples, all
+successful with zero unexpected errors/missed and exact operation counts.
+Independent SQL442 confirms the first mutable note's revision/history4261,
+original owner and structured HUMAN body. This completes4/16 measured windows;
+the10% population's first steady window is active.
 Preserve the2GiB/zero-swap driver scope, container limits,12000 measured seconds,
 all four populations and authority/storage checks. Use a separate completed-window
 audit421/422; planned counts are not results.
@@ -239,6 +242,13 @@ It watches the existing main scope, writes no fixture data and stops if that sco
 ends. Final four-note revision/history and a fresh S3 GET are still pending near
 the last stress window, before ordinary cleanup. Preserve its source/preparation430,
 receipt and private SQL/S3 evidence; do not launch another observer or workload.
+
+Release preservation441 independently hashes the existing0.8.0 worktree's295
+tracked sources and682 distribution files at b9c1ae1d; no HEAD/file/build change
+or new workspace occurs. Consumer baseline440 records HEAD878108b9,315 unrelated
+changed paths, one pre-existing staged path and the unchanged0.8.0 GUI lock.
+Preserve other capability-lock entries and their staging. No consumer edit or
+integration build has occurred; only the reviewed GUI pin/adoption is authorized.
 
 ### Earlier checkpoint and preparation history
 

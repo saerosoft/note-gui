@@ -1781,7 +1781,7 @@
     "helperSha256": "5aafc5de1bda0c49ef0f7ba6d203d5a7e26c989787cfbbe339d15a09aa3c9bd0"
   },
   "correctedSustainedWorkload412": {
-    "status": "RUNNING_TWO_MEASURED_WINDOWS_VERIFIED",
+    "status": "RUNNING_FIRST_POPULATION_FOUR_WINDOWS_VERIFIED",
     "run": "02688f9f0a08",
     "receiptPath": "scoped-workload-02688f9f0a08/receipt.json",
     "liveCheckpoint": "live-corrected-workload-checkpoint-420.json",
@@ -1818,12 +1818,12 @@
       10000,
       1000
     ],
-    "measuredWindowsCompletedAtCheckpoint": 2,
+    "measuredWindowsCompletedAtCheckpoint": 4,
     "firstMeasuredWindowProof": "corrected-workload-first-window-proof-427.json",
     "firstMeasuredWindowProofSha256": "3f9b2a54ad78edb58c76d04f9e1320fb60f6adb00738152bed5387841aa32d2a",
     "cumulativeRawSampleProof": "corrected-workload-completed-windows-proof-422.json",
-    "verifiedMeasuredRawSamples": 36000,
-    "verifiedMeasuredSuccessfulSamples": 36000,
+    "verifiedMeasuredRawSamples": 84000,
+    "verifiedMeasuredSuccessfulSamples": 84000,
     "observedMeasuredErrors": 0,
     "observedMeasuredMissed": 0,
     "firstMeasuredWindowOperationCounts": {
@@ -1847,7 +1847,15 @@
     "independentFinalMutableRowProofAccepted": false,
     "independentFinalS3ProofAccepted": false,
     "secondMeasuredWindowProof": "corrected-workload-second-window-proof-432.json",
-    "secondMeasuredWindowProofSha256": "fbe322326c62764f33583bd7201a7cdb8b8a21460ddcbb50fb34e1195c4681ea"
+    "secondMeasuredWindowProofSha256": "fbe322326c62764f33583bd7201a7cdb8b8a21460ddcbb50fb34e1195c4681ea",
+    "firstCompletedPopulationRawProof": "corrected-workload-first-population-proof-439.json",
+    "firstCompletedPopulationRawProofSha256": "f28eb1e9433bd6d35268d2dcdc0c20ada0e00530f4225e07d9d8877f2c2492df",
+    "firstCompletedPopulationIndependentSqlProof": "corrected-workload-first-population-sql-442.json",
+    "firstCompletedPopulationIndependentSqlProofSha256": "01d221c4e50316a4bc1b82ee5b6f797d1ea3ee65d983aa93685e14ea194f8c35",
+    "completedPopulationPercentages": [
+      100
+    ],
+    "firstPopulationActualFinalMutableRevision": 4261
   },
   "currentPublicationAuthority434": {
     "status": "DIRECT_USER_APPROVAL_GRANTED_NOT_RELEASE_QUALIFICATION",
@@ -1867,6 +1875,12 @@
     "remoteMasterBeforeDevelopmentPush": "dee61e9ecc8486364e354fe52a9c239d655354ee",
     "release081TagAndReleaseAbsentBeforeQualification": true,
     "cleanReleaseQualificationPerformed": false,
-    "consumerPinUpdated": false
+    "consumerPinUpdated": false,
+    "masterPushVerified": true,
+    "publishedMasterCommit": "ad985bf0510c9125f95d52b115e0cd11ea83f64b",
+    "masterPublicationProofSha256": "71754938a2aac923a7033365989bf0e3948a906c82c177a504984c58fb3730a3",
+    "existing080ReleaseRefsUnchanged": true,
+    "existing080SourcesAndBuildPreservationProofSha256": "78964e9c472c13636988209addf9bde8a385c445e0649aa96928d0ea822462fa",
+    "consumerPinBaselineReadOnly": true
   }
 }

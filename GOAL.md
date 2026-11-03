@@ -210,9 +210,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   seconds and existing frozen0.8.0/f40e7a2 tuple. Checkpoint420 verifies the live
   scope/supervisor/tool handle. Proof423 verifies1200 successful first-warmup
   samples and four actual readable populations. Proof427 preserves the first
-  window; proof432 verifies36000/36000 successful samples across two900-second
-  windows with exact operation counts and zero unexpected errors/missed. Only2/16
-  measured windows are complete; preserve original failures
+  window; proof432 preserves two windows. Proof439 verifies84000 successful
+  samples across all four100% windows, including the300-second100rps stress,
+  with exact operation counts and zero unexpected errors/missed. SQL442 confirms
+  the first mutable note's owner and revision/history4261. Only4/16 measured
+  windows are complete; preserve original failures
   and verify the remaining windows, final SQL/storage, input hashes and cleanup.
   Independent read-only observer429 is running with baseline1000000 corpus notes
   and actual16384-byte S3 object verified. Its final four-note/history and fresh
@@ -456,7 +458,8 @@ remain external qualification output to avoid self-referential source archives.
    actual extracted-tarball380 checks. The normal KMS dependency checker requires
    a clean released commit/tag matching its lock. Reply434 now authorizes normal
    publication and the reviewed consumer-pin update. The pane repair and candidate
-   metadata are committed on master at5d19c469/1d65cba2; clean release qualification,
+   metadata are committed on master at5d19c469/1d65cba2 and published with records
+   at ad985bf0, independently verified438. Clean release qualification,
    publication and adoption remain unexecuted. Do not bypass that checker or overwrite the old0.8.0 release/input
    tuple. Keep heavy release/integration gates separate from the running workload.
 7. Current data prerequisite: the collected/nonempty-current and genuine rule-

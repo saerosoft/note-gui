@@ -184,6 +184,9 @@ The normal KMS build requires a clean released commit/tag matching its lock.
 Direct reply434 authorizes patch publication, clean-release qualification and the
 reviewed pin update/integration. Those gates remain unexecuted; no checker is
 bypassed or existing release replaced. Run heavy gates after the active workload.
+Development master is published at ad985bf0 with repair5d19c469 and metadata
+1d65cba2, independently verified438. The existing0.8.0 release remains unchanged;
+clean0.8.1 receiving-branch qualification/publication and adoption are still open.
 
 ## Limits and documentation state
 
