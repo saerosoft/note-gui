@@ -217,13 +217,13 @@ supervisor413, its child and tool session12890 are live at checkpoint420. Actual
 SQL verifies1000000 corpus notes; API-readable populations match1000000/100000/
 10000/1000. Proof423 audits all1200 first-warmup samples:1200 successful, zero
 errors/missed and exact read/save/history/authority/storage operation counts.
-Proof427/432/439 preserve the earlier windows. At12:02UTC, proof451 verifies all
-eight100%/10% windows:168000 measured samples, all successful with zero unexpected
+Proof427/432/439/451 preserve the earlier windows. At12:55UTC, proof462 verifies all
+twelve100%/10%/1% windows:252000 measured samples, all successful with zero unexpected
 errors/missed, complete unique request indexes and exact operation counts. Each
 population includes three900-second20rps and one300-second100rps window. Independent
-SQL452 confirms both completed mutable notes retain their original owner,
-structured HUMAN body and revision/history4261 each,8522 history rows combined.
-This completes8/16 measured windows; the1% population's first steady window is
+SQL463 confirms all three completed mutable notes retain their original owner,
+structured HUMAN body and revision/history4261 each,12783 history rows combined.
+This completes12/16 measured windows; the0.1% population's first steady window is
 active. Live checkpoint420 owns subsequent execution observations.
 Preserve the2GiB/zero-swap driver scope, container limits,12000 measured seconds,
 all four populations and authority/storage checks. Use a separate completed-window
@@ -425,6 +425,13 @@ Its preserved receipt and raw log hashes match. The GUI unit stage passes
 305/307 cases: the direct-ancestor case exceeds its unchanged 5-second test
 budget, and the failed-comments-read case loses its programmatically entered
 draft. These failures do not replace the earlier successful `f40e7a2` receipt.
+
+Read-only audit460 locates the original receipt,4352534-byte raw log and retained
+failure evidence under the consumer's `.tmp/nonai-20261031/`. All three SHA-256
+values match the preserved evidence. The gate receipt is exit1; the raw ancestor
+case reports5078ms against its5000ms budget. The historical systemd wrapper's
+successful exit does not establish gate success. No original per-test scheduling
+snapshot is verified, so locating these artifacts does not establish the cause.
 
 COMPLETED comment-test synchronization repair: real-component diagnostics
 reproduce draft loss even after `contenteditable=true`. The synthetic input

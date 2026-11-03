@@ -1781,7 +1781,7 @@
     "helperSha256": "5aafc5de1bda0c49ef0f7ba6d203d5a7e26c989787cfbbe339d15a09aa3c9bd0"
   },
   "correctedSustainedWorkload412": {
-    "status": "RUNNING_TWO_POPULATIONS_EIGHT_WINDOWS_VERIFIED",
+    "status": "RUNNING_THREE_POPULATIONS_TWELVE_WINDOWS_VERIFIED",
     "run": "02688f9f0a08",
     "receiptPath": "scoped-workload-02688f9f0a08/receipt.json",
     "liveCheckpoint": "live-corrected-workload-checkpoint-420.json",
@@ -1818,12 +1818,12 @@
       10000,
       1000
     ],
-    "measuredWindowsCompletedAtCheckpoint": 8,
+    "measuredWindowsCompletedAtCheckpoint": 12,
     "firstMeasuredWindowProof": "corrected-workload-first-window-proof-427.json",
     "firstMeasuredWindowProofSha256": "3f9b2a54ad78edb58c76d04f9e1320fb60f6adb00738152bed5387841aa32d2a",
     "cumulativeRawSampleProof": "corrected-workload-completed-windows-proof-422.json",
-    "verifiedMeasuredRawSamples": 168000,
-    "verifiedMeasuredSuccessfulSamples": 168000,
+    "verifiedMeasuredRawSamples": 252000,
+    "verifiedMeasuredSuccessfulSamples": 252000,
     "observedMeasuredErrors": 0,
     "observedMeasuredMissed": 0,
     "firstMeasuredWindowOperationCounts": {
@@ -1854,7 +1854,8 @@
     "firstCompletedPopulationIndependentSqlProofSha256": "01d221c4e50316a4bc1b82ee5b6f797d1ea3ee65d983aa93685e14ea194f8c35",
     "completedPopulationPercentages": [
       100,
-      10
+      10,
+      1
     ],
     "firstPopulationActualFinalMutableRevision": 4261,
     "twoCompletedPopulationsRawProof": "corrected-workload-second-population-proof-451.json",
@@ -1863,9 +1864,14 @@
     "twoCompletedPopulationsIndependentSqlProofSha256": "b12588ba88fabfa03aeb7c107fb12d799c530e9f390003de78e3095322518f99",
     "completedPopulationActualMutableRevisions": [
       4261,
+      4261,
       4261
     ],
-    "completedPopulationMutableHistoryRows": 8522
+    "completedPopulationMutableHistoryRows": 12783,
+    "threeCompletedPopulationsRawProof": "corrected-workload-third-population-proof-462.json",
+    "threeCompletedPopulationsRawProofSha256": "4709c3e821b2185eab20fac8b487bd591bc61f31a3acabf2cd95ae89a800d5e4",
+    "threeCompletedPopulationsIndependentSqlProof": "corrected-workload-three-population-sql-463.json",
+    "threeCompletedPopulationsIndependentSqlProofSha256": "4ec691e7544275a72f14d7b9cfc3d40493495ea14bd7d8282f093eab155a04e4"
   },
   "currentPublicationAuthority434": {
     "status": "DIRECT_USER_APPROVAL_GRANTED_NOT_RELEASE_QUALIFICATION",
@@ -1892,5 +1898,23 @@
     "existing080ReleaseRefsUnchanged": true,
     "existing080SourcesAndBuildPreservationProofSha256": "78964e9c472c13636988209addf9bde8a385c445e0649aa96928d0ea822462fa",
     "consumerPinBaselineReadOnly": true
+  },
+  "originalConsumerFailureEvidenceRoute460": {
+    "status": "ORIGINAL_CONSUMER_FAILURE_RELOCATED_HASHES_MATCH",
+    "sourceHead": "878108b96fc61116469d15fa089a8fb8adbb89c9",
+    "receiptSha256": "62683e1178aee249236c522f8514eadcb52d87e2c7d07405ed4513753f8a4976",
+    "rawLogBytes": 4352534,
+    "rawLogSha256": "56ef60fc9092175b0ec513b9ff61bec19fc8d57ca1e6e2b819423c941a3ff5ad",
+    "preservedEvidenceSha256": "dbe9b598a3922a0db16fab047317b1a957ab8f562aa9a32e0ddf24e8569cbd82",
+    "gateExitCode": 1,
+    "guiPassed": 305,
+    "guiTotal": 307,
+    "ancestorConfiguredTimeoutMs": 5000,
+    "ancestorReportedElapsedMs": 5078,
+    "originalFailureCauseProven": false,
+    "originalPerTestSchedulingSnapshotVerified": false,
+    "proof": "original-ancestor-evidence-route-460.json",
+    "proofSha256": "8f28300bab5b0a50c2c69a0dbc2dbde55904eaeb09e6233e60b2723ac33f8ff9",
+    "scope": "Read-only relocation and original hash verification. The wrapper exit does not establish gate success; the original timeout cause remains open."
   }
 }
