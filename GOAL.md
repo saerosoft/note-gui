@@ -325,8 +325,12 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   operations and 4800 separate warmups. Run532 cannot resume its lost tmpfs corpus;
   its ten completed windows do not replace a full uninterrupted qualification.
   Retain source/artifact/driver hashes, memory limits, SQL/S3/preservation checks,
-  the bounded execution window and cleanup reserve. Final collector592 requires
-  all new-run measurements and final proofs before writing595. Do not run
+  the bounded execution window and cleanup reserve. Final collector600/preparation601
+  supersedes592: actual init/process cgroup2 mount settings establish hierarchical
+  counters even when all events are zero. Control599 passes eleven cases, including
+  invalid mount/boot/missing OOM-counter rejection. All other workload, OOM,
+  memory-limit and cleanup guards remain. Require all new-run measurements and
+  final proofs before writing595. Do not run
   collector560 against interrupted artifacts or mark AC08/AC09/AC10 complete.
 - [ ] Obtain the remaining current KMS host/context/storage/workload evidence.
   Bounded configured-native534 and patched-host518 pass; wider current/pipeline/

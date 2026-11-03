@@ -2494,5 +2494,29 @@
       "patched-workload-retry-live-container-limits-593.json": "f44d559259bc5e4ad6c8ed3bbf9a9e94e232fdf6aad9801b5a8dac63daafdb3e",
       "patched-workload-retry-live-start-596.json": "86792227fb4856f14b7737abde54c695ffd3c3ff9cdce9daca57d70b168da736"
     }
+  },
+  "fresh081ZeroEventMemoryVerification601": {
+    "status": "FINAL_COLLECTION_V2_PREPARED_FOR_VALID_ZERO_MEMORY_EVENTS",
+    "preparedAtUtc": "2026-11-03T19:05:49.625455+00:00",
+    "run": "ff7327b40baa",
+    "collector": "collect-patched-workload-retry-final-v2-600.py",
+    "collectorSha256": "8c9e8f5a9747fd7dabe0a5a81c83facc7e08d839205de47c38ae41d8f051b768",
+    "control": "patched-workload-zero-counter-control-599.json",
+    "controlSha256": "f86106a8237d2b28674176cbefd83745857eadfe1b8129da3452074d5de036ae",
+    "hierarchyProof": "patched-workload-retry-counter-hierarchy-594.json",
+    "hierarchyProofSha256": "ced0981f2f125d9038949d7b3fbdddf668905285205612a786853c643732286b",
+    "finalProofTarget": "patched-workload-retry-final-proof-595.json",
+    "previousCollector592AndPreparation589Unchanged": true,
+    "actualFinalMountConfigurationAndSameBootRevalidated": true,
+    "allOriginalMeasuredSqlS3SourceMemoryLimitsOomAndCleanupGuardsRetained": true,
+    "memoryPressureOrProviderCallsIntroduced": false,
+    "finalCollectorExecuted": false,
+    "wholeWorkloadAccepted": false,
+    "controlCaseCount": 11,
+    "actualPreviousAssertionRejectsValidZeroEvents": true,
+    "primaryDocumentation": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+    "proof": "patched-workload-retry-final-v2-preparation-601.json",
+    "proofSha256": "53e0bcf9cbc6f9a71833830eaf5e4ae70123907bc16f103e8d3c21f900880f23",
+    "wholeGoalAccepted": false
   }
 }

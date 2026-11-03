@@ -102,7 +102,11 @@ ends before the successful admission. Preparation583/589 and live start596 bind
 the fresh invocation, adaptive final SQL/S3 observer, scope/inventory observer
 and terminal-metadata reference. Live limits593 verify all seven owned container
 ceilings, no swap, no persistent volumes and an internal network. The new bound
-ends23:53:19UTC with 600 seconds for cleanup. Final collector592 is prepared;
+ends23:53:19UTC with 600 seconds for cleanup. Final collector600/preparation601
+supersedes592's unnecessary positive memory-event condition. Actual init/process
+cgroup2 mount settings and same-boot counters establish hierarchical mode in594;
+eleven control599 cases verify valid zero events and invalid-input rejection.
+Memory limits, zero-OOM, measured-window and cleanup requirements are unchanged;
 all measured windows and final proof595 remain required. No host exclusivity,
 deployment, model execution or whole-goal acceptance is claimed.
 
