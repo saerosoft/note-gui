@@ -2,6 +2,63 @@ import { expect, test } from '@playwright/test';
 import { openToolbar } from './nativeControls';
 import { readFile } from 'node:fs/promises';
 
+for (const width of [1600, 390]) test(`keeps native modal portals inside correctly arranged split panes at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 1000 });
+  await page.goto('./'); await page.waitForFunction(() => !!window.noteExample);
+  const id = await page.evaluate(async () => {
+    const api = window.noteExample.api;
+    const note = await api.create({ spaceId: 'local', title: 'Native split layout', parentId: null, visibility: 'PRIVATE', idempotencyKey: crypto.randomUUID() });
+    await api.save(note.id, { title: note.title, expectedRevision: 1, idempotencyKey: crypto.randomUUID(), bodyJson: { type: 'doc', content: [
+      { type: 'paragraph', content: [{ type: 'text', text: 'Native split layout body.' }] },
+      { type: 'mermaid', attrs: { source: 'graph TD\n Original --> Diagram' } },
+      { type: 'drawio' }, { type: 'excalidraw' },
+    ] } });
+    return note.id;
+  });
+  await page.goto(`?space=local&note=${id}&right=${id}`);
+  const panes = page.locator('.note-gui-pane');
+  const left = panes.first();
+  const right = panes.last().getByRole('textbox', { name: '노트 본문', exact: true });
+  await expect(left.getByRole('button', { name: '원본 편집', exact: true })).toBeEnabled();
+  await right.fill('Keep the independent layout draft.');
+  await expect(right).toHaveText('Keep the independent layout draft.');
+  const originalRight = await right.elementHandle();
+  async function expectPaneLayout() {
+    const boxes = await panes.evaluateAll(nodes => nodes.map(node => {
+      const box = node.getBoundingClientRect();
+      return { x: box.x, y: box.y, width: box.width, height: box.height, bottom: box.bottom };
+    }));
+    expect(boxes).toHaveLength(2);
+    if (width === 1600) {
+      expect(boxes[1].y).toBeCloseTo(boxes[0].y, 0);
+      expect(boxes[1].x).toBeGreaterThanOrEqual(boxes[0].x + boxes[0].width - 1);
+      expect(boxes.every(box => box.height >= 700)).toBe(true);
+    } else {
+      expect(boxes[1].x).toBeCloseTo(boxes[0].x, 0);
+      expect(boxes[1].width).toBeCloseTo(boxes[0].width, 0);
+      expect(boxes[1].y).toBeGreaterThanOrEqual(boxes[0].bottom - 1);
+    }
+  }
+  await expectPaneLayout();
+  await left.locator('.node-excalidraw').scrollIntoViewIfNeeded();
+  await left.getByRole('button', { name: '드로잉 편집', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Excalidraw', exact: true });
+  await expect(dialog).toBeVisible();
+  await expect.poll(async () => {
+    const box = await dialog.boundingBox();
+    return box && Math.abs(box.x) < .5 && Math.abs(box.y) < .5 && Math.abs(box.width - width) < .5 && box.height >= 999;
+  }).toBe(true);
+  const modal = (await dialog.boundingBox())!;
+  expect(modal.x).toBeCloseTo(0, 0); expect(modal.y).toBeCloseTo(0, 0);
+  expect(modal.width).toBeCloseTo(width, 0); expect(modal.height).toBeGreaterThanOrEqual(999);
+  await page.getByRole('button', { name: 'Excalidraw 닫기', exact: true }).click();
+  await expect(dialog).not.toBeVisible();
+  await expectPaneLayout();
+  await expect(right).toHaveText('Keep the independent layout draft.');
+  expect(await right.evaluate((node, original) => node === original, originalRight)).toBe(true);
+  await page.screenshot({ path: `.tmp/native-split-layout-${width}.png`, fullPage: true });
+});
+
 for (const width of [1600, 390]) test(`persists native slash, toolbar, table, link and upload edits at ${width}px`, async ({ page }) => {
   await page.setViewportSize({ width, height: 1000 });
   await page.goto('./'); await page.waitForFunction(() => !!window.noteExample);

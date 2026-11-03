@@ -44,6 +44,8 @@ Reorderable/closable tabs retain independent authored, comment and typed-propert
 drafts. The same note may be edited independently in both panes. Editor/toolbar/
 selection/details/history/operations belong to their actual tab/pane lifetime;
 reopened tabs reject retired acknowledgements and follow-up reads.
+Split panes sit side by side on desktop and stack on narrow screens. Opening or
+closing a native dialog preserves this arrangement.
 
 Navigation/close protect all unsaved content, including unapplied native diagram
 changes. Cancellation retains the selection, URL and draft. Explicit discard
@@ -127,6 +129,7 @@ the graphical viewer. Excalidraw previews omit remote content without rewriting
 the source; Escape stays with canvas/text tools, while explicit exit confirms
 dirty edits. The pinned bundled Korean locale is enabled, with normal upstream
 fallback for untranslated controls.
+Full-screen native dialogs occupy the viewport, including in split-pane layouts.
 
 Diagram edits create immutable attachment successors and then apply references
 to the note; file save and note save are separate. Prior bytes/history remain

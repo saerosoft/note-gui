@@ -7,7 +7,7 @@ import { docmostI18n } from './i18n';
 export function DocmostPaneProvider({ children }: { children: ReactNode }) {
   const [store] = useState(createStore);
   const portalId = useId();
-  return <div data-docmost-pane-root={portalId} style={{ display: "contents" }}><Provider store={store}><I18nextProvider i18n={docmostI18n}>
+  return <div data-docmost-pane-root={portalId} className="note-gui-pane-root"><Provider store={store}><I18nextProvider i18n={docmostI18n}>
     <MantineProvider theme={{ components: {
       Menu: Menu.extend({ defaultProps: { withinPortal: false } }),
       Modal: Modal.extend({ defaultProps: { withinPortal: true, portalProps: { target: `[data-docmost-pane-root="${portalId}"]` } } }),
