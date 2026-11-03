@@ -25,6 +25,10 @@ tag object `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`. Its published qualificati
 records exact-source automated checks and limitations. Human review is not an
 acceptance gate. Consumer adoption and product acceptance remain separate.
 
+The unpublished 0.8.1 candidate repairs split-pane layout and retains the 0.8
+public protocol. Its local package checks do not qualify a clean release commit,
+publish a tag or change the consumer's existing 0.8.0 pin.
+
 - Increment MAJOR for a substantial redesign of the library's concept or
   responsibility, then reset MINOR and PATCH.
 - Increment MINOR and reset PATCH for every public contract change, including

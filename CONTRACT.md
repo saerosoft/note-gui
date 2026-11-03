@@ -1,6 +1,6 @@
 # Note GUI host contract
 
-This contract accompanies the 0.8.0 development candidate for the `version/0.8`
+This contract accompanies the 0.8.1 development candidate for the `version/0.8`
 release line. It adds optional collaboration capabilities and mount-local dirty
 reporting to the existing core/context/relations contract. Candidate metadata on
 `master` does not establish release qualification or publication.
@@ -382,6 +382,19 @@ uncertain write outcome. Only documented idempotent operations may replay their
 same key without first resolving that uncertainty.
 
 ## KMS compatibility and migration
+
+The complete KMS adapter requires `knowledgeCurrentItems`,
+`KnowledgeNote.authoredBody`, and `bodyOrigin` on notes and revisions. Relation
+target lookup requires `knowledgeRelationTargets(noteId, query, offset, limit)`.
+The backend authorizes both notes and filters same-space targets before counting
+or paging. CONTROLLED mode also requires matching visibility and, for private
+notes, the same owner. SHARED mode uses current shared-space authority instead
+of treating historical visibility or ownership as an audience boundary.
+The adapter uses returned
+`total` and `hasNext` with20-row pages; generic readable-note search cannot replace
+this operation. Targets remain subject to current authorization at mutation time.
+Deploy the matching backend before this client. F02/F06/F07 in the functional
+specification own the corresponding editor, relationship and projection behavior.
 
 The 0.7.1 repair preserves edits made while a history restore is pending. A
 clean pane still opens the restored revision. A pane edited before delivery
