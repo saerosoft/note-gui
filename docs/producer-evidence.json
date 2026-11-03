@@ -2223,5 +2223,64 @@
     "wholeGoalAccepted": false,
     "proof": "patched-workload-start-progress-535.json",
     "proofSha256": "35267b489ffe522c4c8a2fa4a9b27bf347f4553082b0f3bab2b40ed7332fd588"
+  },
+  "publicContractAndReleaseReconciliation547": {
+    "status": "D11_CURRENT_08_PROTOCOL_EXPORT_AND_RELEASE_IDENTITY_RECONCILED",
+    "observedAtUtc": "2026-11-03T16:34:50.686049+00:00",
+    "sourceCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "contractsByteIdenticalToQualifiedRelease": {
+      "CONTRACT.md": "c2aa5d13c18fee5f23cbee5e267ace158147bced2a4e3c413f7f4804339e0a89",
+      "src/host.ts": "fb9a816a2018c3a0920397e3d195da10e3c5651274a07b132edb0baa1aa6b287",
+      "src/model.ts": "67e73243a00505fbd194526503f7bab68d57d1c8ff1b5bd3ff15e77fa704d5ea",
+      "src/access.ts": "8205e08c6f046c0b7c12b7a06a35854c500029d2898275567f01961d68422c98",
+      "src/collaboration.ts": "c737e745af5501ecb08714bb4cbb2c1da1556e4c27876e38129fab13f5979344"
+    },
+    "actualDownloadedPackageSha256": "6ad5850cfd6e439df1f5192a844a3568693e066dffa201bb8e417c0f2196ee56",
+    "actualPackagedDeclarationSha256": {
+      "dist/types/index.d.ts": "4ab37951ade733f6b442ae1b53f2a2b9028593e71c1fbf3be36d68d9a1780c77",
+      "dist/types/kms.d.ts": "e9e907995c4d53fdb0089d9d9bd378ca1c79558cc5dc20a6dc3e2095a2457142",
+      "dist/types/host.d.ts": "01c67325f59379cc40ee5e165851d451139a8c78320a7fa794508d55a8d3e9e6",
+      "dist/types/model.d.ts": "661ffc2b80a90a8c95232a1994802459ff4a2bfd387dd4c253022bc27ae6db91",
+      "dist/types/access.d.ts": "a0a8540047601d2b80662294009e1d6724e480e6b4e6dbb66d3d907e6ca2f671",
+      "dist/types/collaboration.d.ts": "da5f91a4894a29dabb06c8aef5c8da39dd87755be29ab0562fc667248474a0a3"
+    },
+    "actualPackagedExports": {
+      ".": {
+        "types": "./dist/types/index.d.ts",
+        "import": "./dist/note-gui.js"
+      },
+      "./style.css": "./dist/note-gui.css",
+      "./kms": {
+        "types": "./dist/types/kms.d.ts",
+        "import": "./dist/kms.js"
+      }
+    },
+    "strictExtractedConsumerQualificationReused": {
+      "actualExtractedTarball": true,
+      "strictTypecheck": true,
+      "skipLibCheck": false,
+      "resolvedExports": [
+        ".",
+        "./kms",
+        "./style.css"
+      ],
+      "runtimeImports": true
+    },
+    "freshRemoteTagRefs": {
+      "refs/tags/release/v0.8.0": "a327c46c3c8ba92f81b6cb6bc911112eb9ae4749",
+      "refs/tags/release/v0.8.0^{}": "b9c1ae1d544194fe9dc0bfe5490992be79182cbe",
+      "refs/tags/release/v0.8.1": "f24188816ecc86091a5400877604ceb90ac7eecc",
+      "refs/tags/release/v0.8.1^{}": "07db42d5eff379cf2141e463c7f723c14ce185e1"
+    },
+    "readmeAndOperationsPointToExactQualifiedPatch": true,
+    "contractMetadataAloneDoesNotEstablishQualification": true,
+    "widerUnagreedAudienceActorFieldsRemainExplicitIntegrationRequirements": true,
+    "lastingProtocolProceduralAndLegalOwnersRetained": true,
+    "publicContractOrRuntimeChanged": false,
+    "newTestsExecuted": false,
+    "workloadAcceptanceEstablished": false,
+    "wholeG10OrGoalAccepted": false,
+    "proof": "public-contract-release-reconciliation-547.json",
+    "proofSha256": "02885b546a4d483e51ab632e29e2c16c836aa1c9516058aeb4fac1ea3f302b68"
   }
 }

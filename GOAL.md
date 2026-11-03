@@ -94,7 +94,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 | D08 | `docs/note-gui-acceptance.md` | Close original screen criteria under library-inside-WEB topology individually. |
 | D09 | `docs/populated-data-acceptance.md` | Current populated current/history/proof/attribution/exact-link/access verification. |
 | D10 | `docs/consumer-acceptance.md`, `docs/producer-evidence.json` | COMPLETED bounded producer receipts and readable 93-entry local archive. Named consumer-host/workload/release cases remain open; this packet is not a feature-specification owner. |
-| D11 | `README.md`, `CONTRACT.md`, `OPERATIONS.md`, `release.json` | COMPLETED README feature-detail transfer to the functional specification. Exact protocol/procedures/identity need final G10 reconciliation. Retain factual/legal owners. |
+| D11 | `README.md`, `CONTRACT.md`, `OPERATIONS.md`, `release.json` | COMPLETED feature-detail transfer and current0.8 protocol/export/release-identity reconciliation547: five contract files and six actual packaged declarations match qualified0.8.1; fresh immutable refs and package checksum match. Retain these factual/procedural/legal owners. Wider G10/AC08 host/context requirements remain open. |
 
 ## Remaining execution checklist
 
