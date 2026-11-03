@@ -76,11 +76,14 @@ New-tuple sustained runec1dca539aa9 starts in532 with the same four profiles,
 16 measured windows/12000 seconds/336000 expected operations and separate4800
 warmup operations. Its operator-selected five-hour bound ends2026-11-03
 21:08:34UTC, reserving600 seconds for cleanup. Progress535 does not establish
-acceptance. First-profile proof562 now verifies all four100% measured windows:
-84000 successful operations, zero unexpected errors/missed operations and1200
-separate warmup successes. Independent SQL confirms mutable revision/history4261,
-original ownership/initial editor and4260 edits by the actual workload actor.
-The other three profiles/12 measured windows and all final checks remain required.
+acceptance. Halfway proof570 verifies both the 100% and 10% readable profiles:
+eight measured windows, 6000 seconds and 168000 successful operations, with zero
+unexpected errors or missed operations and 2400 separate warmup successes.
+Independent SQL confirms both mutable notes at revision4261 with 4261 history
+rows each, original ownership/initial editor and 4260 edits each by the corresponding
+workload actor. The other two profiles, eight measured windows and all final
+checks remain required. No scope OOM or OOM kill is observed; memory-limit events
+are nonzero and are retained in the proof.
 Current/pipeline/rule and whole new-tuple workload acceptance remain open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,

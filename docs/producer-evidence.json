@@ -2324,5 +2324,69 @@
     "wholeGoalAccepted": false,
     "proof": "patched-workload-first-profile-proof-562.json",
     "proofSha256": "69ab409b8e7a5ccbef03db71c5018c96a472e933d531a6877c5588f78446db54"
+  },
+  "halfCurrent081WorkloadProfiles570": {
+    "status": "FIRST_TWO_PROFILES_ALL_EIGHT_WINDOWS_AND_SQL_VERIFIED_FULL_RUN_LIVE",
+    "observedAtUtc": "2026-11-03T17:57:06.674295+00:00",
+    "run": "ec1dca539aa9",
+    "kmsCommit": "2a33a2f81b5742b405a9c2a7a7148723febe9ce6",
+    "guiCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "completedProfiles": [
+      100,
+      10
+    ],
+    "remainingProfiles": [
+      1,
+      0.1
+    ],
+    "measuredWindows": 8,
+    "measuredSeconds": 6000,
+    "measuredSuccessfulOperations": 168000,
+    "unexpectedErrors": 0,
+    "missed": 0,
+    "warmupSuccessesExcludedFromMeasurement": 2400,
+    "readOnlySqlObservations": [
+      {
+        "percent": 100,
+        "revision": 4261,
+        "originalOwnerPreserved": true,
+        "historyRows": 4261,
+        "initialEditorPreserved": true,
+        "workloadActorEdits": 4260
+      },
+      {
+        "percent": 10,
+        "revision": 4261,
+        "originalOwnerPreserved": true,
+        "historyRows": 4261,
+        "initialEditorPreserved": true,
+        "workloadActorEdits": 4260
+      }
+    ],
+    "readOnlySqlProofSha256": "df3366327d708062b7539473b2299fe6990dcf710c3113dec6be945855b7bce2",
+    "rawCompletedWindowBytesUnchanged": true,
+    "scopeMemoryEventsObserved": {
+      "low": 0,
+      "high": 0,
+      "max": 180,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 47
+    },
+    "scopeOomOrOomKillObserved": false,
+    "mainUnitEvidenceReferenceHeld": true,
+    "currentActiveWindow": {
+      "percent": 1,
+      "phase": "warmup",
+      "rate": 20,
+      "seconds": 60,
+      "began": "2026-11-03T17:56:14.467Z"
+    },
+    "remainingEightMeasuredWindowsAndFinalEvidenceRequired": true,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "proof": "patched-workload-halfway-proof-570.json",
+    "proofSha256": "d874cb406ae61063384bce4c3b8e1c274a3681a74cd74a4fa6566e6f9633fba7"
   }
 }
