@@ -216,49 +216,32 @@ maintained test repairs detection;528 passes all original assertions/timeouts.
 Both graphical screenshots are inspected and seven containers/network are absent.
 The immutable0.8.1 release source/tag/assets are unchanged.
 
-New-tuple workload532 starts with the same four profiles,16 measured windows/
-12000 seconds/336000 expected operations and separate4800 warmups. Progress535
-is not acceptance. Halfway proof570 verifies the 100% and 10% readable profiles:
-eight measured windows, 6000 seconds and 168000 successful operations, with zero
-unexpected errors or missed operations and 2400 separate warmup successes.
-Read-only SQL confirms both mutable notes at revision4261 with 4261 history rows
-each, original ownership/initial editor and 4260 edits each by the corresponding
-workload actor. Two profiles, eight windows and final source/memory/SQL/S3/
-preservation/cleanup checks remain open,
-as do the wider current/pipeline/rule criteria.
+Proof577 records the interrupted run532: the host reboots at 2026-11-03
+18:31:31UTC, stopping the run and all observers. Ten completed measured windows
+verify 204,000 successes over 7,800 seconds, with zero errors/missed operations
+in those windows. Original RUNNING receipts and raw results remain as interrupted
+artifacts. Cleanup579 verifies exact ownership/IDs, removes seven stopped
+containers and their network, and independently confirms absence. The earlier
+0.8.0 proof477 is unchanged. Partial windows do not replace the qualification below.
 
-Proof577 supersedes the live status above: the host reboots at 2026-11-03
-18:31:31UTC, stopping run532 and all observers. Ten completed measured windows
-verify 204000 successes over 7800 seconds, with zero errors/missed operations in
-those windows; all frozen input files still match. Original RUNNING receipts and
-raw results remain as interrupted artifacts. The lost tmpfs corpus cannot resume.
-Cleanup579 verifies ownership and exact IDs, removes seven stopped containers and
-their network, and independently confirms absence. The earlier 0.8.0 proof477 is
-unchanged. A fresh complete 16-window qualification and final SQL/S3/preservation/
-memory/cleanup evidence remain required; partial windows do not close acceptance.
-
-Fresh run582 `ff7327b40baa` begins at 2026-11-03 18:53:19UTC after competing
-verification ends. It retains all 16 windows and 4800 separate warmups, with
-no partial-window reuse. Preparation583/589, live start596 and limits593 bind
-the fresh invocation, three observers and seven owned containers. The bound
-ends23:53:19UTC with 600 seconds for cleanup. Final collector600/preparation601
-supersedes592's unnecessary positive memory-event condition. Actual init/process
-cgroup2 mount settings verify hierarchical counters in594; eleven control599 cases
-cover valid zero events and invalid-input rejection. All original memory limits,
-zero-OOM, measured-window and cleanup requirements remain. Collector600/proof595
-require the complete new-run SQL/S3/source/memory/preservation/cleanup evidence.
-This running state does not establish workload or wider current/pipeline/rule
-acceptance.
-
-Proof617 verifies fresh run582's twelve 100%, 10% and 1% readable-population
-windows: 9,000 measured seconds and 252,000 successes, with zero unexpected errors
-or missed operations and 3,600 separate warmup successes. API checks confirm
-readable populations of 1,000,000, 100,000 and 10,000 notes; the driver records 562,
-566 and 564 browser observations. Read-only SQL verifies all three notes at
-revision/history 4,261,
-original ownership/initial editor and 4,260 later edits each by the corresponding
-workload actor. The last profile/four windows and all final
-source/memory/SQL/S3/preservation/cleanup checks remain required.
+Final proof595 accepts fresh run582 `ff7327b40baa` at the published0.8.1 GUI /
+reviewed KMS2a33a2f tuple. All four API populations of
+1,000,000/100,000/10,000/1,000 pass: 16 measured windows/12,000 seconds,
+336,000 successes, zero unexpected errors/missed operations and 4,800 separate
+warmup successes. The normal run exits0 at 22:22:26UTC before its 23:53:19UTC
+bound. Frozen source/artifact/WEB/Node/Chromium/Playwright inputs are unchanged.
+Independent SQL verifies 1,000,000 notes and 1,017,040 revisions; four mutable
+notes retain original ownership at revision4,261 with 17,044 combined history
+rows. The final independent S3 GET verifies16,384 bytes against SQL size/checksum.
+Original roles/policy and five complete 135-table/storage inventories pass.
+Terminal scope memory peaks at1.53GiB within2GiB, with zero swap/OOM events;
+the five monitored services also retain zero OOM events and swap. Reference588
+preserves terminal metadata for587 before release. All seven owned containers
+and their network are independently absent. Collector600/preparation601 and
+control599 retain the full criteria while accepting valid zero memory events.
+No model/provider execution, cold/exclusive/production/latency-SLO or search-quality
+claim is made. Current/pipeline/rule cases, KMS remote publication and the whole
+GUI goal remain open. Do not rerun raw auditor591 after595 binds its hashes.
 
 ## Limits and documentation state
 

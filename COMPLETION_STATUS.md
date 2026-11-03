@@ -72,54 +72,39 @@ wait in the maintained test fixes detection;528 passes all four original cases
 without changing assertions/timeouts or runtime source. Existing0.8.1 release
 source/tag/assets remain unchanged.
 
-New-tuple sustained runec1dca539aa9 starts in532 with the same four profiles,
-16 measured windows/12000 seconds/336000 expected operations and separate4800
-warmup operations. Its operator-selected five-hour bound ends2026-11-03
-21:08:34UTC, reserving600 seconds for cleanup. Progress535 does not establish
-acceptance. Halfway proof570 verifies both the 100% and 10% readable profiles:
-eight measured windows, 6000 seconds and 168000 successful operations, with zero
-unexpected errors or missed operations and 2400 separate warmup successes.
-Independent SQL confirms both mutable notes at revision4261 with 4261 history
-rows each, original ownership/initial editor and 4260 edits each by the corresponding
-workload actor. The other two profiles, eight measured windows and all final
-checks remain required. No scope OOM or OOM kill is observed; memory-limit events
-are nonzero and are retained in the proof.
 The host reboot at 2026-11-03 18:31:31UTC interrupts run532 and all observers.
-Proof577 audits ten completed windows, 7800 measured seconds and 204000 successes,
-with zero errors/missed operations in those windows. All frozen input files still
-match. The original RUNNING receipts are preserved as interrupted artifacts;
-missing transient units after reboot do not establish successful execution.
-The tmpfs corpus cannot resume. Cleanup579 verifies exact IDs/labels, removes
-only the seven owned stopped containers and network, and independently confirms
-absence. The earlier 0.8.0 proof477 hash is unchanged. A fresh complete 16-window
-qualification with the same workload and final checks remains required; the
-partial windows do not replace it. Current/pipeline/rule acceptance remains open.
+Proof577 audits ten completed windows, 7,800 measured seconds and 204,000 successes,
+with zero errors/missed operations in those windows. Original RUNNING receipts
+remain as interrupted artifacts. Cleanup579 verifies exact IDs/labels and removes
+only the seven owned stopped containers and network. The earlier0.8.0 proof477
+hash is unchanged. Partial windows do not replace the fresh qualification below.
 
-Fresh run582 `ff7327b40baa` starts at 2026-11-03 18:53:19UTC with the same full
-workload and no reused partial windows. An initial admission attempt584 stops
-before fixture creation while another KMS verification is active; that process
-ends before the successful admission. Preparation583/589 and live start596 bind
-the fresh invocation, adaptive final SQL/S3 observer, scope/inventory observer
-and terminal-metadata reference. Live limits593 verify all seven owned container
-ceilings, no swap, no persistent volumes and an internal network. The new bound
-ends23:53:19UTC with 600 seconds for cleanup. Final collector600/preparation601
-supersedes592's unnecessary positive memory-event condition. Actual init/process
-cgroup2 mount settings and same-boot counters establish hierarchical mode in594;
-eleven control599 cases verify valid zero events and invalid-input rejection.
-Memory limits, zero-OOM, measured-window and cleanup requirements are unchanged;
-all measured windows and final proof595 remain required. No host exclusivity,
-deployment, model execution or whole-goal acceptance is claimed.
+Fresh run582 `ff7327b40baa` completes at 2026-11-03 22:22:26UTC, before its
+23:53:19UTC bound, with exit0 and no execution-budget expiry. Final proof595
+qualifies all four readable populations, 16 measured windows/12,000 seconds and
+336,000 successes with zero unexpected errors or missed operations. Separate
+warmups contribute 4,800 verified successes. API populations are
+1,000,000/100,000/10,000/1,000. No partial windows from interrupted532 are reused.
+Initial admission failure584 remains intact; competing verification ends before
+successful admission. Preparation583/589 and live limits593 remain bound inputs.
 
-Proof617 verifies twelve measured windows of fresh run582's 100%, 10% and 1%
-readable populations: 9,000 measured seconds and 252,000 successes, with zero
-unexpected errors/missed operations and 3,600 separate warmup successes.
-API checks confirm readable populations of 1,000,000, 100,000 and 10,000 notes;
-the driver records 562, 566 and 564 browser observations. Read-only SQL confirms
-all three notes at
-revision/history 4,261, original ownership/initial editor and 4,260 later edits
-each by the corresponding workload actor. Four measured windows, one readable
-profile and all final checks remain required. Whole-workload
-and current/pipeline/rule acceptance remain open.
+Independent SQL verifies 1,000,000 notes, 100,000 roots, 900,000 children and
+1,017,040 revisions. Four mutable notes retain original ownership at revision
+4,261 with 17,044 combined history rows. The independent final S3 GET verifies
+16,384 bytes and its SQL checksum. Checkpoints607/612/617 additionally verify
+initial editors and 4,260 later edits per actor for the first three profiles.
+Original roles/organization policy, all five 135-table/storage inventories and
+frozen source/artifact/WEB/Node/Chromium/Playwright inputs pass. Terminal memory
+peak is 1.53GiB within the 2GiB cap; swap and OOM events are zero. All five
+monitored service components retain zero OOM events and zero swap. Reference588
+retains terminal metadata until observer587 reads it, then releases the reference.
+Independent Docker lists confirm all seven owned containers and their network
+absent. Existing services/data are not used. No model/provider execution occurs.
+Collector600/preparation601 retains the other guards while actual init/process
+cgroup2 settings and eleven control599 cases validate zero-event accounting.
+Proof595 now binds the raw audit590; do not rerun591 and invalidate those hashes.
+This accepts the bounded published0.8.1/reviewed KMS2a33a2f workload. KMS remote
+publication, current/pipeline/rule cases and the whole GUI goal remain open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without

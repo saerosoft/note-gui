@@ -241,7 +241,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   The six-entry readable capacity-retirement-481.tgz preserves historical limits,
   original failures, six-criterion mapping and sanitized final/raw/warmup proofs.
   F01/F05/F08/F09 own lasting behavior. This accepts published0.8.0/f40e7a2's
-  declared workload, not unpublished0.8.1 or the remaining AC08/AC09 host cases.
+  declared workload, not0.8.1 or the remaining AC08/AC09 host cases.
 - [x] Complete exact failed-workload owned cleanup with fresh SQL/S3 evidence159
   and independent absence proof161. Original organization/role rows and the
   declared new corpus organization are preserved in audit152 and fresh evidence.
@@ -308,8 +308,8 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   zero unexpected errors or missed operations, plus 2400 warmup successes.
   Independent read-only SQL verifies both mutable notes at revision4261 with
   4261 history rows each, original ownership/initial editor and 4260 edits each
-  by the corresponding workload actor. The other two profiles, eight windows and final
-  source/memory/SQL/S3/preservation/cleanup checks remain required.
+  by the corresponding workload actor. This partial observation does not qualify
+  a complete run; run532 is later interrupted as recorded below.
 - [x] Record host-reboot interruption of run532 without accepting the full run.
   Proof577 verifies the system reboot at 2026-11-03 18:31:31UTC and ten completed
   measured windows: 7800 seconds, 204000 successes and zero errors/missed operations
@@ -323,27 +323,28 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   the driver records 562, 566 and 564 browser observations. Read-only SQL verifies
   all three notes at
   revision/history 4,261, original ownership/initial editor and 4,260 later edits
-  each by the corresponding workload actor. One profile, four measured
-  windows and final source/memory/SQL/S3/preservation/cleanup checks remain open.
-- [ ] Complete fresh full 0.8.1/2a33a2f sustained run582 `ff7327b40baa`.
-  After competing verification ends, the fresh run starts at 2026-11-03
-  18:53:19UTC; its five-hour bound ends 23:53:19UTC with 600 seconds for cleanup.
-  Preparation583/589 and live start596 bind the same frozen workload, new
-  invocation and three read-only observers. Admission failure584 remains intact.
-  Retain four profiles, 16 measured windows, 12000 measured seconds, 336000 expected
-  operations and 4800 separate warmups. Run532 cannot resume its lost tmpfs corpus;
-  its ten completed windows do not replace a full uninterrupted qualification.
-  Retain source/artifact/driver hashes, memory limits, SQL/S3/preservation checks,
-  the bounded execution window and cleanup reserve. Final collector600/preparation601
-  supersedes592: actual init/process cgroup2 mount settings establish hierarchical
-  counters even when all events are zero. Control599 passes eleven cases, including
-  invalid mount/boot/missing OOM-counter rejection. All other workload, OOM,
-  memory-limit and cleanup guards remain. Require all new-run measurements and
-  final proofs before writing595. Do not run
-  collector560 against interrupted artifacts or mark AC08/AC09/AC10 complete.
+  each by the corresponding workload actor. Final proof595 below subsequently
+  qualifies the remaining profile and final preservation/cleanup checks.
+- [x] Complete fresh full 0.8.1/2a33a2f sustained run582 `ff7327b40baa`.
+  Final collector600 writes proof595 after all 16 measured windows and 12,000
+  seconds: 336,000 successes, zero unexpected errors/missed operations and 4,800
+  separate warmup successes. API populations are 1,000,000/100,000/10,000/1,000.
+  Read-only SQL verifies 1,000,000 notes/100,000 roots/900,000 children and
+  1,017,040 revisions; four mutable notes retain original ownership at revision
+  4,261 with 17,044 combined history rows. A fresh S3 GET verifies 16,384 bytes
+  against SQL size/checksum. Original roles/policy, five complete 135-table/storage
+  inventories and frozen source/artifact/WEB/Node/Chromium/Playwright inputs pass.
+  The normal run exits0 at 22:22:26UTC, before its 23:53:19UTC bound. Terminal
+  memory peak is 1.53GiB within 2GiB, with zero swap/OOM events. Unit-reference
+  evidence588 preserves terminal metadata for587 and then releases it. All seven
+  owned containers and their network are independently absent. Preparation601
+  and eleven control599 cases verify zero-event hierarchical accounting without
+  changing the other acceptance guards. Interrupted run532 and earlier0.8.0
+  evidence remain intact. Do not rerun auditor591 after proof595 binds its hashes.
+  This bounded workload does not close AC08/AC09/AC10 or the whole GUI goal.
 - [ ] Obtain the remaining current KMS host/context/storage/workload evidence.
-  Bounded configured-native534 and patched-host518 pass; wider current/pipeline/
-  rule criteria and actual KMS remote publication remain open.
+  Bounded configured-native534, patched-host518 and full workload595 pass;
+  wider current/pipeline/rule criteria and actual KMS remote publication remain open.
 - [x] Qualify and publish the producer 0.8.0 release. The exact release snapshot
   `b9c1ae1d` passes source3, unit307/34, browser41/41, native5/5 and extracted
   package682/source295 checks. Annotated tag object

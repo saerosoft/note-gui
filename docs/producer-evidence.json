@@ -2775,5 +2775,124 @@
     "wholeGoalAccepted": false,
     "proof": "patched-workload-retry-three-profile-proof-617.json",
     "proofSha256": "8fe6d146a7804fd416a2dad6d8414359ad5a5cd7d98bf027df0b715ad7efaf33"
+  },
+  "fullFresh081WorkloadAndCleanup595": {
+    "status": "BOUNDED_PUBLISHED_081_CURRENT_KMS_WORKLOAD_AND_OWNED_CLEANUP_VERIFIED",
+    "run": "ff7327b40baa",
+    "observedAtUtc": "2026-11-03T22:24:48.149449+00:00",
+    "guiVersion": "0.8.1",
+    "guiCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "kmsCommit": "2a33a2f81b5742b405a9c2a7a7148723febe9ce6",
+    "measuredSeconds": 12000,
+    "measuredWindows": 16,
+    "measuredSuccessfulOperations": 336000,
+    "separateWarmupSuccessfulOperations": 4800,
+    "warmupRawProof": [
+      {
+        "percent": 100,
+        "actualSuccessfulSamples": 1200,
+        "rawFile": "workload-100-warmup-0.json",
+        "rawSha256": "ddce5bfa2ea50bf42ba87023b9b3bf038c7382aa142929561f826eccd6ef7551"
+      },
+      {
+        "percent": 10,
+        "actualSuccessfulSamples": 1200,
+        "rawFile": "workload-10-warmup-0.json",
+        "rawSha256": "329c0ab0985932e569d691778463d2b2f97c95b736c6bc42ef4e7ad0de5f0ea5"
+      },
+      {
+        "percent": 1,
+        "actualSuccessfulSamples": 1200,
+        "rawFile": "workload-1-warmup-0.json",
+        "rawSha256": "500a32663d3539c359c537d23170f0e53222144d723ef8cb9d9aa2b996bf9d99"
+      },
+      {
+        "percent": 0.1,
+        "actualSuccessfulSamples": 1200,
+        "rawFile": "workload-0.1-warmup-0.json",
+        "rawSha256": "cf47f9e589aa3198bbc061568b4d4308cfbc5d34544ce2ae5c3f1c9101bedf23"
+      }
+    ],
+    "unexpectedErrors": 0,
+    "missed": 0,
+    "actualApiReadablePopulations": [
+      1000000,
+      100000,
+      10000,
+      1000
+    ],
+    "exactCorpusNotes": 1000000,
+    "exactCorpusRevisions": 1017040,
+    "independentFinalMutableNotes": 4,
+    "exactMutableRevisionEach": 4261,
+    "exactMutableHistoryRows": 17044,
+    "actualFinalS3GetBytes": 16384,
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "allSourceArtifactWebDriverAndCoreInputsUnchanged": true,
+    "scopeOomKills": 0,
+    "terminalMetadataRetainedWithUnitReference": true,
+    "unitEvidenceReferenceReleased": true,
+    "dockerAvailabilityConfirmedBeforeAbsenceChecks": true,
+    "scopeMemoryPeakBytes": 1641435136,
+    "scopeMemoryLimitBytes": 2147483648,
+    "scopeSwapLimitBytes": 0,
+    "lastLiveScopeMemoryEvents": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "hierarchicalParentOomCountersUnchanged": true,
+    "ownedMonitoredComponentPeaks": {
+      "api": 1209221120,
+      "web": 188170240,
+      "postgres": 3145252864,
+      "storage": 145100800,
+      "redis": 30871552
+    },
+    "ownedContainersIndependentlyAbsent": 7,
+    "ownedNetworkIndependentlyAbsent": true,
+    "httpClientPolicy": {
+      "idleRetirementMs": 4000,
+      "matchedApiRequests": 340840,
+      "retiredActiveSockets": 0,
+      "retiredFreeSockets": 305,
+      "skippedBusySockets": 0,
+      "retriesAdded": false,
+      "activeRequestDeadlinesChanged": false,
+      "chromiumNetworkingChanged": false
+    },
+    "prior080AcceptedAndFailedRunsUnchanged": true,
+    "newTupleWorkloadAccepted": true,
+    "kmsRemotePublicationAccepted": false,
+    "currentPipelineRuleCasesAccepted": false,
+    "wholeGuiGoalAccepted": false,
+    "coldExclusiveProductionOrLatencySloClaimed": false,
+    "modelOrSearchQualityClaimed": false,
+    "hierarchicalCounterBasis": "Verified init/process cgroup2 mount configuration includes subtree events; positive memory-limit events are not required.",
+    "zeroMemoryLimitEventsAreValid": true,
+    "completeInventoryPhases": 5,
+    "publicTablesPerPhase": 135,
+    "inventoryFiles": 15,
+    "sourceArtifactSha256": {
+      "actual-workload-retry-582-receipt.json": "dd6a26513dc9103149ea2b0cc632e88e0e637232e09c0d15eefbc11afe6cf13d",
+      "patched-workload-completed-windows-proof-590.json": "78c789ddd81081dc260c032ab830d778194c82da46e926618a75cf5bbd041313",
+      "workload-results.json": "5bbdc42fedfa7c41f1fea08f5ad9a18882404ffd8661da4bd45bf5df2996c759",
+      "environment-result.json": "99806dfe1255a59ef33c90b94c414fdd599966747de50f77e4e7e2fc21e9b774",
+      "patched-workload-independent-final-watch-586.json": "efe8d34bb434b482fb0474c1a1d36237fb9c02bc60d6ae6cc69c4d1ffcb3ef74",
+      "patched-workload-scope-watch-587.json": "5f8ad7946fb8834770aa27210c6ba34d940c6a13db33fdf4d88a33f956d93133",
+      "patched-workload-retry-live-container-limits-593.json": "f44d559259bc5e4ad6c8ed3bbf9a9e94e232fdf6aad9801b5a8dac63daafdb3e",
+      "patched-workload-retry-counter-hierarchy-594.json": "ced0981f2f125d9038949d7b3fbdddf668905285205612a786853c643732286b",
+      "workload-container-memory.jsonl": "58320242b3f1f06acfd62548a4b403692dfceb7510efd6aeff8d591745f655e9",
+      "patched-workload-unit-evidence-reference-588.json": "e6cd877021cd3bb7f1635fbfdeaf90cf81789bd60c292120e5963c468ba10289",
+      "unit-evidence-reference-control-559.json": "f4b139160e3d6f43d3a390e989449624497e0d6f616cb5606eb340f276b8ad6e",
+      "patched-workload-retry-final-v2-preparation-601.json": "53e0bcf9cbc6f9a71833830eaf5e4ae70123907bc16f103e8d3c21f900880f23"
+    },
+    "proof": "patched-workload-retry-final-proof-595.json",
+    "proofSha256": "4de774dbe971af446406683a30bf7a0a66b3126b8bc59d854a8daf1056c3e723",
+    "wholeGoalAccepted": false
   }
 }
