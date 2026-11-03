@@ -70,8 +70,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   qualified07db42d5 and all seven downloaded assets match in proof492. Reply434
   authorizes its reviewed KMS pin/integration. The local GUI-only pin commit
   2a33a2f passes strict dependency checks, clean normal bootstrap and full root
-  Make verification in499. Actual patched-host acceptance and normal pre-push/
-  remote publication remain pending.
+  Make verification in499. Bounded ordinary patched-host checks at375/900/1440px
+  and split/native-modal checks at1600/390px pass in518. The unchanged normal
+  pre-push hook passes its full Make gate in dry-run519. KMS remote publication
+  awaits confirmation that its Jenkins routing does not trigger an excluded
+  deployment; repository push/poll triggers and a deploy stage are present.
   Wider context/native/workload requirements remain AC08.
 - [ ] AC10: Feature behavior has one lasting specification owner. Every fully
   completed work document is marked complete and removed with evidence/links
@@ -203,9 +206,17 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   2134 cases with zero failures/errors and five opt-in skips;2101 cached cases
   and33 previously executed fakedata cases are reused in the final gate.
   All405 served runtime assets match the normal supplier build and all292 served
-  source files match exact release blobs. Actual patched-host and normal pre-push/
-  remote publication remain open. Earlier authentication/Node/IPC setup failures
-  and their source-identical receipts remain unchanged.
+  source files match exact release blobs. Proof518 verifies the actual patched
+  host at375/900/1440px and same-note split/native-modal geometry at1600/390px:
+  the other editor DOM/draft and stored revision2 remain intact; six actual S3
+  objects/492 bytes match SQL owners, sizes and checksums. Earlier setup and
+  temporary-driver failures remain recorded. The normal unchanged pre-push hook
+  passes its full Make gate in dry-run519; no KMS remote update occurs. Actual
+  publication awaits Jenkins branch routing confirmation because deployment is
+  excluded. All28 containers/four networks from the actual-host attempts are
+  independently absent. Root qualification database/container/anonymous volume/
+  network cleanup520 is complete before its deadline. Wider configured-native,
+  current/pipeline/rule and new-tuple sustained-workload cases remain open.
 - [x] Verify actual plain GraphQL, ordinary review and HTTP MCP rich-write
   protection at375/1440px: corrected372 passes6/6 in c6c7161bf627. Proof376 checks
   exact rich JSON/files, rejection/pending state, replay/actor identity, SQL18

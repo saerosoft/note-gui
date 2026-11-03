@@ -46,8 +46,25 @@ through a command-local GitHub helper; the service's missing Node PATH is correc
 using the existing project toolchain; an overlong IPC socket path is reproduced
 and corrected using a short directory within project `.tmp`. No source/test
 assertion, worker count or test timeout changes. Strict dependency checks pass.
-Actual patched-host acceptance, normal pre-push and KMS remote publication remain
-pending. Producer/root-gate success does not close current/pipeline/rule cases.
+Bounded actual patched-host proof518 now verifies375/900/1440px ordinary
+login/save/reload/download/denial/tree-move cases and1600/390px same-note split
+panes with a full-viewport Excalidraw modal. The other editor DOM/draft and stored
+revision2 remain intact. Six direct S3 GETs/492 bytes match SQL owners, sizes and
+checksums; four screenshots are inspected. A preparation-only missing Java record,
+the temporary driver's module path/invalid empty diagram inputs and an overly
+strict membership audit remain in517. The ordinary507 browser/SQL checks pass,
+its outer receipt stays FAIL and separate509 verifies cleanup. Corrected516
+passes unchanged source/artifact checks and ordinary owned cleanup. All28
+containers/four networks from these attempts are independently absent.
+
+The unchanged normal pre-push hook runs full Make verification successfully in
+dry-run519, with no remote update. KMS publication awaits Jenkins branch routing
+confirmation: its repository pipeline has push/poll triggers and a deploy stage,
+while the current approval excludes deployment. No matching local Jenkins job
+is found; other controllers remain unverified. Root qualification database,
+container, anonymous volume and network cleanup520 completes before its deadline.
+Configured native Draw.io, current/pipeline/rule and new-tuple sustained-workload
+acceptance remain open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without

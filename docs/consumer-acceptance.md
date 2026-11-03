@@ -161,7 +161,7 @@ only readiness waits change in the separate driver. Wider cases below remain ope
 | Owner/input | Required check before acceptance |
 | --- | --- |
 | KMS release coordinator | Adopt only the published version/tag/peeled commit and matching source offer. Serve the complete module/CSS/chunks/fonts/notices through actual `/notes/`, with Vite stopped. |
-| KMS ordinary authenticated host | Bounded restore4/ownership3 and all-format formatted restore2 pass in270/255/332. Preserve exact server/body/byte and independent draft/DOM evidence. Producer pane-grid repair passes Make365/browser43; qualify the published0.8.1 patch in the integrated host before whole-screen acceptance. |
+| KMS ordinary authenticated host | Bounded restore4/ownership3 and all-format formatted restore2 pass in270/255/332. Preserve exact server/body/byte and independent draft/DOM evidence. Published0.8.1 bounded actual-host518 passes ordinary375/900/1440px and split/native-modal1600/390px checks, including independent draft/DOM preservation. Wider whole-screen/context acceptance remains open. |
 | KMS file authority | Bounded integrated native4, Draw.io peer ownership3 and Mermaid/Excalidraw peer4 pass in254/255/323. Proofs261/274/327 preserve original owners/bytes, successor uploader, direct denial, role restoration and actual storage inventories. Wider product/context acceptance remains open. |
 | KMS contextual fixture | Current/authored/history stay distinct; relation/backlink proof and source/rule/review/action links select the exact authorized operation/revision. No private source is copied into shared content. |
 | Approved Draw.io installation | Qualify the approved deployment/embed origin. Five current tests use the actual pinned native application over isolated loopback HTTPS; deployment/session acceptance remains separate. |
@@ -194,8 +194,22 @@ entries and the existing speech stage. Fresh WEB938/148, other frontend70 and
 GUI307/34 pass; backend2134/zero failures/errors/five opt-in skips reuses2101
 cached cases and33 prior fakedata executions. All405 served runtime assets and
 292 corresponding-source blobs match their owning build/release. Original setup
-failures remain preserved without source/assertion/timeout changes. Actual
-patched-host acceptance and normal pre-push/remote publication remain pending.
+failures remain preserved without source/assertion/timeout changes. Bounded
+patched-host proof518 passes ordinary375/900/1440px login/save/reload/download/
+denial/tree-move checks and1600/390px same-note split/native-modal checks. The
+other editor DOM/draft and stored revision2 remain intact. Six S3 GETs/492 bytes
+match SQL owners, sizes and checksums. Original temporary-driver failures and
+the overly strict cleanup audit remain in517; separate509 verifies ordinary507
+cleanup without changing its failed outer receipt. All28 owned containers/four
+networks are independently absent.
+
+The unchanged normal pre-push hook passes full Make verification in dry-run519.
+KMS remote publication awaits confirmation of Jenkins branch routing because
+the repository pipeline has push/poll triggers and a deploy stage and the current
+approval excludes deployment. The local Jenkins has no matching job; other
+controllers remain unverified. Root qualification database/container/anonymous
+volume/network cleanup520 is complete. Wider configured-native, current/pipeline/
+rule and new-tuple sustained-workload criteria remain open.
 
 ## Limits and documentation state
 
