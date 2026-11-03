@@ -208,8 +208,18 @@ KMS remote publication awaits confirmation of Jenkins branch routing because
 the repository pipeline has push/poll triggers and a deploy stage and the current
 approval excludes deployment. The local Jenkins has no matching job; other
 controllers remain unverified. Root qualification database/container/anonymous
-volume/network cleanup520 is complete. Wider configured-native, current/pipeline/
-rule and new-tuple sustained-workload criteria remain open.
+volume/network cleanup520 is complete. Bounded configured-native534 now passes
+4/4 actual host cases using normal matched WEB/GUI builds and CSP, with11 S3
+GETs/5510 bytes. An immediate mode count races modal mounting in the original525
+run; the failed trace and3/4 result remain intact. One visible-dialog wait in the
+maintained test repairs detection;528 passes all original assertions/timeouts.
+Both graphical screenshots are inspected and seven containers/network are absent.
+The immutable0.8.1 release source/tag/assets are unchanged.
+
+New-tuple workload532 is running with the same four profiles,16 measured windows/
+12000 seconds/336000 expected operations and separate4800 warmups. Progress535
+is not acceptance. Wider current/pipeline/rule and sustained-workload criteria
+remain open.
 
 ## Limits and documentation state
 

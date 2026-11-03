@@ -63,8 +63,21 @@ confirmation: its repository pipeline has push/poll triggers and a deploy stage,
 while the current approval excludes deployment. No matching local Jenkins job
 is found; other controllers remain unverified. Root qualification database,
 container, anonymous volume and network cleanup520 completes before its deadline.
-Configured native Draw.io, current/pipeline/rule and new-tuple sustained-workload
-acceptance remain open.
+Bounded configured-native proof534 now passes4/4 actual KMS cases on normal
+matched WEB/GUI builds, with normal CSP and11 direct S3 GETs/5510 bytes. Both
+graphical screenshots are inspected and all seven containers/network are absent.
+First run525 preserves3 passes/one120-second timeout: the immediate iframe count
+returns0 before the modal mounts and selects readonly XML. One visible-dialog
+wait in the maintained test fixes detection;528 passes all four original cases
+without changing assertions/timeouts or runtime source. Existing0.8.1 release
+source/tag/assets remain unchanged.
+
+New-tuple sustained runec1dca539aa9 starts in532 with the same four profiles,
+16 measured windows/12000 seconds/336000 expected operations and separate4800
+warmup operations. Its operator-selected five-hour bound ends2026-11-03
+21:08:34UTC, reserving600 seconds for cleanup. Progress535 does not establish
+acceptance. Current/pipeline/rule and new-tuple sustained-workload acceptance
+remain open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without

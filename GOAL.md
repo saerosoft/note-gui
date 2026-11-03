@@ -215,8 +215,14 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   publication awaits Jenkins branch routing confirmation because deployment is
   excluded. All28 containers/four networks from the actual-host attempts are
   independently absent. Root qualification database/container/anonymous volume/
-  network cleanup520 is complete before its deadline. Wider configured-native,
-  current/pipeline/rule and new-tuple sustained-workload cases remain open.
+  network cleanup520 is complete before its deadline. Bounded configured-native
+  qualification534 now passes4/4 with normal matched WEB/GUI builds, unchanged
+  CSP and11 actual S3 GETs/5510 bytes. First run525 preserves3 passes/one120s
+  failure: an immediate iframe count races modal mounting and selects readonly
+  XML. One visible-dialog wait in the maintained test fixes detection;528 passes
+  all four original cases without changing assertions/timeouts or runtime source.
+  The released0.8.1 source/tag/assets remain unchanged. Wider current/pipeline/rule
+  and new-tuple sustained-workload cases remain open.
 - [x] Verify actual plain GraphQL, ordinary review and HTTP MCP rich-write
   protection at375/1440px: corrected372 passes6/6 in c6c7161bf627. Proof376 checks
   exact rich JSON/files, rejection/pending state, replay/actor identity, SQL18
@@ -297,8 +303,15 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   `verify-23.log`, `independent-19.log`, `native-drawio-10.log`, actual API run 05,
   the independent final proof and `packed-check-09.log` establish this bounded
   result. Adopted product-host acceptance remains AC08/AC09.
-- [ ] Obtain the remaining current KMS host/context/native/storage/workload
-  evidence. Bounded release qualification and adoption are complete below.
+- [ ] Finish the new0.8.1/2a33a2f sustained workloadec1dca539aa9 in532.
+  Preparation533 keeps the prior four profiles,16 measured windows/12000 seconds,
+  336000 expected operations and4800 separate warmup operations unchanged.
+  Normal source-identical default WEB/API and actual Node/Chromium/Playwright
+  inputs are frozen. The operator-selected five-hour bound ends2026-11-03
+  21:08:34UTC and reserves600 seconds for cleanup. Progress535 is not acceptance.
+- [ ] Obtain the remaining current KMS host/context/storage/workload evidence.
+  Bounded configured-native534 and patched-host518 pass; wider current/pipeline/
+  rule criteria and actual KMS remote publication remain open.
 - [x] Qualify and publish the producer 0.8.0 release. The exact release snapshot
   `b9c1ae1d` passes source3, unit307/34, browser41/41, native5/5 and extracted
   package682/source295 checks. Annotated tag object
