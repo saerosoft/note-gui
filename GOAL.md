@@ -316,12 +316,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   in those completed windows. All frozen input files still match. Original RUNNING
   receipts remain as interrupted artifacts. Cleanup579 removes only the seven
   exact owned stopped containers and network and independently confirms absence.
-- [x] Verify the first 100% readable profile in fresh run582 `ff7327b40baa`.
-  Proof607 audits four measured windows, 3,000 seconds and 84,000 successes with
-  zero unexpected errors or missed operations, plus 1,200 separate warmup successes.
-  API checks confirm 1,000,000 readable notes; the driver records 562 browser observations.
-  Read-only SQL verifies revision/history 4,261, original ownership/initial editor
-  and 4,260 later edits by the workload actor. Three profiles, twelve measured
+- [x] Verify the 100% and 10% readable profiles in fresh run582 `ff7327b40baa`.
+  Proof612 audits eight measured windows, 6,000 seconds and 168,000 successes with
+  zero unexpected errors or missed operations, plus 2,400 separate warmup successes.
+  API checks confirm readable populations of 1,000,000 and 100,000 notes; the driver
+  records 562 and 566 browser observations. Read-only SQL verifies both notes at
+  revision/history 4,261, original ownership/initial editor and 4,260 later edits
+  each by the corresponding workload actor. Two profiles, eight measured
   windows and final source/memory/SQL/S3/preservation/cleanup checks remain open.
 - [ ] Complete fresh full 0.8.1/2a33a2f sustained run582 `ff7327b40baa`.
   After competing verification ends, the fresh run starts at 2026-11-03
