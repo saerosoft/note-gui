@@ -216,7 +216,7 @@ maintained test repairs detection;528 passes all original assertions/timeouts.
 Both graphical screenshots are inspected and seven containers/network are absent.
 The immutable0.8.1 release source/tag/assets are unchanged.
 
-New-tuple workload532 is running with the same four profiles,16 measured windows/
+New-tuple workload532 starts with the same four profiles,16 measured windows/
 12000 seconds/336000 expected operations and separate4800 warmups. Progress535
 is not acceptance. Halfway proof570 verifies the 100% and 10% readable profiles:
 eight measured windows, 6000 seconds and 168000 successful operations, with zero
@@ -226,6 +226,16 @@ each, original ownership/initial editor and 4260 edits each by the corresponding
 workload actor. Two profiles, eight windows and final source/memory/SQL/S3/
 preservation/cleanup checks remain open,
 as do the wider current/pipeline/rule criteria.
+
+Proof577 supersedes the live status above: the host reboots at 2026-11-03
+18:31:31UTC, stopping run532 and all observers. Ten completed measured windows
+verify 204000 successes over 7800 seconds, with zero errors/missed operations in
+those windows; all frozen input files still match. Original RUNNING receipts and
+raw results remain as interrupted artifacts. The lost tmpfs corpus cannot resume.
+Cleanup579 verifies ownership and exact IDs, removes seven stopped containers and
+their network, and independently confirms absence. The earlier 0.8.0 proof477 is
+unchanged. A fresh complete 16-window qualification and final SQL/S3/preservation/
+memory/cleanup evidence remain required; partial windows do not close acceptance.
 
 ## Limits and documentation state
 

@@ -303,19 +303,26 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   `verify-23.log`, `independent-19.log`, `native-drawio-10.log`, actual API run 05,
   the independent final proof and `packed-check-09.log` establish this bounded
   result. Adopted product-host acceptance remains AC08/AC09.
-- [x] Verify the 100% and 10% readable-population profiles in current run532.
+- [x] Verify the 100% and 10% readable-population profiles in run532 before reboot.
   Proof570 audits eight measured windows, 6000 seconds and 168000 operations with
   zero unexpected errors or missed operations, plus 2400 warmup successes.
   Independent read-only SQL verifies both mutable notes at revision4261 with
   4261 history rows each, original ownership/initial editor and 4260 edits each
   by the corresponding workload actor. The other two profiles, eight windows and final
   source/memory/SQL/S3/preservation/cleanup checks remain required.
-- [ ] Finish the new0.8.1/2a33a2f sustained workloadec1dca539aa9 in532.
-  Preparation533 keeps the prior four profiles,16 measured windows/12000 seconds,
-  336000 expected operations and4800 separate warmup operations unchanged.
-  Normal source-identical default WEB/API and actual Node/Chromium/Playwright
-  inputs are frozen. The operator-selected five-hour bound ends2026-11-03
-  21:08:34UTC and reserves600 seconds for cleanup. Progress535 is not acceptance.
+- [x] Record host-reboot interruption of run532 without accepting the full run.
+  Proof577 verifies the system reboot at 2026-11-03 18:31:31UTC and ten completed
+  measured windows: 7800 seconds, 204000 successes and zero errors/missed operations
+  in those completed windows. All frozen input files still match. Original RUNNING
+  receipts remain as interrupted artifacts. Cleanup579 removes only the seven
+  exact owned stopped containers and network and independently confirms absence.
+- [ ] Complete a fresh full 0.8.1/2a33a2f sustained workload after resource admission.
+  Retain four profiles, 16 measured windows, 12000 measured seconds, 336000 expected
+  operations and 4800 separate warmups. Run532 cannot resume its lost tmpfs corpus;
+  its ten completed windows do not replace a full uninterrupted qualification.
+  Retain source/artifact/driver hashes, memory limits, SQL/S3/preservation checks,
+  a fresh bounded execution window and cleanup reserve. Do not run collector560
+  against the interrupted artifacts or mark AC08/AC09/AC10 complete.
 - [ ] Obtain the remaining current KMS host/context/storage/workload evidence.
   Bounded configured-native534 and patched-host518 pass; wider current/pipeline/
   rule criteria and actual KMS remote publication remain open.

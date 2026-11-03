@@ -2388,5 +2388,73 @@
     "wholeGoalAccepted": false,
     "proof": "patched-workload-halfway-proof-570.json",
     "proofSha256": "d874cb406ae61063384bce4c3b8e1c274a3681a74cd74a4fa6566e6f9633fba7"
+  },
+  "current081WorkloadInterruptedByHostReboot577": {
+    "status": "HOST_REBOOT_INTERRUPTED_WORKLOAD_NOT_ACCEPTED",
+    "observedAtUtc": "2026-11-03T18:44:22.674605+00:00",
+    "run": "ec1dca539aa9",
+    "previousBootId": "44e57cefbb9f4f62b628a4e513334d98",
+    "currentBootId": "05323e85-01f1-45b4-9c59-34fe4096c4bd",
+    "confirmedRebootEvents": [
+      {
+        "bootId": "44e57cefbb9f4f62b628a4e513334d98",
+        "realtimeMicroseconds": "1793730691175232",
+        "message": "The system will reboot now!"
+      },
+      {
+        "bootId": "44e57cefbb9f4f62b628a4e513334d98",
+        "realtimeMicroseconds": "1793730691206945",
+        "message": "System is rebooting."
+      }
+    ],
+    "originalRunningReceiptsPreservedAsInterruptedArtifacts": true,
+    "completedMeasuredWindows": 10,
+    "completedMeasuredSeconds": 7800,
+    "completedMeasuredSuccessfulOperations": 204000,
+    "unexpectedErrorsInCompletedWindows": 0,
+    "missedInCompletedWindows": 0,
+    "interruptedActiveWindow": {
+      "percent": 1,
+      "phase": "steady",
+      "index": 2,
+      "rate": 20,
+      "seconds": 900,
+      "began": "2026-11-03T18:27:14.561Z"
+    },
+    "ownedNetwork": {
+      "name": "kms-action-browser-ec1dca539aa9-network",
+      "id": "d0b20d064ba2691d0f34140288a3e80edc58a14e7e9001640e341c0c6b5a3b61",
+      "internal": true,
+      "connectedContainers": 0
+    },
+    "allDeclaredFilesStillMatchFrozenInputs": true,
+    "changedOrMissingDeclaredFiles": [],
+    "finalSqlS3PreservationAndScopeProofNotCompleted": true,
+    "tmpfsFixtureCannotBeResumedAfterReboot": true,
+    "oldSuccessful080WorkloadProofPreserved": true,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "proof": "patched-workload-reboot-interruption-577.json",
+    "proofSha256": "380c100fc433898cbd954c5bbb6086e8794c8c8e8e435083173398f7e4648fe7",
+    "cleanup": {
+      "status": "REBOOT_INTERRUPTED_OWNED_RESOURCES_REMOVED_AND_INDEPENDENTLY_ABSENT",
+      "observedAtUtc": "2026-11-03T18:44:56.211723+00:00",
+      "run": "ec1dca539aa9",
+      "interruptionProofSha256": "380c100fc433898cbd954c5bbb6086e8794c8c8e8e435083173398f7e4648fe7",
+      "ownedStoppedContainersRemoved": 7,
+      "ownedNetworkRemoved": true,
+      "labelsAndExactIdsRevalidatedBeforeRemoval": true,
+      "forcedRemovalUsed": false,
+      "noPersistentVolumesPresent": true,
+      "successfulDockerListsProveAbsence": true,
+      "existingServicesDataAndBindSourcesNotModified": true,
+      "oldSuccessful080ProofHashVerifiedUnchanged": true,
+      "originalInterruptedReceiptsAndRawWindowsRetained": true,
+      "newTupleWholeWorkloadAccepted": false,
+      "wholeGoalAccepted": false
+    },
+    "cleanupProof": "patched-workload-reboot-cleanup-579.json",
+    "cleanupProofSha256": "8241c4aee0e9affd9d84d573ad8033305185ec1ba844dfbe43dd99a9f7084570",
+    "priorFinalCollector560NotExecuted": true
   }
 }

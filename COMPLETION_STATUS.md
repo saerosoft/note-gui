@@ -5,8 +5,8 @@
 Latest authority: reply434 additionally approves current master commits/push,
 normal clean0.8.1 patch qualification/publication and the reviewed KMS dependency
 update/integration. Existing releases, services and data must remain. Deployment
-and model/provider calls remain excluded. The approved workload is complete in
-proof477; heavy release/integration gates may now begin after fresh resource/input
+and model/provider calls remain excluded. The earlier 0.8.0 workload is complete in
+proof477; heavy release/integration gates may begin after fresh resource/input
 admission. Earlier direct approval253 covers builds/tests and isolated
 integration/workload checks. Fresh
 successors254/255/257 retain the original cases, guards and6390/4260/2130s budgets;
@@ -84,7 +84,16 @@ rows each, original ownership/initial editor and 4260 edits each by the correspo
 workload actor. The other two profiles, eight measured windows and all final
 checks remain required. No scope OOM or OOM kill is observed; memory-limit events
 are nonzero and are retained in the proof.
-Current/pipeline/rule and whole new-tuple workload acceptance remain open.
+The host reboot at 2026-11-03 18:31:31UTC interrupts run532 and all observers.
+Proof577 audits ten completed windows, 7800 measured seconds and 204000 successes,
+with zero errors/missed operations in those windows. All frozen input files still
+match. The original RUNNING receipts are preserved as interrupted artifacts;
+missing transient units after reboot do not establish successful execution.
+The tmpfs corpus cannot resume. Cleanup579 verifies exact IDs/labels, removes
+only the seven owned stopped containers and network, and independently confirms
+absence. The earlier 0.8.0 proof477 hash is unchanged. A fresh complete 16-window
+qualification with the same workload and final checks remains required; the
+partial windows do not replace it. Current/pipeline/rule acceptance remains open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without
