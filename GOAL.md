@@ -68,7 +68,10 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   remote readback matches. Bounded current-source CONTROLLED host10 passes.
   New0.8.1 producer publication is complete: annotated tag f2418881 resolves to
   qualified07db42d5 and all seven downloaded assets match in proof492. Reply434
-  authorizes its reviewed KMS pin and integration, which remain pending.
+  authorizes its reviewed KMS pin/integration. The local GUI-only pin commit
+  2a33a2f passes strict dependency checks, clean normal bootstrap and full root
+  Make verification in499. Actual patched-host acceptance and normal pre-push/
+  remote publication remain pending.
   Wider context/native/workload requirements remain AC08.
 - [ ] AC10: Feature behavior has one lasting specification owner. Every fully
   completed work document is marked complete and removed with evidence/links
@@ -192,6 +195,17 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   retains before/after evidence. Candidate0.8.1 Make379 and extracted package380
   subsequently pass. Final clean0.8.1 qualification/publication is now verified
   in492; affected integrated-host adoption remains open.
+- [x] Pin published0.8.1 in canonical KMS master as GUI-only commit2a33a2f.
+  Only the release-lock GUI entry and gitlink change; unrelated working lock
+  entries and the existing speech stage are preserved. Strict dependency checks,
+  clean normal bootstrap and full normal root Make verification pass in499.
+  WEB938/148, other frontend70 and GUI307/34 execute freshly. Backend reports
+  2134 cases with zero failures/errors and five opt-in skips;2101 cached cases
+  and33 previously executed fakedata cases are reused in the final gate.
+  All405 served runtime assets match the normal supplier build and all292 served
+  source files match exact release blobs. Actual patched-host and normal pre-push/
+  remote publication remain open. Earlier authentication/Node/IPC setup failures
+  and their source-identical receipts remain unchanged.
 - [x] Verify actual plain GraphQL, ordinary review and HTTP MCP rich-write
   protection at375/1440px: corrected372 passes6/6 in c6c7161bf627. Proof376 checks
   exact rich JSON/files, rejection/pending state, replay/actor identity, SQL18

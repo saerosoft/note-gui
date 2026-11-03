@@ -187,9 +187,15 @@ prior preparation-only scanner false positive remains in the readable evidence;
 no actual key is included. Existing0.8.0 tag/assets and frozen inputs are preserved.
 
 The normal KMS build requires a clean released commit/tag matching its lock.
-Reply434 authorizes the reviewed dependency update and integration. That consumer
-pin and affected patched-host qualification remain pending; do not bypass the
-checker or include unrelated concurrent consumer changes.
+Reply434 authorizes the reviewed dependency update and integration. The local
+GUI-only KMS pin commit2a33a2f passes strict checks, clean normal bootstrap and
+full normal root Make verification in499. It preserves unrelated dependency
+entries and the existing speech stage. Fresh WEB938/148, other frontend70 and
+GUI307/34 pass; backend2134/zero failures/errors/five opt-in skips reuses2101
+cached cases and33 prior fakedata executions. All405 served runtime assets and
+292 corresponding-source blobs match their owning build/release. Original setup
+failures remain preserved without source/assertion/timeout changes. Actual
+patched-host acceptance and normal pre-push/remote publication remain pending.
 
 ## Limits and documentation state
 
