@@ -198,6 +198,7 @@ test('round-trips editable Mermaid, Draw.io and Excalidraw attachment revisions'
   await insert('drawio');
   await page.getByRole('button', { name: '다이어그램 편집', exact: true }).click();
   const xml = '<mxfile><diagram name="Acceptance"><mxGraphModel><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="2" value="API note" vertex="1" parent="1"><mxGeometry x="20" y="20" width="120" height="60" as="geometry"/></mxCell></root></mxGraphModel></diagram></mxfile>';
+  await expect(page.getByRole('dialog', { name: 'Draw.io', exact: true })).toBeVisible();
   const graphical = await page.locator('iframe[title="Draw.io editor"]').count() > 0;
   let initialDrawioId: string | undefined;
   if (graphical) {
