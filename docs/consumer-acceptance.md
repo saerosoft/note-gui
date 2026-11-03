@@ -150,16 +150,40 @@ exact-source logs, bounded SQL/S3 proofs and retained qualification attempts.
 
 ## Consumer acceptance cases
 
+COMPLETED bounded current-host session loss in `f807414bc891` at375/1440px:
+three protected panes and two unsaved comments retire after actual logout,
+unauthenticated reads fail, and acknowledged relogin restores the exact target.
+Private bodies/revision1, zero saved comments and three original sessions are
+independently checked, together with two135-table inventories, original roles
+and owned cleanup. The earlier V1 loading-editor failure remains preserved;
+only readiness waits change in the separate driver. Wider cases below remain open.
+
 | Owner/input | Required check before acceptance |
 | --- | --- |
 | KMS release coordinator | Adopt only the published version/tag/peeled commit and matching source offer. Serve the complete module/CSS/chunks/fonts/notices through actual `/notes/`, with Vite stopped. |
-| KMS ordinary authenticated host | Save/reload a rich document; delay a real history-restore response, type a draft, deliver it, verify the draft and stale-save conflict, inspect the committed server revision, then explicitly replace the draft. Repeat same-note panes and tab switching/closure. |
-| KMS file authority | Repeat the bounded peer XML result for the qualified integrated host and all required native formats; retain independent storage inventory. Change role/audience during reads/uploads and verify the byte endpoint as well as the UI. |
+| KMS ordinary authenticated host | Bounded restore4/ownership3 and all-format formatted restore2 pass in270/255/332. Preserve exact server/body/byte and independent draft/DOM evidence. Producer pane-grid repair passes Make365/browser43; qualify the unpublished patch in the integrated host before whole-screen acceptance. |
+| KMS file authority | Bounded integrated native4, Draw.io peer ownership3 and Mermaid/Excalidraw peer4 pass in254/255/323. Proofs261/274/327 preserve original owners/bytes, successor uploader, direct denial, role restoration and actual storage inventories. Wider product/context acceptance remains open. |
 | KMS contextual fixture | Current/authored/history stay distinct; relation/backlink proof and source/rule/review/action links select the exact authorized operation/revision. No private source is copied into shared content. |
 | Approved Draw.io installation | Qualify the approved deployment/embed origin. Five current tests use the actual pinned native application over isolated loopback HTTPS; deployment/session acceptance remains separate. |
 | Platform scope | Linux is required. Windows support and its qualification are NOT_APPLICABLE by explicit user decision; its historical billing failure is not a blocker and its workflow is removed. |
 | KMS P14 owner | Freeze the real workload, hardware, access selectivity and scale envelope. Repeat root/child/ancestor/move/large-body/byte/memory measurements and sustained mixed-authority acceptance. |
 | KMS SC01/SC09 coordinator | Verify the new optional policy/association and dirty-state APIs in its isolated shared/controlled host. Original creator and SC01/SC02 mapping are implemented; wider per-record audience/actor DTOs remain backend-owned inputs. |
+
+Actual rich-write protection in run `c6c7161bf627` passes six375/1440px cases:
+plain writes, ordinary review and HTTP MCP proposals/decisions reject structured
+flattening and preserve title-only rich content/files. Request/approval replay
+retains revision and actual client identity. Proof376 independently verifies SQL,
+24 S3 objects/1663 bytes, original roles/settings and owned cleanup. Initial schema
+fixture failure351 is preserved. These cases use the frozen host; the unpublished
+pane-grid patch and genuine pipeline/current cases remain separately qualified.
+
+Unpublished patch candidate0.8.1 passes Make379 and actual extracted-tarball380
+checks. Its405 runtime JS/CSS/font assets exactly match the43-case browser build;
+all682 shipped distribution files and802 source/notice entries are byte-checked.
+The normal KMS build requires a clean released commit/tag matching its lock.
+Direct reply434 authorizes patch publication, clean-release qualification and the
+reviewed pin update/integration. Those gates remain unexecuted; no checker is
+bypassed or existing release replaced. Run heavy gates after the active workload.
 
 ## Limits and documentation state
 
@@ -217,7 +241,10 @@ runtime/data and unrelated concurrent backend work are preserved. The remaining
 host conditions cannot be closed by producer-only checks.
 G11 retirement remains open. Seven historical journals are reconciled in
 `COMPLETION_STATUS.md`; the completed 2026-10-25 correction unit is removed after
-53 current tests and a readable four-entry archive. Six journals still retain
-unfinished dependencies. Historical evidence keeps its original source/topology
+53 current tests and a readable four-entry archive. The completed move/large-document
+unit is also removed with its six-entry archive. The bounded actual-host Draw.io
+journal retires with its ten-entry archive280 after native4/ownership3/restore4
+and independent inventory/storage/role/cleanup verification. Four original journals still
+retain unfinished dependencies. Historical evidence keeps its original source/topology
 limits. Keep licenses, provenance and active criteria; retire the session prompt
 and completion record last.

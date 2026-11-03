@@ -45,14 +45,14 @@ it is unrelated to this release. Preserve inherited branches and tags.
 
 ## Consumer identity
 
-Pin all three values: `version/0.8`, `release/v0.8.0` and the tag's exact peeled
+For the 0.8.1 patch, pin all three values: `version/0.8`, `release/v0.8.1` and the tag's exact peeled
 commit recorded in `qualification.json`. Verify that the selected checkout
 equals that commit, that the tag resolves to it, and that `release.json` and
 the contract digests match the release evidence. Later patches may advance the
 branch; a consumer stays on its reviewed tag and commit until explicitly upgraded.
 Never follow `master`, a caret range, `latest` or automatic remote updates.
 
-Download the release's `knowledge-engine-note-gui-0.8.0.tgz` and check it against
+After that release is published, download `knowledge-engine-note-gui-0.8.1.tgz` and check it against
 `SHA256SUMS`. It contains the package manifest and complete `dist/`, including
 the ES module entries, CSS, chunks, fonts, declarations, source offer and notices.
 The root, `/kms` and `/style.css` package exports retain their documented paths.

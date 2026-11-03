@@ -1,5 +1,305 @@
 # GUI completion work record
 
+## Current checkpoint on 2026-11-03 UTC
+
+Latest authority: reply434 additionally approves current master commits/push,
+normal clean0.8.1 patch qualification/publication and the reviewed KMS dependency
+update/integration. Existing releases, services and data must remain. Deployment
+and model/provider calls remain excluded. Heavy release/integration gates follow
+the running workload. Earlier direct approval253 covers builds/tests and isolated
+integration/workload checks. Fresh
+successors254/255/257 retain the original cases, guards and6390/4260/2130s budgets;
+focused259 passes18/18. The existing native interval ending06:45UTC is retained
+as an additional bound, without claiming a new interval approval or exclusivity.
+
+Master now contains pane repair `5d19c469` and candidate metadata `1d65cba2`.
+All three executed runtime/regression source hashes match proof367. Public API
+declarations match the published0.8.0 release. Remote master inspection matches
+the previous local `dee61e9e`; release/v0.8.1 and its GitHub release do not exist.
+Documentation and current approval434 are being recorded before the authorized
+development push. Clean release qualification/publication and KMS adoption are
+still pending; no heavy gate is started alongside the workload.
+
+Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
+skipped or flaky cases, outer exit0. The matched normal build is reused without
+rebuilding. Graphical edit/reopen, access revocation, read-only viewer and native
+Mermaid/Draw.io/Excalidraw attachment roundtrips pass. Actual S3 GET checks verify
+11 objects/5510 bytes. Both135-table inventories and unchanged original roles/
+organization policy are retained; independent proof260 confirms all seven owned
+containers and their network absent. All declared inputs/artifacts remain
+unchanged. Receipt: `native-matched-1793679195972139321/receipt.json` under
+`.tmp/gui-completion/`. Ownership255 then passes run `7910f743011c`, browser3/3,
+outer0 and actual S3 GET5 objects/1980 bytes, with original roles/policy and
+independent cleanup264 verified.
+
+Restore257 run `3151e244df3c` is FAIL, browser3/4 and outer1. Its other-tab case
+fills the still-active restore target before the destination note finishes
+opening; both documents have identical initial body text, so that prerequisite
+cannot identify the active note. Trace266 identifies the wrong selected tab at
+input time and the later destination-tab switch. Roles/policy and owned cleanup
+are preserved. Separate spec268 adds only a unique destination-title wait;
+all final assertions/timeouts remain. Corrected stage270 passes run `b6898897e40f`,
+browser4/4, zero unexpected/skipped/flaky cases and outer0, against the same build.
+Actual S3 GET verifies6 objects/696 bytes; both135-table inventories, exact roles/
+policy and independent cleanup272 pass. Proof274 independently checks inventory
+hashes and exact role/policy equality for ownership and corrected restore.
+Preserve original257 and its inputs, trace and failure. The declared native4,
+ownership3 and restore4 sequence is complete; wider all-format peer/context and
+sustained workload acceptance remain open. Ordinary human stale-proposal262
+passes375/1440px in `0a0859d886c5`: newer human content stays at revision2, the
+old proposal remains PENDING at its original revision and current membership
+stays empty. This does not qualify pipeline stale-target or populated-current cases.
+
+Legacy300 passes both widths in `d0445e4349d4`, with six revisions, exact legacy
+origin/restored text and no invented current items. Initial legacy rows use INSERT
+only with append-only guards enabled. Earlier attempts fail on immutable-history
+UPDATE, unsupported HUMAN/null-projection expectations, a start-anchored history
+label and unconditional clean-restore DOM identity. Reconciliation295 checks the
+current contract and pinned source before the separate provenance/restore case;
+no product behavior is changed. Proof305 verifies inventories, exact roles/policy,
+unchanged sources/artifacts/WEB/drivers and independent owned cleanup.
+
+Draw.io's bounded journal is archived/removed with readable10-entry archive280
+and12-criterion mapping. Additional Mermaid/Excalidraw peer cases323 pass4/4
+in `7831968c1c40` at375/1440px. Authoritative edit capability, actual uploader,
+successor revision/previousId, original owners/bytes, reopen and outsider/explicit
+anonymous401 checks pass; proof327 verifies8 S3 objects/2295 bytes, inventories,
+role restoration and independent cleanup. Earlier persona/storage-state/selector
+failures remain. Failed309 retains its preservation failure; normal API recovery
+and fresh SQL/S3 evidence precede separately verified owned cleanup317/321.
+
+All-format rich history332 passes2/2 in `b1e6dbf7da02`: heading, bold, table and
+exact historical Mermaid/Draw.io/Excalidraw file references/bytes are restored;
+visible native edit controls work and the independent1440px dirty pane retains
+its body/DOM. Proof336 verifies12 S3 objects/926 bytes, inventories, unchanged
+inputs/build, roles/policy and independent cleanup335. Earlier325/329 failures
+remain: scope the bold assertion, then close history and scroll each lazy native
+node into view without changing final assertions/timeouts. This reveals a
+separate pane-grid defect: empty modal portal wrappers participate in the grid
+through the provider's display:contents and displace the right pane. Correct it
+after the workload using a failing geometry regression and retained native-modal/
+draft checks. A separate design question was unnecessary: the user's existing
+no-human-review decision governs this routine in-scope repair. Whole GUI
+acceptance remains open.
+
+Fresh private Make312 passes source3, unit307/34, normal types/declarations/
+build/distribution and strict package-name imports, exit0 in35.598s. Its293 copied
+tracked inputs remain byte-identical; the Draw.io journal deletion is preserved
+in both copies. This qualifies the executed working snapshot before the proposed
+pane-grid correction, without replacing any published release or frozen KMS build.
+
+Sustained workload337 is TERMINAL FAIL/exit1 in run `995d5221d4f9`. All16
+measured windows/12000 seconds finish:336000 requests,335999 successful, one
+root-read socket hang up and zero missed. Four warmups add4800 successful
+requests. Actual readable populations match1000000/100000/10000/1000; all four
+mutable notes reach revision4261 with original owners and zero page errors.
+Proof355 audits every completed raw window; error356 preserves the unproven
+transport cause, empty nearby WEB/API logs and no restart/OOM evidence. Do not
+retry, waive the zero-error condition or claim accepted workload performance.
+
+The original cleanup also fails because WorkloadHost and inherited InventoriedHost
+both create the exclusive before-cleanup inventory. Original source/receipt/
+report stay unchanged. Read-only watcher358 captures final notes before cleanup;
+separate cleanup359 captures fresh135-table inventory, exact original roles and
+declared corpus addition,1000000 notes/1017040 revisions, four owner/revision4261
+rows and actual S3 GET1 object/16384 bytes. Normal owned-only stops/removals finish;
+independent proof360 confirms all seven containers/network absent. Keepalive exit137
+is recorded. Public proof361 retains the failed workload and successful cleanup.
+All2213 source blobs, API/worker artifacts,2660 WEB files and declared drivers remain
+unchanged. Driver/browser scope peak2060517376 bytes, zero OOM kills; container
+memory samples retain their separate limits. The completed execution is no longer
+live and must not be restarted from its consumed marker. Current reply253 still
+covered the remaining scoped tests at that checkpoint; Git/publication, provider
+calls and deployment were excluded before the later direct reply434.
+
+Pane-grid repair is VERIFIED for the unpublished producer snapshot. Regression363
+fails desktop with right-pane y522.5 instead of45; the separate mobile case passes
+after waiting for the existing modal transition. The product fix makes each pane
+provider a single grid/flex item, lets the editor fill it and retains the existing
+narrow-screen minimum height on that item. Portal target/viewport attachment,
+native draft lifetime and public protocol are unchanged.
+
+Private normal Make365 passes source3/unit307/34, types/declarations/build/
+distribution and strict package-name imports. Targeted layout2/2 and full independent
+browser43/43 pass, with zero skips/flakes/unexpected cases. All293 copied execution
+inputs and canonical inputs still match the Make receipt. Proof367 retains RED,
+GREEN, screenshots visually inspected at1600/390px, viewport modal and independent
+draft/DOM checks. This is a PATCH-level repair, not a new published release or
+consumer adoption. The frozen KMS inputs are unchanged. Final documentation/source-
+package refresh and affected integrated-host qualification remain separate.
+
+Rich-write protection372 passes actual host `c6c7161bf627`, six375/1440px cases:
+plain GraphQL, ordinary review and actual HTTP MCP proposal/canonical decision.
+Structured replacement returns REJECTED with the canonical message key and leaves
+proposals pending until explicit rejection. Title-only updates retain exact rich
+JSON, all diagram/file references and bytes; approval/request replay creates no
+extra revision. Actual MCP client identity is retained. Independent proof376
+verifies6 notes/18 revisions, four human and four tool proposals,24 S3 objects/
+1663 bytes, original roles/organizations/space settings and135-table inventories.
+Frozen source/API/worker/WEB/driver hashes match; independent cleanup375 confirms
+owned resources absent. No provider credential/client/call is added. The provider
+policy name needed by MCP exists only on one declared new owned fixture space.
+
+First attempt351 `72419d2c2232` fails before browser setup on the schema's
+external-transfer/provider-list consistency constraint. Original inputs/failure
+stay unchanged; diagnosis374 binds the constraint and the separately corrected
+host371. Both runs preserve original roles and owned cleanup. Do not confuse
+these normal human/tool cases with genuine rule or nonempty-current acceptance.
+
+Audit353 confirms the historical populated seed inserts processing/review rows
+and a synthetic profile. It cannot supply fresh ordinary processing/comparison
+provenance. The existing bounded43 scope is unchanged; an existing qualified
+result/environment path is requested while independent work continues. Models,
+forced queue staging and invented observations remain outside current scope.
+
+The working metadata now declares unpublished candidate0.8.1, PATCH within the
+unchanged0.8 protocol. Normal Make379 passes source3/unit307/34, types/declarations/
+build/distribution and strict imports. Its405 runtime JS/CSS/font assets exactly
+match the build used by browser43. Actual tarball380 contains689 files, including
+682 distribution files. A consumer extracted from that real tarball passes strict
+imports/types; all802 source/notice entries match293 source and509 dependency
+notice inputs byte for byte. Original qualification/release0.8.0 stays immutable.
+
+Integrated patched-host qualification cannot use the normal KMS build until a
+clean published patch and its reviewed dependency pin exist. The owning
+release_import.py requires the recorded commit, clean checkout and tag; it is not
+bypassed. Direct reply434 now authorizes current master commits/push, normal
+clean patch qualification/publication and the reviewed consumer-pin update/
+integration against concrete package380. No new candidate KMS build, release
+publication or pin change has occurred at this checkpoint. Final clean-release/
+source qualification and adoption remain open even though the local package is
+verified. The original restricted-scope records remain dated history.
+
+Transport audit381 verifies the client's default retry0 and persistent HTTP agent;
+module resolution/digests are observed after the run, without inventing an
+execution-time module digest or the original socket state. Read-only diagnostic384
+finishes in `ae54aaffa376`: continuous reads1200/1200 succeed, while idle-boundary
+bursts complete320 reads with311 successes and nine connection resets. All nine
+use reused sockets idle for approximately6002–6006ms. Proof389 binds payload-free
+events, unchanged note rows/roles and independent owned cleanup388. Diagnostic
+completion is not workload acceptance; the original failure's cause is unproven.
+
+A separate idle-pool helper390 retires only sockets still in the agent's free
+pool after4000ms. Local HTTP regressions391 pass2/2, including a4300ms active
+response under its unchanged30000ms deadline. No request retry is added. The
+successor394 retains all1200 continuous reads and40 bursts of eight, but its first
+admission is refused by the existing competing-verification guard before any
+fixture starts. Preserve that terminal preflight and the other project's work;
+the other process later exits without intervention. Fresh guards admit separate
+successor401 in `442e558a8630`:1200 continuous reads and320 idle-boundary reads
+all succeed, with zero retries/errors and256 free sockets retired. No active
+socket is retired. Proof409 verifies raw connection events, unchanged note rows,
+roles and source/API/worker/WEB/driver hashes; independent408 confirms all seven
+owned containers/network absent. This verifies the harness policy against the
+old qualified host, not the new patch or another sustained workload. Final load
+qualification must identify its executed consumer tuple; patch publication and
+adoption remain pending.
+
+The cleanup collision also has a separate one-line successor399: after the same
+exclusive inventory and corpus/role validation, call the ordinary owned-resource
+cleanup once. Regression398 reproduces FileExistsError on original168; successor
+399 passes3/3, including preservation failure retaining resources and pre-corpus
+shared cleanup. Proof400 records zero Docker calls. Original failures, source and
+completed cleanup359 remain unchanged; this does not accept a new workload run.
+
+Corrected full workload412 is now running in `02688f9f0a08`. This distinct
+single-use execution follows the actual idle-reset correction409 and cleanup
+regression400. Preparation415 verifies unchanged seed/resource methods, operation
+logic and all measured window definitions; the new host's cleanup tests416 pass3/3.
+The HTTP client module has a pre-run digest and requires a matching post-run
+digest as well.
+
+The operator-selected five-hour bound is2026-11-03 10:11:54.073682–15:11:54.073682UTC
+under the existing direct isolated-testing approval253, without host exclusivity.
+Systemd scope `kms-gui-workload-retired-pool-412-20261103101154.scope` is active;
+supervisor413, its child and tool session12890 are live at checkpoint420. Actual
+SQL verifies1000000 corpus notes; API-readable populations match1000000/100000/
+10000/1000. Proof423 audits all1200 first-warmup samples:1200 successful, zero
+errors/missed and exact read/save/history/authority/storage operation counts.
+Proof427 preserves the first18000-sample window. Proof432 now verifies both
+completed900-second20rps windows:36000 measured samples, all successful, zero
+unexpected errors/missed and exact operation counts. This completes2/16 measured
+windows; the third steady window is active.
+Preserve the2GiB/zero-swap driver scope, container limits,12000 measured seconds,
+all four populations and authority/storage checks. Use a separate completed-window
+audit421/422; planned counts are not results.
+
+This run uses only the frozen published GUI0.8.0/KMS f40e7a2 inputs. No rebuild,
+release, pin or deployment change occurs. It can qualify that workload tuple;
+unpublished0.8.1 adoption and affected-host qualification remain separate.
+Original337/394 failures and all their inputs are preserved. Follow the actual
+live handle to terminal state and verify SQL/storage, input hashes and owned
+cleanup before claiming any new capacity result.
+
+Read-only final observer429 is separately running under tool session63099 and
+the same15:11:54.073682UTC bound. Its baseline independently verifies1000000 notes,
+100000 roots/900000 children and an actual S3 LIST/GET of the single16384-byte
+object with matching checksum. These additional reads are outside the paced load.
+It watches the existing main scope, writes no fixture data and stops if that scope
+ends. Final four-note revision/history and a fresh S3 GET are still pending near
+the last stress window, before ordinary cleanup. Preserve its source/preparation430,
+receipt and private SQL/S3 evidence; do not launch another observer or workload.
+
+### Earlier checkpoint and preparation history
+
+The additional normal GUI/Next build has been consumed. Native225's build exits
+0, including TypeScript and static generation. Its original outer receipt remains
+FAIL/exit2 because strict source validation rejects the previously undeclared
+`frontend/apps/web/next-env.d.ts`; `runtimeStarted` is false. Preserve the build
+outputs, attempt marker and original failure. Do not build again.
+
+Separate qualification232 independently reproduces that exact generated file
+with pinned Next16.3.5 and verifies the original inputs, matching artifacts,
+normal CSP/public assets and804 corresponding-source ZIP entries. Its qualified
+manifest SHA256 is `3b657816e4b2591502f24d6ba2e10fce8e4eb762839dc77b395faf1280ab94bd`.
+This qualifies build inputs/outputs only; it does not accept native runtime or
+replace manifest203 or the original225 failure.
+
+Runtime235 exits1 at the unchanged20GiB memory admission guard before a fixture
+starts. Independent proof241 records19.96GiB available and a45105152-byte
+shortfall at02:48:51.224286UTC. Native4, ownership3 and restore4 executed counts
+remain0. Admission234 and the executed235 source/log must remain unchanged.
+Follow-ups238 prepare ownership239, restore240 and finite228; none has executed.
+The handoff reports28.69GiB available at02:54:18.280804UTC. That later sample is
+neither successful admission nor a resource reservation.
+
+Approval219 has expired. Historical local approval223 records native
+02:31:39.126511-05:31:39.126511UTC and legacy/human
+05:41:39.126511-06:41:39.126511UTC on2026-11-03. Those timestamps are preserved;
+this new Codex session requires direct command authorization and an applicable
+UTC interval. Runtime-only native4, ownership3 and restore4 need6390s in total
+(1500s execution+600s cleanup+30s margin per stage). Under223 the latest first
+runtime start is03:45:09.126511UTC. Fresh resources, contention, ports, exact
+input/output identity and independent predecessor cleanup remain mandatory.
+Only successful native4 plus independently verified cleanup admits ownership3;
+verify its cleanup before restore4. A failed admission or case is terminal.
+
+Legacy/human need a separate serial2160s budget; successful session-loss is not
+rerun. K1/K2/pipeline-K3 and genuine rule comparison/approval/activation evidence
+remain open. No corrected workload run, process termination, rebuild, Git change,
+pin update or release publication is authorized by this checkpoint. Existing
+private package174 predates these documentation edits; final source/package/ZIP
+verification still needs explicit authorization. No work record can retire yet.
+
+Receipt sources: `.tmp/gui-completion/native-matched-1793673206692281605/receipt.json`,
+`native-build-qualification-232/receipt.json`, `qualified-native-cases-235.log`,
+`qualified-followups-238.log` and `qualified-native-memory-block-241/receipt.json`
+under the same evidence directory. `.tmp/gui-completion/codex-checkpoint-242/inspection.json`
+records this session's read-only inspection and evidence hashes; it is not a new
+runtime or package qualification. Earlier checkpoints below are historical.
+
+Successors244/245/247 and authorization adapter243 are now prepared under
+`.tmp/gui-completion/`, with source hashes/diff in `codex-runtime-preparation-248.json`.
+Preparation248 remains immutable. Direct user approval250 now authorizes focused
+checks and one native4/ownership3/restore4 sequence during2026-11-03
+03:45:00-06:45:00UTC. Focused251 exits0:18 guard/syntax checks pass,0 failures/
+errors, no real Docker calls or runtime admission. It verifies approval rejection,
+source drift, original guard/case adaptation reuse, full6390/4260/2130s budgets,
+failed predecessor/cleanup rejection and single-use failure behavior. Actual
+native/ownership/restore counts remain0. The proposal249 and actual approval250
+are separate records. Fresh runtime admission is still required after03:45UTC.
+
+
 This is the active G01–G11 requirement record, not a lane acceptance report.
 `GOAL.md` owns the complete objective, acceptance checklist, command gates,
 immediate next step and retirement inventory. Lasting feature behavior belongs
@@ -202,7 +502,132 @@ snapshot. The actual after run is still exit1, history9/9 and ancestor5/7;
 this pairing neither retroactively binds the old diagnostics nor resolves the
 ancestor cause or failed consumer gate.
 
-## Finite text-worker fixture failure
+## Bounded current-host session loss
+
+COMPLETED bounded G02/G08 identity-loss cases in actual run `f807414bc891`,
+exit0/107.402seconds on2026-11-02. At375/1440px, actual logout retires three
+protected panes and two unsaved comments; normal unauthenticated reads fail.
+Acknowledged relogin returns to the exact original target, including the
+two-pane query. Stored private notes remain at revision1 with no persisted
+comments, and three original fixture sessions remain current. Independent
+proof114 matches2213 source inputs,2660 WEB files, complete API/worker and26
+driver/external execution snapshots before/after. Two135-table inventories,
+exact original roles and seven owned containers/network are independently
+verified. Page errors and model calls are zero. This does not accept all G08,
+legacy, rule, native or sustained workload criteria.
+
+The original V1 run `758b7d6209ef` remains FAIL/exit1: it tries to fill the
+comment editor while contenteditable is false, before any session-loss action.
+Its unchanged inputs, inventories, roles and cleanup are independently preserved
+in proof101. A separate external driver waits for actual editability and input
+acknowledgement. Exact source comparison108 retains every original JavaScript
+assertion/timeout and the normal600-second browser/900-second outer execution
+and180-second cleanup budgets. The V1 input layout and manifest are not edited.
+Both runs retain the outer relay connection-refused diagnostic; independent
+browser, SQL and cleanup observations determine the bounded verdict.
+
+The user directly assigns this session future UTC windows on2026-11-02:
+legacy/session12:10-13:10, native13:20-14:50, workload15:00-20:00. The actual
+question response is preserved separately from the declined peer calendars.
+It grants no peer pledge or host exclusivity and retains all existing guards.
+Legacy's12:10 and12:30 admissions fail below20GiB before a fixture starts;
+neither is a browser result. Native/workload remain unexecuted at this checkpoint.
+The native launcher's13:20UTC admission fails below20GiB, exit1/childStarted:false.
+Proof129 confirms unchanged inputs, absent build-attempt marker/GUI/Next outputs
+and no action-browser containers or networks at13:21:30UTC. No native build or
+fixture starts, and no repeated admission is queued. The workload waiter
+is normally interrupted at13:15:53UTC with exit130, before any child/scope/seed,
+to require independent cleanup of earlier native attempts before workload starts.
+Its unchanged input hashes and interrupt receipt remain preserved. Workload still
+requires the original15:00-20:00UTC window and every original admission check;
+scheduling or waiting creates no corpus and establishes no runtime acceptance.
+
+The user explicitly confirms the unused frozen V2 language server and approves
+one normal SIGTERM. At14:11:13UTC its termination is observed; all2213 V2 source
+hashes match. No other process is signaled and no force kill occurs. Native's
+latest full-budget start13:34:30UTC has passed, so no second admission occurs.
+Audit132 then verifies all earlier window controllers terminal, no native build
+attempt/outputs and no action-browser containers/networks. Workload133 is
+rescheduled only after that audit, retaining the original15:00 start and guards.
+
+Actual workload133/scoped `d88bd5e5cebb` starts at15:00UTC and fails with exit1
+after386.884seconds. It seeds1000000 notes and initial revisions and verifies
+readable populations1000000/100000/10000/1000, but completes no warmup or measured
+window. The upload harness incorrectly requires byteSize on FileReceipt; actual
+stored size is16384bytes and its S3 checksum matches SQL. Audit152 confirms exact
+original organizations/roles and only the declared corpus organization added.
+The old preservation guard rejects that authorized addition. Scope peak is
+1527455744bytes, swap0 and OOM0; these are setup observations, not sustained load.
+
+COMPLETED owned cleanup: cleanup154 removes web normally but times out stopping
+hash. Explicit approval then permits one SIGKILL each for hash/storage-admin;
+continuation159 captures fresh SQL/S3 first and normally stops the other four
+containers. Independent proof161 confirms all seven original container IDs and
+the network absent, readable evidence and original workload/cleanup154 hashes
+unchanged. Proof160's network-diagnostic assertion failure remains preserved.
+The corrected workload candidate is not executed: its conditional15:30UTC
+authorization expires before the response is observed at15:41UTC.
+
+COMPLETED separate harness-correction preparation: tests155/158 each reproduce
+the original defect, then pass4/4 against helper156/157. Candidate host168/live169
+queries normal noteFiles metadata and requires exact original rows, only the
+declared new organization and unchanged post-setup rows. Verification171 preserves
+input hashes, prepare/start/bootstrap AST, all measurement assertions/timeouts and
+direct runtime denial. Initial RED snapshots are captured afterward164; no
+execution-time RED snapshot is claimed. Verifier170's AST-ordering failure is
+retained. This is local preparation, not actual metadata API or load acceptance.
+
+Separate approval142 assigns native20:10-23:00UTC on2026-11-02 and legacy/human
+23:10-00:10UTC across midnight. Prepared variants146-149 have not run and have no
+scheduled launcher. Fresh predecessor proof, resources, contention, input identity
+and complete original budgets remain required. The sustained workload stays open.
+These record edits require a new source/package refresh; gate139 does not bind
+their later bytes.
+
+The user subsequently advances only the native start to now through direct
+answer185; the23:00UTC end and original counts/guards remain. Own waiter181 ends
+normally via SIGINT before any child, exit130, proof184. Preparation191 passes4
+window tests,2517 input hashes, artifact/external identity, fresh predecessor
+cleanup and current resource admission. Native188 then uses the one normal
+matching build attempt. GUI build/distribution completes; Next fails with991
+reported errors beginning with missing generated GraphQL model imports. The copy
+lacks generated backend entities schema and frontend contract outputs.
+
+COMPLETED failure audit193: normal build exit1, outer exit2, runtimeStarted:false,
+zero native/ownership/restore cases and no created fixture containers/network.
+All declared input hashes and API/worker/external hashes remain unchanged. The
+source-set check rejects exactly five newly generated i18n declarations; failed
+build outputs2297 files, marker/log/receipt and readable archive are preserved.
+No second build or dependent case starts. New fresh prerequisite preparation and
+an additional one-build approval are required. Later record edits again need a
+fresh source/package refresh; private gate174 binds its earlier snapshot only.
+
+Additional direct approval195 covers fresh generated prerequisites and one extra
+normal build. Separate preparation209 captures normal codegen exit0 and unchanged
+290 outputs; binding203 explicitly records those outputs, matching API entities
+schema and five i18n declarations. Parent2213/GUI295 blobs match and strict source
+tests197 pass4/4 after RED. Preparation196/202 driver failures remain preserved.
+Admission205 then fails the full-sequence time check before resources or build.
+Proof210 at20:39:59UTC observes8400.120s before23:00UTC, less than8790s. No extra
+build/fixture starts; the additional build remains unused. A new direct interval
+is required, and all native/ownership/restore acceptance remains incomplete.
+
+Subsequent relative-window approval219 is anchored to21:54:23.830909UTC rather
+than an expiring fixed end. Fresh217 passes input/predecessor/full-time checks,
+then rejects memory below20GiB. Proof220 observes20468363264bytes available,
+1006473216bytes below the required21474836480. No additional build or fixture
+starts, no threshold changes and no process is terminated. The extra build is
+unused; safe memory recovery and another fresh admission are required. Under219,
+the latest initial full-sequence start is22:27:53.830909UTC.
+
+Three additional native ownership cases are prepared separately from the original
+four. Source review corrects successor-file attribution to the actual uploader
+and waits for each note's committed save response before reading its revision.
+Preparation119 passes strict types, adapter2 and source-binding checks2. These
+checks establish preparation only; actual normal build, original selected cases,
+remaining2130-second budget and independent cleanup are required before this suite.
+
+## Earlier finite text-worker fixture failure
 
 Run `2b7136e2305b` on2026-11-02 at05:15:56-05:17:08UTC uses the frozen
 `f40e7a2` source and matching complete API/worker/WEB artifacts. It exits1 after
@@ -323,17 +748,17 @@ acceptance. No whole G-unit is accepted solely from component tests.
 
 | Unit | Original criteria and current source | Producer evidence / remaining behavior | Host dependency / status |
 | --- | --- | --- | --- |
-| G01 | KNOWLEDGE-002/010/064, F08; `src/vendor/docmost`, `upstream-manifest.json` | Retained shell/editor/tree/CSS, 115 provenance entries. Populated packed-browser 1600/390 views preserve the composition and shipped Korean glyphs. Actual slash/toolbar/link/code/table/file-chooser edits persist after reload at both widths; initial menu lifetime failures are repaired. | KMS QA01, approved deployment and current `/notes/` visual acceptance remain separate. PARTIAL. |
-| G02 | KNOWLEDGE-001/003/004/011; `src/index.tsx`, `hostRuntime.tsx`, `host.ts` | Core-only persistence, named extensions, actual package imports and isolated mount lifetimes pass. Current KMS CONTROLLED run10 passes authenticated direct entry, rich save/reload, draft-safe route lifecycle and style disposal at three widths. | Exact 0.8 source is adopted locally; normal parent gate/publication and wider session/mode cases remain open. PARTIAL. |
-| G03 | KNOWLEDGE-005–009/027, F04/F05; `Pane.tsx`, `paneState.ts`, `NotePanels.tsx`, `localPersistence.ts` | Delayed restore loss repaired. Complete gate 266 pass; Chromium/Chrome each 35 pass. Exact lost-ack create/save/comment replay preserves identity and later drafts. Property readback detects torn reads, withholds uncertain writes and resolves panel-only conflicts without losing the body draft. | KMS canonical transaction, plain/proposal/MCP rich-node and application semantics. PARTIAL. |
-| G04 | KNOWLEDGE-012/013/015; `Pane.tsx`, `DocmostPaneProvider.tsx`, `Workspace.tsx` | Independent pane/tab/native draft ownership and mount-local dirty aggregation pass. Current KMS CONTROLLED run10 also verifies actual Back/Forward cancellation, explicit leave/reopen and the same editor/draft/history at three widths; fragment/distance regressions fail first/pass after repair. | Imported corpus, integrated same-note/native draft matrix and wider mode acceptance remain open. PARTIAL. |
-| G05 | KNOWLEDGE-019–022/058, F06; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Actual hierarchy/current authority, sustained mixed workload and scale envelope owned by KMS P14. Historical million-note results retain their older workload. PARTIAL. |
-| G06 | KNOWLEDGE-023–026/030/032–038, F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Actual populated KMS business projections and shared associations require the authoritative accepted host/contract. PARTIAL. |
-| G07 | KNOWLEDGE-016–018/027/065, F09; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Actual approved Draw.io application passes five desktop/narrow/viewer/restore/held-refresh cases, including inline edit and undo retention. Real API peer XML successor preserves original bytes and denies outsider/anonymous bytes. | Qualified Draw.io deployment, integrated all-format co-editor/storage acceptance and independent consumer inventory remain open. PARTIAL. |
-| G08 | KNOWLEDGE-014/027/036, F02; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
-| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | COMPLETED packaging/platform/release/adoption gate: normal parent pre-push publishes `f40e7a2` and independent remote readback matches. Linux passes; Windows is NOT_APPLICABLE. Wider GUI/context/native/workload stays in its own G-unit. |
-| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Agreed optional adapter is verified in core-only/CONTROLLED/SHARED hosts. Three-width actual SHARED creation, real actors, original link creator/global receipt/relink, file authority and CONTROLLED role/epoch2/3/4 recovery pass in `c3d33e70ced0`, with independent SQL/S3/role/cleanup proof. | Wider populated actor/reviewer/source context, integrated native cases and whole SC09 remain open. No new DTO or actor inference is introduced. PARTIAL; bounded AC04 complete. |
-| G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; one completed correction unit is archived/removed. Current producer packet, sanitized proof and 93-entry readable evidence archive are verified. Duplicate current/screen contracts move to the lasting specification. | Six journals retain unfinished host/workload/release criteria. Prompt and this record remain until last. PARTIAL. |
+| G01 | KNOWLEDGE-002/010/064, F10; `src/vendor/docmost`, `upstream-manifest.json` | Retained shell/editor/tree/CSS, 115 provenance entries. Populated packed-browser 1600/390 views preserve the composition and shipped Korean glyphs. Actual slash/toolbar/link/code/table/file-chooser edits persist after reload at both widths; initial menu lifetime failures are repaired. | KMS QA01, approved deployment and current `/notes/` visual acceptance remain separate. PARTIAL. |
+| G02 | KNOWLEDGE-001/003/004/011; `src/index.tsx`, `hostRuntime.tsx`, `host.ts` | Core-only persistence, named extensions, actual package imports and isolated mount lifetimes pass. Current KMS CONTROLLED run10 passes authenticated direct entry, rich save/reload, draft-safe route lifecycle and style disposal at three widths. | Exact 0.8 adoption and the normal parent gate/publication are complete at `f40e7a2`; bounded session-loss/relogin also passes. Wider host/mode cases remain open. PARTIAL. |
+| G03 | KNOWLEDGE-005–009/027, F02/F04; `Pane.tsx`, `paneState.ts`, `NotePanels.tsx`, `localPersistence.ts` | Delayed restore loss repaired. Complete gate 266 pass; Chromium/Chrome each 35 pass. Exact lost-ack create/save/comment replay preserves identity and later drafts. Property readback detects torn reads, withholds uncertain writes and resolves panel-only conflicts without losing the body draft. | Actual plain/review/HTTP-MCP rich protection passes6 cases in c6c7161bf627 with SQL/byte/cleanup proof376. Genuine pipeline application/current-membership cases remain open. PARTIAL. |
+| G04 | KNOWLEDGE-012/013/015; `Pane.tsx`, `DocmostPaneProvider.tsx`, `Workspace.tsx` | Independent pane/tab/native draft ownership and mount-local dirty aggregation pass. Current KMS CONTROLLED run10 also verifies actual Back/Forward cancellation, explicit leave/reopen and the same editor/draft/history at three widths; fragment/distance regressions fail first/pass after repair. | Integrated same-note/native ownership3/restore4 and independent dirty-pane formatted restore2 pass in255/270/332. Pane-grid producer repair passes Make365/browser43. Imported current-context and integrated patched-host/whole mode acceptance remain open. PARTIAL. |
+| G05 | KNOWLEDGE-019–022/058, F05; `NoteTree.tsx`, `treeCache.ts` | Actual 1,300 roots/1,302 notes: 26 pages, reads at most 50 rows, 29 rendered rows; return after LRU eviction refetches the first page. Deep grandchild reveals its ancestor path. A 1,000-paragraph rich document and exact 1 MiB download pass. Sanitized measurements are in `docs/producer-evidence.json`. | Actual hierarchy/current authority, sustained mixed workload and scale envelope owned by KMS P14. Historical million-note results retain their older workload. PARTIAL. |
+| G06 | KNOWLEDGE-023–026/030/032–038, F06/F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Bounded populated43 applications and shared associations pass in024345c3b295/c3d33e70ced0. Collected-empty-authored/nonempty-current, human restore with independent nonempty current, pipeline stale-target and genuine rule-comparison/application cases remain open. PARTIAL. |
+| G07 | KNOWLEDGE-016–018/027/065, F08; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Producer native5 and actual matched-host native4/ownership3/restore4 pass, including inline edit/undo, co-editor successor attribution and pane/tab restore isolation. Current-host SQL/storage/role/cleanup proofs are preserved in261/274 and archive280. | Bounded approved-origin Draw.io journal is complete and retired. Additional all-format peer/storage cases323 and formatted restore332 pass with independent proofs327/336. Pane-grid producer repair passes normal Make365/browser43 with proof367. Wider integrated patched-host/product/context acceptance remains open. PARTIAL. |
+| G08 | KNOWLEDGE-014/027/036, F09; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
+| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | Published0.8 release/adoption is complete at f40e7a2. Unpublished0.8.1 producer Make379/package380 passes; clean patch promotion/publication, reviewed consumer pin and integrated patched-host checks are authorized by reply434 and remain unexecuted pending normal qualification. Windows is NOT_APPLICABLE. PARTIAL for the current candidate. |
+| G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Agreed optional adapter is verified in core-only/CONTROLLED/SHARED hosts. Three-width actual SHARED creation, real actors, original link creator/global receipt/relink, file authority and CONTROLLED role/epoch2/3/4 recovery pass in `c3d33e70ced0`, with independent SQL/S3/role/cleanup proof. | Integrated native4/ownership3/restore4, peer4 and formatted restore2 pass in254/255/270/323/332. Wider populated actor/reviewer/source context, integrated patched-host layout and whole SC09 remain open. No new DTO or actor inference is introduced. PARTIAL; bounded AC04 complete. |
+| G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; correction, move/large-document and bounded Draw.io units are archived/removed. Current producer packet, sanitized proofs and readable evidence archives retain their limits. Duplicate current/screen contracts move to the lasting specification. | Four original journals retain unfinished host/workload criteria. Prompt and this record remain until last. PARTIAL. |
 
 ## Individual original criterion accounting
 
@@ -533,7 +958,7 @@ This does not waive final release archival or accept the current product host.
 | `docs/2026-10-25-note-library-corrections.md` | COMPLETED six correction items; historical import/byte observations remain in Git at `bd28c292` and the local retirement archive. Current 53/53 tests pass in seven files. | RETIRE this correction unit. F01/F04/F08 own its behavior. Managed Draw.io deployment, populated current knowledge and the rest of the product matrix remain open in G01/G06/G07 and GOAL AC08/AC09. |
 | `docs/capacity-and-access-acceptance.md` | Warm million-note fixture, 50-row reads, cache/retained heap, real role changes | G05/G08; not cold/peak/sustained/current-host acceptance. Windows is outside the required scope. |
 | `docs/current-knowledge-acceptance.md` | Authored/current/legacy distinction, historical source ordering and exact pinned rule evidence | COMPLETED duplicate-contract transfer to F02/F04/F06/F07. Retain dated evidence; G06 server/current-host acceptance remains KMS-owned. |
-| `docs/drawio-acceptance.md` | Real approved native Draw.io, forged-window/origin refusal, immutable bytes and viewer | G07/G08; offline protocol fixture does not replace this native editor or current deployment acceptance. |
+| `docs/drawio-acceptance.md` (removed) | COMPLETED actual matched-host native4/ownership3/restore4 with normal CSP, forged-message refusal, immutable bytes, viewer/revocation, undo, co-editor attribution and pane/tab restore | Ten-entry readable archive `drawio-retirement-280.tgz` preserves12-criterion mapping, journal, sanitized proofs, original257 failure/correction and screenshots. F03/F04/F08/F09 own behavior. Wider G07/G08 and AC08 context/workload remain open. |
 | `docs/move-and-large-document-acceptance.md` (removed) | COMPLETED in actual Next run `e7bf9972a611`: private subtree/peer denial, source URL and two DOM editors/drafts through refresh, link clearance, 1,000 paragraphs/20MiB native SHA and110,000-character rejection | Six-entry readable archive `move-large-retirement-01.tgz` preserves the completed original, sanitized proof and F02/F03/F05/F08 mapping. Wider G05/G07/G08 and sustained AC08 remain open. |
 | `docs/note-gui-acceptance.md` | Canonical scope and historical rich editor/pane/access cases | COMPLETED contract transfer to F01/F07/F09. Retain G01–G09 current-screen dependencies; standalone topology is superseded by library-inside-WEB, with no whole-screen completion inferred. |
 | `docs/populated-data-acceptance.md` | Applied history/proof, exact rule links and restricted evidence | G06/G08; history is not current membership or model quality. |
@@ -674,9 +1099,11 @@ subsequent native-modal navigation reproduction. That repair now passes its
 complete current-source gates. `GOAL.md` tracks the full remaining objective;
 this unit alone does not complete it.
 
-The remaining gates require final 0.8 package/browser/native qualification,
-wider backend-supplied audience/actor fields and current KMS context/storage/
-workload evidence. The core SC01/SC02 GUI and dirty APIs no longer await user
+The remaining gates require source/package verification after the latest record
+edits and current KMS context/native/storage/workload evidence. Published 0.8
+producer qualification and bounded consumer adoption are complete. Wider
+audience/actor cases need authoritative transport only where an actual case
+cannot be represented by existing fields. The core SC01/SC02 GUI and dirty APIs no longer await user
 approval. Windows is not required and human review is not a gate. Release
 publication/deployment remain separately authorized operations. Preserve the
 controlled core-only host and retire only journals whose carried criteria have

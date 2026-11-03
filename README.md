@@ -100,29 +100,16 @@ The package exports are:
 
 The module exports `mountNoteCoreGui`, `mountNoteGui`, `createNoteAccess`,
 `createLocalNoteApi`, `ApiError` and the public model/host declarations.
-`mountNoteCoreGui(container, { api, host, knowledgeContext?, relations?, timeZone? })`
-requires only the injected core and host bindings. Absent extensions hide their
-controls and cause no calls. The injected path does not load the compatibility
-HTTP adapter. The complete `NoteApi`, `NoteGuiOptions`, `MountedNoteGui` and
-`NoteGuiHostModule` contracts remain available.
-`mountNoteGui(container, options?)` bundles the pinned React runtime, creates
-an isolated React root and returns `{ unmount() }`. `NoteGuiOptions.api` may supply a compatible `NoteApi` adapter;
-omitting it uses the existing authenticated domain adapter. `NoteGuiOptions.onNavigate`
-may handle native product links through the host router by returning `true`;
-return `false` to retain browser navigation. Dirty-pane confirmation runs before
-the callback, and modified clicks retain their native behavior. The host must
-still preserve backend authorization, revision checks and CSRF.
+Use `mountNoteCoreGui(container, { api, host })` for an injected host, or
+`mountNoteGui(container, options?)` for the complete compatibility entrypoint.
+[The host contract](CONTRACT.md#imports-and-mount-lifetime) defines the optional
+capabilities, time zone, navigation callbacks and returned mount handle,
+including `unmount()` and `hasUnsavedChanges()`. Its public types include
+`NoteApi`, `NoteGuiOptions`, `MountedNoteGui` and `NoteGuiHostModule`.
 
-The optional `NoteGuiOptions.timeZone` setting accepts an IANA time zone for source evidence and
-knowledge application timestamps. Those timestamps include the applied zone.
-Omitting the option uses the browser clock. The setting belongs to each mount;
-multiple roots can use different clocks. An invalid zone rejects the mount
-before creating a React root. The product host passes its workspace time zone.
-
-A consumer
-whose build resolves the pinned checkout as a package can import
-`mountNoteGui` from `@knowledge-engine/note-gui` and the CSS from
-`@knowledge-engine/note-gui/style.css`; this does not imply an npm publication.
+Consumers resolving the pinned checkout as a package can import the module from
+`@knowledge-engine/note-gui` and CSS from `@knowledge-engine/note-gui/style.css`.
+This does not imply an npm publication.
 
 Copy the complete `dist/` tree to the host's served asset location. The library
 asset base defaults to `/note-gui/`; set `NOTE_GUI_ASSET_BASE` before building
@@ -213,21 +200,11 @@ Keep credentials out of every browser-visible setting.
 
 ## Domain API and diagrams
 
-The complete KMS compatibility API must expose `knowledgeCurrentItems`, `KnowledgeNote.authoredBody`
-and `bodyOrigin` on notes and revisions. The editor loads `richBody` first,
-then `authoredBody`, including an intentionally empty authored body. Current
-knowledge comes only from the API's current-item projection. Older mixed
-documents remain unchanged and carry a `LEGACY_UNCLASSIFIED` notice; their
-history is not inferred to be current knowledge. Deploy the matching backend
-contract before this client.
-
-Relation target lookup additionally requires `knowledgeRelationTargets(noteId,
-query, offset, limit)`. The API authorizes the current anchor and applies its
-same-space, same-visibility and private-owner rules before counting or paging.
-The relation picker replaces each 20-row page and uses the server's total and
-next-page flag; it does not filter the generic first page of readable notes.
-A target that changes before submission remains subject to the server's write
-checks, and a target-field rejection asks the reader to select it again.
+Deploy the matching backend before using the complete KMS adapter.
+[KMS compatibility prerequisites](CONTRACT.md#kms-compatibility-and-migration)
+identify its required current-item, authored-body, origin and relation-target
+transport. [F02, F06 and F07](docs/functional-specification.md) own the editing,
+relationship and current-knowledge behavior.
 
 An explicitly used separate-origin demo must be permitted by the API
 `CORS_ALLOWED_ORIGINS`, alongside the product web origins. For the optional

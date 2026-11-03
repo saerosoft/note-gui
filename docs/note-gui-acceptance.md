@@ -12,8 +12,9 @@ COMPLETED specification consolidation: the [functional specification](functional
 owns host responsibilities and F01/F07/F09 behavior; `CONTRACT.md` owns exact
 current/history/comparison operations. Historical standalone topology is
 superseded by the library mounted inside WEB. This record retains the dated
-acceptance evidence, not a second feature contract. Current G01 through G09 and
-GOAL AC08/AC09 screen/host/release dependencies remain open.
+acceptance evidence, not a second feature contract. Current screen/host
+dependencies remain open under GOAL AC08 and their individual G-units. Bounded
+G09 packaging/platform/release/adoption and GOAL AC09 are complete.
 
 ## Repeatable checks
 
@@ -69,9 +70,17 @@ rule version. The [current-knowledge run](current-knowledge-acceptance.md)
 also verifies separate current membership, preserved structured human content,
 late old evidence, claim labels, legacy restoration and current-item access.
 
-The [self-hosted Draw.io run](drawio-acceptance.md) verified graphical editing,
+The [native diagram specification](functional-specification.md#f08-native-diagrams-and-files) retains graphical editing,
 save, reload and re-edit, immutable attachment bytes, forged-message rejection
-and removal of an open diagram when administrator access is revoked.
+and removal of an open diagram when administrator access is revoked. Actual
+matched-host native4/ownership3/restore4 now pass; the completed Draw.io journal,
+12-criterion mapping and sanitized evidence are preserved in the readable10-entry
+`.tmp/gui-completion/drawio-retirement-280.tgz`. Additional Mermaid/Excalidraw
+peer4 and all-format formatted restore2 now pass in323/332 with actual storage
+proof327/336 and independent cleanup. The pane-grid producer repair passes
+Make365/browser43 with inspected1600/390px screenshots; its unpublished patched
+consumer qualification and wider populated-context/workload acceptance remain
+in G07/G08 and GOAL AC08.
 
 The later [capacity and account-access run](capacity-and-access-acceptance.md)
 verified three account sessions, live role and membership revocation, and

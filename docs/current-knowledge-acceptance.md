@@ -6,7 +6,8 @@ COMPLETED specification consolidation: the [functional specification](functional
 F02/F04/F06/F07 owns authored-body fallback, legacy origin, current membership,
 layout, expanded proof and paging. `CONTRACT.md` owns the exact transport. This
 record retains the dated workload/evidence below; its current-host G06/G08 and
-GOAL AC08/AC09 dependencies remain open. The historical run does not qualify the
+GOAL AC08 dependencies remain open. Bounded release/adoption AC09 is complete.
+The historical run does not qualify the
 new locked consumer or authorize business-fixture seeding.
 
 ## Real-API workload
@@ -18,14 +19,49 @@ historical statements stay outside current membership, with current counts
 4/25/4/4. Current items and history page20+5; exact original/saved comparisons
 and automatic administrator demotion clearance pass. Independent inventories
 and cleanup pass. Eight exact NOT_FOUND reads are paired with successful owner
-controls. Rule-version, legacy-origin and the approved sustained workload
-remain open. This does not requalify the older
+controls. Rule-version and the approved sustained workload remain open. Bounded
+legacy-origin verification follows below. This does not requalify the older
 million-note migration or its target-device claims.
 Current-host evidence must also cover the collected note's empty human editor,
-human-history restore with unchanged independent current membership, and stale
-proposal rejection after a newer human save. The bounded run above does not
-establish those cases or formatted-document diagram retention. Keep this
-record until each applicable current-host case has evidence.
+human-history restore with unchanged independent nonempty current membership,
+and pipeline stale-target refusal. Ordinary human-proposal stale acceptance is
+verified separately below. The bounded run above does not
+establish those cases. Separate actual-host formatted restore332 now passes
+375/1440px: heading/bold/table and exact original three-format references/bytes
+are retained, with an independent dirty pane unchanged. Proof336 verifies actual
+storage, roles/policy and owned cleanup. The separate pane-grid producer repair
+now passes Make365/browser43; integrated patched-host qualification remains open.
+Keep this record until every applicable current-host case has evidence.
+
+Bounded legacy run `d0445e4349d4` passes375/1440px using synthetic initial legacy
+rows inserted with immutable-history guards enabled. Rich save and restore retain
+the authoritative LEGACY_UNCLASSIFIED origin; the initial revision keeps its null
+authored projection, while the restored authored text exactly matches the original
+body. Six revisions and zero current items are independently checked. Inventories,
+roles/policy, unchanged inputs and owned cleanup pass. This qualifies the named
+origin/restore cases, without requalifying the historical migration or31-record
+legacy accumulation cohort. All earlier fixture/expectation failures are retained.
+
+Frozen-contract analysis distinguishes ordinary human ReviewProposal from a
+pipeline/current-item proposal. Normal stale human ACCEPTED decisions require
+no rules or models.
+Actual ordinary human-proposal run `0a0859d886c5` now passes375/1440px: newer
+human documents remain revision2, attempted stale ACCEPTED decisions return
+CONFLICT and both proposals remain PENDING at their original revision. Independent
+SQL verifies four note revisions and zero current items; inventories/roles/owned
+cleanup pass. That subset cannot qualify pipeline stale-target refusal or a nonempty collected
+current cohort. Rich restore is also normally supported, but its current-item
+prerequisite must already have legitimate provenance. No ordinary public
+model-free controlled-analysis ingress is identified for freshly preparing that
+cohort under the approved restrictions. Do not manufacture execution profiles,
+force queue staging or treat empty membership as the populated case.
+Source audit353 confirms that the frozen historical helper inserts processing/
+review rows and an explicitly synthetic model profile before normal acceptance.
+That seed cannot establish a fresh ordinary durable processing result. The
+existing bounded43 result retains its stated controlled-fixture scope. Remaining
+collected/current and genuine comparison cases need an existing qualified KMS
+environment/result; a path/environment request is pending. Other approved work
+continues without provider calls or fabricated observations.
 
 The finite text-worker attempt `2b7136e2305b` on2026-11-02 fails normal durable
 rule validation with `LOCATIONS_OUT_OF_SCOPE` before approval or application.
@@ -51,7 +87,7 @@ Flyway history, then restoring only the retained application data. The source
 database stayed unchanged. Before any new cases were applied, all 1,000,055
 notes and 1,000,295 revisions matched the original ID, title, body and rich-body
 fingerprints. All retained rows had `LEGACY_UNCLASSIFIED` origin, no authored
-projection was invented, and the current-item table was empty. The migration
+  projection was invented, and the current-item table was empty. The migration
 retained its fresh Flyway history and left no disabled triggers.
 
 `e2e/currentKnowledge.spec.ts` uses actual notes, sources, applied changes,

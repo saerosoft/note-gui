@@ -24,11 +24,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   credentials, retained consumer content and private source from distribution.
 - Agree precise KMS transport before public shared-mode changes. Never infer
   authority from roles/admin flags or historical visibility.
-- The user explicitly authorized goal-related external changes, commits, pushes,
-  builds and tests without repeated approval for this session. This supersedes
-  earlier consumer/source/pin/release waiting conditions. Preserve existing data
-  and unrelated work; this document alone grants no authority in a future session.
-  No model/provider execution is needed for this GUI objective.
+- Current direct approval authorizes builds, tests and isolated integration/load
+  verification while preserving existing data/services. Direct reply434 also
+  authorizes the current master commits/push, normal clean0.8.1 patch release
+  qualification/publication and the reviewed KMS dependency update/integration.
+  Deployment remains excluded. Historical grants do not expand this approval;
+  this document grants no authority by itself.
+  No model/provider execution is authorized for this GUI objective.
 - Do not waive a criterion or delete its only record to declare completion.
 
 ## Measurable acceptance criteria
@@ -49,18 +51,24 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   Wider populated/native/workload and whole SC09/G10 remain AC08 dependencies.
 - [x] AC05: Host-external dirty navigation has an agreed mount-local contract
   covering body/comment/property/native drafts and disposal.
-- [x] AC06: Full verification and actual extracted-package imports, strict types,
+- [ ] AC06: Full verification and actual extracted-package imports, strict types,
   CSS/assets/fonts/notices and all matching source entries pass for final code.
+  Current0.8.1 producer Make379 and actual extracted package380 pass;405 runtime
+  JS/CSS/font files exactly match browser43. Final record/source qualification on
+  the clean release result remains separate and awaits its publication workflow.
 - [x] AC07: Actual desktop/narrow/native Draw.io and Linux qualification are
   verified in authorized environments. Windows is out of scope by explicit user
   decision; its failed historical run is not a remaining acceptance condition.
 - [ ] AC08: The current qualified KMS host verifies `/notes/`, actor/file/storage/
   access/context and the agreed sustained workload; fixtures do not substitute.
-- [x] AC09: The release owner qualifies the exact immutable tuple, source and
+- [ ] AC09: The release owner qualifies the exact immutable tuple, source and
   evidence, and the consumer adopts its reviewed tuple under separate authority.
   The single normal KMS pre-push passes and publishes `f40e7a2`; fresh HTTPS
   remote readback matches. Bounded current-source CONTROLLED host10 passes.
-  Wider mode/context/native/workload requirements remain AC04/AC08.
+  The new0.8.1 patch is locally verified but unpublished; its clean release
+  qualification and reviewed KMS pin are authorized by reply434 and remain
+  unexecuted pending the normal release workflow.
+  Wider context/native/workload requirements remain AC08.
 - [ ] AC10: Feature behavior has one lasting specification owner. Every fully
   completed work document is marked complete and removed with evidence/links
   preserved; unfinished criteria remain traceable. Execution records retire last.
@@ -74,7 +82,7 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 | D03 | `docs/2026-10-25-note-library-corrections.md` (removed) | COMPLETED and retired: all six corrections pass current focused 53/53 in seven files. A readable four-entry retirement archive and Git `bd28c292` preserve evidence; F01/F04/F08 and the ledger retain the mapping. Separate product dependencies remain G01/G06/G07 and AC08/AC09. |
 | D04 | `docs/capacity-and-access-acceptance.md` | Preserve historical million-note warm receipts/limits; finish agreed current-host workload/platform acceptance. |
 | D05 | `docs/current-knowledge-acceptance.md` | Current-host authored/current/legacy/history/proof/rule and actor/access verification. |
-| D06 | `docs/drawio-acceptance.md` | Current integrated approved deployment and all required co-editor/storage/access cases. |
+| D06 | `docs/drawio-acceptance.md` (removed) | COMPLETED bounded actual-host native4/ownership3/restore4. The readable10-entry `drawio-retirement-280.tgz` preserves the journal,12-criterion mapping, sanitized proofs, original restore failure/correction and graphical screenshots. F03/F04/F08/F09 retain behavior; wider peer/context/workload obligations remain G07/G08/AC08. |
 | D07 | `docs/move-and-large-document-acceptance.md` (removed) | COMPLETED bounded current-host move/document/byte checks in `e7bf9972a611`. Six-entry readable archive preserves the original, sanitized proof and F02/F03/F05/F08 mapping. Sustained workload remains D04/G05/AC08. |
 | D08 | `docs/note-gui-acceptance.md` | Close original screen criteria under library-inside-WEB topology individually. |
 | D09 | `docs/populated-data-acceptance.md` | Current populated current/history/proof/attribution/exact-link/access verification. |
@@ -83,6 +91,20 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 
 ## Remaining execution checklist
 
+- [x] Verify bounded current-host identity loss/relogin in `f807414bc891`:
+  actual375/1440px cases retire three protected panes and two unsaved comments,
+  deny unauthenticated reads and return to the exact target after acknowledged
+  relogin. Stored private notes/revision1 and three original fixture sessions
+  remain unchanged. Two135-table inventories, exact original roles and seven
+  owned containers/network are independently checked. Exit0/107.402seconds.
+  Preserve V1's earlier loading-editor FAIL `758b7d6209ef`; the separate driver
+  adds editable/input-acknowledgement waits without changing assertions/timeouts.
+- [x] Verify bounded current-host legacy origin/restore in `d0445e4349d4` at
+  375/1440px, with unchanged initial immutable revisions, enabled history guards,
+  exact restored text/origin and empty current membership. Proof305 verifies
+  inventories, roles/policy and owned cleanup. Preserve earlier memory admissions
+  and the fixture/history-selector/unsupported-expectation failures. This does
+  not requalify the historical million-note migration or populated legacy cohort.
 - [x] Run actual GNU Make `verify` using a locally extracted checksum-verified
   Make4.4.1 in a private source/dependency/output copy. Exit0 in73.158seconds:
   source3, unit307/34, normal types/declarations/build/distribution and strict
@@ -150,10 +172,61 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
 - [ ] Obtain genuine independent comparison observations before rule review,
   approval, activation or target-subtree application. V2 verifies only location
   validation; no row-level post-validation rule-state SQL snapshot was captured.
-- [ ] Execute legacy/session, normal matched-native build/acceptance and the
-  sustained workload in separately agreed future intervals. The09:25-10:25UTC
-  interval ended. The proposed next three intervals were all declined because
-  the peer's authorized QA01 work has no bounded pause. No new interval exists.
+- [x] Preserve the current user's directly assigned2026-11-02UTC windows:
+  legacy/session12:10-13:10, native13:20-14:50, workload15:00-20:00. Earlier peer
+  calendar requests remain declined; no peer pledge or host exclusivity is claimed.
+- [x] Finish the declared matched-native build/runtime sequence: native4,
+  ownership3 and corrected restore4 pass254/255/270, with source/artifact identity,
+  normal CSP, actual storage bytes and independent cleanup. Original failures stay
+  preserved; wider all-format peer acceptance remains separate.
+- [x] Verify additional native peer formats323 (Mermaid/Excalidraw,4/4) and
+  all-format formatted-history332 (2/2) at375/1440px, with actual API/storage,
+  exact owners/bytes, explicit anonymous denial and independent cleanup327/335.
+  Proofs327/336 preserve the bounded scope and earlier failures.
+- [x] Correct the independently reproduced pane-grid defect: empty native-modal
+  portals displaced the right pane through display:contents. RED363 reproduces
+  y522.5 instead of45. Minimal provider/flex repair passes Make365 source3/unit307,
+  strict package imports and full independent browser43, including1600/390px
+  pane geometry, native viewport and independent draft/DOM preservation. Proof367
+  retains before/after evidence. Candidate0.8.1 Make379 and extracted package380
+  subsequently pass; clean release qualification and affected integrated-host
+  adoption remain open.
+- [x] Verify actual plain GraphQL, ordinary review and HTTP MCP rich-write
+  protection at375/1440px: corrected372 passes6/6 in c6c7161bf627. Proof376 checks
+  exact rich JSON/files, rejection/pending state, replay/actor identity, SQL18
+  revisions and24 actual S3 objects/1663 bytes. Original schema-preparation failure
+  stays preserved; inventories/original roles/settings and independent cleanup375
+  pass. Genuine rule/current-membership cases remain separate.
+- [ ] Finish the approved sustained workload,
+  retaining every input, resource, contention and cleanup guard. Native's13:20
+  admission fails before build/fixture; proof129 preserves that result. Later
+  workload133/scoped d88bd5e5cebb seeds1000000 notes/revisions but fails before
+  warmup or measurement. Original inputs and FAIL remain unchanged; expected
+  final workload counts must not substitute for actual observations. Successor337
+  completes all16 windows with one error among336000 measured requests; proof361
+  independently confirms owned cleanup. Its zero-error criterion remains open.
+  Distinct corrected412 is now running in02688f9f0a08 after actual idle-pool
+  verification409 and cleanup regression400. It preserves the full12000 measured
+  seconds and existing frozen0.8.0/f40e7a2 tuple. Checkpoint420 verifies the live
+  scope/supervisor/tool handle. Proof423 verifies1200 successful first-warmup
+  samples and four actual readable populations. Proof427 preserves the first
+  window; proof432 verifies36000/36000 successful samples across two900-second
+  windows with exact operation counts and zero unexpected errors/missed. Only2/16
+  measured windows are complete; preserve original failures
+  and verify the remaining windows, final SQL/storage, input hashes and cleanup.
+  Independent read-only observer429 is running with baseline1000000 corpus notes
+  and actual16384-byte S3 object verified. Its final four-note/history and fresh
+  S3 checks remain pending before cleanup; additional reads are disclosed outside
+  the paced workload. Follow its existing tool session63099 as well as12890.
+- [x] Complete exact failed-workload owned cleanup with fresh SQL/S3 evidence159
+  and independent absence proof161. Original organization/role rows and the
+  declared new corpus organization are preserved in audit152 and fresh evidence.
+  Cleanup154 FAIL and proof160 driver failure remain separate preserved records.
+- [x] Preserve direct approval142 for native20:10-23:00UTC on2026-11-02 and
+  legacy/human23:10-00:10UTC across midnight. Variants146-149 are unexecuted;
+  fresh independent predecessor proof and all unchanged admission guards apply.
+  Corrected-workload approval153 expires before its response is observed, so
+  no new actual workload run is authorized by that conditional answer.
 
 - [x] Read all nine current docs records and root assignment/completion records.
 - [x] Create this goal without overwriting unrelated goals.
@@ -206,8 +279,8 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   `verify-23.log`, `independent-19.log`, `native-drawio-10.log`, actual API run 05,
   the independent final proof and `packed-check-09.log` establish this bounded
   result. Adopted product-host acceptance remains AC08/AC09.
-- [ ] Obtain current KMS host/storage/workload/
-  release/adoption evidence.
+- [ ] Obtain the remaining current KMS host/context/native/storage/workload
+  evidence. Bounded release qualification and adoption are complete below.
 - [x] Qualify and publish the producer 0.8.0 release. The exact release snapshot
   `b9c1ae1d` passes source3, unit307/34, browser41/41, native5/5 and extracted
   package682/source295 checks. Annotated tag object
@@ -344,11 +417,12 @@ remain external qualification output to avoid self-referential source archives.
 
 ## Blockers
 
-1. RESOLVED for this goal: the user explicitly approved necessary build,
-   compilation, regression/full/browser/package tests and verified master
-    commits/pushes in the current session. The later unlimited grant includes
-    goal-related KMS changes and release publication. This file alone does not
-   authorize a future session to bypass its current instructions.
+1. Direct reply253 approves necessary build, compilation, regression/browser/
+   package checks and isolated integration/load verification. Reply434 additionally
+   approves current master commits/push, normal clean patch release qualification/
+   publication and the reviewed KMS dependency update/integration. Preserve
+   existing data/services/releases. Deployment and model/provider calls remain
+   excluded. Wider historical grants do not expand this scope.
 2. RESOLVED design approval: the user accepted the recommended optional policy/
    association and mount-local dirty APIs for 0.8.0, with no human-review gate.
    SC01 base policy is published in KMS `59bc415`. The KMS owner supplied the
@@ -373,17 +447,159 @@ remain external qualification output to avoid self-referential source archives.
    Windows run `41324344742` was rejected before any runner step:
    "The job was not started because your account is locked due to a billing
    issue." Do not retry, request billing recovery or require a Windows runner.
-5. RESOLVED authorization: the user's later unlimited session grant includes the
-    external work required by this goal. The earlier KMS message
-    `01a19869-2438-7dc0-8f9a-bf5c565170b9` and its current
-    `docs/frontend-architecture.md:25-31` confirm the bounded contract but no
-    implemented binding in the locked `/notes/` host. No pin/config/runtime/
-    release change or expanded source/rule/proposal seeding was authorized by
-    that coordination alone. Its technical contract remains evidence; the later
-    direct user grant supplies execution authority. Preserve current data and
-    perform new fixture writes only in specifically owned isolated resources.
+5. Historical coordination: KMS message
+   `01a19869-2438-7dc0-8f9a-bf5c565170b9` established a bounded contract;
+   later dated grants supported the completed release/adoption work. Neither
+   expands current reply253. Preserve current data and make fixture writes only
+   in specifically owned isolated resources.
+6. Current patch publication: the concrete0.8.1 candidate passes Make379 and
+   actual extracted-tarball380 checks. The normal KMS dependency checker requires
+   a clean released commit/tag matching its lock. Reply434 now authorizes normal
+   publication and the reviewed consumer-pin update. The pane repair and candidate
+   metadata are committed on master at5d19c469/1d65cba2; clean release qualification,
+   publication and adoption remain unexecuted. Do not bypass that checker or overwrite the old0.8.0 release/input
+   tuple. Keep heavy release/integration gates separate from the running workload.
+7. Current data prerequisite: the collected/nonempty-current and genuine rule-
+   comparison cases need actual ordinary processing/comparison results. Audit353
+   confirms the historical seed directly inserts processing/review rows and a
+   synthetic model profile; it cannot supply a fresh legitimate ingress. A user
+   environment/path request is pending. Other work continues, and no provider
+   call, forced stage or invented profile is authorized.
+
+- [x] Reproduce idle-socket connection resets in read-only diagnostic384:
+  continuous1200/1200 pass; idle bursts311/320 succeed and nine reused sockets
+  reset after approximately6002–6006ms. Proof389 and independent cleanup388
+  preserve source/data/roles and the original workload failure. Its cause is
+  not established from this separate diagnostic.
+- [x] Prepare isolated harness corrections: idle-pool helper390 passes two actual
+  local HTTP regressions without changing retries or active deadlines; cleanup
+  successor399 passes three regressions after original168 reproduces the duplicate
+  exclusive inventory. Preservation failures still retain resources.
+- [x] Validate the idle-pool policy against actual KMS before considering another
+  full workload. First admission394 is refused before fixture startup because
+  another KMS verification is active. After that process exits without
+  intervention, fresh successor401 passes1200 continuous and320 idle-boundary
+  reads, with256 free sockets retired and zero active sockets/errors/retries.
+  Proof409 verifies original note rows/roles and declared inputs; independent408
+  confirms owned cleanup. Original394 and sustained337 failures remain unchanged.
+  This does not qualify a new full workload or the unpublished0.8.1 patch.
+
+## Current checkpoint on 2026-11-03 UTC
+
+At the original runtime checkpoint, approval253 authorizes builds/tests and
+isolated integration/workload checks, excluding Git mutation/publication. Later
+reply434 expands the current publication/adoption scope above. Fresh guards259
+pass18/18. Native254 then passes actual host run `54980887bd1e`, browser4/4 with
+zero unexpected/skipped/flaky outcomes and outer exit0. It reuses qualified
+build232 without rebuilding. Actual S3 GET verifies11 objects/5510 bytes;
+both135-table inventories, original roles/policy and unchanged declared inputs
+are preserved. Independent proof260 confirms all seven owned containers and
+network absent. Ownership255 passes3/3 in `7910f743011c`, outer0, actual S3 GET5
+objects/1980 bytes and independent cleanup264. Restore257 fails3/4 in
+`3151e244df3c`: trace266 shows input reaches the old tab before the destination
+note opens, because both notes have identical initial body text. Separate spec268
+adds a unique destination-title prerequisite without relaxing assertions or
+timeouts; corrected stage270 passes4/4 in `b6898897e40f`, outer0 and actual S3 GET6
+objects/696 bytes. Inventories/roles/policy and independent cleanup272 pass;
+proof274 checks saved ownership/restore inventories independently. Preserve
+original257 and its failure. The declared11 native/ownership/restore cases are
+complete. Ordinary human stale-proposal262 passes375/1440px in `0a0859d886c5`;
+legacy300 passes both widths in `d0445e4349d4`, with initial INSERT-only fixtures,
+active append-only history guards, exact legacy origin/projection restoration and
+independent inventories/roles/cleanup305. Contract reconciliation295 records the
+unsupported assumptions in the old harness; all failed sources/results remain.
+The completed bounded Draw.io journal retires with readable10-entry archive280.
+Additional Mermaid/Excalidraw peer323 passes4/4 with independent storage/role/
+cleanup proof327; formatted all-diagram restore332 passes2/2 with proof336.
+Earlier persona/selector failures and owned recovery317 remain preserved.
+The pane-grid repair reproduces RED363 and passes normal Make365 plus full
+independent browser43; proof367 retains exact sources, native viewport/draft checks
+and inspected screenshots. It is unpublished and has not changed the frozen KMS
+consumer. Extra plain/review/HTTP-MCP cases pass6/6 in c6c7161bf627 with independent
+proof376 and cleanup375; the initial schema-preparation failure stays preserved.
+
+Sustained run `995d5221d4f9` finishes all16 windows/12000 measured seconds with
+FAIL/exit1:336000 measured requests,335999 successful, one root-read socket hang
+up, zero missed. All four populations match actual access counts and reach save
+revision4261; page errors are0. The transport cause remains unproven. The original
+cleanup also preserves resources on a duplicate exclusive inventory filename.
+Read-only watcher358 and separate cleanup359 verify1000000 corpus notes/1017040
+revisions, exact original roles/organization and corpus addition, original owners,
+fresh135-table inventory and actual S3 GET16384 bytes. Independent360 confirms all
+seven owned containers/network absent. Proof361 preserves failure, unchanged input
+hashes and completed cleanup separately. Do not restart the consumed run or waive
+the zero-error condition. Pane-grid and rich-write checks have since passed as
+recorded above; patched consumer adoption, current-data/comparison and clean
+release/source qualification remain open.
+
+Receipts are under `.tmp/gui-completion/`: `codex-user-authorization-253.json`,
+`codex-runtime-guard-checks-259/receipt.json`,
+`native-matched-1793679195972139321/receipt.json` and
+`native-254-independent-predecessor-260.json`.
+
+### Earlier checkpoint and preparation history
+
+The additional normal GUI/Next build has been consumed. Native225's build exits
+0, including TypeScript and static generation. Its original outer receipt remains
+FAIL/exit2 because strict source validation rejects the previously undeclared
+`frontend/apps/web/next-env.d.ts`; `runtimeStarted` is false. Preserve the build
+outputs, attempt marker and original failure. Do not build again.
+
+Separate qualification232 independently reproduces that exact generated file
+with pinned Next16.3.5 and verifies the original inputs, matching artifacts,
+normal CSP/public assets and804 corresponding-source ZIP entries. Its qualified
+manifest SHA256 is `3b657816e4b2591502f24d6ba2e10fce8e4eb762839dc77b395faf1280ab94bd`.
+This qualifies build inputs/outputs only; it does not accept native runtime or
+replace manifest203 or the original225 failure.
+
+Runtime235 exits1 at the unchanged20GiB memory admission guard before a fixture
+starts. Independent proof241 records19.96GiB available and a45105152-byte
+shortfall at02:48:51.224286UTC. Native4, ownership3 and restore4 executed counts
+remain0. Admission234 and the executed235 source/log must remain unchanged.
+Follow-ups238 prepare ownership239, restore240 and finite228; none has executed.
+The handoff reports28.69GiB available at02:54:18.280804UTC. That later sample is
+neither successful admission nor a resource reservation.
+
+Approval219 has expired. Historical local approval223 records native
+02:31:39.126511-05:31:39.126511UTC and legacy/human
+05:41:39.126511-06:41:39.126511UTC on2026-11-03. Those timestamps are preserved;
+this new Codex session requires direct command authorization and an applicable
+UTC interval. Runtime-only native4, ownership3 and restore4 need6390s in total
+(1500s execution+600s cleanup+30s margin per stage). Under223 the latest first
+runtime start is03:45:09.126511UTC. Fresh resources, contention, ports, exact
+input/output identity and independent predecessor cleanup remain mandatory.
+Only successful native4 plus independently verified cleanup admits ownership3;
+verify its cleanup before restore4. A failed admission or case is terminal.
+
+Legacy/human need a separate serial2160s budget; successful session-loss is not
+rerun. K1/K2/pipeline-K3 and genuine rule comparison/approval/activation evidence
+remain open. No corrected workload run, process termination, rebuild, Git change,
+pin update or release publication is authorized by this checkpoint. Existing
+private package174 predates these documentation edits; final source/package/ZIP
+verification still needs explicit authorization. No work record can retire yet.
+
+Receipt sources: `.tmp/gui-completion/native-matched-1793673206692281605/receipt.json`,
+`native-build-qualification-232/receipt.json`, `qualified-native-cases-235.log`,
+`qualified-followups-238.log` and `qualified-native-memory-block-241/receipt.json`
+under the same evidence directory. `.tmp/gui-completion/codex-checkpoint-242/inspection.json`
+records this session's read-only inspection and evidence hashes; it is not a new
+runtime or package qualification. Earlier checkpoints below are historical.
+
+Successors244/245/247 and authorization adapter243 are now prepared under
+`.tmp/gui-completion/`, with source hashes/diff in `codex-runtime-preparation-248.json`.
+Preparation248 remains immutable. Direct user approval250 now authorizes focused
+checks and one native4/ownership3/restore4 sequence during2026-11-03
+03:45:00-06:45:00UTC. Focused251 exits0:18 guard/syntax checks pass,0 failures/
+errors, no real Docker calls or runtime admission. It verifies approval rejection,
+source drift, original guard/case adaptation reuse, full6390/4260/2130s budgets,
+failed predecessor/cleanup rejection and single-use failure behavior. Actual
+native/ownership/restore counts remain0. The proposal249 and actual approval250
+are separate records. Fresh runtime admission is still required after03:45UTC.
 
 ## Immediate next step
+
+The dated authorization and preparation history below does not grant this new
+session execution authority. Use the current checkpoint above for the next run.
 
 The bounded producer unit is committed/pushed through `a95e719e`; final package
 and source checks pass in `packed-check-10.log`, with 93 readable evidence entries
@@ -391,6 +607,35 @@ in `evidence-check-19.json`. Do not repeat this completed development unit or
 reuse its consumed fixture.
 
 The user has now authorized the remaining external work for this session:
+
+Current checkpoint: failed workload owned cleanup is independently complete161.
+The two harness corrections pass local RED/GREEN and candidate verification171;
+actual metadata API and sustained load remain unverified. No workload rerun is
+authorized now. Evening approval142 covers only the stated
+native and legacy/human cases, with fresh proof and original admission guards.
+
+Immediate native continuation185 uses the one normal build after canceling the
+old waiter before child184 and passing fresh preparation191. Native188 fails
+Next build before any fixture: generated GraphQL contract inputs are absent;
+the source-set guard also rejects five new i18n declarations. Audit193 preserves
+all declared input/API/worker/external hashes and2297 failed output files, and
+confirms no action-browser resources were created. Original4, ownership3 and
+restore4 remain unexecuted. A separately approved fresh-input preparation and
+additional single build are needed; the consumed attempt must not be reset.
+
+Approval195 then permits the fresh generated-input preparation and one extra
+build. Codegen209 and strict input binding203/197 are complete. Admission205/210
+blocks on insufficient remaining full-sequence time before23:00UTC; the extra
+build is unused. Obtain a new direct serial interval rather than repeat the
+completed preparation, reduce8790s, overlap finite work or reset failed evidence.
+
+Historical relative-window approval219 supplied three native hours from observed
+T=2026-11-02 21:54:23.830909UTC and a separate finite hour atT+3h10m. Fresh217
+passes source/predecessor/full-time checks but is blocked by the20GiB memory
+guard. Proof220 observes20468363264bytes available,1006473216bytes short. No extra
+build or fixture starts and no other process is stopped. Memory must be recovered
+externally or through a specifically authorized safe lifecycle action before a
+fresh admission; the extra build remains unused and the full objective is open.
 
 1. COMPLETED producer release: `version/0.8` / `release/v0.8.0` selects
    `b9c1ae1d`, with matching package/source/evidence and seven verified downloaded
@@ -407,7 +652,7 @@ The user has now authorized the remaining external work for this session:
    Resolve any wider transport requirement against canonical server fields;
    never infer it from roles or invent an unneeded DTO.
 4. Mark each satisfied original criterion immediately, consolidate lasting
-   behavior and retire each fully completed record with readable evidence. Six
+   behavior and retire each fully completed record with readable evidence. Four
    unfinished journals, 11 G-units and 44 original rows remain traceable until
    their own acceptance evidence is complete.
 

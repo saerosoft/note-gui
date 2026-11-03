@@ -21,7 +21,12 @@
     "typeBuildDistributionAndImportsPassed": true,
     "makeAvailable": false,
     "makeInvocationExitCode": 127,
-    "makePrerequisiteCommandsIndividuallyExecutedExitCodes": [0, 0, 0, 0],
+    "makePrerequisiteCommandsIndividuallyExecutedExitCodes": [
+      0,
+      0,
+      0,
+      0
+    ],
     "readOnlyReviewFindings": 0,
     "runtimeSourceChanged": false,
     "timeoutsOrOriginalAssertionsRelaxed": false,
@@ -45,7 +50,11 @@
     "sourceTestsPassed": 3,
     "typeBuildDistributionPassed": true,
     "buildExecutionSourceSnapshotCaptured": false,
-    "sourceDistributionPackageRefreshExitCodes": [0, 0, 0],
+    "sourceDistributionPackageRefreshExitCodes": [
+      0,
+      0,
+      0
+    ],
     "sourceConfigLockHashesMatchForRefresh": true,
     "readOnlyReviewFindings": 0,
     "runtimeOrContractChanged": false,
@@ -66,7 +75,12 @@
     "immutableSrcConfigLockSnapshotFilesVerified": 217,
     "allPrePostInputHashesMatch": true,
     "changedInputPaths": [],
-    "typeSourceDistributionPackageExitCodes": [0, 0, 0, 0],
+    "typeSourceDistributionPackageExitCodes": [
+      0,
+      0,
+      0,
+      0
+    ],
     "fullProductionBuildRepeated": false,
     "readOnlyReviewFindings": 0,
     "runtimeOrPublicContractChanged": false,
@@ -116,6 +130,108 @@
     "ruleAcceptanceClaimed": false,
     "scope": "Finite old-source text-only fixture rejected by normal note-location validation. Preserve executed V1 inputs. V2 preparation matches source/artifacts and removes expectation-derived observations; it stops after an actual host-valid/PENDING response until genuine comparison observations exist. New explicit resource coordination is required. The17 recorded drivers exclude an imported public helper without an execution snapshot; no retrospective binding or current-source, file/storage, legacy/session, native-build or workload qualification."
   },
+  "boundedCurrentSessionLoss": {
+    "status": "BOUNDED_CURRENT_HOST_SESSION_LOSS_PASS",
+    "run": "f807414bc891",
+    "exitCode": 0,
+    "elapsedSeconds": 107.40157756098779,
+    "widthsPassed": [
+      375,
+      1440
+    ],
+    "protectedPanesRetired": 3,
+    "protectedUnsavedCommentsRetired": 2,
+    "actualUnauthenticatedReadDenied": true,
+    "actualAcknowledgedReloginReturnsToExactTarget": true,
+    "storedPrivateNotesUnchanged": 2,
+    "newCommentsPersisted": 0,
+    "originalFixtureSessionsPreservedAndCurrent": 3,
+    "sourceInputsPrePostMatched": 2213,
+    "webFilesPrePostMatched": 2660,
+    "driverAndExternalExecutionSnapshots": 26,
+    "inventoryCount": 2,
+    "tablesPerInventory": 135,
+    "exactOriginalRolesAndOrganizationPolicyPreserved": true,
+    "ownedContainersIndependentlyAbsent": 7,
+    "ownedNetworkIndependentlyAbsent": true,
+    "pageErrors": 0,
+    "modelCalls": 0,
+    "rawEnvironmentSha256": "8b1abcaeced6e0b41101a88f5f9800882a7e3c2ef1473f2f019630736910b453",
+    "rawBrowserResultSha256": "bdc6ed54243937e9756fca8015d2628999376590515c5cf9dbd10eb10170a05b",
+    "rawDatabaseProofSha256": "df2f905db29b8d2475b24e9c2016f9238417a5dcf78ef438935f9e46531722e9",
+    "outerReceiptSha256": "4e96b05987a332af8a215206ee16c789ba089d2029b189abde9250595bd8c7ab",
+    "originalReadinessFailurePreserved": "758b7d6209ef",
+    "originalAssertionsAndTimeoutsRetained": true,
+    "outerRelayConnectionRefusedDiagnosticRetained": true,
+    "wholeGuiLaneAccepted": false
+  },
+  "directUserWindows": {
+    "dateUtc": "2026-11-02",
+    "legacySession": [
+      "12:10",
+      "13:10"
+    ],
+    "native": [
+      "13:20",
+      "14:50"
+    ],
+    "workload": [
+      "15:00",
+      "20:00"
+    ],
+    "source": "Actual current-user question response, not a peer pledge or host exclusivity.",
+    "legacyAdmissionFailuresBeforeAnyFixture": 2,
+    "legacyExecuted": false,
+    "nativeLauncherScheduled": false,
+    "nativeAdmissionFailuresBeforeBuildOrFixture": 1,
+    "nativeAdmissionReason": "MemAvailable below20GiB at13:20UTC; exit1 and childStarted:false.",
+    "workloadLauncherScheduled": false,
+    "workloadAttemptCompleted": true,
+    "workloadAttemptExitCode": 1,
+    "workloadWaitingControllerStoppedBeforeChild": true,
+    "workloadWaitingControllerExitCode": 130,
+    "workloadStartRequiresEarlierOwnedCleanupProof": true,
+    "workloadRescheduledAfterPredecessorAudit": true,
+    "nativeFullBudgetDeadlineExpiredBeforeResourceRecovery": true,
+    "scheduledLaunchIsRuntimeAcceptance": false,
+    "allExistingGuardsRetained": true
+  },
+  "additionalNativeOwnershipPreparation": {
+    "status": "REVIEW_CORRECTED_PREPARATION_ONLY",
+    "actualHostCasesPrepared": 3,
+    "runtimeExecuted": false,
+    "originalNoteAndFileOwnerPreservedInExpectations": true,
+    "successorUploaderExpectedSeparately": true,
+    "saveResponsesBoundToActualNoteBeforeRevisionReads": true,
+    "strictTypeCheckExitCode": 0,
+    "adapterCasesPassed": 2,
+    "sourceBindingChecksPassed": 2,
+    "sourceBindingChecksAreBehavioralRuntimeEvidence": false,
+    "originalFourCasesReaccepted": false,
+    "wholeNativeAcceptanceClaimed": false
+  },
+  "normalHumanProposalPreparation": {
+    "status": "SYNTAX_AND_SOURCE_PREPARATION_ONLY",
+    "proposalFamily": "ReviewProposal",
+    "normalModelFreeApiRouteIdentified": true,
+    "actualRuntimeExecuted": false,
+    "pipelineStaleAcceptanceClaimed": false,
+    "collectedCurrentCohortCreated": false,
+    "newFiniteIntervalRequired": false,
+    "separateEveningIntervalApproved": true,
+    "eveningRuntimeExecuted": false
+  },
+  "approvedUnusedV2IndexerStop": {
+    "status": "NORMAL_TERMINATION_OBSERVED",
+    "normalSigtermRequests": 1,
+    "forcedTerminationPerformed": false,
+    "otherProcessesSignaled": false,
+    "v2SourceHashesMatchedBeforeAndAfter": 2213,
+    "completeApiAndWorkerMatchPriorHashesAfterward": true,
+    "webFilesMatchPriorManifestAfterward": 2660,
+    "immediatePreSignalArtifactSnapshotClaimed": false,
+    "nativeAdmissionRepeated": false
+  },
   "v2LocationDiagnostic": {
     "status": "LOCATION_HOST_VALIDATION_PASSED_RULE_ACCEPTANCE_BLOCKED",
     "run": "aecb6a5a27ed",
@@ -161,10 +277,10 @@
     "wholeConsumerAcceptanceClaimed": false
   },
   "remainingRuntimeCalendar": {
-    "status": "BLOCKED_NO_NEW_INTERVAL",
+    "status": "CURRENT_USER_WINDOWS_ASSIGNED_NO_PEER_PLEDGE",
     "previousIntervalEndUtc": "2026-11-02T10:25:00Z",
-    "proposedLegacyNativeWorkloadIntervalsAgreed": false,
-    "reason": "The peer's authorized QA01 verification and implementation has no established pause boundary."
+    "earlierPeerProposalsAgreed": false,
+    "reason": "The current user subsequently assigned the direct windows recorded separately. All resource, competing-process and preservation guards remain; peer abstention and host exclusivity are not claimed."
   },
   "additionalCommentSourcePairing": {
     "status": "IMMUTABLE_SELECTED_BEFORE_AND_ACTUAL_FROZEN_AFTER_VERIFIED",
@@ -177,7 +293,10 @@
     "afterAncestorCasesPassed": 5,
     "afterAncestorCasesFailed": 2,
     "afterWholeFocusedExitCode": 1,
-    "changedInputPaths": ["src/docmost/history.test.tsx", "vite.config.ts"],
+    "changedInputPaths": [
+      "src/docmost/history.test.tsx",
+      "vite.config.ts"
+    ],
     "allOtherTrackedInputBytesUnchanged": true,
     "assertionsAndTimeoutsUnchanged": true,
     "newTestsExecuted": false,
@@ -186,7 +305,7 @@
     "scope": "Reconstruct the immutable selected-before Git inputs and verify actual frozen-after execution copies. Before has no direct execution-time pre/post GUI digest. The source-bound after run remains FAIL overall; no retroactive original snapshot or ancestor-cause claim."
   },
   "approvedSustainedWorkloadPreparation": {
-    "status": "DEFINITION_AND_SCHEDULER_VERIFIED_RUNTIME_UNEXECUTED",
+    "status": "RUNTIME_FAIL_BEFORE_MEASUREMENT_CLEANUP_VERIFIED",
     "sourceCommit": "f40e7a2b64098d4e8ba295c75449dccf2f61b4b6",
     "guiCommit": "b9c1ae1d544194fe9dc0bfe5490992be79182cbe",
     "sourceBlobsMatched": 2213,
@@ -197,7 +316,12 @@
     "steadyWindowsPerProfile": 3,
     "stressRate": 100,
     "stressSecondsPerProfile": 300,
-    "authorizedPercentages": [100, 10, 1, 0.1],
+    "authorizedPercentages": [
+      100,
+      10,
+      1,
+      0.1
+    ],
     "measuredSeconds": 12000,
     "warmupSeparateSeconds": 240,
     "maximumWholeReservationSeconds": 18000,
@@ -209,11 +333,144 @@
     "minimumDiskHeadroomGiB": 10,
     "containerCeilingsGiB": 15.25,
     "separateDriverBrowserCeilingGiB": 2,
-    "driverBrowserScopeApplied": false,
-    "seedExecuted": false,
-    "runtimeExecuted": false,
+    "driverBrowserScopeApplied": true,
+    "seedExecuted": true,
+    "runtimeExecuted": true,
     "capacityAcceptanceClaimed": false,
     "scopeApprovalDoesNotReserveResources": true
+  },
+  "actualSustainedWorkloadAttempt": {
+    "run": "d88bd5e5cebb",
+    "status": "FAIL",
+    "executionExitCode": 1,
+    "elapsedSeconds": 386.884,
+    "actualSeedNotes": 1000000,
+    "actualSeedRevisions": 1000000,
+    "actualReadablePopulations": [
+      1000000,
+      100000,
+      10000,
+      1000
+    ],
+    "completedWarmups": 0,
+    "completedMeasuredWindows": 0,
+    "scopePeakBytes": 1527455744,
+    "scopeSwapBytes": 0,
+    "scopeOomKills": 0,
+    "uploadFailure": "Harness reads byteSize from FileReceipt instead of querying actual file metadata.",
+    "preservationFailure": "Whole-organization equality rejects the single declared corpus organization addition.",
+    "originalOrganizationAndRoleRowsPreserved": true,
+    "onlyDeclaredCorpusOrganizationAdded": true,
+    "actualS3FileBytes": 16384,
+    "actualS3BytesAndChecksumMatchDatabase": true,
+    "sourceArtifactWebAndDriverInputsUnchanged": true,
+    "originalFailureAndCleanup154Unchanged": true,
+    "ownedContainersIndependentlyAbsent": 7,
+    "ownedNetworkIndependentlyAbsent": true,
+    "approvedKeepaliveSigkillCount": 2,
+    "otherRemainingContainersStoppedNormally": 4,
+    "cleanupProof": ".tmp/gui-completion/workload-cleanup-proof-161/receipt.json",
+    "cleanupProofSha256": "158ff9f541960a2d1be9cc088fa14accf3014b996ab9e64425b70f0fcd9b82fa",
+    "conditionalCorrectedRunApprovalExpiredBeforeResponseObserved": true,
+    "correctedCandidatePreparationVerified": true,
+    "correctedPreservationTestsPassed": 4,
+    "correctedUploadMetadataTestsPassed": 4,
+    "bothOriginalDefectsReproducedBeforeFix": true,
+    "initialRedExecutionTimeSnapshotsClaimed": false,
+    "correctedSeedResourceMethodsUnchanged": true,
+    "measurementAssertionsAndTimeoutsUnchanged": true,
+    "correctedDirectRuntimeDenied": true,
+    "normalMetadataApiRuntimeQualified": false,
+    "correctedRuntimeExecuted": false,
+    "sustainedWorkloadAccepted": false
+  },
+  "directEveningWindows": {
+    "nativeStartUtc": "2026-11-02T20:10:00Z",
+    "nativeEndUtc": "2026-11-02T23:00:00Z",
+    "finiteStartUtc": "2026-11-02T23:10:00Z",
+    "finiteEndUtc": "2026-11-03T00:10:00Z",
+    "nativeBuildAttemptsAuthorized": 1,
+    "originalNativeCases": 4,
+    "additionalOwnershipCases": 3,
+    "additionalRestoreCases": 4,
+    "finiteModes": [
+      "legacy",
+      "human"
+    ],
+    "runtimeExecuted": false,
+    "launcherScheduled": false,
+    "sourceBoundLocalGuardTestsPassed": 5,
+    "freshIndependentPredecessorProofRequired": true,
+    "allOriginalAdmissionGuardsRequired": true
+  },
+  "immediateNativeAttempt": {
+    "approval": ".tmp/gui-completion/user-immediate-native-approval-185.json",
+    "nativeStartAdvancedByDirectUserAnswer": true,
+    "endUtcUnchanged": "2026-11-02T23:00:00Z",
+    "oldWaiterCancelledBeforeChildExitCode": 130,
+    "immediateWindowTestsPassed": 4,
+    "freshNativeInputHashesMatchedBeforeBuild": 2517,
+    "normalBuildAttemptsExecuted": 1,
+    "normalBuildExitCode": 1,
+    "outerExitCode": 2,
+    "status": "FAIL_BEFORE_FIXTURE",
+    "guiBuildAndDistributionCompleted": true,
+    "nextReportedErrors": 991,
+    "missingGeneratedGraphqlModelInputs": true,
+    "generatedBackendEntitiesSchemaAbsentFromPreparedCopy": true,
+    "declaredInputHashChanges": 0,
+    "apiWorkerAndExternalHashesUnchanged": true,
+    "sourceSetRejectedNewI18nDeclarations": 5,
+    "failedBuildOutputFilesPreserved": 2297,
+    "runtimeStarted": false,
+    "originalNativeCasesExecuted": 0,
+    "ownershipCasesExecuted": 0,
+    "restoreCasesExecuted": 0,
+    "actionBrowserContainersAndNetworksAbsent": true,
+    "failedAttemptMarkerAndRawEvidencePreserved": true,
+    "additionalBuildExecuted": false,
+    "nativeAccepted": false
+  },
+  "generatedNativePreparation": {
+    "status": "PREPARATION_VERIFIED_FULL_SEQUENCE_TIME_BLOCKED",
+    "additionalSingleBuildApproved": true,
+    "normalCodegenExitCode": 0,
+    "codegenFilesUnchangedOnVerification": 290,
+    "explicitGeneratedPrerequisites": 296,
+    "parentGitBlobsVerified": 2213,
+    "guiGitBlobsVerified": 295,
+    "strictGeneratedInputTestsPassed": 4,
+    "omittedGeneratedInputsStillRejected": true,
+    "broadSourceExclusionsAdded": false,
+    "priorPreparation196And202FailuresPreserved": true,
+    "admission205RejectedBeforeResourceOrBuildStage": true,
+    "budgetObservedAtUtc": "2026-11-02T20:39:59.879716+00:00",
+    "remainingSecondsBeforeApprovedEnd": 8400.120284,
+    "requiredFullSequenceSeconds": 8790,
+    "additionalBuildStarted": false,
+    "fixtureStarted": false,
+    "additionalSingleBuildAuthorizationConsumed": false,
+    "newDirectIntervalRequired": true,
+    "nativeAccepted": false
+  },
+  "latestRelativeNativeAdmission": {
+    "approval": ".tmp/gui-completion/user-relative-native-finite-approval-219.json",
+    "approvalObservedAtUtc": "2026-11-02T21:54:23.830909+00:00",
+    "nativeEndUtc": "2026-11-03T00:54:23.830909+00:00",
+    "finiteStartUtc": "2026-11-03T01:04:23.830909+00:00",
+    "finiteEndUtc": "2026-11-03T02:04:23.830909+00:00",
+    "status": "MEMORY_ADMISSION_BLOCKED_BEFORE_BUILD_OR_FIXTURE",
+    "sourceAndPredecessorAndFullTimeChecksPassed": true,
+    "memAvailableBytesAtFollowupObservation": 20468363264,
+    "requiredMemAvailableBytes": 21474836480,
+    "memoryShortfallBytesAtFollowupObservation": 1006473216,
+    "additionalBuildStarted": false,
+    "fixtureStarted": false,
+    "additionalSingleBuildAuthorizationConsumed": false,
+    "otherProcessesTerminated": false,
+    "resourceThresholdReduced": false,
+    "automaticRetryPerformed": false,
+    "nativeAccepted": false
   },
   "laterPrivateMakeVerification": {
     "status": "ACTUAL_MAKE_VERIFY_PASS_CURRENT_WORKING_INPUT_SNAPSHOT",
@@ -269,7 +526,11 @@
     "run": "0caa51d9e802",
     "apiSha256": "7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0",
     "backendTree": "e26efe6a81e0d5456dcc640e59ac4e3d24f73357",
-    "widthsPassed": [375, 900, 1440],
+    "widthsPassed": [
+      375,
+      900,
+      1440
+    ],
     "dialogDecisionsPassed": 12,
     "webTestsPassed": 938,
     "webTestFiles": 148,
@@ -304,7 +565,11 @@
     "run": "c3d33e70ced0",
     "publishedParentCommit": "f40e7a2b64098d4e8ba295c75449dccf2f61b4b6",
     "apiSha256": "7eaaac803389e2ccd1f41408f02c86c9eae5c5c5869a401f19ea12e6d6dedeb0",
-    "widthsPassed": [375, 900, 1440],
+    "widthsPassed": [
+      375,
+      900,
+      1440
+    ],
     "sqlNotes": 8,
     "sqlRevisions": 20,
     "sqlComments": 3,
@@ -316,7 +581,11 @@
     "actualS3GetBytes": 121,
     "publicTablesPerInventory": 135,
     "inventories": 2,
-    "policyEpochs": ["2", "3", "4"],
+    "policyEpochs": [
+      "2",
+      "3",
+      "4"
+    ],
     "originalRolesAndCreatorsPreserved": true,
     "receiptReplayAddsNoTransition": true,
     "readableDraftAndEditorSurviveDowngradeRecovery": true,
@@ -332,11 +601,22 @@
   "boundedPopulatedConsumerHost": {
     "status": "BOUNDED_PASS_RULE_AND_LEGACY_OPEN",
     "run": "024345c3b295",
-    "widthsPassed": [375, 1440],
+    "widthsPassed": [
+      375,
+      1440
+    ],
     "acceptedControlledChanges": 43,
     "unchangedAuthoredDocuments": 4,
-    "currentMembershipCounts": [4, 25, 4, 4],
-    "currentAndHistoryPageSizes": [20, 5],
+    "currentMembershipCounts": [
+      4,
+      25,
+      4,
+      4
+    ],
+    "currentAndHistoryPageSizes": [
+      20,
+      5
+    ],
     "exactOriginalAndSavedComparisonVerified": true,
     "deniedReadsWithIdenticalAuthorizedControls": 8,
     "deniedErrorCode": "NOT_FOUND",
@@ -427,7 +707,10 @@
     "packedVerificationScope": "0.8.0 actual tarball passes collaboration/dirty declarations, runtime imports, matching CSS and all source bytes after completed-unit retirement; final documentation-only recording is rechecked against the extracted package.",
     "localEvidenceArchiveReadableEntries": 93,
     "releaseOwnerArchivalAccepted": true,
-    "packedRuntimeImports": [".", "./kms"],
+    "packedRuntimeImports": [
+      ".",
+      "./kms"
+    ],
     "packedCssExportResolved": true,
     "strictDeclarationsSkipLibCheck": false
   },
@@ -503,13 +786,33 @@
     "accessCasesPassed": 4,
     "implementationBeforeMenuRepair": "f971775e",
     "authorizationHarnessCommit": "673d7b6f",
-    "peerXmlSuccessor": { "distinctIdentity": true, "originalBytesUnchanged": true, "successorBytesExact": true, "outsiderStatus": 403, "anonymousStatus": 401, "noProtectedBytes": true, "createdNoteArchived": true },
+    "peerXmlSuccessor": {
+      "distinctIdentity": true,
+      "originalBytesUnchanged": true,
+      "successorBytesExact": true,
+      "outsiderStatus": 403,
+      "anonymousStatus": 401,
+      "noProtectedBytes": true,
+      "createdNoteArchived": true
+    },
     "expiredAtUtc": "2026-11-01T13:22:39Z",
     "ownerReportedOwnedResourcesRemoved": 8,
     "independentConsumerSqlInventory": false,
     "scope": "Bounded synthetic real API producer browser evidence. KMS reported cleanup before an independent row/count/role inventory was captured. Not consumer storage, integrated release or SHARED-mode acceptance. Protected fixture/auth material is excluded from public source."
   },
-  "nativeDrawio": { "version": "32.6.1", "commit": "84487b4891cbc0f32d7e30f34cf878c87cb1f414", "transport": "Isolated HTTPS loopback, exact certificate SPKI pin", "cases": ["1600px canvas save/reload", "390px canvas save/reload", "read-only viewer", "same-note history restore isolation", "held refresh retains inline edit and undo"], "productionDeploymentAccepted": false },
+  "nativeDrawio": {
+    "version": "32.6.1",
+    "commit": "84487b4891cbc0f32d7e30f34cf878c87cb1f414",
+    "transport": "Isolated HTTPS loopback, exact certificate SPKI pin",
+    "cases": [
+      "1600px canvas save/reload",
+      "390px canvas save/reload",
+      "read-only viewer",
+      "same-note history restore isolation",
+      "held refresh retains inline edit and undo"
+    ],
+    "productionDeploymentAccepted": false
+  },
   "realCollaborationLease": {
     "implementationCommit": "05a6f5d5",
     "browserSpecCommit": "bc3a07e0",
@@ -551,7 +854,11 @@
     "maximumRowsPerRead": 50,
     "maximumRenderedTreeRows": 29,
     "navigationP95Ms": 889,
-    "retainedHeapBytes": { "baseline": 9016480, "after25Pages": 10188772, "afterReturn": 10380108 },
+    "retainedHeapBytes": {
+      "baseline": 9016480,
+      "after25Pages": 10188772,
+      "afterReturn": 10380108
+    },
     "largeDocumentParagraphs": 1000,
     "savedDocumentJsonBytes": 168001,
     "openEditSaveReloadMs": 15895,
@@ -561,46 +868,1005 @@
     "scope": "Linux Chromium 0.8 run under concurrent shared-host load, real localStorage and Web Locks, explicit GC, 25 forward pages and return. Not peak memory, KMS scale or sustained product workload."
   },
   "visualEvidence": [
-    { "path": ".tmp/gui-completion/iab-current-1600.png", "width": 1600, "height": 1000, "sha256": "cc6880f08a47a43b4d96ce6cfa2fb9c6944e8c887469d9abe0ac2b8310c9dbd3", "scope": "Actual extracted-package native shell/document/comments through f971775e; shipped custom Korean glyphs verified." },
-    { "path": ".tmp/gui-completion/iab-current-390.png", "width": 390, "height": 844, "sha256": "9f00c7e701b694ebad40831feb957c55c66838eb07734ea3eceba3d22898b613", "scope": "Actual packed Chrome at 390px, comment-only dirty tab and no page overflow; through f971775e." },
-    { "path": ".tmp/native-editor-controls-1600.png", "width": 1600, "height": 1000, "sha256": "662a0484a35a4d568503383ccc48e38a6417c4d84e4d0a79ad43774dd3641235", "scope": "Native heading/bold/link/code/table/file-chooser content after reload, Linux Chromium 0.8 fixture." },
-    { "path": ".tmp/native-editor-controls-390.png", "width": 390, "height": 1000, "sha256": "f2668740c3ce0d2bd0df06a08d7db5f42567864db61c58ff86f42592b723103c", "scope": "Native controls after reload, Linux Chromium 0.8 fixture; table scroll contained within the document." },
-    { "path": ".tmp/native-drawio-1600.png", "width": 1600, "height": 1000, "sha256": "f716c5eea66276e16e13c52e8d93c421cff8872a215cc31d631f09cb20785d9b", "scope": "Actual approved Draw.io graphical canvas through isolated HTTPS fixture." },
-    { "path": ".tmp/native-drawio-390.png", "width": 390, "height": 1000, "sha256": "ce3188180ecb3e7a95a6e8a040d6b29b4af81b1b0e7825732168b5a3d8672d00", "scope": "Actual approved native Draw.io narrow graphical canvas." },
-    { "path": ".tmp/collaboration-1600.png", "width": 1600, "height": 1000, "sha256": "3771155d4218dc7e187f218415037edd0914e0e682dfc9b1360534f6080492f8", "scope": "Actual 0.8 shared-policy and association panel, desktop independent host." },
-    { "path": ".tmp/collaboration-390.png", "width": 390, "height": 1000, "sha256": "abb1ddc0aa976944902f28a4d600caa60f75c5d147fddcc564e63ebd24397933", "scope": "Actual 0.8 narrow association panel, no horizontal page overflow." }
+    {
+      "path": ".tmp/gui-completion/iab-current-1600.png",
+      "width": 1600,
+      "height": 1000,
+      "sha256": "cc6880f08a47a43b4d96ce6cfa2fb9c6944e8c887469d9abe0ac2b8310c9dbd3",
+      "scope": "Actual extracted-package native shell/document/comments through f971775e; shipped custom Korean glyphs verified."
+    },
+    {
+      "path": ".tmp/gui-completion/iab-current-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "9f00c7e701b694ebad40831feb957c55c66838eb07734ea3eceba3d22898b613",
+      "scope": "Actual packed Chrome at 390px, comment-only dirty tab and no page overflow; through f971775e."
+    },
+    {
+      "path": ".tmp/native-editor-controls-1600.png",
+      "width": 1600,
+      "height": 1000,
+      "sha256": "662a0484a35a4d568503383ccc48e38a6417c4d84e4d0a79ad43774dd3641235",
+      "scope": "Native heading/bold/link/code/table/file-chooser content after reload, Linux Chromium 0.8 fixture."
+    },
+    {
+      "path": ".tmp/native-editor-controls-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "f2668740c3ce0d2bd0df06a08d7db5f42567864db61c58ff86f42592b723103c",
+      "scope": "Native controls after reload, Linux Chromium 0.8 fixture; table scroll contained within the document."
+    },
+    {
+      "path": ".tmp/native-drawio-1600.png",
+      "width": 1600,
+      "height": 1000,
+      "sha256": "f716c5eea66276e16e13c52e8d93c421cff8872a215cc31d631f09cb20785d9b",
+      "scope": "Actual approved Draw.io graphical canvas through isolated HTTPS fixture."
+    },
+    {
+      "path": ".tmp/native-drawio-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "ce3188180ecb3e7a95a6e8a040d6b29b4af81b1b0e7825732168b5a3d8672d00",
+      "scope": "Actual approved native Draw.io narrow graphical canvas."
+    },
+    {
+      "path": ".tmp/collaboration-1600.png",
+      "width": 1600,
+      "height": 1000,
+      "sha256": "3771155d4218dc7e187f218415037edd0914e0e682dfc9b1360534f6080492f8",
+      "scope": "Actual 0.8 shared-policy and association panel, desktop independent host."
+    },
+    {
+      "path": ".tmp/collaboration-390.png",
+      "width": 390,
+      "height": 1000,
+      "sha256": "abb1ddc0aa976944902f28a4d600caa60f75c5d147fddcc564e63ebd24397933",
+      "scope": "Actual 0.8 narrow association panel, no horizontal page overflow."
+    }
   ],
   "remainingInputs": [
     "Wider SC09/populated/native/workload KMS host acceptance after bounded optional SHARED/CONTROLLED qualification; retain concrete missing actor cases without inventing a DTO",
-    "Qualified Draw.io deployment and integrated all-format co-editor storage/access acceptance with independent inventory",
+    "Wider integrated all-format peer storage/access acceptance. Bounded approved-origin Draw.io native4/ownership3/restore4 and their independent inventories/byte/role/cleanup evidence are complete.",
     "Wider contextual/storage acceptance after the published immutable 0.8 release, normal parent gate/publication and bounded CONTROLLED host pass",
     "Execution of the user-approved isolated million-note GUI workload:20rps steady, three15-minute windows per100/10/1/0.1% authorized profile,100rps stress; no model/relevance or whole-P14 claim. Linux is required and Windows is excluded"
   ],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,
-    "journalsDeleted": 2,
-    "retiredDocuments": [{
-      "path": "docs/2026-10-25-note-library-corrections.md",
-      "status": "COMPLETED",
-      "focusedTestsPassed": 53,
-      "focusedTestFiles": 7,
-      "historicalGitCommit": "bd28c292",
-      "evidenceArchive": ".tmp/gui-completion/correction-retirement-01.tgz",
-      "evidenceArchiveSha256": "91ccbf9fa179f8cbc5389c38bc6e070c6f801221def2d63a7dcdf9480f3eda44",
-      "evidenceArchiveReadableEntries": 4,
-      "specificationSections": ["F01", "F03", "F04", "F07", "F08"],
-      "remainingParentCriteria": ["G01", "G06", "G07", "AC08", "AC09"]
-    }, {
-      "path": "docs/move-and-large-document-acceptance.md",
-      "status": "COMPLETED",
-      "run": "e7bf9972a611",
-      "evidenceArchive": ".tmp/gui-completion/move-large-retirement-01.tgz",
-      "evidenceArchiveSha256": "04e05f2623f6855b67c934ed3d5fa99f01bf87b95bb0bfdfae6678b8a1310f81",
-      "evidenceArchiveReadableEntries": 6,
-      "specificationSections": ["F02", "F03", "F05", "F08"],
-      "remainingParentCriteria": ["G05", "G07", "G08", "AC08", "AC10"]
-    }],
+    "journalsDeleted": 3,
+    "retiredDocuments": [
+      {
+        "path": "docs/2026-10-25-note-library-corrections.md",
+        "status": "COMPLETED",
+        "focusedTestsPassed": 53,
+        "focusedTestFiles": 7,
+        "historicalGitCommit": "bd28c292",
+        "evidenceArchive": ".tmp/gui-completion/correction-retirement-01.tgz",
+        "evidenceArchiveSha256": "91ccbf9fa179f8cbc5389c38bc6e070c6f801221def2d63a7dcdf9480f3eda44",
+        "evidenceArchiveReadableEntries": 4,
+        "specificationSections": [
+          "F01",
+          "F03",
+          "F04",
+          "F07",
+          "F08"
+        ],
+        "remainingParentCriteria": [
+          "G01",
+          "G06",
+          "G07",
+          "AC08",
+          "AC09"
+        ]
+      },
+      {
+        "path": "docs/move-and-large-document-acceptance.md",
+        "status": "COMPLETED",
+        "run": "e7bf9972a611",
+        "evidenceArchive": ".tmp/gui-completion/move-large-retirement-01.tgz",
+        "evidenceArchiveSha256": "04e05f2623f6855b67c934ed3d5fa99f01bf87b95bb0bfdfae6678b8a1310f81",
+        "evidenceArchiveReadableEntries": 6,
+        "specificationSections": [
+          "F02",
+          "F03",
+          "F05",
+          "F08"
+        ],
+        "remainingParentCriteria": [
+          "G05",
+          "G07",
+          "G08",
+          "AC08",
+          "AC10"
+        ]
+      },
+      {
+        "path": "docs/drawio-acceptance.md",
+        "status": "COMPLETED_BOUNDED_CURRENT_HOST",
+        "actualNativeCasesPassed": 4,
+        "actualOwnershipCasesPassed": 3,
+        "actualRestoreCasesPassed": 4,
+        "originalRestoreFailurePreserved": true,
+        "evidenceArchive": ".tmp/gui-completion/drawio-retirement-280.tgz",
+        "evidenceArchiveSha256": "e0ff30cd755247cf90a89b4bc736b3f106ee2e117032ddcb82c45ff3fc37dc2f",
+        "evidenceArchiveReadableEntries": 10,
+        "individualCriteriaVerified": 12,
+        "specificationSections": [
+          "F03",
+          "F04",
+          "F08",
+          "F09"
+        ],
+        "remainingParentCriteria": [
+          "G01",
+          "G07",
+          "G08",
+          "AC08",
+          "AC10"
+        ]
+      }
+    ],
     "promptRetired": false,
-    "reason": "Completed correction and bounded move/large-document units retired with readable evidence and specification mapping. Five other journals and execution records retain unfinished contextual/native/workload and final archival obligations."
+    "reason": "Completed correction, move/large-document and bounded actual-host Draw.io journals retired with readable evidence and lasting specification mapping. Four original journals and execution records retain wider context/peer/workload and final source/package obligations."
+  },
+  "boundedConfiguredNativeConsumerHost": {
+    "status": "PASS_BOUNDED_NATIVE_INDEPENDENT_RECORD_CHECK",
+    "run": "54980887bd1e",
+    "runtimeReceiptSha256": "33d6660203e9fe8c669878c73f70d2a10c878159699da389d3cd005cebe9811d",
+    "environmentReportSha256": "2d0114e82f5deb51e18ac1b20889fd4e2214d39f9d2b305e4f1f3b9bd58a4484",
+    "browserStats": {
+      "startTime": "2026-11-03T04:14:23.179Z",
+      "duration": 96088.12999999999,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "inventoryPhasesVerified": 2,
+    "tablesPerInventory": 135,
+    "exactOriginalRolesAndOrganizationPolicyPreserved": true,
+    "runtimeIndependentS3GetObjects": 11,
+    "runtimeIndependentS3GetBytes": 5510,
+    "independentPredecessorCleanupProofSha256": "f7c0746b0e3073744de78b865435f4d988e20cd0cbff3be6f275389740183fde",
+    "screenshots": {
+      "drawio-read-only.png": {
+        "sha256": "82e06c479cfd3961802dcf2db4b61a10c42287ff8c230fb111298e33818eb00e",
+        "dimensions": [
+          1600,
+          1000
+        ]
+      },
+      "drawio-graphical-reopened.png": {
+        "sha256": "d60238f307bd1621b1c7ff912354b58c3f14830a1683fc6485aa2617a26cecf6",
+        "dimensions": [
+          1600,
+          1000
+        ]
+      }
+    },
+    "originalInputsAndFailedEvidenceUnchanged": true,
+    "sourceSetUnchanged": true,
+    "normalBuildRepeated": false,
+    "wholeNativeAcceptanceClaimed": false,
+    "proofSha256": "c110d09304e341892c6581ac656771606118dc398def5fa94a83ddb37dbbf13f",
+    "remainingCases": [
+      "wider all-format peer and current-host context/workload acceptance"
+    ]
+  },
+  "boundedNativeOwnershipConsumerHost": {
+    "status": "PASS_BOUNDED_ONLY",
+    "run": "7910f743011c",
+    "browserCasesPassed": 3,
+    "unexpectedSkippedFlaky": 0,
+    "outerExitCode": 0,
+    "actualS3GetObjects": 5,
+    "actualS3GetBytes": 1980,
+    "originalRolesAndPolicyPreserved": true,
+    "independentCleanupProofSha256": "09b2fe52783dcdc3da6b1673bd030072627cf9c5357abf324709e37408085942",
+    "normalBuildRepeated": false
+  },
+  "nativeRestoreFirstAttempt": {
+    "status": "FAIL",
+    "run": "3151e244df3c",
+    "browserCasesPassed": 3,
+    "browserCasesFailed": 1,
+    "outerExitCode": 1,
+    "diagnosis": {
+      "status": "FAILED_RESTORE_TAB_PREREQUISITE_IDENTIFIED",
+      "run": "3151e244df3c",
+      "originalReceiptSha256": "4916ccfd1dfa0e0a3c938ed9ea0501eeb33df12339a14148d6d3af15fb02dea4",
+      "originalSpecSha256": "b232daf904712a4aa421d49d93230a8985cfa94f0d50d4715712a6595122fab5",
+      "traceSha256": "f19bcd83e1b1ffac5d220a654025a049866c37dbc6d0f00cf0a52262c0f3654a",
+      "actualBrowserStats": {
+        "startTime": "2026-11-03T04:20:18.118Z",
+        "duration": 45441.253000000004,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "evidence": {
+        "otherNoteRequestStartedMs": 18810.732,
+        "otherNoteRequestDurationMs": 198.159,
+        "bodyFillStartedMs": 18927.264,
+        "snapshot19039SelectedTab": "restore target, with entered draft",
+        "snapshot19162SelectedTab": "other note, with original current body",
+        "bothNotesHaveSameCurrentBody": true
+      },
+      "cause": "The shared body-text prerequisite passes against the still-active restore target before the other note becomes active. The draft is entered in that target, not in the independent tab asserted later.",
+      "proposedCorrection": "Await the other note unique title before filling its body. Preserve every original final assertion and timeout.",
+      "originalFailedInputsPreserved": true,
+      "originalRolesPreserved": true,
+      "independentCleanupVerified": true,
+      "runtimeDefectClaimed": false,
+      "correctedRunExecuted": false
+    },
+    "correctedSourcePrepared": true,
+    "correctedAcceptanceClaimed": true,
+    "correctionScope": "Separate corrected run b6898897e40f passes4/4; original3151e244df3c remains FAIL."
+  },
+  "boundedNativeFollowupsConsumerHost": {
+    "status": "PASS_NATIVE_OWNERSHIP_AND_CORRECTED_RESTORE",
+    "wholeGuiAccepted": false,
+    "originalRestoreFailurePreserved": true,
+    "runs": [
+      {
+        "lane": "ownership3",
+        "run": "7910f743011c",
+        "status": "PASS",
+        "exitCode": 0,
+        "allDeclaredInputsUnchanged": true,
+        "runtimeReceiptSha256": "b67b497fdee681aa8d461bce13be67bef394ec15fe4019c8b30950b1fb02b568",
+        "environmentReportSha256": "ce4035f77243e0ce03f06652232b735b451289d9d5778bc4479e7220a26e9832",
+        "inventoryPhasesVerified": 2,
+        "tablesPerInventory": 135,
+        "exactRolesAndOrganizationPolicyPreserved": true,
+        "browserStats": {
+          "startTime": "2026-11-03T04:17:44.621Z",
+          "duration": 31021.894,
+          "expected": 3,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "independentBytes": {
+          "passed": true,
+          "actualNextHost": true,
+          "actualConfiguredGraphicalEditor": true,
+          "actualApiAndStorage": true,
+          "tests": 3,
+          "actualS3GetObjects": 5,
+          "actualS3GetBytes": 1980,
+          "modelCalls": 0,
+          "defaultDistributionByteIdentityClaimed": false
+        }
+      },
+      {
+        "lane": "restore4",
+        "run": "b6898897e40f",
+        "status": "PASS",
+        "exitCode": 0,
+        "allDeclaredInputsUnchanged": true,
+        "runtimeReceiptSha256": "e8821e10a3f35a575c9a4623f0a04708e32df95deaf2b2c15c4ef196107f6ff8",
+        "environmentReportSha256": "464c4120277bd3d40a03fcf5fb9df5e89c4fd2a25f7689fdaa037f3770a4ebd5",
+        "inventoryPhasesVerified": 2,
+        "tablesPerInventory": 135,
+        "exactRolesAndOrganizationPolicyPreserved": true,
+        "browserStats": {
+          "startTime": "2026-11-03T04:24:57.421Z",
+          "duration": 24636.096,
+          "expected": 4,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "independentBytes": {
+          "passed": true,
+          "actualNextHost": true,
+          "actualConfiguredGraphicalEditor": false,
+          "actualApiAndStorage": true,
+          "tests": 4,
+          "actualS3GetObjects": 6,
+          "actualS3GetBytes": 696,
+          "modelCalls": 0,
+          "defaultDistributionByteIdentityClaimed": false
+        }
+      }
+    ],
+    "proofSha256": "ddcb80fe731316343dd923133a39e39a10cf3666691d6c15332c74b23aecd02b",
+    "independentCleanupProofSha256": "1552a5168d67f31fc175a8dc13204a5c1ae5670212d4a062e2fd7e96b8a3b34d"
+  },
+  "boundedHumanStaleConsumerHost": {
+    "status": "PASS_ORDINARY_HUMAN_STALE_PROPOSAL_ONLY",
+    "run": "0a0859d886c5",
+    "outerExitCode": 0,
+    "widths": [
+      375,
+      1440
+    ],
+    "casesPassed": 2,
+    "pageErrors": 0,
+    "normalHumanProposalOnly": true,
+    "pipelineStaleAcceptanceClaimed": false,
+    "collectedCurrentCohortCreated": false,
+    "proof": {
+      "passed": true,
+      "manualHumanProposalsOnly": true,
+      "newerHumanNotesPreserved": 2,
+      "proposalsStillPendingAtOriginalRevision": 2,
+      "currentMembershipRows": 0,
+      "noteRevisionRows": 4,
+      "pipelineStaleAcceptanceClaimed": false
+    },
+    "rolesPolicyAndOwnedCleanupVerified": true,
+    "sourceArtifactsWebAndDriversUnchanged": true,
+    "runtimeReceiptSha256": "c4d3d9ea38471dd29b7470822bc3b45c22ed0e5133649826c21560b4e12e151a",
+    "environmentReportSha256": "17cbe1e834aeed4284c2d036ec87c9d7d39e8da0bac0d1d29fffff9a11f23e43",
+    "independentCleanupProofSha256": "ad6f7bddd604bbf1ecec99855e7b6781cc470e2bba9b11f3f4ea03b6e7b11a15"
+  },
+  "legacyInitialFixtureAttempt": {
+    "status": "LEGACY_FIXTURE_FAILED_BEFORE_BROWSER",
+    "run": "53032bf31c08",
+    "outerExitCode": 1,
+    "originalReceiptSha256": "392fa426f2f35d107b34d743a5fdcddbf883a6b5947b61c4443a801c1a16e704",
+    "postgresLogSha256": "b1df9f46240e6c6e80867c2e598a4c8238be131afcb48a4a86010f9b069e0d9b",
+    "finding": "The prepared fixture attempts UPDATE on note_revision; the active reject_history_mutation trigger refuses History is append-only. No legacy browser case executes.",
+    "originalSourcesArtifactsAndWebUnchanged": true,
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "independentCleanupVerified": true,
+    "proposedCorrection": "Seed the synthetic initial legacy note and initial revision by INSERT in the owned empty fixture. Keep append-only triggers enabled; do not alter retained history.",
+    "correctedRunExecuted": false
+  },
+  "boundedLegacyConsumerHost": {
+    "status": "PASS_BOUNDED_CURRENT_HOST_LEGACY_ORIGIN",
+    "run": "d0445e4349d4",
+    "outerExitCode": 0,
+    "casesPassed": 2,
+    "widths": [
+      375,
+      1440
+    ],
+    "pageErrors": 0,
+    "independentProof": {
+      "passed": true,
+      "notes": 2,
+      "revisions": 6,
+      "originChains": [
+        "LEGACY_UNCLASSIFIED",
+        "LEGACY_UNCLASSIFIED",
+        "LEGACY_UNCLASSIFIED"
+      ],
+      "noInventedCurrentMembership": true,
+      "syntheticLegacyClassificationOnly": true,
+      "migrationQualificationClaimed": false
+    },
+    "initialFixture": {
+      "initialRowsInsertedOnly": true,
+      "historyTriggersDisabled": false,
+      "retainedHistoryModified": false,
+      "activeHistoryGuardsVerified": true
+    },
+    "sourceArtifactsWebAndDriversUnchanged": true,
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "inventoryPhasesVerified": 2,
+    "tablesPerInventory": 135,
+    "runtimeReceiptSha256": "0b0807acd38d03a8c31bf2fd92a0169976c65d7436a78695a80e0682e7a8ac4a",
+    "environmentReportSha256": "ab5abfbf4cc461e88529d05e210c39cff6728f27c21227f6ddb7885232fe4324",
+    "independentCleanupProofSha256": "eaa1e8155e277dc53ff0daa8be94a1ec88975e78204bfffee1ceab3dcd87ba25",
+    "originalFailuresAndUnsupportedAssumptionsPreserved": true,
+    "migrationQualificationClaimed": false
+  },
+  "legacyHarnessContractReconciliation": {
+    "status": "LEGACY_HARNESS_CONTRACT_RECONCILIATION",
+    "lastFailedRun": "0f01f7b66839",
+    "lastFailure": "Unconditional original DOM identity after clean restore",
+    "publicPinnedPaneSha256": "6c3fb7133adde6ae6675d853643c53cc4d99b980ac82afc1d031c351f26f4e17",
+    "supportedRequirements": {
+      "initialLegacyFixture": "Insert only; initial revision authored projection remains null and history triggers stay enabled",
+      "richSave": "Returned LEGACY_UNCLASSIFIED origin is preserved; authored projection equals the explicit edited text",
+      "cleanRestore": "Restore historical body/origin as a new revision, show editable current content, preserve immutable initial revision and empty current membership",
+      "dirtyAndOtherPaneRestore": "Keep actual edited/other-pane draft and editor; separately proven by native ownership255 and restore270"
+    },
+    "unsupportedOldAssumptions": [
+      "Updating immutable historical rows is permitted",
+      "Rich save silently reclassifies legacy origin as HUMAN",
+      "Restored text projection must remain null",
+      "History button accessible name starts with revision label",
+      "A clean restore must retain the original DOM editor"
+    ],
+    "ruling": "Stop patching the old harness case by case. Reconcile its observations with CONTRACT F04/F07 and the pinned producer implementation, then use a separately named provenance/restore case. Keep all failed sources/results. Do not change product behavior to satisfy unsupported expectations.",
+    "riskIfWrong": "If clean-restore DOM identity was intended as a public guarantee, that requires an explicit lifecycle-contract decision rather than a test-only change.",
+    "newBoundedRunPassed": "d0445e4349d4"
+  },
+  "additionalNativePeerPreconditionFailure": {
+    "status": "AUTHORIZED_COEDITOR_PREREQUISITE_PREPARED",
+    "failedRun": "6f89c1e3638b",
+    "failedOuterExitCode": 130,
+    "originalPeerSpaceRole": "MEMBER",
+    "actualOriginalCanEdit": false,
+    "actualOriginalFileReadStatus": 200,
+    "finding": "The previous peer was a readable controlled-space member without write authority over the owner note. The test incorrectly assumed that membership grants edit capability.",
+    "correction": "Use normal setSpaceMember to grant the owned fixture peer OWNER, assert authoritative canEdit:true before UI editing, and restore its independently observed original MEMBER role in finally.",
+    "originalFinalOwnershipRevisionByteAndDenialAssertionsChanged": false,
+    "originalTimeoutsChanged": false,
+    "originalSourceSha256": "93ee1c94164b3e04858096a30e69e895970d4d278633fb136de56248fdb2226c",
+    "correctedSourceSha256": "bba7427b2f893f93a8f2ea0ae34b9969af94a667407f7d6aac30c356bbe2ec1b",
+    "runnerSha256": "a3576622554324e3b2083936f9fb400c6fa4677c2beb85e97b56124378992f7e",
+    "originalFailedReceiptSha256": "3c5ddccf58ff2921afd6220a3c2e9010812f220c10fbb67a8fcd6823b81bd423",
+    "ordinaryOwnedCleanupVerified": true,
+    "existingServicesSignaled": false,
+    "newRunExecuted": false
+  },
+  "boundedNativePeerFormatsConsumerHost": {
+    "status": "PASS_BOUNDED_ACTUAL_HOST_PEER_FORMATS",
+    "run": "7831968c1c40",
+    "browserStats": {
+      "startTime": "2026-11-03T05:15:40.011Z",
+      "duration": 18372.054,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "outerExitCode": 0,
+    "widths": [
+      375,
+      1440
+    ],
+    "formats": [
+      "mermaid",
+      "excalidraw"
+    ],
+    "actualNativeCanvasAndSourceEdits": true,
+    "authoritativeEditCapabilityChecked": true,
+    "originalNoteAndFileOwnersRetained": true,
+    "successorFilesOwnedByActualPeer": true,
+    "successorRevisionAndPreviousIdChecked": true,
+    "originalFileBytesUnchanged": true,
+    "outsiderReadsDenied": true,
+    "anonymousStateExplicitlyEmpty": true,
+    "anonymousReadsReturned401": true,
+    "reopenVerified": true,
+    "independentByteProof": {
+      "passed": true,
+      "actualNextHost": true,
+      "actualConfiguredGraphicalEditor": false,
+      "actualApiAndStorage": true,
+      "tests": 4,
+      "actualS3GetObjects": 8,
+      "actualS3GetBytes": 2295,
+      "modelCalls": 0,
+      "defaultDistributionByteIdentityClaimed": false
+    },
+    "inventoryPhasesVerified": 2,
+    "tablesPerInventory": 135,
+    "exactOriginalRolesAndPolicyPreserved": true,
+    "declaredInputsAndBuildUnchanged": true,
+    "runtimeReceiptSha256": "39e13ced3ae836b2d6680462d92f2bcff040307ce391d404a5ca3e1fce04fbb0",
+    "environmentReportSha256": "f93065689c7eeedb5cc8e353cc4953113504583eeac4312fab2ea7a0b0bd5fbf",
+    "independentCleanupProofSha256": "cd37602fcb072120c9f4f791285d2c629be2f96b2f952344abf4a5f95c64ebb0",
+    "earlierFailuresRetained": true,
+    "wholeGuiAccepted": false
+  },
+  "boundedNativeAllFormatRestoreConsumerHost": {
+    "status": "PASS_BOUNDED_ACTUAL_HOST_FORMATTED_RESTORE",
+    "run": "b1e6dbf7da02",
+    "outerExitCode": 0,
+    "widths": [
+      375,
+      1440
+    ],
+    "tests": 2,
+    "formattedHeadingBoldAndTableRestored": true,
+    "exactHistoricalRichBodyAndOriginalFileReferencesRestored": true,
+    "allThreeVisibleNativeEditControlsEnabled": true,
+    "independentDirtyPaneBodyAndDomPreservedAt1440": true,
+    "originalFileBytesVerified": true,
+    "independentByteProof": {
+      "passed": true,
+      "actualNextHost": true,
+      "actualConfiguredGraphicalEditor": false,
+      "actualApiAndStorage": true,
+      "tests": 2,
+      "actualS3GetObjects": 12,
+      "actualS3GetBytes": 926,
+      "modelCalls": 0,
+      "defaultDistributionByteIdentityClaimed": false
+    },
+    "tablesPerInventory": 135,
+    "inventoryPhasesVerified": 2,
+    "exactRolesAndOrganizationPolicyPreserved": true,
+    "declaredInputsAndBuildUnchanged": true,
+    "ownedResourcesIndependentlyAbsent": true,
+    "earlierFailuresRetained": true,
+    "separatePaneGridDefectStillOpen": true,
+    "runtimeReceiptSha256": "fffd6c2f7c870676c18d38aad8b8ee55a76cac98cdd159debfe504654018caae",
+    "environmentReportSha256": "40759f5925590d26dcc9b511dae0a988bc6476e94cc2e96b63083fc89f0c1170",
+    "wholeGuiAccepted": false
+  },
+  "nativePeerOwnedRecovery": {
+    "failedRun": "ce72419f17c8",
+    "originalFailureRetained": true,
+    "normalApiRestoredOriginalRole": true,
+    "fresh135TableAndByteEvidenceVerified": true,
+    "ownedCleanupStatus": "OWNED_RECOVERY_AND_CLEANUP_COMPLETE",
+    "receiptPath": "peer-owned-recovery-317/receipt.json",
+    "independentAbsenceProof": "peer-317-independent-predecessor-321.json",
+    "boundedStopExit137ForOwnedKeepalivesRetained": true,
+    "existingServicesChanged": false
+  },
+  "freshPrivateMakeVerification312": {
+    "status": "PASS",
+    "exitCode": 0,
+    "elapsedSeconds": 35.5980056490007,
+    "startedAtUtc": "2026-11-03T05:35:11.643134+00:00",
+    "finishedAtUtc": "2026-11-03T05:35:47.241321+00:00",
+    "originalWorkingInputsUnchanged": true,
+    "trackedDeletionsPreserved": true,
+    "missingTrackedInputs": [
+      "docs/drawio-acceptance.md"
+    ],
+    "logSha256": "f3a4bd7f96e2d2b9fa32aa25387274cbf0663679ff358d0178def0cedf4b8b9f",
+    "runtimeSourceChanged": false
+  },
+  "currentSustainedWorkload337": {
+    "status": "MEASURED_WORKLOAD_FAILED_ONE_TRANSPORT_ERROR_CLEANUP_COMPLETE",
+    "run": "995d5221d4f9",
+    "receiptPath": "scoped-workload-995d5221d4f9/receipt.json",
+    "systemdUnit": "kms-gui-workload-current-337-20261103053613.scope",
+    "supervisorReceipt": "workload-supervisor-338.json",
+    "measuredSecondsRequired": 12000,
+    "plannedResultsAreNotObservations": true,
+    "wholeGuiAccepted": false,
+    "completedMeasuredWindows": 16,
+    "requiredMeasuredWindows": 16,
+    "firstMeasuredWindowRawSampleProof": "workload-first-window-344.json",
+    "firstMeasuredWindowActualSamples": 18000,
+    "firstMeasuredWindowActualSuccesses": 18000,
+    "firstMeasuredWindowErrors": 0,
+    "firstMeasuredWindowMissed": 0,
+    "secondMeasuredWindowRawSampleProof": "workload-second-window-348.json",
+    "secondMeasuredWindowActualSamples": 18000,
+    "secondMeasuredWindowActualSuccesses": 18000,
+    "secondMeasuredWindowErrors": 0,
+    "secondMeasuredWindowMissed": 0,
+    "firstPopulationRawProof": "workload-first-population-proof-354.json",
+    "firstPopulationMeasuredSamples": 84000,
+    "firstPopulationMeasuredSuccesses": 84000,
+    "firstPopulationMeasuredErrors": 0,
+    "firstPopulationMeasuredMissed": 0,
+    "cumulativeRawSampleProof": "workload-completed-windows-proof-355.json",
+    "cumulativeVerifiedRawSamples": 336000,
+    "cumulativeVerifiedSuccessfulSamples": 335999,
+    "observedMeasuredErrors": 1,
+    "observedMeasuredMissed": 0,
+    "firstRequestErrorProof": "workload-request-error-356.json",
+    "zeroErrorConditionSatisfied": false,
+    "completedPopulations": [
+      100,
+      10,
+      1,
+      0.1
+    ],
+    "completedPopulationActualSaveRevisions": [
+      4261,
+      4261,
+      4261,
+      4261
+    ],
+    "terminalPublicProof": "workload-public-proof-361.json",
+    "ownedCleanupComplete": true,
+    "independentCleanupProof": "workload-independent-cleanup-360.json"
+  },
+  "currentSustainedWorkloadTerminalProof": {
+    "status": "MEASURED_WORKLOAD_FAILED_ONE_TRANSPORT_ERROR_CLEANUP_COMPLETE",
+    "run": "995d5221d4f9",
+    "outerExitCode": 1,
+    "measuredWindowsCompleted": 16,
+    "measuredSeconds": 12000,
+    "measuredRequests": 336000,
+    "successfulMeasuredRequests": 335999,
+    "measuredErrors": 1,
+    "measuredMissed": 0,
+    "warmupsCompleted": 4,
+    "warmupRequests": 4800,
+    "readablePopulations": [
+      1000000,
+      100000,
+      10000,
+      1000
+    ],
+    "actualSaveRevisions": [
+      4261,
+      4261,
+      4261,
+      4261
+    ],
+    "pageErrors": 0,
+    "corpusNotes": 1000000,
+    "corpusRevisions": 1017040,
+    "editedNotes": 4,
+    "originalNoteOwnershipPreserved": true,
+    "originalOrganizationsAndRolesPreserved": true,
+    "actualFinalS3GetObjects": 1,
+    "actualFinalS3GetBytes": 16384,
+    "freshInventoryTables": 135,
+    "containerPeakCgroupBytes": {
+      "api": 1197633536,
+      "web": 183255040,
+      "postgres": 3085512704,
+      "storage": 130023424,
+      "redis": 8318976
+    },
+    "containerMemoryEvents": {
+      "api": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "web": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "postgres": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "storage": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      },
+      "redis": {
+        "low": 0,
+        "high": 0,
+        "max": 0,
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0,
+        "sock_throttled": 0
+      }
+    },
+    "memoryObservationRows": 1198,
+    "driverScopePeakBytes": 2060517376,
+    "driverScopeOomKills": 0,
+    "allSourceInputsUnchanged": true,
+    "allArtifactsUnchanged": true,
+    "allWebInputsUnchanged": true,
+    "driverAndExternalInputsUnchanged": true,
+    "rawProofSha256": "c6e44d10fbb76effcdeba38414f6866677c633d4082a7df79b326cd5da70a3cf",
+    "cleanupReceiptSha256": "83e72868616bb1ef3063af5cf65df4dafdda1732f7fca617f21b483a0ee83b09",
+    "independentCleanupSha256": "65f2edd35454d085b70cbcb17a911675e9cb9853bc24c4ca0058b57154a398a8",
+    "originalFailureUnchanged": true,
+    "ownedContainersAndNetworkAbsent": true,
+    "failedRequestError": "socket hang up",
+    "transportRootCauseEstablished": false,
+    "duplicateSnapshotCleanupDefectPreserved": true,
+    "wholeWorkloadAccepted": false
+  },
+  "unpublishedPaneLayoutPatch": {
+    "status": "PASS_UNPUBLISHED_PANE_LAYOUT_PATCH",
+    "normalMakeExitCode": 0,
+    "unitCases": 307,
+    "unitFiles": 34,
+    "sourceTests": 3,
+    "normalTypesDeclarationsBuildDistributionAndStrictPackageImportsPassed": true,
+    "browserStats": {
+      "startTime": "2026-11-03T09:12:52.486Z",
+      "duration": 104795.757,
+      "expected": 43,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "all293ExecutedInputsAndCanonicalWorkingInputsStillMatchMake365": true,
+    "targetedBrowserCases": 2,
+    "originalRedPreserved": "pane-layout-red-proof-364.json",
+    "fullBrowserLogSha256": "6171546c7075d4031f1a23971f0228140d3e959ca4eed3375952deda5284e090",
+    "fullBrowserResultsSha256": "4ed3eac56cb0b80442bab15274564cfd4d43b34857d021b9593a2c306137c529",
+    "productSourceSha256": {
+      "src/docmost/DocmostPaneProvider.tsx": "2001daf780712c7a799e59ebce1c5e1f78f6c2c1cc84d5cef2c2dc8c82f4fc1a",
+      "src/integration.css": "53667e16daaed1263dc55fcf5c99a0d64fec294e81b05a43986c33e9be3c63af",
+      "e2e/nativeEditor.independent.spec.ts": "45d4bf95769392ccae84e6f83bd8936211040b52bf098c77a4371c7e03f246f3"
+    },
+    "screenshotsVisuallyInspectedAtWidths": [
+      1600,
+      390
+    ],
+    "nativeModalViewportAndIndependentDraftDomVerified": true,
+    "publicProtocolChanged": false,
+    "versionImpact": "PATCH",
+    "newVersionPublished": false,
+    "frozenKmsInputsChanged": false,
+    "wholeGuiAccepted": false
+  },
+  "boundedRichWriteProtectionConsumerHost": {
+    "status": "PASS_BOUNDED_ACTUAL_HOST_RICH_WRITE_PROTECTION",
+    "run": "c6c7161bf627",
+    "outerExitCode": 0,
+    "cases": 6,
+    "widths": [
+      375,
+      1440
+    ],
+    "routes": [
+      "plain GraphQL",
+      "ordinary human review proposal",
+      "actual HTTP MCP proposal plus canonical tool decision"
+    ],
+    "replacementRefusalCode": "REJECTED",
+    "replacementRefusalMessageKey": "knowledge.plain-update.rejected",
+    "rejectedProposalsRemainPendingBeforeExplicitRejection": true,
+    "titleOnlyChangesPreserveExactRichJsonAndFileReferences": true,
+    "decisionReplayDoesNotCreateAnotherNoteRevision": true,
+    "mcpClientIdentityAndRequestReplayVerified": true,
+    "independentSqlAndStorageProof": {
+      "passed": true,
+      "cases": 6,
+      "notes": 6,
+      "revisions": 18,
+      "humanProposals": 4,
+      "toolProposals": 4,
+      "actualS3GetObjects": 24,
+      "actualS3GetBytes": 1663,
+      "originalSpaceSettingsUnchanged": true,
+      "initialDeclaredOwnedSpaceAdded": true,
+      "currentMembershipRows": 0,
+      "actualMcpProposalTransport": true,
+      "noModelCalls": true,
+      "genuineRuleComparisonClaimed": false
+    },
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "originalSpaceSettingsPreserved": true,
+    "onlyDeclaredNewFixtureProviderPolicyAdded": true,
+    "providerCredentialsClientsOrCallsAdded": false,
+    "twoInventoryPhasesVerified": true,
+    "tablesPerInventory": 135,
+    "ownedContainersAndNetworkIndependentlyAbsent": true,
+    "allSourceArtifactsWebAndDriversUnchanged": true,
+    "runtimeReceiptSha256": "c9dab9eea3168f3c1d49d9e01aa9f6ef408d5896d183643abe25e2e0708a6d62",
+    "environmentReportSha256": "4c59e747562e0ac611662bf72083d98bb693efdfc7a581f607fe47c91d40da52",
+    "independentCleanupSha256": "cb8737ec5402cbe5a664d1a98a0abfc6bc33a6abfcbc85be9cbbbf3ec013c399",
+    "earlierSchemaPreparationFailureRetained": true,
+    "frozenHostUsedUnpublishedLayoutPatchNotAdopted": true,
+    "genuineRuleOrPopulatedCurrentCaseClaimed": false,
+    "wholeGuiAccepted": false
+  },
+  "unpublished081ReviewPackage": {
+    "status": "PASS_UNPUBLISHED_ACTUAL_TARBALL_REVIEW_CANDIDATE",
+    "version": "0.8.1",
+    "normalMakeExitCode": 0,
+    "packageSha256": "6cc2312b950f233bc4f286dea4060894abd2cc716590c146ebb1e7573055eb45",
+    "packageBytes": 27208693,
+    "shippedFiles": 689,
+    "distributionFiles": 682,
+    "strictExtractedPackageConsumerExitCode": 0,
+    "sourceArchiveEntries": 802,
+    "sourceEntries": 293,
+    "dependencyNoticeEntries": 509,
+    "allTarballAndSourceBytesMatched": true,
+    "allExecutedSourceInputsUnchanged": true,
+    "cleanReleaseCommitQualified": false,
+    "publication": false,
+    "consumerPinChanged": false,
+    "runtimeAssetCount405MatchesBrowser43": true,
+    "normalKmsDependencyCheckerPreserved": true,
+    "publicationAndReviewedPinApprovalPending": false,
+    "publicationAndReviewedPinApprovalGranted": true,
+    "approvalRecordSha256": "ca1c2dc9c505b01c3fe53c18b50052b1d7313c6e1dd1da284c932ac88814b547"
+  },
+  "transportIdleDiagnostic": {
+    "status": "DIAGNOSTIC_REPRODUCED_IDLE_REUSE_CONNECTION_RESETS",
+    "run": "ae54aaffa376",
+    "observationCompleted": true,
+    "outerExitCode": 0,
+    "continuousReads": 1200,
+    "continuousSuccesses": 1200,
+    "idleBoundaryBurstReads": 320,
+    "idleBoundaryBurstSuccesses": 311,
+    "observedConnectionResets": 9,
+    "allResetRequestsReusedSockets": true,
+    "resetSocketIdleMs": [
+      6002.65112200001,
+      6002.13693399998,
+      6005.119439000002,
+      6006.503456000006,
+      6003.210533999983,
+      6005.451347000024,
+      6004.795606,
+      6005.781662000023,
+      6004.408174000011
+    ],
+    "instrumentedRequests": 1521,
+    "reusedRequests": 1447,
+    "socketClosures": 74,
+    "noteRowsUnchanged": true,
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "ownedCleanupIndependentlyConfirmed": true,
+    "requestDeadlinesOrRetriesChanged": false,
+    "payloadOrAuthenticationHeadersLogged": false,
+    "originalSustainedFailureCauseProven": false,
+    "originalSustainedWorkloadAccepted": false,
+    "runtimeReceiptSha256": "76b5472435ab9c6e9c7a28286283920689dc6129b94f14eb95e978bd63eed9e0",
+    "eventFileSha256": "5631b880b8a785c64d8d90c1bcf7ae7b9c5857abb8c6aa291460bd5390353fc1",
+    "independentCleanupSha256": "d1666e0cfd8b5d5b10430b036fa8d4a3d83d9eb5b00e127189caf0bc40913516"
+  },
+  "idlePoolCorrectionPreparation": {
+    "status": "LOCAL_HTTP_TESTS_PASSED_ACTUAL_KMS_ADMISSION_REFUSED",
+    "unitTests": {
+      "exitCode": 0,
+      "tests": 2,
+      "failures": 0,
+      "actualHttpServer": true,
+      "slowActiveResponseMs": 4300,
+      "requestDeadlineMs": 30000
+    },
+    "idleRetirementMs": 4000,
+    "retireOnlySocketsStillInAgentFreePool": true,
+    "retryOrDeadlineChanges": false,
+    "continuousReadsRequired": 1200,
+    "idleBurstsRequired": 40,
+    "readsPerBurstRequired": 8,
+    "preflightLogSha256": "93c911d094ecf533a1b147bf0cf4b1f7235cb367b775bb4f0dadfc447cbde508",
+    "fixtureStarted": false,
+    "originalFailureCauseEstablished": false,
+    "wholeWorkloadAccepted": false
+  },
+  "workloadCleanupCorrection": {
+    "status": "LOCAL_CLEANUP_REGRESSION_PASSED_ACTUAL_WORKLOAD_NOT_RERUN",
+    "originalRedExitCode": 1,
+    "redErrors": 1,
+    "greenExitCode": 0,
+    "greenTests": 3,
+    "exclusiveInventoryCount": 1,
+    "validatesOriginalRolesAndExactCorpusBeforeRemoval": true,
+    "failedPreservationRetainsResources": true,
+    "preCorpusSharedCleanupUnchanged": true,
+    "actualDockerCalls": 0,
+    "newWorkloadAccepted": false
+  },
+  "idlePoolCorrectionActualKms": {
+    "status": "ACTUAL_KMS_IDLE_POOL_RETIREMENT_VERIFIED",
+    "run": "442e558a8630",
+    "outerExitCode": 0,
+    "elapsedSeconds": 282.9379626400005,
+    "continuousReads": 1200,
+    "continuousSuccesses": 1200,
+    "idleBoundaryBurstReads": 320,
+    "idleBoundaryBurstSuccesses": 320,
+    "requestErrors": 0,
+    "instrumentedRequestsIncludingCsrf": 1521,
+    "freeSocketsRetired": 256,
+    "activeSocketsRetired": 0,
+    "retirementIntervalMs": 4000,
+    "retriesAdded": false,
+    "activeRequestDeadlinesChanged": false,
+    "originalNoteRowsUnchanged": true,
+    "originalRolesAndOrganizationPolicyPreserved": true,
+    "sourceArtifactWebAndDriverInputsUnchanged": true,
+    "ownedCleanupIndependentlyConfirmed": true,
+    "eventCounts": {
+      "request-socket": 1521,
+      "response-end": 1521,
+      "socket-close": 276,
+      "retire-free-socket": 256
+    },
+    "redPreserved": "transport-idle-reproduction-proof-389.json",
+    "originalSustainedFailureCauseProven": false,
+    "originalSustainedWorkloadAccepted": false,
+    "newFullWorkloadExecuted": false,
+    "runtimeReceiptSha256": "2a1e04a0817d0c01a73434ee8343938e2df8e0a61595e0744a3624c91bf578b3",
+    "environmentReceiptSha256": "eb2f7fa1b20225cda6d04e17220708e5df15d025e52d20349eb3c707c7478fe8",
+    "eventFileSha256": "229192fbd548066fe49f5c968bd3b215f696f64c784b81fdb6d2b22eb70012d7",
+    "resultSha256": "0467b935da2a15c04834e451e78aaf43f8e49ad046ccae862c30e857946eb253",
+    "independentCleanupSha256": "79ebaef4fc5bb0234711b231ca002bc67aca292f9929e1cf969f47aabb048d9d",
+    "helperSha256": "5aafc5de1bda0c49ef0f7ba6d203d5a7e26c989787cfbbe339d15a09aa3c9bd0"
+  },
+  "correctedSustainedWorkload412": {
+    "status": "RUNNING_TWO_MEASURED_WINDOWS_VERIFIED",
+    "run": "02688f9f0a08",
+    "receiptPath": "scoped-workload-02688f9f0a08/receipt.json",
+    "liveCheckpoint": "live-corrected-workload-checkpoint-420.json",
+    "liveToolSession": 12890,
+    "systemdUnit": "kms-gui-workload-retired-pool-412-20261103101154.scope",
+    "supervisorPid": 4158001,
+    "childPid": 4158003,
+    "reservedStartUtc": "2026-11-03T10:11:54.073682+00:00",
+    "reservedEndUtc": "2026-11-03T15:11:54.073682+00:00",
+    "intervalChosenByOperatorUnderBroadUserApproval": true,
+    "hostExclusivityClaimed": false,
+    "executionBudgetSeconds": 17393,
+    "cleanupReserveSeconds": 600,
+    "measuredSecondsRequired": 12000,
+    "measuredOperationsRequired": 336000,
+    "currentPublishedKmsCommit": "f40e7a2b64098d4e8ba295c75449dccf2f61b4b6",
+    "currentPublishedGuiVersion": "0.8.0",
+    "unpublished081Qualified": false,
+    "idlePolicyActualProofSha256": "cbd574b056b4cb4bb63d527a4fbed4185fd78993dcc336e336a47587a0f1eb0a",
+    "cleanupRegressionSha256": "cc72642549b92c5a53ca8b7a051906455b55d747ea551731df0940f38a0220ab",
+    "preparation415Sha256": "92bc582923d07b5776aec22960c8550a1f8eff4332e49c72b160edf79142c0a5",
+    "clientModulePrePostHashRequired": true,
+    "newHostCleanupRegressionTests": 3,
+    "originalFailurePreserved": true,
+    "wholeWorkloadAccepted": false,
+    "firstWarmupProof": "corrected-workload-first-warmup-proof-423.json",
+    "firstWarmupActualSamples": 1200,
+    "firstWarmupActualSuccesses": 1200,
+    "firstWarmupErrors": 0,
+    "firstWarmupMissed": 0,
+    "actualReadablePopulations": [
+      1000000,
+      100000,
+      10000,
+      1000
+    ],
+    "measuredWindowsCompletedAtCheckpoint": 2,
+    "firstMeasuredWindowProof": "corrected-workload-first-window-proof-427.json",
+    "firstMeasuredWindowProofSha256": "3f9b2a54ad78edb58c76d04f9e1320fb60f6adb00738152bed5387841aa32d2a",
+    "cumulativeRawSampleProof": "corrected-workload-completed-windows-proof-422.json",
+    "verifiedMeasuredRawSamples": 36000,
+    "verifiedMeasuredSuccessfulSamples": 36000,
+    "observedMeasuredErrors": 0,
+    "observedMeasuredMissed": 0,
+    "firstMeasuredWindowOperationCounts": {
+      "roots": 4500,
+      "children": 4500,
+      "note": 3600,
+      "ancestors": 1800,
+      "history": 900,
+      "authorityDenial": 900,
+      "save": 900,
+      "storageDownload": 900
+    },
+    "independentFinalObserver": "workload-independent-final-watch-429.json",
+    "independentFinalObserverToolSession": 63099,
+    "independentFinalObserverPid": 286022,
+    "independentFinalObserverStatus": "RUNNING_BASELINE_VERIFIED_FINAL_ROWS_PENDING",
+    "independentObserverSourceSha256": "e7481e79fe877ce5ca5ae7c77cf6d9782ac6ce95a6c668da51fc0537b73aed42",
+    "independentObserverBaselineCorpusNotes": 1000000,
+    "independentObserverBaselineS3GetBytes": 16384,
+    "independentObserverReadsOutsidePacedLoad": true,
+    "independentFinalMutableRowProofAccepted": false,
+    "independentFinalS3ProofAccepted": false,
+    "secondMeasuredWindowProof": "corrected-workload-second-window-proof-432.json",
+    "secondMeasuredWindowProofSha256": "fbe322326c62764f33583bd7201a7cdb8b8a21460ddcbb50fb34e1195c4681ea"
+  },
+  "currentPublicationAuthority434": {
+    "status": "DIRECT_USER_APPROVAL_GRANTED_NOT_RELEASE_QUALIFICATION",
+    "approvalRecordSha256": "ca1c2dc9c505b01c3fe53c18b50052b1d7313c6e1dd1da284c932ac88814b547",
+    "masterCommitsAndPushAuthorized": true,
+    "normalCleanPatchReleaseQualificationAndPublicationAuthorized": true,
+    "reviewedKmsDependencyUpdateAndIntegrationAuthorized": true,
+    "existingReleasesDataAndServicesPreserved": true,
+    "deploymentAuthorized": false,
+    "modelProviderCallsAuthorized": false,
+    "heavyGatesDeferredUntilCurrentWorkloadEnds": true,
+    "releasePublicationPerformed": false,
+    "paneRepairDevelopmentCommit": "5d19c469",
+    "candidateMetadataDevelopmentCommit": "1d65cba2",
+    "allExecutedProductAndRegressionSourceHashesMatchProof367": true,
+    "publicApiDeclarationsMatchPublished080": true,
+    "remoteMasterBeforeDevelopmentPush": "dee61e9ecc8486364e354fe52a9c239d655354ee",
+    "release081TagAndReleaseAbsentBeforeQualification": true,
+    "cleanReleaseQualificationPerformed": false,
+    "consumerPinUpdated": false
   }
 }

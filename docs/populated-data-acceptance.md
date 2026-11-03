@@ -15,8 +15,12 @@ unchanged authored documents, current membership counts4/25/4/4, complete
 proposals are controlled test inputs, not model output. Eight NOT_FOUND reads
 each have an identical successful owner control with expected body text;
 private/administrator audience labels are also verified.
-Current-host rule-version and legacy-origin cases remain NOT YET VERIFIED.
-The historical cases below retain those obligations; this document is not ready
+Current-host rule-version acceptance remains NOT YET VERIFIED. Bounded legacy
+origin/restore now passes375/1440px in `d0445e4349d4`, with initial immutable rows,
+exact restored text/origin and no invented current membership. Independent
+inventories/roles/cleanup305 pass. This synthetic legacy case does not requalify
+the historical31-record legacy accumulation cohort or million-note migration.
+The historical cases below retain their limits; this document is not ready
 for retirement. F07 in the functional specification owns lasting behavior.
 Initial run04 lacks the ordinary durable worker required by normal rule
 validation. A later finite notifications/text-worker attempt `2b7136e2305b`

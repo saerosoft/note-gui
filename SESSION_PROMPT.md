@@ -4,10 +4,12 @@ Submit this task to the GUI project session. Reading the file alone grants no co
 
 Current user decisions supersede earlier waiting conditions: implement the
 recommended optional policy/association and mount-local dirty APIs as 0.8.0;
-coordinate isolated KMS acceptance without modifying its source or deployment;
+coordinate isolated KMS acceptance and the reviewed GUI dependency update;
 no human review is required. Windows OS support/qualification is not required.
-Builds, tests, development commits and pushes are authorized for this session.
-Release publication and deployment remain separately authorized operations.
+Current approval covers builds, tests, isolated integration/load verification,
+current master commits/push, normal clean0.8.1 patch qualification/publication and
+the reviewed KMS dependency update/integration. Deployment and provider/model
+execution remain excluded. Preserve existing releases, services and data.
 
 ## Objective and source requirements
 
@@ -55,13 +57,13 @@ Maintain `COMPLETION_STATUS.md` with G-unit and original criterion, current impl
 
 For each unfinished requirement: reproduce it, complete the smallest coherent GUI unit, add meaningful regressions, run full normal gates and affected real browser/package checks, document the contract/version effect, commit/push the verified development change and continue. Do not stop after one fix while an independent assigned criterion is actionable.
 
-Use a real core-only persistent example for producer acceptance. For KMS-only semantics, prepare the exact required host method/result, observed failure and consumer acceptance case. Do not edit KMS, its locked submodule/pins/APIs, restart its runtime or expose its private code/configuration/corpus in this public repository. Whole KN01/KN02 and product access/capacity acceptance belongs to KMS.
+Use a real core-only persistent example for producer acceptance. For KMS-only semantics, prepare the exact required host method/result, observed failure and consumer acceptance case. KMS edits are limited to the reviewed GUI dependency pin and required adoption metadata/integration. Preserve unrelated consumer work and existing runtime/data; do not change its backend API or expose private code/configuration/corpus in this public repository. Whole KN01/KN02 and product access/capacity acceptance belongs to KMS.
 
 ## Branch, permissions and handoff
 
 Inspect branch/status/active work and preserve other sessions' edits. Use canonical `Projects/note-gui` on `master`, not inherited upstream-style `main`, a KMS pinned copy or old temporary clone. Develop without new feature/worktree/release branches. The earlier operating-policy commit is already published.
 
-This submitted task authorizes scoped builds/tests/isolated browser checks and coherent development commits/pushes through normal gates. Use English code/docs and project-root `.tmp` for temporary evidence. It does not authorize actual model/provider use, release refs/assets, deployment or edits to other projects.
+Direct reply434 authorizes current master commits/push, normal clean0.8.1 patch qualification/publication and the reviewed KMS dependency update/integration, in addition to scoped builds/tests and isolated browser/load checks. Historical grants do not expand that scope. Use English code/docs and project-root `.tmp` for temporary evidence. Deployment, actual model/provider use and unrelated consumer edits remain excluded. Preserve current workload inputs and run heavy release/integration gates after that workload ends.
 
 Apply conceptual MAJOR, every public-contract change MINOR and unchanged-minor repair PATCH. The release operator later promotes reviewed `master -> version/*` and qualifies the exact result. Never merge/rebase/cherry-pick/copy release commits back into master; fix release-discovered bugs here first. Preserve inherited branches/tags and all source obligations.
 
