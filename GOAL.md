@@ -303,6 +303,13 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   `verify-23.log`, `independent-19.log`, `native-drawio-10.log`, actual API run 05,
   the independent final proof and `packed-check-09.log` establish this bounded
   result. Adopted product-host acceptance remains AC08/AC09.
+- [x] Verify the first100% readable-population profile in current run532.
+  Proof562 audits all four measured windows/3000 seconds/84000 operations with
+  zero unexpected errors/missed operations and1200 separate warmup successes.
+  Independent read-only SQL verifies first mutable revision/history4261, original
+  ownership/initial editor and4260 revisions by the actual workload actor.
+  This accepts one profile only; the other three profiles,12 windows and final
+  source/memory/SQL/S3/preservation/cleanup checks remain required.
 - [ ] Finish the new0.8.1/2a33a2f sustained workloadec1dca539aa9 in532.
   Preparation533 keeps the prior four profiles,16 measured windows/12000 seconds,
   336000 expected operations and4800 separate warmup operations unchanged.

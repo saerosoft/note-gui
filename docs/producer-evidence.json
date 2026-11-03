@@ -2282,5 +2282,47 @@
     "wholeG10OrGoalAccepted": false,
     "proof": "public-contract-release-reconciliation-547.json",
     "proofSha256": "02885b546a4d483e51ab632e29e2c16c836aa1c9516058aeb4fac1ea3f302b68"
+  },
+  "firstCurrent081WorkloadProfile562": {
+    "status": "FIRST_100_PERCENT_PROFILE_ALL_FOUR_WINDOWS_AND_SQL_VERIFIED_FULL_RUN_LIVE",
+    "observedAtUtc": "2026-11-03T17:07:02.120114+00:00",
+    "run": "ec1dca539aa9",
+    "kmsCommit": "2a33a2f81b5742b405a9c2a7a7148723febe9ce6",
+    "guiCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "completedProfiles": [
+      100
+    ],
+    "remainingProfiles": [
+      10,
+      1,
+      0.1
+    ],
+    "measuredWindows": 4,
+    "measuredSeconds": 3000,
+    "measuredSuccessfulOperations": 84000,
+    "unexpectedErrors": 0,
+    "missed": 0,
+    "warmupSuccessesExcludedFromMeasurement": 1200,
+    "firstMutableNoteRevision": 4261,
+    "firstMutableHistoryRows": 4261,
+    "originalOwnerAndInitialEditorPreserved": true,
+    "laterRevisionsAttributedToActualWorkloadActor": 4260,
+    "readOnlySqlProofSha256": "f5a9d497d3cb8c5a0d7ce00b727fb7bf80ce1848e585a77fc331058b16239f56",
+    "rawCompletedWindowBytesUnchanged": true,
+    "scopeOomOrOomKillObserved": false,
+    "mainUnitEvidenceReferenceHeld": true,
+    "currentActiveWindow": {
+      "percent": 10,
+      "phase": "steady",
+      "index": 0,
+      "rate": 20,
+      "seconds": 900,
+      "began": "2026-11-03T17:06:08.946Z"
+    },
+    "remaining12MeasuredWindowsAndFinalEvidenceRequired": true,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "proof": "patched-workload-first-profile-proof-562.json",
+    "proofSha256": "69ab409b8e7a5ccbef03db71c5018c96a472e933d531a6877c5588f78446db54"
   }
 }

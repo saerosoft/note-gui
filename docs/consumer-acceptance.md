@@ -218,8 +218,12 @@ The immutable0.8.1 release source/tag/assets are unchanged.
 
 New-tuple workload532 is running with the same four profiles,16 measured windows/
 12000 seconds/336000 expected operations and separate4800 warmups. Progress535
-is not acceptance. Wider current/pipeline/rule and sustained-workload criteria
-remain open.
+is not acceptance. First-profile proof562 verifies all four100% measured windows/
+84000 operations with zero unexpected errors/missed operations and1200 separate
+warmup successes. Read-only SQL confirms mutable revision/history4261 and original
+ownership with4260 edits attributed to the actual workload actor. Three profiles/
+12 windows and final source/memory/SQL/S3/preservation/cleanup checks remain open,
+as do the wider current/pipeline/rule criteria.
 
 ## Limits and documentation state
 
