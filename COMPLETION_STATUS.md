@@ -532,6 +532,14 @@ pass; a scoped-query experiment measures no improvement and is removed in full.
 Keep its original timeout and assertions. No new release, consumer gate,
 consumer pin change or backend verification is claimed by this repair.
 
+Warning-cost diagnostic626 runs only the unchanged first ancestor test, retaining
+its original assertions,5000ms limit and console output. It passes1 selected case;
+the other6 cases are not selected. One auto-scroll warning takes3.08ms
+synchronously. All source/config/lock inputs match before/after. Proof627 records
+this bounded current observation; it does not establish the original failure's
+cause or justify a logging/runtime change. Attempt625 passes the selected test
+but fails its result-file hook;626 changes only that diagnostic output path.
+
 Additional diagnosis reproduces a separate post-move test-order defect.
 Holding only the post-move ancestor response lets the original observations
 reach the final assertion before the replacement tree request starts; the

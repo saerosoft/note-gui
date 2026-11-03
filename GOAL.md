@@ -408,6 +408,9 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   preserved hashes:305/307 GUI cases pass; the ancestor case reports5078ms
   against5000ms. No original per-test scheduling snapshot is verified, so the
   cause remains open. The historical systemd wrapper's exit is not gate success.
+  Current diagnostic626 retains the first case, assertions,5000ms limit and
+  warning output:1 selected case passes; one warning takes3.08ms synchronously.
+  Source-bound proof627 leaves the original cause open; no runtime fix is justified.
 - [x] Diagnose the separate post-move final-page assertion race with a held
   ancestor response and pre-execution RED/GREEN source hashes. Await the same
   exact replacement-page assertion; keep the original direct-ancestor timeout
