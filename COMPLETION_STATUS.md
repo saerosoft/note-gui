@@ -95,6 +95,17 @@ absence. The earlier 0.8.0 proof477 hash is unchanged. A fresh complete 16-windo
 qualification with the same workload and final checks remains required; the
 partial windows do not replace it. Current/pipeline/rule acceptance remains open.
 
+Fresh run582 `ff7327b40baa` starts at 2026-11-03 18:53:19UTC with the same full
+workload and no reused partial windows. An initial admission attempt584 stops
+before fixture creation while another KMS verification is active; that process
+ends before the successful admission. Preparation583/589 and live start596 bind
+the fresh invocation, adaptive final SQL/S3 observer, scope/inventory observer
+and terminal-metadata reference. Live limits593 verify all seven owned container
+ceilings, no swap, no persistent volumes and an internal network. The new bound
+ends23:53:19UTC with 600 seconds for cleanup. Final collector592 is prepared;
+all measured windows and final proof595 remain required. No host exclusivity,
+deployment, model execution or whole-goal acceptance is claimed.
+
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without
 rebuilding. Graphical edit/reopen, access revocation, read-only viewer and native

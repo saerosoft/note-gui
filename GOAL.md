@@ -316,13 +316,18 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   in those completed windows. All frozen input files still match. Original RUNNING
   receipts remain as interrupted artifacts. Cleanup579 removes only the seven
   exact owned stopped containers and network and independently confirms absence.
-- [ ] Complete a fresh full 0.8.1/2a33a2f sustained workload after resource admission.
+- [ ] Complete fresh full 0.8.1/2a33a2f sustained run582 `ff7327b40baa`.
+  After competing verification ends, the fresh run starts at 2026-11-03
+  18:53:19UTC; its five-hour bound ends 23:53:19UTC with 600 seconds for cleanup.
+  Preparation583/589 and live start596 bind the same frozen workload, new
+  invocation and three read-only observers. Admission failure584 remains intact.
   Retain four profiles, 16 measured windows, 12000 measured seconds, 336000 expected
   operations and 4800 separate warmups. Run532 cannot resume its lost tmpfs corpus;
   its ten completed windows do not replace a full uninterrupted qualification.
   Retain source/artifact/driver hashes, memory limits, SQL/S3/preservation checks,
-  a fresh bounded execution window and cleanup reserve. Do not run collector560
-  against the interrupted artifacts or mark AC08/AC09/AC10 complete.
+  the bounded execution window and cleanup reserve. Final collector592 requires
+  all new-run measurements and final proofs before writing595. Do not run
+  collector560 against interrupted artifacts or mark AC08/AC09/AC10 complete.
 - [ ] Obtain the remaining current KMS host/context/storage/workload evidence.
   Bounded configured-native534 and patched-host518 pass; wider current/pipeline/
   rule criteria and actual KMS remote publication remain open.

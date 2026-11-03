@@ -2456,5 +2456,43 @@
     "cleanupProof": "patched-workload-reboot-cleanup-579.json",
     "cleanupProofSha256": "8241c4aee0e9affd9d84d573ad8033305185ec1ba844dfbe43dd99a9f7084570",
     "priorFinalCollector560NotExecuted": true
+  },
+  "fresh081WorkloadAfterReboot596": {
+    "status": "FRESH_FULL_WORKLOAD_AND_THREE_INDEPENDENT_OBSERVERS_LIVE",
+    "observedAtUtc": "2026-11-03T18:55:04.217634+00:00",
+    "run": "ff7327b40baa",
+    "mainUnit": "kms-gui-081-sustained-workload-retry-582.service",
+    "mainInvocationId": "ce5e6217a52447e484cb41ff34363d10",
+    "startedAtUtc": "2026-11-03T18:53:19.723331+00:00",
+    "operatorSelectedEndUtc": "2026-11-03T23:53:19.723331+00:00",
+    "oldPartialWindowsReused": false,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "profiles": [
+      100,
+      10,
+      1,
+      0.1
+    ],
+    "measuredWindowsRequired": 16,
+    "measuredSecondsRequired": 12000,
+    "measuredOperationsRequired": 336000,
+    "separateWarmupOperationsRequired": 4800,
+    "priorAdmissionRejectedDuringCompetingVerification": true,
+    "threeReadOnlyObserverUnits": [
+      "kms-gui-081-workload-retry-final-586.service",
+      "kms-gui-081-workload-retry-scope-587.service",
+      "kms-gui-081-workload-retry-reference-588.service"
+    ],
+    "finalCollector": "collect-patched-workload-retry-final-592.py",
+    "finalProofTarget": "patched-workload-retry-final-proof-595.json",
+    "finalAcceptanceEstablished": false,
+    "proofSha256": {
+      "patched-workload-retry-preparation-583.json": "407f984d82b6449cbe27e0c6ff2539ef2fac18fd64550ddb4e8ffbe43bdb50d0",
+      "patched-workload-retry-admission-584.json": "689b5a3eac1dadfbcefca1b4bbb1437cd89a6da1ef939bdf423874bf61b74e98",
+      "patched-workload-retry-observers-preparation-589.json": "fdd8ff79d2a822c436a7802d6c2208d72166b980fa94981c7c74e016ea3f7eb4",
+      "patched-workload-retry-live-container-limits-593.json": "f44d559259bc5e4ad6c8ed3bbf9a9e94e232fdf6aad9801b5a8dac63daafdb3e",
+      "patched-workload-retry-live-start-596.json": "86792227fb4856f14b7737abde54c695ffd3c3ff9cdce9daca57d70b168da736"
+    }
   }
 }

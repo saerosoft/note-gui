@@ -237,6 +237,15 @@ their network, and independently confirms absence. The earlier 0.8.0 proof477 is
 unchanged. A fresh complete 16-window qualification and final SQL/S3/preservation/
 memory/cleanup evidence remain required; partial windows do not close acceptance.
 
+Fresh run582 `ff7327b40baa` begins at 2026-11-03 18:53:19UTC after competing
+verification ends. It retains all 16 windows and 4800 separate warmups, with
+no partial-window reuse. Preparation583/589, live start596 and limits593 bind
+the fresh invocation, three observers and seven owned containers. The bound
+ends23:53:19UTC with 600 seconds for cleanup. Final collector592 and proof595
+require the complete new-run SQL/S3/source/memory/preservation/cleanup evidence.
+This running state does not establish workload or wider current/pipeline/rule
+acceptance.
+
 ## Limits and documentation state
 
 The 1,300-root local example measurement is warm, single-user and explicitly
