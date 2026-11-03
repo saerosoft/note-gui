@@ -19,15 +19,20 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 ## Version policy
 
 The current minor contract is 0.8.0. Optional collaboration capabilities and
-mount-local dirty reporting establish this line. The qualified release is
-`release/v0.8.0` at `b9c1ae1d544194fe9dc0bfe5490992be79182cbe`, with annotated
-tag object `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`. Its published qualification
-records exact-source automated checks and limitations. Human review is not an
-acceptance gate. Consumer adoption and product acceptance remain separate.
+mount-local dirty reporting establish this line. The current qualified patch is
+[release/v0.8.1](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.1)
+at `07db42d5eff379cf2141e463c7f723c14ce185e1`, with annotated tag object
+`f24188816ecc86091a5400877604ceb90ac7eecc`. It repairs native modal split-pane
+layout within the unchanged intended 0.8 protocol. Its exact clean release source
+passes normal Make verification, 43 independent browser cases, five actual
+Draw.io cases and strict extracted-package checks. All seven downloaded assets match qualification
+and checksums. Human review is not an acceptance gate. Consumer adoption and
+product acceptance remain separate.
 
-The unpublished 0.8.1 candidate repairs split-pane layout and retains the 0.8
-public protocol. Its local package checks do not qualify a clean release commit,
-publish a tag or change the consumer's existing 0.8.0 pin.
+The original 0.8.0 annotated tag `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`
+still resolves to `b9c1ae1d544194fe9dc0bfe5490992be79182cbe`. Preserve its assets
+and source for consumers retaining that pin. Publishing 0.8.1 does not update
+an existing consumer automatically.
 
 - Increment MAJOR for a substantial redesign of the library's concept or
   responsibility, then reset MINOR and PATCH.
@@ -45,14 +50,15 @@ it is unrelated to this release. Preserve inherited branches and tags.
 
 ## Consumer identity
 
-For the 0.8.1 patch, pin all three values: `version/0.8`, `release/v0.8.1` and the tag's exact peeled
-commit recorded in `qualification.json`. Verify that the selected checkout
+For the 0.8.1 patch, pin `version/0.8`, `release/v0.8.1` and exact commit
+`07db42d5eff379cf2141e463c7f723c14ce185e1`, as recorded in `qualification.json`.
+Verify that the selected checkout
 equals that commit, that the tag resolves to it, and that `release.json` and
 the contract digests match the release evidence. Later patches may advance the
 branch; a consumer stays on its reviewed tag and commit until explicitly upgraded.
 Never follow `master`, a caret range, `latest` or automatic remote updates.
 
-After that release is published, download `knowledge-engine-note-gui-0.8.1.tgz` and check it against
+Download `knowledge-engine-note-gui-0.8.1.tgz` from that release and check it against
 `SHA256SUMS`. It contains the package manifest and complete `dist/`, including
 the ES module entries, CSS, chunks, fonts, declarations, source offer and notices.
 The root, `/kms` and `/style.css` package exports retain their documented paths.

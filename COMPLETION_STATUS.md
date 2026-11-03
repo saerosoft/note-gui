@@ -13,14 +13,28 @@ successors254/255/257 retain the original cases, guards and6390/4260/2130s budge
 focused259 passes18/18. The existing native interval ending06:45UTC is retained
 as an additional bound, without claiming a new interval approval or exclusivity.
 
-Master publication is VERIFIED at `ad985bf0`, containing pane repair `5d19c469`,
-candidate metadata `1d65cba2` and current work records. Proof438 checks the normal
-fast-forward push, matching remote head and clean development tree at publication.
-All three executed runtime/regression source hashes match proof367; public API
-declarations match published0.8.0. The existing annotated0.8.0 tag/peeled commit
-and version branch remain unchanged; release/v0.8.1 is not published. Clean
-receiving-branch qualification and KMS adoption remain pending after the workload.
-No heavy release/integration gate has started.
+Producer0.8.1 qualification and publication are COMPLETE in proof492. The exact
+clean receiving version/0.8 source is master-origin commit07db42d5, with annotated
+tag `f24188816ecc86091a5400877604ceb90ac7eecc`. Normal Make/source3/unit307/34,
+strict declaration/import/build checks, independent browser43 and actual native
+Draw.io5 pass. Browser reports have zero skips/flaky/unexpected outcomes. The
+actual tarball contains682 matching distribution files and292 exact committed
+source blobs. Agent inspection confirms desktop/narrow split layout and full
+native dialogs. All seven downloaded release assets and six checksums match.
+
+The native app worktree tools time out without returning an operation or creating
+a worktree. Normal Git fallback creates an isolated receiving-branch worktree
+and promotes master forward only. The old0.8.0 worktree is detached at the same
+b9c1ae1d commit; its295 tracked sources and682 built files remain byte-identical.
+The original0.8.0 tag/assets are preserved. A preparation-only archive scanner
+matches its own quoted key marker; the failed archive/helper remain intact. The
+corrected scanner detects a real local PEM in memory, excludes the quoted source,
+and the final readable evidence retains that failure. No product gate is rerun
+for this preparation correction and no private key enters release assets.
+
+The reviewed KMS pin update/integration is authorized by reply434 and remains
+pending. Producer publication does not qualify affected product-host behavior or
+close the remaining current/pipeline/rule requirements.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,
 skipped or flaky cases, outer exit0. The matched normal build is reused without
@@ -114,7 +128,8 @@ live and must not be restarted from its consumed marker. Current reply253 still
 covered the remaining scoped tests at that checkpoint; Git/publication, provider
 calls and deployment were excluded before the later direct reply434.
 
-Pane-grid repair is VERIFIED for the unpublished producer snapshot. Regression363
+Earlier pane-grid verification before final release qualification is VERIFIED.
+Regression363
 fails desktop with right-pane y522.5 instead of45; the separate mobile case passes
 after waiting for the existing modal transition. The product fix makes each pane
 provider a single grid/flex item, lets the editor fill it and retains the existing
@@ -154,7 +169,7 @@ provenance. The existing bounded43 scope is unchanged; an existing qualified
 result/environment path is requested while independent work continues. Models,
 forced queue staging and invented observations remain outside current scope.
 
-The working metadata now declares unpublished candidate0.8.1, PATCH within the
+At the candidate checkpoint, working metadata declares0.8.1, PATCH within the
 unchanged0.8 protocol. Normal Make379 passes source3/unit307/34, types/declarations/
 build/distribution and strict imports. Its405 runtime JS/CSS/font assets exactly
 match the build used by browser43. Actual tarball380 contains689 files, including
@@ -767,7 +782,7 @@ acceptance. No whole G-unit is accepted solely from component tests.
 | G06 | KNOWLEDGE-023–026/030/032–038, F06/F07; `NoteProperties`, `NoteRelations`, `NoteKnowledgeContext`, `NoteCurrentKnowledge`, `NoteProvenance` | Four typed property writes/delete and preserved rich content pass. Full controlled-extension browser checks bounded current/history/proof pages, attribution/backlinks and exact source/rule/review-operation/action popup destinations. Local read retry and keyless-write readback guards pass. | Bounded populated43 applications and shared associations pass in024345c3b295/c3d33e70ced0. Collected-empty-authored/nonempty-current, human restore with independent nonempty current, pipeline stale-target and genuine rule-comparison/application cases remain open. PARTIAL. |
 | G07 | KNOWLEDGE-016–018/027/065, F08; `useDiagramSource`, `useAuthorizedFile`, native node views | Native Excalidraw/Mermaid/XML roundtrips pass. Producer native5 and actual matched-host native4/ownership3/restore4 pass, including inline edit/undo, co-editor successor attribution and pane/tab restore isolation. Current-host SQL/storage/role/cleanup proofs are preserved in261/274 and archive280. | Bounded approved-origin Draw.io journal is complete and retired. Additional all-format peer/storage cases323 and formatted restore332 pass with independent proofs327/336. Pane-grid producer repair passes normal Make365/browser43 with proof367. Wider integrated patched-host/product/context acceptance remains open. PARTIAL. |
 | G08 | KNOWLEDGE-014/027/036, F09; `access.ts`, `hostRuntime.tsx`, `useSpaceAccess.ts` | Refresh/revocation and delayed delivery/media pass; historical real API cases cover private/admin/session/demotion/removal/viewer drafts. New optional transport separates scoped403/FORBIDDEN from identity loss. Fresh shared/controlled byte denial and independent exact-role SQL/S3 proof pass. | Core fail-closed semantics are unchanged. Old expired-lease inventory remains absent; fresh lease proof does not substitute for adopted product-host or wider mode-change acceptance. PARTIAL. |
-| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | Published0.8 release/adoption is complete at f40e7a2. Unpublished0.8.1 producer Make379/package380 passes; clean patch promotion/publication, reviewed consumer pin and integrated patched-host checks are authorized by reply434 and remain unexecuted pending normal qualification. Windows is NOT_APPLICABLE. PARTIAL for the current candidate. |
+| G09 | FOUNDATION-002/003/004/025–029, KNOWLEDGE-064; build/source/package scripts | Exact immutable 0.8 release passes source3/unit307/34/browser41/native5/package682/source295 with downloaded assets verified. KMS source-built distribution matches all804 corresponding-source ZIP entries and passes WEB938/148, focused15/3, build/types/lint and three-width CONTROLLED host10. | Published0.8 release/adoption is complete at f40e7a2. Qualified0.8.1 is published at07db42d5/tag f2418881, with source3/unit307/34/browser43/native5/package682/source292 and all seven downloaded assets verified in492. Reviewed consumer pin and affected patched-host checks are authorized by reply434 and remain pending. Windows is NOT_APPLICABLE. PARTIAL until consumer adoption. |
 | G10 | SC01/SC02/SC04/SC09/SC10, KNOWLEDGE-004/023–027/036/038 | Agreed optional adapter is verified in core-only/CONTROLLED/SHARED hosts. Three-width actual SHARED creation, real actors, original link creator/global receipt/relink, file authority and CONTROLLED role/epoch2/3/4 recovery pass in `c3d33e70ced0`, with independent SQL/S3/role/cleanup proof. | Integrated native4/ownership3/restore4, peer4 and formatted restore2 pass in254/255/270/323/332. Wider populated actor/reviewer/source context, integrated patched-host layout and whole SC09 remain open. No new DTO or actor inference is introduced. PARTIAL; bounded AC04 complete. |
 | G11 | R02–R06; factual docs, seven original journals, source distribution | Seven journals reconciled; correction, move/large-document, bounded Draw.io and declared capacity units are archived/removed. Current producer packet, sanitized proofs and readable evidence archives retain their limits. Duplicate current/screen contracts move to the lasting specification. | Three original journals retain unfinished host/context/rule criteria. Prompt and this record remain until last. PARTIAL. |
 

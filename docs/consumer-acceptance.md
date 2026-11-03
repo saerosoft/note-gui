@@ -161,7 +161,7 @@ only readiness waits change in the separate driver. Wider cases below remain ope
 | Owner/input | Required check before acceptance |
 | --- | --- |
 | KMS release coordinator | Adopt only the published version/tag/peeled commit and matching source offer. Serve the complete module/CSS/chunks/fonts/notices through actual `/notes/`, with Vite stopped. |
-| KMS ordinary authenticated host | Bounded restore4/ownership3 and all-format formatted restore2 pass in270/255/332. Preserve exact server/body/byte and independent draft/DOM evidence. Producer pane-grid repair passes Make365/browser43; qualify the unpublished patch in the integrated host before whole-screen acceptance. |
+| KMS ordinary authenticated host | Bounded restore4/ownership3 and all-format formatted restore2 pass in270/255/332. Preserve exact server/body/byte and independent draft/DOM evidence. Producer pane-grid repair passes Make365/browser43; qualify the published0.8.1 patch in the integrated host before whole-screen acceptance. |
 | KMS file authority | Bounded integrated native4, Draw.io peer ownership3 and Mermaid/Excalidraw peer4 pass in254/255/323. Proofs261/274/327 preserve original owners/bytes, successor uploader, direct denial, role restoration and actual storage inventories. Wider product/context acceptance remains open. |
 | KMS contextual fixture | Current/authored/history stay distinct; relation/backlink proof and source/rule/review/action links select the exact authorized operation/revision. No private source is copied into shared content. |
 | Approved Draw.io installation | Qualify the approved deployment/embed origin. Five current tests use the actual pinned native application over isolated loopback HTTPS; deployment/session acceptance remains separate. |
@@ -174,19 +174,22 @@ plain writes, ordinary review and HTTP MCP proposals/decisions reject structured
 flattening and preserve title-only rich content/files. Request/approval replay
 retains revision and actual client identity. Proof376 independently verifies SQL,
 24 S3 objects/1663 bytes, original roles/settings and owned cleanup. Initial schema
-fixture failure351 is preserved. These cases use the frozen host; the unpublished
-pane-grid patch and genuine pipeline/current cases remain separately qualified.
+fixture failure351 is preserved. These cases use the frozen host; published0.8.1
+adoption and genuine pipeline/current cases remain separate requirements.
 
-Unpublished patch candidate0.8.1 passes Make379 and actual extracted-tarball380
-checks. Its405 runtime JS/CSS/font assets exactly match the43-case browser build;
-all682 shipped distribution files and802 source/notice entries are byte-checked.
+Producer0.8.1 is now qualified and published at exact clean release commit
+`07db42d5eff379cf2141e463c7f723c14ce185e1`, annotated tag object
+`f24188816ecc86091a5400877604ceb90ac7eecc`. Normal Make/source3/unit307/34,
+independent browser43, actual native Draw.io5 and strict extracted-package
+imports/types pass. All682 distribution files and292 committed source blobs
+match. Proof492 verifies all seven downloaded assets and six checksums. The
+prior preparation-only scanner false positive remains in the readable evidence;
+no actual key is included. Existing0.8.0 tag/assets and frozen inputs are preserved.
+
 The normal KMS build requires a clean released commit/tag matching its lock.
-Direct reply434 authorizes patch publication, clean-release qualification and the
-reviewed pin update/integration. Those gates remain unexecuted; no checker is
-bypassed or existing release replaced. Run heavy gates after the active workload.
-Development master is published at ad985bf0 with repair5d19c469 and metadata
-1d65cba2, independently verified438. The existing0.8.0 release remains unchanged;
-clean0.8.1 receiving-branch qualification/publication and adoption are still open.
+Reply434 authorizes the reviewed dependency update and integration. That consumer
+pin and affected patched-host qualification remain pending; do not bypass the
+checker or include unrelated concurrent consumer changes.
 
 ## Limits and documentation state
 

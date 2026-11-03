@@ -87,6 +87,8 @@ The package is `private: true`; these instructions do not describe an npm
 publication. Consume a qualified release pinned by version branch, immutable tag
 and exact commit as described in [OPERATIONS.md](OPERATIONS.md), and
 retain its lockfile, notices and matching corresponding-source offer.
+The current qualified patch is [0.8.1](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.1);
+its exact tag/commit identity is recorded in OPERATIONS.md.
 
 ## Host the public library
 

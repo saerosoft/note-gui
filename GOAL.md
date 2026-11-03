@@ -51,11 +51,12 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   Wider populated/native/workload and whole SC09/G10 remain AC08 dependencies.
 - [x] AC05: Host-external dirty navigation has an agreed mount-local contract
   covering body/comment/property/native drafts and disposal.
-- [ ] AC06: Full verification and actual extracted-package imports, strict types,
-  CSS/assets/fonts/notices and all matching source entries pass for final code.
-  Current0.8.1 producer Make379 and actual extracted package380 pass;405 runtime
-  JS/CSS/font files exactly match browser43. Final record/source qualification on
-  the clean release result remains separate and awaits its publication workflow.
+- [x] AC06: Exact clean0.8.1 release07db42d5 passes normal Make verification,
+  source3/unit307/34, independent browser43 and actual native Draw.io5, with zero
+  skips/flaky/unexpected browser outcomes. Actual extracted tarball imports/types
+  pass with skipLibCheck:false; all682 distribution files and292 committed source
+  blobs match. All seven published/downloaded assets and six checksums match in
+  proof492. Consumer adoption and affected product-host checks remain AC08/AC09.
 - [x] AC07: Actual desktop/narrow/native Draw.io and Linux qualification are
   verified in authorized environments. Windows is out of scope by explicit user
   decision; its failed historical run is not a remaining acceptance condition.
@@ -65,9 +66,9 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   evidence, and the consumer adopts its reviewed tuple under separate authority.
   The single normal KMS pre-push passes and publishes `f40e7a2`; fresh HTTPS
   remote readback matches. Bounded current-source CONTROLLED host10 passes.
-  The new0.8.1 patch is locally verified but unpublished; its clean release
-  qualification and reviewed KMS pin are authorized by reply434 and remain
-  unexecuted pending the normal release workflow.
+  New0.8.1 producer publication is complete: annotated tag f2418881 resolves to
+  qualified07db42d5 and all seven downloaded assets match in proof492. Reply434
+  authorizes its reviewed KMS pin and integration, which remain pending.
   Wider context/native/workload requirements remain AC08.
 - [ ] AC10: Feature behavior has one lasting specification owner. Every fully
   completed work document is marked complete and removed with evidence/links
@@ -189,8 +190,8 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   strict package imports and full independent browser43, including1600/390px
   pane geometry, native viewport and independent draft/DOM preservation. Proof367
   retains before/after evidence. Candidate0.8.1 Make379 and extracted package380
-  subsequently pass; clean release qualification and affected integrated-host
-  adoption remain open.
+  subsequently pass. Final clean0.8.1 qualification/publication is now verified
+  in492; affected integrated-host adoption remains open.
 - [x] Verify actual plain GraphQL, ordinary review and HTTP MCP rich-write
   protection at375/1440px: corrected372 passes6/6 in c6c7161bf627. Proof376 checks
   exact rich JSON/files, rejection/pending state, replay/actor identity, SQL18
@@ -448,14 +449,14 @@ remain external qualification output to avoid self-referential source archives.
    later dated grants supported the completed release/adoption work. Neither
    expands current reply253. Preserve current data and make fixture writes only
    in specifically owned isolated resources.
-6. Current patch publication: the concrete0.8.1 candidate passes Make379 and
-   actual extracted-tarball380 checks. The normal KMS dependency checker requires
-   a clean released commit/tag matching its lock. Reply434 now authorizes normal
-   publication and the reviewed consumer-pin update. The pane repair and candidate
-   metadata are committed on master at5d19c469/1d65cba2 and published with records
-   at ad985bf0, independently verified438. Clean release qualification,
-   publication and adoption remain unexecuted. Do not bypass that checker or overwrite the old0.8.0 release/input
-   tuple. Keep heavy release/integration gates separate from the running workload.
+6. Current patch publication:0.8.1 is qualified and published from exact clean
+   version/0.8 commit07db42d5 with annotated tag f2418881. Proof492 verifies all
+   seven downloaded assets and six checksums. Source3/unit307/34/browser43/native5,
+   strict extracted-package imports and292 exact source blobs pass. The normal
+   KMS checker still requires the reviewed released tuple; reply434 authorizes
+   updating that pin and integration. Preserve unrelated consumer work, old0.8.0
+   tag/assets and the accepted frozen workload inputs. Producer qualification
+   does not substitute for affected product-host adoption checks.
 7. Current data prerequisite: the collected/nonempty-current and genuine rule-
    comparison cases need actual ordinary processing/comparison results. Audit353
    confirms the historical seed directly inserts processing/review rows and a
@@ -511,8 +512,9 @@ cleanup proof327; formatted all-diagram restore332 passes2/2 with proof336.
 Earlier persona/selector failures and owned recovery317 remain preserved.
 The pane-grid repair reproduces RED363 and passes normal Make365 plus full
 independent browser43; proof367 retains exact sources, native viewport/draft checks
-and inspected screenshots. It is unpublished and has not changed the frozen KMS
-consumer. Extra plain/review/HTTP-MCP cases pass6/6 in c6c7161bf627 with independent
+and inspected screenshots. Final0.8.1 publication is verified in492; the frozen
+KMS0.8.0 inputs remain unchanged and reviewed patch adoption is still pending.
+Extra plain/review/HTTP-MCP cases pass6/6 in c6c7161bf627 with independent
 proof376 and cleanup375; the initial schema-preparation failure stays preserved.
 
 Sustained run `995d5221d4f9` finishes all16 windows/12000 measured seconds with

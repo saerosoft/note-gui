@@ -1906,7 +1906,7 @@
     "deploymentAuthorized": false,
     "modelProviderCallsAuthorized": false,
     "heavyGatesDeferredUntilCurrentWorkloadEnds": true,
-    "releasePublicationPerformed": false,
+    "releasePublicationPerformed": true,
     "paneRepairDevelopmentCommit": "5d19c469",
     "candidateMetadataDevelopmentCommit": "1d65cba2",
     "allExecutedProductAndRegressionSourceHashesMatchProof367": true,
@@ -1918,9 +1918,9 @@
     "masterPushVerified": true,
     "publishedMasterCommit": "ad985bf0510c9125f95d52b115e0cd11ea83f64b",
     "masterPublicationProofSha256": "71754938a2aac923a7033365989bf0e3948a906c82c177a504984c58fb3730a3",
-    "existing080ReleaseRefsUnchanged": true,
     "existing080SourcesAndBuildPreservationProofSha256": "78964e9c472c13636988209addf9bde8a385c445e0649aa96928d0ea822462fa",
-    "consumerPinBaselineReadOnly": true
+    "consumerPinBaselineReadOnly": true,
+    "existing080RefsUnchangedAtDevelopmentPublication": true
   },
   "originalConsumerFailureEvidenceRoute460": {
     "status": "ORIGINAL_CONSUMER_FAILURE_RELOCATED_HASHES_MATCH",
@@ -1956,5 +1956,74 @@
     "historicalFailuresAndLimitsPreserved": true,
     "unfinishedPatchedHostContextAndRuleCriteriaRemainOpen": true,
     "wholeGoalAccepted": false
+  },
+  "qualifiedPublished081Release492": {
+    "status": "PUBLISHED_081_ANNOTATED_TAG_AND_SEVEN_DOWNLOADED_ASSETS_VERIFIED",
+    "releaseUrl": "https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.1",
+    "sourceCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "tagObject": "f24188816ecc86091a5400877604ceb90ac7eecc",
+    "publicationProof": "release-081-publication-proof-492.json",
+    "publicationProofSha256": "611260bada4bef9e01b2de9a511a0bade3377360019466cbfaf00138aa64089e",
+    "counts": {
+      "sourceOfferTests": 3,
+      "unitComponentTests": 307,
+      "unitComponentTestFiles": 34,
+      "pinnedUpstreamSources": 115,
+      "localFontAssets": 234,
+      "independentBrowserTests": 43,
+      "actualNativeDrawioTests": 5,
+      "browserSkipped": 0,
+      "browserFailed": 0,
+      "browserFlaky": 0,
+      "committedSourceFiles": 292,
+      "distributionFiles": 682,
+      "packageFiles": 689
+    },
+    "downloadedAssets": {
+      "SHA256SUMS": {
+        "sha256": "e01fa545a40a93fea9f15316d9f9b0ca81d5b2b258ce7c522ff918d48bd8e54a",
+        "sizeBytes": 538
+      },
+      "release.json": {
+        "sha256": "a463aa38c0256e403df1d3ad69f4a02bd3a49d3db25f567c0be08e0bd4e5354c",
+        "sizeBytes": 284
+      },
+      "note-gui-source-0.8.1.zip": {
+        "sha256": "d68f74c61d0127f3acabb9b071b0abccf2afcc27b23180f8fd0aa3ca3a814808",
+        "sizeBytes": 1318861
+      },
+      "CONTRACT-SHA256SUMS": {
+        "sha256": "10a9fae9cb3da06da1aaad938fb458002189e8dc2c94b4d456acc1ec69788176",
+        "sizeBytes": 402
+      },
+      "qualification.json": {
+        "sha256": "aa7ebf034bab73d45e95984b9faf5ee0f325cbd85cfa4416ae3674900d5d6672",
+        "sizeBytes": 6532
+      },
+      "knowledge-engine-note-gui-0.8.1.tgz": {
+        "sha256": "6ad5850cfd6e439df1f5192a844a3568693e066dffa201bb8e417c0f2196ee56",
+        "sizeBytes": 27212479
+      },
+      "producer-evidence-0.8.1.tgz": {
+        "sha256": "78a5cf55f2725efd5172794d1520f91aa1904cf8af8322886cb9d18666d355b6",
+        "sizeBytes": 687479
+      }
+    },
+    "allSevenAssetsByteIdentical": true,
+    "sixChecksumsPassed": true,
+    "allCommittedSourceBlobsMatch": true,
+    "nativeStaticApplicationFilesVerifiedBeforeAndAfter": 3092,
+    "agentVisualInspection": [
+      "native-split-layout-1600.png",
+      "native-split-layout-390.png",
+      "native-drawio-1600.png",
+      "native-drawio-390.png"
+    ],
+    "existing080TagAndAssetsPreserved": true,
+    "version08AdvancedByQualifiedMasterOriginPatch": true,
+    "preparationOnlyScannerFailurePreserved": true,
+    "consumerPinChanged": false,
+    "consumerAdoptionAccepted": false,
+    "wholeGuiGoalAccepted": false
   }
 }
