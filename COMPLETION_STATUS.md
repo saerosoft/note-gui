@@ -217,12 +217,14 @@ supervisor413, its child and tool session12890 are live at checkpoint420. Actual
 SQL verifies1000000 corpus notes; API-readable populations match1000000/100000/
 10000/1000. Proof423 audits all1200 first-warmup samples:1200 successful, zero
 errors/missed and exact read/save/history/authority/storage operation counts.
-Proof427/432 preserve the first two windows. Proof439 now verifies all four100%
-windows:three900-second20rps and one300-second100rps,84000 measured samples, all
-successful with zero unexpected errors/missed and exact operation counts.
-Independent SQL442 confirms the first mutable note's revision/history4261,
-original owner and structured HUMAN body. This completes4/16 measured windows;
-the10% population's first steady window is active.
+Proof427/432/439 preserve the earlier windows. At12:02UTC, proof451 verifies all
+eight100%/10% windows:168000 measured samples, all successful with zero unexpected
+errors/missed, complete unique request indexes and exact operation counts. Each
+population includes three900-second20rps and one300-second100rps window. Independent
+SQL452 confirms both completed mutable notes retain their original owner,
+structured HUMAN body and revision/history4261 each,8522 history rows combined.
+This completes8/16 measured windows; the1% population's first steady window is
+active. Live checkpoint420 owns subsequent execution observations.
 Preserve the2GiB/zero-swap driver scope, container limits,12000 measured seconds,
 all four populations and authority/storage checks. Use a separate completed-window
 audit421/422; planned counts are not results.

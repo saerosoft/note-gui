@@ -210,11 +210,11 @@ platform, release or consuming-product acceptance. No earlier GOAL.md existed.
   seconds and existing frozen0.8.0/f40e7a2 tuple. Checkpoint420 verifies the live
   scope/supervisor/tool handle. Proof423 verifies1200 successful first-warmup
   samples and four actual readable populations. Proof427 preserves the first
-  window; proof432 preserves two windows. Proof439 verifies84000 successful
-  samples across all four100% windows, including the300-second100rps stress,
-  with exact operation counts and zero unexpected errors/missed. SQL442 confirms
-  the first mutable note's owner and revision/history4261. Only4/16 measured
-  windows are complete; preserve original failures
+  window; proof432/439 preserve earlier windows. At12:02UTC, proof451 verifies
+  168000 successful samples across all eight100%/10% windows, including both
+  300-second100rps stress windows, with exact operation counts and zero unexpected
+  errors/missed. SQL452 confirms both completed notes' original owners and
+  revision/history4261 each. Only8/16 measured windows are complete; preserve original failures
   and verify the remaining windows, final SQL/storage, input hashes and cleanup.
   Independent read-only observer429 is running with baseline1000000 corpus notes
   and actual16384-byte S3 object verified. Its final four-note/history and fresh

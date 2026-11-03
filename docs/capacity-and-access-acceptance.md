@@ -19,12 +19,14 @@ its child and the2GiB/zero-swap systemd scope are observed live at checkpoint420
 Actual SQL verifies1000000 corpus notes and API-readable populations match
 1000000/100000/10000/1000. Proof423 verifies the first warmup's1200 raw samples,
 all successful with zero errors/missed and exact operation counts. First-window
-proof427/432 preserve the first two windows. Proof439 verifies84000 successful
-measured samples across the first population's three900-second20rps and
-one300-second100rps windows, zero unexpected errors/missed, unique complete request
-indexes and exact operation counts. Independent SQL442 verifies the first mutable
-note's original owner, structured HUMAN body and revision/history4261. Only4/16
-measured windows are complete; the10% population's first steady window is active.
+proof427/432/439 preserve earlier windows. At12:02UTC, proof451 verifies168000
+successful measured samples across all eight100%/10% windows, zero unexpected
+errors/missed, unique complete request indexes and exact operation counts. Both
+populations include three900-second20rps and one300-second100rps window. Independent
+SQL452 verifies both completed mutable notes' original owner, structured HUMAN
+body and revision/history4261 each,8522 history rows combined. Only8/16 measured
+windows are complete; the1% population's first steady window is active. Consult
+live checkpoint420 for subsequent observations.
 The full workload and final preservation/cleanup are not yet accepted.
 Follow the live execution rather than launch another run. Audit completed raw
 windows with421/422, then verify independent SQL/S3, input identity and owned cleanup.
