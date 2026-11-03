@@ -110,14 +110,15 @@ Memory limits, zero-OOM, measured-window and cleanup requirements are unchanged;
 all measured windows and final proof595 remain required. No host exclusivity,
 deployment, model execution or whole-goal acceptance is claimed.
 
-Halfway proof612 verifies eight measured windows of fresh run582's 100% and 10%
-readable populations: 6,000 measured seconds and 168,000 successes, with zero
-unexpected errors/missed operations and 2,400 separate warmup successes.
-API checks confirm readable populations of 1,000,000 and 100,000 notes; the driver
-records 562 and 566 browser observations. Read-only SQL confirms both notes at
+Proof617 verifies twelve measured windows of fresh run582's 100%, 10% and 1%
+readable populations: 9,000 measured seconds and 252,000 successes, with zero
+unexpected errors/missed operations and 3,600 separate warmup successes.
+API checks confirm readable populations of 1,000,000, 100,000 and 10,000 notes;
+the driver records 562, 566 and 564 browser observations. Read-only SQL confirms
+all three notes at
 revision/history 4,261, original ownership/initial editor and 4,260 later edits
-each by the corresponding workload actor. Eight measured windows, two readable
-profiles and all final checks remain required. Whole-workload
+each by the corresponding workload actor. Four measured windows, one readable
+profile and all final checks remain required. Whole-workload
 and current/pipeline/rule acceptance remain open.
 
 Native254 completes actual run `54980887bd1e`: browser4/4, zero unexpected,

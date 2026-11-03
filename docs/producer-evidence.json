@@ -2667,5 +2667,113 @@
     "wholeGoalAccepted": false,
     "proof": "patched-workload-retry-halfway-proof-612.json",
     "proofSha256": "8e1227f86fc726dc6c3c2a55c3b1fa81f3646b250b71524d9ebfbd9dabd69ef0"
+  },
+  "threeFresh081WorkloadProfiles617": {
+    "status": "FIRST_THREE_FRESH_RETRY_PROFILES_ALL_TWELVE_WINDOWS_AND_SQL_VERIFIED_FULL_RUN_LIVE",
+    "observedAtUtc": "2026-11-03T21:33:14.292355+00:00",
+    "run": "ff7327b40baa",
+    "kmsCommit": "2a33a2f81b5742b405a9c2a7a7148723febe9ce6",
+    "guiCommit": "07db42d5eff379cf2141e463c7f723c14ce185e1",
+    "completedProfiles": [
+      100,
+      10,
+      1
+    ],
+    "remainingProfiles": [
+      0.1
+    ],
+    "measuredWindows": 12,
+    "measuredSeconds": 9000,
+    "measuredSuccessfulOperations": 252000,
+    "unexpectedErrors": 0,
+    "missed": 0,
+    "warmupSuccessesExcludedFromMeasurement": 3600,
+    "warmups": [
+      {
+        "percent": 100,
+        "actualSuccessfulSamples": 1200,
+        "rawSha256": "ddce5bfa2ea50bf42ba87023b9b3bf038c7382aa142929561f826eccd6ef7551"
+      },
+      {
+        "percent": 10,
+        "actualSuccessfulSamples": 1200,
+        "rawSha256": "329c0ab0985932e569d691778463d2b2f97c95b736c6bc42ef4e7ad0de5f0ea5"
+      },
+      {
+        "percent": 1,
+        "actualSuccessfulSamples": 1200,
+        "rawSha256": "500a32663d3539c359c537d23170f0e53222144d723ef8cb9d9aa2b996bf9d99"
+      }
+    ],
+    "readOnlySqlObservations": [
+      {
+        "percent": 100,
+        "revision": 4261,
+        "originalOwnerPreserved": true,
+        "historyRows": 4261,
+        "firstRevision": 1,
+        "lastRevision": 4261,
+        "initialEditorPreserved": true,
+        "workloadActorEdits": 4260,
+        "otherLaterEditors": 0
+      },
+      {
+        "percent": 10,
+        "revision": 4261,
+        "originalOwnerPreserved": true,
+        "historyRows": 4261,
+        "firstRevision": 1,
+        "lastRevision": 4261,
+        "initialEditorPreserved": true,
+        "workloadActorEdits": 4260,
+        "otherLaterEditors": 0
+      },
+      {
+        "percent": 1,
+        "revision": 4261,
+        "originalOwnerPreserved": true,
+        "historyRows": 4261,
+        "firstRevision": 1,
+        "lastRevision": 4261,
+        "initialEditorPreserved": true,
+        "workloadActorEdits": 4260,
+        "otherLaterEditors": 0
+      }
+    ],
+    "readOnlySqlProofSha256": "193a42dc196098ec051eefc9d929e37a0c4b4c7eab922d11fca9b2232af4594e",
+    "actualApiReadablePopulations": [
+      1000000,
+      100000,
+      10000
+    ],
+    "actualBrowserObservationsByProfile": {
+      "100": 562,
+      "10": 566,
+      "1": 564
+    },
+    "scopeMemoryEventsObserved": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    },
+    "scopeMemoryPeakBytes": 1123545088,
+    "mainAndThreeObserversConfirmedActive": true,
+    "currentActiveWindow": {
+      "percent": 0.1,
+      "phase": "steady",
+      "index": 0,
+      "rate": 20,
+      "seconds": 900,
+      "began": "2026-11-03T21:32:19.672Z"
+    },
+    "remainingFourMeasuredWindowsAndFinalEvidenceRequired": true,
+    "newTupleWholeWorkloadAccepted": false,
+    "wholeGoalAccepted": false,
+    "proof": "patched-workload-retry-three-profile-proof-617.json",
+    "proofSha256": "8fe6d146a7804fd416a2dad6d8414359ad5a5cd7d98bf027df0b715ad7efaf33"
   }
 }

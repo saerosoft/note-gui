@@ -250,13 +250,14 @@ require the complete new-run SQL/S3/source/memory/preservation/cleanup evidence.
 This running state does not establish workload or wider current/pipeline/rule
 acceptance.
 
-Halfway proof612 verifies fresh run582's eight 100% and 10% readable-population
-windows: 6,000 measured seconds and 168,000 successes, with zero unexpected errors
-or missed operations and 2,400 separate warmup successes. API checks confirm
-readable populations of 1,000,000 and 100,000 notes; the driver records 562 and 566
-browser observations. Read-only SQL verifies both notes at revision/history 4,261,
+Proof617 verifies fresh run582's twelve 100%, 10% and 1% readable-population
+windows: 9,000 measured seconds and 252,000 successes, with zero unexpected errors
+or missed operations and 3,600 separate warmup successes. API checks confirm
+readable populations of 1,000,000, 100,000 and 10,000 notes; the driver records 562,
+566 and 564 browser observations. Read-only SQL verifies all three notes at
+revision/history 4,261,
 original ownership/initial editor and 4,260 later edits each by the corresponding
-workload actor. The other two profiles/eight windows and all final
+workload actor. The last profile/four windows and all final
 source/memory/SQL/S3/preservation/cleanup checks remain required.
 
 ## Limits and documentation state
