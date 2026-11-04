@@ -24,6 +24,5 @@ as independently generated business output.
 
 The historical journal's pending consumer tests and retirement conditions are
 superseded as local work instructions. KMS decides whether any of those checks
-belongs in its own acceptance plan. [GOAL.md](../GOAL.md) tracks only remaining
-library work. This reference page neither requires consumer data nor claims that
+belongs in its own acceptance plan. The [acceptance record](note-gui-acceptance.md) records completed library qualification and retained limits. This reference page neither requires consumer data nor claims that
 all current library presentation checks have been completed.

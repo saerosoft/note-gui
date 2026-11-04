@@ -1,6 +1,9 @@
 # Note GUI
 
-[SESSION_PROMPT.md](SESSION_PROMPT.md) is the development-session template for `master`. [OPERATIONS.md](OPERATIONS.md#development-first-one-way-promotion) defines one-way development-to-release promotion; reading the template alone grants no command permission.
+[OPERATIONS.md](OPERATIONS.md#development-first-one-way-promotion) defines
+development on `master` and forward-only release promotion. The
+[functional specification](docs/functional-specification.md) and
+[host contract](CONTRACT.md) define library behavior.
 
 Note GUI is an independent browser library adapted from the AGPL core of
 [docmost/docmost](https://github.com/docmost/docmost). It distributes the retained
@@ -13,7 +16,7 @@ KMS adoption, data validation and release milestones are outside this project's
 completion criteria.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
-qualification and consumer pins. [Release 0.8.2](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2)
+qualification and consumer pins. [Release 0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3)
 contains the qualified package, corresponding source, evidence and checksums.
 `release.json` declares identity; the published `qualification.json` records the
 exact tested commit and limits. Consumer adoption remains a separate check.
@@ -38,8 +41,7 @@ and modifications. Upstream history remains available in Git.
 
 [The functional specification](docs/functional-specification.md) owns the
 required editor, tab/pane/navigation, context/proof, native diagram/file,
-authority/shared-collaboration and delivery behavior. [GOAL.md](GOAL.md) records
-which requirements have current verification and which remain unfinished.
+authority/shared-collaboration and delivery behavior. The [qualification record](docs/note-gui-acceptance.md) maps the requirements to the verified release and records its limits.
 
 The working tree excludes Docmost's server, Enterprise modules, account and
 organization management, workspace setup, cloud integration, email templates
@@ -84,7 +86,7 @@ The package is `private: true`; these instructions do not describe an npm
 publication. Consume a qualified release pinned by version branch, immutable tag
 and exact commit as described in [OPERATIONS.md](OPERATIONS.md), and
 retain its lockfile, notices and matching corresponding-source offer.
-The current qualified patch is [0.8.2](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2);
+The current qualified patch is [0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3);
 its exact tag/commit identity is recorded in OPERATIONS.md.
 
 ## Host the public library
@@ -268,7 +270,7 @@ required for that delivered work.
 
 ## Acceptance and work status
 
-[GOAL.md](GOAL.md) owns the remaining checklist and verification boundaries.
+The [qualification record](docs/note-gui-acceptance.md) records the completed F01–F10/G01–G11 audit, exact release and retained limitations.
 [The consumer packet](docs/consumer-acceptance.md) explains the library/consumer
 responsibility boundary. Historical integration records and producer evidence
 retain their original limits. Consumer deployment, adoption and business-data

@@ -10,8 +10,7 @@ and dependency-pin changes do not define this project's completion.
 
 The [functional specification](functional-specification.md),
 [public contract](../CONTRACT.md) and [release procedures](../OPERATIONS.md)
-define this library's requirements. [GOAL.md](../GOAL.md) and
-[COMPLETION_STATUS.md](../COMPLETION_STATUS.md) track local work and evidence.
+define this library's requirements. The [qualification record](note-gui-acceptance.md) maps completed library work to its evidence.
 This packet does not prescribe a consuming project's architecture or acceptance
 plan and grants no permission to change another repository.
 
@@ -35,13 +34,14 @@ Optional capabilities need populated, empty, denied, failed and late supplied
 results. The library presents those results and fences retired work; it does not
 generate the host's business truth or require a production corpus to test the UI.
 
-The recorded 0.8.1 qualification selects commit
-`07db42d5eff379cf2141e463c7f723c14ce185e1` and annotated tag
-`release/v0.8.1`. Evidence 492 records 3 source checks, 307 unit tests in 34
-files, 43 independent browser cases, 5 actual native Draw.io cases, strict package
-checks and seven matching downloaded assets. Exact tag identity, source and checksums remain in `OPERATIONS.md`,
-`release.json` and the released qualification assets. Documentation correction
-does not rewrite those assets or claim a fresh test run.
+The qualified 0.8.3 release selects commit
+`eb6f80843db21ea6878ecde9838ad277e12009b5` and annotated tag `release/v0.8.3`.
+It passes 3 source checks, 329 unit tests in 34 files, 46 independent browser cases,
+5 actual native Draw.io cases, strict extracted-package checks and additional
+sequence/math compatibility checks. Its dependency audit reports 0 known findings.
+All seven downloaded assets match the checksums. Exact tag identity, commands,
+source and hashes remain in `OPERATIONS.md` and the release qualification assets.
+Earlier releases and historical consumer observations retain their original limits.
 
 ## Optional integration
 
@@ -70,7 +70,7 @@ No previous consumer acceptance flag establishes whole-library completion.
 
 The historical [current-knowledge](current-knowledge-acceptance.md),
 [populated-data](populated-data-acceptance.md) and
-[note-screen](note-gui-acceptance.md) records retain their provenance links.
+[note-screen](note-gui-acceptance.md#historical-consumer-evidence) records retain their provenance links.
 The full earlier [consumer packet](https://github.com/saerosoft/note-gui/blob/3d15c3e096b4fdb4fec347a01277b0780ac2ce2d/docs/consumer-acceptance.md) remains in Git history.
 Its consumer-specific work instructions and library completion dependencies are
 superseded by the user's 2026-11-04 independence clarification. Each consumer

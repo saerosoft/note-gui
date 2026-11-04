@@ -8,10 +8,7 @@
       "CONTRACT.md",
       "OPERATIONS.md"
     ],
-    "currentWorkOwners": [
-      "GOAL.md",
-      "COMPLETION_STATUS.md"
-    ],
+    "currentWorkOwners": [],
     "consumerAuthority": "Each consuming project decides how to integrate, host, deploy and adopt the library.",
     "consumerWorkIsLibraryCompletionGate": false,
     "optionalKmsAdapterRetained": true,
@@ -24,10 +21,13 @@
       "implementationBaseCommit",
       "candidateScope",
       "historicalCandidateScope",
-      "historicalRemainingInputs"
+      "historicalRemainingInputs",
+      "wholeGuiLaneAccepted",
+      "retirement"
     ],
-    "qualifiedReleaseEvidence": "qualifiedPublished082Release20261104",
-    "wholeProjectCompletionRequiresLocalAudit": true
+    "qualifiedReleaseEvidence": "qualifiedPublished083Release20261104",
+    "wholeProjectCompletionRequiresLocalAudit": true,
+    "currentAcceptanceRecord": "docs/note-gui-acceptance.md"
   },
   "candidate": "0.8.0",
   "developmentBranch": "master",
@@ -954,10 +954,7 @@
       "scope": "Actual 0.8 narrow association panel, no horizontal page overflow."
     }
   ],
-  "remainingInputs": [
-    "Qualify and publish same-contract patch0.8.3 with the verified dependency remediation, full exact-release gates and downloaded-asset verification.",
-    "Finish final local evidence and completed-work-record retirement."
-  ],
+  "remainingInputs": [],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,
     "journalsDeleted": 3,
@@ -3211,5 +3208,138 @@
     "consumerRepositoryChanged": false,
     "proof": ".tmp/dependency-repair-20261104/repair-proof.json",
     "proofSha256": "c1b6b2884a9e265a38f2bafb47278c689d5a147c9691501159c072099dfcd4de"
+  },
+  "qualifiedPublished083Release20261104": {
+    "status": "PUBLISHED_083_ANNOTATED_TAG_AND_SEVEN_DOWNLOADED_ASSETS_VERIFIED",
+    "observedAtUtc": "2026-11-04T05:09:05.645151+00:00",
+    "releaseUrl": "https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3",
+    "sourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+    "tagObject": "f7435ccc48cbeff92d1da54b6e8587c9ea78e968",
+    "allSevenAssetsByteIdentical": true,
+    "sixChecksumsPassed": true,
+    "existing080And081And082TagsAndAssetsPreserved": true,
+    "counts": {
+      "sourceOfferTests": 3,
+      "unitComponentTests": 329,
+      "unitComponentTestFiles": 34,
+      "pinnedUpstreamSources": 115,
+      "localFontAssets": 234,
+      "independentBrowserTests": 46,
+      "actualNativeDrawioTests": 5,
+      "browserSkipped": 0,
+      "browserFailed": 0,
+      "browserFlaky": 0,
+      "committedSourceFiles": 292,
+      "distributionFiles": 747,
+      "packageFiles": 754
+    },
+    "dependencyAudit": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "dependencies": 548,
+      "devDependencies": 0,
+      "optionalDependencies": 0,
+      "totalDependencies": 548
+    },
+    "dependencyCompatibility": {
+      "status": "PASS",
+      "sourceRoot": "/home/saerosoft/Projects/note-gui/.tmp/release-083/source",
+      "actualSequenceConversion": {
+        "elements": 8,
+        "generatedIds": 4,
+        "uniqueGeneratedIds": true,
+        "types": [
+          "rectangle",
+          "line",
+          "arrow"
+        ]
+      },
+      "mermaidMath": {
+        "mathNodes": 1,
+        "svgCount": 1
+      },
+      "actualBuiltLibraryMath": {
+        "scripts": 0,
+        "errors": []
+      },
+      "serverClosed": true
+    },
+    "openDependabotAlertsAtVerification": 0,
+    "downloadedAssets": {
+      "CONTRACT-SHA256SUMS": {
+        "sha256": "093517d751b7224c7f7df78ea268d9e36003dd5a6384e65e88fcd781a1a132e0",
+        "sizeBytes": 402
+      },
+      "SHA256SUMS": {
+        "sha256": "5953c5d979d5c6e1961996986eaf42fa465d12752d6020cae06a42d53669fd48",
+        "sizeBytes": 538
+      },
+      "knowledge-engine-note-gui-0.8.3.tgz": {
+        "sha256": "f3a7af5c51de91d7d8824c46780e6b7200f3affa9927f947ef16c1b5fd62d94f",
+        "sizeBytes": 27223765
+      },
+      "note-gui-source-0.8.3.zip": {
+        "sha256": "41cff5843a5be8bf58b474a28534a8e02463832af3d7e6fe6ce17938cc80db4c",
+        "sizeBytes": 1311614
+      },
+      "producer-evidence-0.8.3.tgz": {
+        "sha256": "8cbcefefd8078059a24b36a89d3853cf5661318cdb69c56339942f1d76e97a44",
+        "sizeBytes": 583969
+      },
+      "qualification.json": {
+        "sha256": "017734d4ddc5a8d0dee527a45697e0ab2e290d3cb01e9bce392b2d13bca19f2e",
+        "sizeBytes": 8207
+      },
+      "release.json": {
+        "sha256": "4828ab5aa1b9183b4c4b765070a96de931fb5124851e5afe659a2f5f37bdcf59",
+        "sizeBytes": 284
+      }
+    },
+    "consumerRepositoryChanged": false,
+    "historicalAncestorCauseProven": false,
+    "publicationProof": ".tmp/release-083/publication-proof.json",
+    "publicationProofSha256": "e1a29037041a3b23d7f8d36da90dfc4ca37a41c04f57cf30e69421e5a2c3c7e5"
+  },
+  "independentLibraryCompletion20261104": {
+    "status": "COMPLETE_WITH_RECORDED_LIMITS",
+    "acceptedAtUtc": "2026-11-04T05:09:07.646429+00:00",
+    "requirements": "F01-F10 and G01-G11",
+    "sourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+    "qualificationRecord": "docs/note-gui-acceptance.md",
+    "remainingLibraryWork": [],
+    "consumerAcceptanceImplied": false,
+    "consumerRepositoryChanged": false,
+    "historicalAncestorCauseProven": false,
+    "retiredWorkRecords": [
+      {
+        "path": "GOAL.md",
+        "sourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+        "sha256": "00c0bbb83ec6b4d5a7de7d8e60a672bfa335ec4df87582b9c5d961c6991093b9"
+      },
+      {
+        "path": "SESSION_PROMPT.md",
+        "sourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+        "sha256": "85958e171ff500ece13eb2609364abeadc0a2aa2fe543e9f1fccc3763a09ad29"
+      },
+      {
+        "path": "COMPLETION_STATUS.md",
+        "sourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+        "sha256": "ee8a53bc417319027677c5f2ff2079f836bf199f7f0412428365219f1d6d0c76"
+      }
+    ],
+    "qualifiedReleaseSourceRetainsAllRecords": true,
+    "lastingOwners": [
+      "README.md",
+      "CONTRACT.md",
+      "OPERATIONS.md",
+      "docs/functional-specification.md",
+      "docs/note-gui-acceptance.md"
+    ],
+    "postReleaseChangesAreDocumentationOnly": true
   }
 }

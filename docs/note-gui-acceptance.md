@@ -1,40 +1,87 @@
-# Note GUI acceptance scope and historical screen evidence
+# Independent library qualification
 
-## Library acceptance
+## Current accepted release
 
-The [functional specification](functional-specification.md) owns the retained
-Docmost shell/editor/tree, tabs/panes, native diagrams, optional context and
-access lifecycle. The [public contract](../CONTRACT.md) owns exact operations.
-Library acceptance exercises the actual built package in the independent
-persistent host at desktop and narrow widths, with native editing and structured
-save/reload/restore, conflicts, protected navigation and bounded resource checks.
+The F01–F10/G01–G11 library audit is complete for
+[release 0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3),
+qualified on 2026-11-04 at commit `eb6f80843db21ea6878ecde9838ad277e12009b5`.
+Its annotated tag object is `f7435ccc48cbeff92d1da54b6e8587c9ea78e968`. This records
+library behavior and delivered artifacts; each consuming project owns its
+integration, backend semantics, deployment, data and adoption decision.
 
-`pnpm test:independent`, the native Draw.io gate and the normal source/package
-checks are repository-owned qualification routes described in
-[OPERATIONS.md](../OPERATIONS.md). This page does not authorize running them or
-claim a fresh execution. [GOAL.md](../GOAL.md) tracks remaining local review.
+| Gate | Exact release result |
+| --- | --- |
+| Frozen bootstrap and normal Make | PASS; 3 source checks and 329 unit/component tests across 34 files; types/build/distribution/imports pass |
+| Independent persistent host | 46 passed; zero skipped, unexpected or flaky cases |
+| Actual native Draw.io | 5 passed; zero skipped, unexpected or flaky cases; 3092 static application files byte-verified |
+| Extracted tarball | Strict declarations with `skipLibCheck: false`; root, `/kms` and CSS exports and actual runtime imports pass |
+| Distribution/source | 747 distribution files, 292 committed source files and 754 package files checked |
+| Dependency audit | 0 known findings, following 24 baseline findings; actual installed graph verified |
+| Dependency compatibility | Actual sequence conversion and mathematical rendering pass, including the final built library |
+| Publication | 7 downloaded assets byte-identical; 6 checksums pass; old 0.8.0/0.8.1/0.8.2 assets preserved |
 
-## Consumer boundary
+The release's `qualification.json`, `producer-evidence-0.8.3.tgz` and
+`SHA256SUMS` retain exact commands, tool versions, case results and hashes.
+`producer-evidence.json` records the dated publication proof. No consuming
+repository, dependency pin, service or business data was changed by this repair.
 
-Each consuming project selects its web framework, routes, backend, data and
-integration. The KMS KN01/KN02 screens, `/notes/` host, CI/deployment and product
-milestones are not this project's required topology or completion criteria.
-The existing optional `/kms` adapter retains its documented contract.
+## Requirement mapping
 
-Historical KMS plans can explain the original extraction and visual references.
-They do not govern the independent library's architecture. Preserve the local
-Docmost fidelity requirements and provenance when reviewing library behavior.
+| Requirement / completed unit | Verified library behavior | Checks |
+| --- | --- | --- |
+| F01 / G02 | Injected core, optional named capabilities, exact destinations, isolated mount/disposal | Host-boundary/access tests; independent mount and late-result flows |
+| F02 / G03 | Structured editing, revisions, replay, lost acknowledgements and write rejection | Pane/retry/local persistence tests; actual native controls and reload |
+| F03 / G04 | Independent dirty tabs/panes, protected departure and native drafts | Dirty/pane tests; split-layout, same-note and cancelled/discarded browser flows |
+| F04 / G03/G04 | Immutable history, revision-guarded restore, supplied actors and late-result fencing | History tests; authored/current preservation and native restore browser flows |
+| F05 / G05 | Bounded pages/cache/rows, authorized ancestors, moves and retained drafts | Tree/cache/ancestor tests; tree and independent resource checks |
+| F06 / G06 | Typed properties, relations, target selection, proof and uncertain-write readback | Property/relation tests; actual independent relation/proof flows |
+| F07 / G06 | Separate authored/current/history, exact destinations and opaque paging | Current/context tests; empty-authored/restore and opaque/empty-token browser cases |
+| F08 / G07 | Editable immutable diagrams/files, authorized bytes, refresh/revocation and previews | Diagram/file tests; independent native editors; five actual Draw.io cases |
+| F09 / G08/G10 | Supplied policy/capabilities/actors/epochs, associations and scoped denial | Access/collaboration/host-boundary tests; independent shared/controlled flows |
+| F10 / G01/G09 | Retained Docmost composition, desktop/narrow layout, module/CSS/fonts/types/source/notices | Normal Make, strict extracted package, independent/native checks and visual inspection |
+| Documentation / G11 | Independent ownership, exact evidence, preserved failures and completed-record retirement | Local requirement matrix, immutable source snapshots, JSON/link/diff verification |
 
-## Preserved record
+The source offer on the qualified tag retains the full test inputs, lockfile,
+SDK patch, provenance, notices and local feature specifications. Optional context,
+relations and collaboration use supplied contract results around a real persistent
+core; a business pipeline is not a prerequisite for library presentation checks.
 
-The [full historical acceptance journal](https://github.com/saerosoft/note-gui/blob/3d15c3e096b4fdb4fec347a01277b0780ac2ce2d/docs/note-gui-acceptance.md) retains the original
-2026-10-24 real-API screen observations and the later bounded native, move,
-storage and workload results. `producer-evidence.json` retains the exact
-source tuples, attempts and limits; those observations apply to their recorded
-runs. Consumer acceptance and historical migration claims are not new local
-qualification results. KMS decides how to use that evidence in its own project.
+## Repairs and retained limits
 
-The [current-knowledge](current-knowledge-acceptance.md) and
-[populated-data](populated-data-acceptance.md) reference pages preserve their
-history links. Their earlier pending consumer criteria do not block local
-library acceptance or retirement of completed library work records.
+Current/history pagination preserves original cursor strings and visited pages.
+Only null ends pagination; empty and numeric-looking tokens remain valid. Tree
+cache tuple keys distinguish null, string sentinels and separator-containing IDs.
+The 22 original failing regressions are retained with their passing counterparts.
+Affected dependency pins/resolutions are updated while retaining the intended
+0.8 public operations, limits and existing Excalidraw patch.
+
+Qualification covers Linux and desktop/narrow browser layouts. Windows remains
+excluded. The independent example uses browser storage and Web Locks; no product
+authentication, model/search quality, business truth or production-scale claim is
+made. A dependency audit covers advisories known at that execution time.
+
+Historical direct-ancestor failures remain failures with unknown cause because
+their original runs lack stage/scheduler data. The current unchanged 5000 ms case
+passes in the full gate. No timeout or assertion was relaxed and no historical
+fix is claimed. Reopen upon a current reproducible failure. Failed preparation
+and diagnostic attempts remain preserved alongside the selected successful run.
+
+## Completed work records
+
+The local library checklist, session work units and execution status are retired
+after qualification and publication. Their exact source snapshots remain in the
+[qualified source](https://github.com/saerosoft/note-gui/tree/eb6f80843db21ea6878ecde9838ad277e12009b5)
+as `GOAL.md`, `SESSION_PROMPT.md` and `COMPLETION_STATUS.md`, and in its matching
+source archive. Their release/final-record checklist items are closed by the
+publication proof and this lasting requirement mapping. Current behavior remains
+owned by the functional specification and contract; operations owns releases.
+No outstanding task is carried from those records into this library queue.
+
+## Historical consumer evidence
+
+The [historical screen journal](https://github.com/saerosoft/note-gui/blob/3d15c3e096b4fdb4fec347a01277b0780ac2ce2d/docs/note-gui-acceptance.md)
+retains the original real-API observations. The [current-knowledge](current-knowledge-acceptance.md)
+and [populated-data](populated-data-acceptance.md) reference pages preserve their
+provenance and limits. Earlier KMS plans and acceptance flags describe those exact
+runs. They do not govern this independent project's architecture or completion,
+or authorize changes in another project.

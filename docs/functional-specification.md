@@ -16,8 +16,7 @@ Historical extraction plans remain provenance rather than governing requirements
 
 This document owns lasting feature behavior. [CONTRACT.md](../CONTRACT.md) owns
 exact API types/operations/errors/lifecycle; [OPERATIONS.md](../OPERATIONS.md)
-owns build/release/source procedures. [GOAL.md](../GOAL.md) owns work status and
-verification. Requirements here do not claim completed acceptance.
+owns build/release/source procedures. The [qualification record](note-gui-acceptance.md) maps these requirements to the exact tested release and its limits.
 
 ## F01: Host composition
 

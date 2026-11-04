@@ -5,7 +5,7 @@
 Note GUI is an independent library. Its authored/current/history presentation,
 optional extension behavior, paging, exact links and access lifecycle are owned
 by [F02/F04/F06/F07](functional-specification.md) and the
-[public contract](../CONTRACT.md). Local work is tracked in [GOAL.md](../GOAL.md).
+[public contract](../CONTRACT.md). Current library qualification is recorded in the [acceptance record](note-gui-acceptance.md).
 
 KMS owns the business meaning and generation of its current membership,
 pipelines, rule comparisons, approval and migrations. The earlier requirements
