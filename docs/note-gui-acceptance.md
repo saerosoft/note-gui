@@ -25,6 +25,26 @@ The release's `qualification.json`, `producer-evidence-0.8.3.tgz` and
 `producer-evidence.json` records the dated publication proof. No consuming
 repository, dependency pin, service or business data was changed by this repair.
 
+## Current work status
+
+The 2026-11-05 documentation review found no additional unfinished requirement
+outside the completed F01–F10/G01–G11 mapping. The retired checklist's final
+release and record-retirement items are closed by the published 0.8.3 evidence and
+the completed-work-record disposition below.
+
+The functional specification and contract retain implemented behavior as ongoing
+requirements. `OPERATIONS.md` describes checks for future changes and releases;
+it does not schedule another release. Historical integration journals and dated
+pending/failure flags in `producer-evidence.json` describe their original runs,
+not an active work queue. Licenses, notices and source-provenance records remain
+required distribution material.
+
+There is no open implementation, qualification or publication task in this
+project's current scope. Consumer adoption and future upstream updates belong to
+their respective integration and maintenance decisions. Historical limitations
+remain recorded below. Current runtime, public types and dependency pins match
+the qualified release; this documentation review does not claim new test runs.
+
 ## Requirement mapping
 
 | Requirement / completed unit | Verified library behavior | Checks |

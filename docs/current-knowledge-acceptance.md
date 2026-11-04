@@ -27,7 +27,8 @@ their original limits. Synthetic setup is not a claim of normal business ingress
 location validation is not a claim of independent comparison or rule approval.
 Those qualifications remain attached to the historical evidence.
 
-Library presentation coverage is reviewed through
+Current library presentation coverage is recorded in the
+[qualification record](note-gui-acceptance.md#requirement-mapping), including
 `src/NoteCurrentKnowledge.test.tsx`, `e2e/context.independent.spec.ts` and the
-related independent history/pane checks. This document makes no new test or
-whole-project completion claim. It carries no pending KMS work for this project.
+independent history/pane checks. These historical integration observations carry
+no outstanding library task.

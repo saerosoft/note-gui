@@ -28,7 +28,8 @@
     ],
     "qualifiedReleaseEvidence": "qualifiedPublished083Release20261104",
     "wholeProjectCompletionRequiresLocalAudit": true,
-    "currentAcceptanceRecord": "docs/note-gui-acceptance.md"
+    "currentAcceptanceRecord": "docs/note-gui-acceptance.md",
+    "currentStatusRecord": "independentDocumentationAudit20261105"
   },
   "candidate": "0.8.0",
   "developmentBranch": "main",
@@ -3376,5 +3377,59 @@
     "removedRefsBackupSha256": "691aac50777e579e6b3081b5b31f2556c6e1f31b2946e06978e617f5d63b2860",
     "allRemovedRefsBackedUp": true,
     "historicalQualificationRecordsUnchanged": true
+  },
+  "independentDocumentationAudit20261105": {
+    "status": "COMPLETE_NO_OPEN_LIBRARY_WORK",
+    "reviewDate": "2026-11-05",
+    "reviewedDevelopmentBase": "3beb9fdfc042a9958b4261df472e7eac0f3e4f00",
+    "qualifiedRelease": "0.8.3",
+    "qualifiedSourceCommit": "eb6f80843db21ea6878ecde9838ad277e12009b5",
+    "documentationFilesReviewed": 31,
+    "functionalRequirementsReviewed": [
+      "F01",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10"
+    ],
+    "completedUnitsReviewed": [
+      "G01",
+      "G02",
+      "G03",
+      "G04",
+      "G05",
+      "G06",
+      "G07",
+      "G08",
+      "G09",
+      "G10",
+      "G11"
+    ],
+    "remainingLibraryWork": [],
+    "retiredChecklistReleaseAndRecordItemsClosed": true,
+    "historicalPendingFlagsAreNotCurrentTasks": true,
+    "outOfScopeConsumerWorkAdded": false,
+    "runtimePublicTypesAndDependencyPinsMatchQualifiedRelease": true,
+    "newRuntimeTestsExecuted": false,
+    "contractDocumentClarifiedWithoutApiBehaviorChanges": true,
+    "newReleaseRequiredForThisDocumentationReview": false,
+    "retainedLimits": [
+      "Linux desktop/narrow qualification; Windows excluded.",
+      "Historical direct-ancestor timeout cause remains unknown; existing current unchanged test passes.",
+      "Independent-host data and resource results do not qualify a consumer production deployment."
+    ],
+    "corrections": [
+      "Removed consumer rollout/coordinator/Next.js adoption instructions from the host contract.",
+      "Described completed restore/comment behavior without candidate or pending-release wording.",
+      "Linked historical integration pages to completed library qualification.",
+      "Clarified extraction provenance versus current persistence/hosting choices.",
+      "Aligned the source-offer Python minimum with README and operations."
+    ],
+    "record": "docs/note-gui-acceptance.md#current-work-status"
   }
 }

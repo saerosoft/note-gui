@@ -400,18 +400,20 @@ of treating historical visibility or ownership as an audience boundary.
 The adapter uses returned
 `total` and `hasNext` with20-row pages; generic readable-note search cannot replace
 this operation. Targets remain subject to current authorization at mutation time.
-Deploy the matching backend before this client. F02/F06/F07 in the functional
-specification own the corresponding editor, relationship and projection behavior.
+A host selecting this adapter must provide a backend compatible with these
+operations and fields. The consuming project owns backend rollout and client
+adoption. F02/F06/F07 in the functional specification own the corresponding
+editor, relationship and projection behavior.
 
-The 0.7.1 repair preserves edits made while a history restore is pending. A
+History restoration preserves edits made while a restore is pending. A
 clean pane still opens the restored revision. A pane edited before delivery
 keeps its draft and editor instance; its existing content revision remains the
 save guard when restored content differs. Saving then reports the normal
 revision conflict, and the member can inspect the latest server version.
-No host API, import or storage migration is required. Consumers remain on their
-qualified pin until a separate release promotion and adoption review.
+This behavior requires no host API, import or storage migration. Consumers choose
+their release and integration checks under their own project policy.
 
-The same candidate distinguishes failed comment/history reads from authorized
+The library distinguishes failed comment/history reads from authorized
 empty results and offers an explicit read retry without replaying mutations or
 clearing an unsent comment. Its stylesheet supplies the Korean/CJK glyph fallback
 on hosts without a Korean font; the existing Latin font stack and native layout
@@ -473,8 +475,8 @@ prefers `richBody`, then `authoredBody ?? body`, preserving intentionally empty
 authored text. It supplies classification from the same response as optional
 presentation metadata and the compatibility alias, without another request or
 implicit HUMAN default. History and legacy warnings retain their semantics.
-Advance the product pin only after the coordinator verifies its actual Next.js
-`/notes/` host with Vite stopped, access changes and complete source delivery.
+Each consuming project selects its host framework, routes, version and
+integration checks. Its adoption workflow is not a library completion condition.
 
 ## Independent persistent example
 

@@ -843,5 +843,14 @@
     "repository": "https://github.com/saerosoft/knowledge-engine",
     "commit": "7de5cadb978bd7318bf6b72956a3d460d011ef9e",
     "directory": "note-gui"
+  },
+  "recordScope": {
+    "purpose": "Source provenance and implementation adaptations, not a work backlog.",
+    "integrationDescriptions": "Application changes preserve extraction and integration observations. Mentions of PostgreSQL, Next.js or KN-02 do not require a consuming architecture.",
+    "currentRequirements": [
+      "docs/functional-specification.md",
+      "CONTRACT.md"
+    ],
+    "remainingLibraryWork": []
   }
 }

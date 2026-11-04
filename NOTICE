@@ -12,7 +12,9 @@ Retained source and modifications are listed in upstream-manifest.json.
 The actual core page/editor, tree, comments, history and diagrams are adapted
 to the authorized domain API and pane-scoped state.
 No Enterprise code, Docmost server, cloud integration, upstream authentication,
-Hocuspocus provider, Yjs persistence or browser body database is included.
+Hocuspocus provider or Yjs persistence is included. The independent example can
+use the library's browser-storage adapter; consuming hosts choose their own
+canonical persistence.
 
 Third-party packages remain under their respective licenses. package.json,
 the release lockfile and dependency-license notices accompany releases.
