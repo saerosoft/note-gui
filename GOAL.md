@@ -83,16 +83,24 @@ product automatically.
   lack stage/scheduler data. The current unchanged5000ms test passes in the full
   normal gate. No timeout/assertion relaxation or claimed historical fix is made.
   Reopen upon a current reproducible failure with diagnostic data.
-- [ ] Qualify and publish patch0.8.2 through the normal master-to-version promotion,
+- [x] Qualify and publish patch0.8.2 through the normal master-to-version promotion,
   exact clean-release gates, extracted-package checks and downloaded-asset/ref
   verification. Keep existing tags/assets immutable; no consumer changes belong
   to this release.
+- [x] Resolve the dependency advisories discovered during publication. The original
+  lockfile audit reports 24 affected findings (critical 1/high 9/moderate 9/low 5).
+  Exact direct/transitive corrections yield 0 known findings. Normal source3,
+  unit329/34, independent46 and actual native5 pass. Actual sequence conversion,
+  mathematical rendering and the installed graph pass; diagnostic preparation
+  failures are retained. Public runtime operations and the SDK patch are unchanged.
+- [ ] Qualify and publish same-contract patch0.8.3 from these reviewed master-origin
+  dependency corrections. Preserve 0.8.0/0.8.1/0.8.2 tags and assets.
 - [ ] Finish local evidence and completed-work-record retirement after release
   qualification. The user's session-wide approval covers the presented repairs
   and necessary verification; do not request the same approval again.
 
 The former consumer-dependent and design-approval blocked assessments are
-superseded. Remaining work is this library's patch qualification and final records.
+superseded. Remaining work is this library's 0.8.3 patch qualification and final records.
 
 ## Working constraints
 

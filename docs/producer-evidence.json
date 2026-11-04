@@ -26,7 +26,7 @@
       "historicalCandidateScope",
       "historicalRemainingInputs"
     ],
-    "qualifiedReleaseEvidence": "qualifiedPublished081Release492",
+    "qualifiedReleaseEvidence": "qualifiedPublished082Release20261104",
     "wholeProjectCompletionRequiresLocalAudit": true
   },
   "candidate": "0.8.0",
@@ -955,8 +955,8 @@
     }
   ],
   "remainingInputs": [
-    "Qualify and publish the same-contract0.8.2 patch from reviewed master commits; verify immutable refs and downloaded assets.",
-    "Complete local evidence and completed-work-record retirement after release qualification."
+    "Qualify and publish same-contract patch0.8.3 with the verified dependency remediation, full exact-release gates and downloaded-asset verification.",
+    "Finish final local evidence and completed-work-record retirement."
   ],
   "retirement": {
     "historicalAcceptanceJournalsReconciled": 7,
@@ -3076,5 +3076,140 @@
     "wholeGoalAccepted": false,
     "proof": ".tmp/opaque-cursor-20261104/cursor-repair-proof.json",
     "proofSha256": "efa47982d3698f0cee72a68440c554caa64d5888f47447e0720ff292604dac4b"
+  },
+  "qualifiedPublished082Release20261104": {
+    "status": "PUBLISHED_082_ANNOTATED_TAG_AND_SEVEN_DOWNLOADED_ASSETS_VERIFIED",
+    "releaseUrl": "https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2",
+    "sourceCommit": "41595cfaacb762a8165046069ce09c78b6bf13b1",
+    "tagObject": "2d581c52ccd52e8294cd9ae4cfda76b17b74d0ce",
+    "allSevenAssetsByteIdentical": true,
+    "sixChecksumsPassed": true,
+    "existing080And081AssetsPreserved": true,
+    "counts": {
+      "sourceOfferTests": 3,
+      "unitComponentTests": 329,
+      "unitComponentTestFiles": 34,
+      "pinnedUpstreamSources": 115,
+      "localFontAssets": 234,
+      "independentBrowserTests": 46,
+      "actualNativeDrawioTests": 5,
+      "browserSkipped": 0,
+      "browserFailed": 0,
+      "browserFlaky": 0,
+      "committedSourceFiles": 292,
+      "distributionFiles": 682,
+      "packageFiles": 689
+    },
+    "downloadedAssets": {
+      "CONTRACT-SHA256SUMS": {
+        "sha256": "f0066513c3118aa1a1713b81a1c94b81930c0796b588d3c8a20d9c41eab72b59",
+        "sizeBytes": 402
+      },
+      "SHA256SUMS": {
+        "sha256": "24ebf7c2a84f44f619570e9dc6e44f49efc3f133d4fd9a63ccf817451e95b821",
+        "sizeBytes": 538
+      },
+      "knowledge-engine-note-gui-0.8.2.tgz": {
+        "sha256": "65357b065f6b39ebed2c1da34c4ca20df43221d2ed1deda49af37acb58d5ed61",
+        "sizeBytes": 27166602
+      },
+      "note-gui-source-0.8.2.zip": {
+        "sha256": "35f404aa6438f6a4f7c46bdf6277b7d07c15ad9b22f82ed7ae364a0e9c6be618",
+        "sizeBytes": 1272688
+      },
+      "producer-evidence-0.8.2.tgz": {
+        "sha256": "cf45fa3180c37b485479cf0f5941ed536d238f768a6c0af37e8b2b7c0ceea189",
+        "sizeBytes": 536913
+      },
+      "qualification.json": {
+        "sha256": "8088f875645c82637517c6c3b633d49921dd387d5362e41a5df1a0522c03162b",
+        "sizeBytes": 6812
+      },
+      "release.json": {
+        "sha256": "6a860a0465f2b4a03d896e592ca08d8d58778eb6f18e23844dbf9af4750b4490",
+        "sizeBytes": 284
+      }
+    },
+    "consumerRepositoryChanged": false,
+    "qualificationIncludesSecurityAudit": false,
+    "publicationProof": ".tmp/release-082/publication-proof.json",
+    "publicationProofSha256": "e279c5b03900230db1a9c5f06a21017705c320b5c421544aaf7ed6ae2ea84088"
+  },
+  "independentDependencyRepair20261104": {
+    "status": "AFFECTED_DEPENDENCIES_REMEDIATED_AND_VERIFIED",
+    "auditBefore": {
+      "critical": 1,
+      "high": 9,
+      "moderate": 9,
+      "low": 5
+    },
+    "auditAfter": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "normalGate": {
+      "sourceTests": 3,
+      "unitTests": 329,
+      "unitFiles": 34,
+      "typesBuildDistributionStrictImports": true
+    },
+    "independentBrowser": {
+      "startTime": "2026-11-04T04:53:31.997Z",
+      "duration": 145763.568,
+      "expected": 46,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "actualNativeDrawio": {
+      "startTime": "2026-11-04T04:56:01.188Z",
+      "duration": 42700.992,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "compatibility": {
+      "status": "PASS",
+      "sourceRoot": "/home/saerosoft/Projects/note-gui/.tmp/dependency-repair-20261104/source",
+      "actualSequenceConversion": {
+        "elements": 8,
+        "generatedIds": 4,
+        "uniqueGeneratedIds": true,
+        "types": [
+          "rectangle",
+          "line",
+          "arrow"
+        ]
+      },
+      "mermaidMath": {
+        "mathNodes": 1,
+        "svgCount": 1
+      },
+      "actualBuiltLibraryMath": {
+        "scripts": 0,
+        "errors": []
+      },
+      "serverClosed": true
+    },
+    "installedGraphSha256": "685452875b1e3eb10401d19d9d2cdd47c48188fdcc18ccee3445e7caefa342db",
+    "gateReceiptsSha256": {
+      "bootstrap": "08982d5bfc6fb8d28108bb918ac483139f8db06c010d0c1531d319a4bd86e673",
+      "audit": "f3539825bf6985f448d40b75c8092561fab11fbfb49290b841e1e5cde82491e9",
+      "verify": "75cb6d521787364f3583aae2255a4727ce90ff937dd37980a0e504715ead7fd4",
+      "independent": "5bed34f3910a2a7bc876eb80f5f1adbdc96e7e8aba88390c2e7868e5d32d5784",
+      "native": "22ea3fe1ac4f2b4b437436bd2c328a0cf06dcdfee8b8a3492aae1c32385feb7c"
+    },
+    "readOnlyReview": "No blocker; actual sequence conversion and math rendering pass.",
+    "diagnosticPreparationFailuresPreserved": true,
+    "publicApiChanged": false,
+    "excalidrawPatchUnchanged": true,
+    "newReleasePublished": false,
+    "consumerRepositoryChanged": false,
+    "proof": ".tmp/dependency-repair-20261104/repair-proof.json",
+    "proofSha256": "c1b6b2884a9e265a38f2bafb47278c689d5a147c9691501159c072099dfcd4de"
   }
 }

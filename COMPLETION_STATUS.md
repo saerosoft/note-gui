@@ -114,9 +114,31 @@ The former requests for Jenkins branch routing, legitimate pipeline/current
 results and historical consumer corpora are not prerequisites for this project's
 work. A consumer may use that evidence when it chooses its own acceptance plan.
 
+## Published cursor repair and dependency follow-up
+
+Release 0.8.2 at `41595cfaacb762a8165046069ce09c78b6bf13b1`, annotated tag object
+`2d581c52ccd52e8294cd9ae4cfda76b17b74d0ce`, passes the exact clean-release normal
+source3/unit329/34, independent46, actual native5 and extracted-package gates.
+All7 downloaded assets,6 checksums,682 distribution files and292 public source
+files match. Existing 0.8.0/0.8.1 assets are unchanged. The producer packet records
+the publication proof; this qualification makes no security-audit claim.
+
+Publication reveals dependency alerts belonging to this project. A fresh lockfile
+audit confirms 24 affected findings, including 1 critical. Three affected direct
+pins and four exact transitive resolutions are corrected. The updated audit has 0
+known findings; the full normal/independent/native gates pass again at329/46/5.
+Actual Mermaid sequence conversion produces 8 elements with 4 unique generated IDs,
+math rendering produces a MathML node, and the built library renders the supplied
+diagram without an error or forbidden script/frame output. The installed graph
+matches all corrected pins. Read-only review finds no blocker. Diagnostic attempts
+with incorrect metadata/skeleton assumptions remain failed and preserved.
+
+The same intended public contract now needs a 0.8.3 qualification. This is library
+maintenance and changes no consuming repository, backend, data or deployment.
+
 ## Remaining work
 
-Qualify and publish the unchanged-contract0.8.2 repair through `OPERATIONS.md`,
+Qualify and publish the unchanged-contract0.8.3 dependency repair through `OPERATIONS.md`,
 verify immutable refs/downloaded assets, then finish local record retirement.
 The user approved this session's repairs and verification. No consumer adoption,
 deployment or business-data prerequisite is part of this work.

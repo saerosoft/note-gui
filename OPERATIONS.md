@@ -29,18 +29,22 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 The current minor contract is 0.8.0. Optional collaboration capabilities and
 mount-local dirty reporting establish this line. The current qualified patch is
-[release/v0.8.1](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.1)
-at `07db42d5eff379cf2141e463c7f723c14ce185e1`, with annotated tag object
-`f24188816ecc86091a5400877604ceb90ac7eecc`. It repairs native modal split-pane
-layout within the unchanged intended 0.8 protocol. Its exact clean release source
-passes normal Make verification, 43 independent browser cases, five actual
-Draw.io cases and strict extracted-package checks. All seven downloaded assets match qualification
-and checksums. Human review is not an acceptance gate. Consumer adoption and
-product acceptance remain separate.
+[release/v0.8.2](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2)
+at `41595cfaacb762a8165046069ce09c78b6bf13b1`, with annotated tag object
+`2d581c52ccd52e8294cd9ae4cfda76b17b74d0ce`. It repairs opaque cursor preservation,
+empty-token continuation and tree cache key collisions within the intended 0.8
+protocol. Normal Make verification, 46 independent browser cases, five actual
+Draw.io cases and strict extracted-package checks pass. All seven downloaded
+assets match qualification and checksums. Consumer adoption remains separate.
+
+The prior qualified 0.8.1 release at `07db42d5eff379cf2141e463c7f723c14ce185e1`
+repairs native modal split-pane layout. Its annotated tag object remains
+`f24188816ecc86091a5400877604ceb90ac7eecc`; its source, assets and evidence remain
+available to consumers retaining that exact pin.
 
 The original 0.8.0 annotated tag `a327c46c3c8ba92f81b6cb6bc911112eb9ae4749`
 still resolves to `b9c1ae1d544194fe9dc0bfe5490992be79182cbe`. Preserve its assets
-and source for consumers retaining that pin. Publishing 0.8.1 does not update
+and source for consumers retaining that pin. Publishing a patch does not update
 an existing consumer automatically.
 
 - Increment MAJOR for a substantial redesign of the library's concept or
@@ -57,22 +61,30 @@ The core/context/relations split and explicit host contract added to package
 `release/v0.7.0`. The inherited Docmost `v0.7.0` tag identifies upstream history;
 it is unrelated to this release. Preserve inherited branches and tags.
 
-The 0.8.2 development candidate repairs opaque cursor preservation, empty-token
-continuation and tree cache key collisions within the existing 0.8 contract.
-Public types and page-size bounds are unchanged. Its release qualification and
-publication are recorded separately from the qualified 0.8.1 assets above.
+The 0.8.3 development candidate updates affected sanitizer/tooling dependencies
+and narrowly overrides vulnerable transitive resolutions. Public types, runtime
+operations and page-size bounds remain unchanged. Qualification and publication
+are recorded separately from the immutable 0.8.2 assets above.
+
+The exact overrides in `pnpm-workspace.yaml` apply only to affected versions.
+Nano ID 4 moves to 5 because its corrected release is on that line; the converter
+uses its synchronous API. KaTeX 0.18 uses its public renderer API. Verify actual
+Mermaid-to-Excalidraw conversion and mathematical rendering when changing these
+resolutions, retain the existing Excalidraw patch, and regenerate matching source
+and dependency notices. A clean dependency audit describes the advisories known
+at that run; it is not a guarantee against future vulnerabilities.
 
 ## Consumer identity
 
-For the 0.8.1 patch, pin `version/0.8`, `release/v0.8.1` and exact commit
-`07db42d5eff379cf2141e463c7f723c14ce185e1`, as recorded in `qualification.json`.
+For the 0.8.2 patch, pin `version/0.8`, `release/v0.8.2` and exact commit
+`41595cfaacb762a8165046069ce09c78b6bf13b1`, as recorded in `qualification.json`.
 Verify that the selected checkout
 equals that commit, that the tag resolves to it, and that `release.json` and
 the contract digests match the release evidence. Later patches may advance the
 branch; a consumer stays on its reviewed tag and commit until explicitly upgraded.
 Never follow `master`, a caret range, `latest` or automatic remote updates.
 
-Download `knowledge-engine-note-gui-0.8.1.tgz` from that release and check it against
+Download `knowledge-engine-note-gui-0.8.2.tgz` from that release and check it against
 `SHA256SUMS`. It contains the package manifest and complete `dist/`, including
 the ES module entries, CSS, chunks, fonts, declarations, source offer and notices.
 The root, `/kms` and `/style.css` package exports retain their documented paths.

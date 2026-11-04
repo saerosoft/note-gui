@@ -13,7 +13,7 @@ KMS adoption, data validation and release milestones are outside this project's
 completion criteria.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
-qualification and consumer pins. [Release 0.8.0](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.0)
+qualification and consumer pins. [Release 0.8.2](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2)
 contains the qualified package, corresponding source, evidence and checksums.
 `release.json` declares identity; the published `qualification.json` records the
 exact tested commit and limits. Consumer adoption remains a separate check.
@@ -84,7 +84,7 @@ The package is `private: true`; these instructions do not describe an npm
 publication. Consume a qualified release pinned by version branch, immutable tag
 and exact commit as described in [OPERATIONS.md](OPERATIONS.md), and
 retain its lockfile, notices and matching corresponding-source offer.
-The current qualified patch is [0.8.1](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.1);
+The current qualified patch is [0.8.2](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.2);
 its exact tag/commit identity is recorded in OPERATIONS.md.
 
 ## Host the public library

@@ -1,6 +1,6 @@
 {
   "name": "@knowledge-engine/note-gui",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "private": true,
   "module": "./dist/note-gui.js",
   "types": "./dist/types/index.d.ts",

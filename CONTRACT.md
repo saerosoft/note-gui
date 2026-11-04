@@ -1,9 +1,7 @@
 # Note GUI host contract
 
-This contract accompanies the 0.8.2 development candidate for the `version/0.8`
-release line. It adds optional collaboration capabilities and mount-local dirty
-reporting to the existing core/context/relations contract. Candidate metadata on
-`master` does not establish release qualification or publication.
+This contract defines the `version/0.8` release line. It adds optional collaboration capabilities and mount-local dirty
+reporting to the existing core/context/relations contract. Release metadata alone does not establish qualification or publication.
 The core/context/relations split and explicit host bindings added to the former
 0.6 package establish this new minor contract. Release identity and qualification
 follow [OPERATIONS.md](OPERATIONS.md) and `release.json`; no blanket compatibility
