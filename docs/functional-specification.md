@@ -2,11 +2,17 @@
 
 ## Responsibility
 
-The reusable library provides the retained Docmost note shell, editor, tree and
+Note GUI is an independent project. The reusable library provides the retained
+Docmost note shell, editor, tree and
 panels inside a consuming web host. The host owns authentication, authorization,
 canonical persistence/revisions, immutable storage and business knowledge,
 rules, reviews and actions. Vite is optional development tooling. Enterprise
 modules, simultaneous co-editing, style packs and full Trilium parity are excluded.
+
+Each consuming project decides how to integrate and deploy the library. KMS is
+one optional integration target; its product milestones, data migrations, rules,
+pipelines and adoption decisions do not define this project's completion.
+Historical extraction plans remain provenance rather than governing requirements.
 
 This document owns lasting feature behavior. [CONTRACT.md](../CONTRACT.md) owns
 exact API types/operations/errors/lifecycle; [OPERATIONS.md](../OPERATIONS.md)
@@ -16,7 +22,7 @@ verification. Requirements here do not claim completed acceptance.
 ## F01: Host composition
 
 Core-only hosts supply authorized persistence, access lifecycle and destinations
-without KMS routes/cookies/context stubs. Knowledge context and relations are
+without product-specific routes, cookies or generated clients. Knowledge context and relations are
 complete optional named capabilities: absent means no controls/calls; supplied
 failure is visible and recoverable. Every mount owns its root/listeners/timers/
 portals. Idempotent disposal fences retired results without undoing backend writes.
@@ -169,9 +175,10 @@ Preserve native shell/editor/tree/menu/panel composition at desktop/narrow width
 local table/diagram scrolling must not force page overflow. Deliver matching
 module/CSS/chunks/fonts/declarations/licenses/notices/provenance/source together.
 Shipped CJK fallback covers Korean controls/code/comparisons without replacing
-retained Latin/monospace character ranges or requiring a font CDN. Native-platform,
-consumer-host and workload acceptance uses actual authorized environments and
-matching delivered artifacts, not types or producer fixtures alone.
+retained Latin/monospace character ranges or requiring a font CDN. Library
+qualification exercises matching built artifacts in its independent persistent
+host, with actual browser, native-editor and measured resource checks. Consumers
+qualify their own backend semantics, target deployments and production workloads.
 Linux is the qualified host operating system. Windows support and native Windows
 qualification are outside the required scope. No human-review gate is required;
 automated checks and actual authorized-environment evidence still apply.

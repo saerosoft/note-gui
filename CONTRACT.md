@@ -12,6 +12,13 @@ emitted from `src/index.tsx`, `src/model.ts`, `src/host.ts` and `src/access.ts`.
 The legacy complete API remains supported. KMS integration and its pinned release
 are accepted separately by the product owner.
 
+Note GUI is an independent project. This contract defines the library's public
+behavior for any compatible host. Each consuming project selects its own
+integration and owns backend semantics, deployment and product acceptance.
+The optional `/kms` adapter documents an existing integration; it does not give
+KMS authority over this project's goals, architecture or completion. This scope
+clarification changes no exported type, runtime operation or compatibility rule.
+
 ## Imports and mount lifetime
 
 ```ts
@@ -101,7 +108,9 @@ reads its existing `NoteRevision.editorName` field rather than deriving an actor
 (`OWNER | EDITOR | VIEWER`). `Visibility` retains `SPACE | PRIVATE |
 ADMINISTRATORS`. These existing structural values are not new host permissions.
 `Page<T>` has `items: T[]` and `nextCursor: string | null`. Supply null for the
-first page and pass the returned cursor unchanged for the next one. Trees/files
+first page and pass the returned cursor unchanged for the next one. Only null
+ends pagination; an empty string or numeric-looking string is still a supplied
+continuation token. Trees/files
 use pages of up to 50; history/comments/context/relations use up to 20. Core
 readable-title search returns up to 20 results. Empty successful results mean
 authorized emptiness; denial/unavailability must reject.

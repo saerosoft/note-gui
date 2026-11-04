@@ -1,5 +1,14 @@
 # Releases and consumption
 
+## Project ownership
+
+Note GUI owns its development, public contract, qualification and releases as
+an independent project. Consuming projects choose their versions and integration
+and qualify their own backend, deployment and product behavior. KMS milestones,
+Jenkins routing, dependency-pin publication and business-data validation are
+outside this repository's completion criteria. Historical integration evidence
+does not authorize work in a consuming repository.
+
 ## Development-first, one-way promotion
 
 `master` is this repository's main development branch. All implementation, defect fixes, tests and documentation start there, including defects discovered in a released version. Do not develop fixes directly on `version/*` or create temporary work branches.

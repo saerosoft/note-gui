@@ -1,21 +1,24 @@
-# Knowledge Engine note GUI
+# Note GUI
 
 [SESSION_PROMPT.md](SESSION_PROMPT.md) is the development-session template for `master`. [OPERATIONS.md](OPERATIONS.md#development-first-one-way-promotion) defines one-way development-to-release promotion; reading the template alone grants no command permission.
 
-This public fork of [docmost/docmost](https://github.com/docmost/docmost) adapts
-Docmost's AGPL core note client for Knowledge Engine. It distributes the
-original/adapted application shell, page editor, navigation and styles as an
-importable browser library, with a typed adapter to the existing domain API.
-Basic hosts can supply `NoteCoreApi` without KMS APIs, cookies or routes. Named
-knowledge-context and relation extensions retain the full product experience.
+Note GUI is an independent browser library adapted from the AGPL core of
+[docmost/docmost](https://github.com/docmost/docmost). It distributes the retained
+application shell, page editor, navigation and styles through a typed host API.
+Hosts supply `NoteCoreApi` and may enable the named knowledge-context, relation
+and collaboration capabilities. The optional `/kms` compatibility adapter is one
+integration option. Each consuming project decides how to use the library and
+owns its authentication, backend, routes, deployment and product acceptance.
+KMS adoption, data validation and release milestones are outside this project's
+completion criteria.
 See [CONTRACT.md](CONTRACT.md) for exact operations, lifecycle, errors and migration.
 See [OPERATIONS.md](OPERATIONS.md) for contract-led versions, immutable releases,
 qualification and consumer pins. [Release 0.8.0](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.0)
 contains the qualified package, corresponding source, evidence and checksums.
 `release.json` declares identity; the published `qualification.json` records the
 exact tested commit and limits. Consumer adoption remains a separate check.
-The product hosts this library inside Next.js; Vite is an optional development
-and demo harness. Preserve the retained original Docmost stylesheets;
+Hosts choose their own web framework; Vite is an optional development and demo
+harness. Preserve the retained original Docmost stylesheets;
 host-specific layout additions support tabs, panes and embedding rather than
 redesigning the workspace.
 
@@ -41,21 +44,15 @@ which requirements have current verification and which remain unfinished.
 The working tree excludes Docmost's server, Enterprise modules, account and
 organization management, workspace setup, cloud integration, email templates
 and product deployment stack. The original Docmost database and collaboration
-server are not required. Authentication, permissions, storage, revisions,
-search, rules and actions belong to the external Knowledge Engine API. The
-client selects spaces already authorized by that API; it does not manage them.
-Links to related sources, rules, reviews and actions navigate to the product
-web routes. The host consumes the library while the existing Kotlin API remains
-authoritative for authentication, permissions and data; there is no second
-Docmost backend or browser body database in the KMS runtime. The independent
-single-user example uses explicitly selected browser persistence. Trilium is a behavioral reference for
-navigation additions.
+server are not required. The consuming host owns authentication, permissions,
+storage, revisions, search, rules and actions. The client uses the authorized
+spaces, data and destinations supplied through its public contract. The
+independent single-user example uses explicitly selected browser persistence.
+Trilium is a behavioral reference for navigation additions.
 
-The canonical requirements remain the
-[implementation plan](https://static.saerosoft.com/knowledge-engine/#implementation-plan)
-and its linked KN-02 note screen. Source extraction supports
-`#knowledge-reuse` and `#knowledge-gui-features`; it does not establish screen
-acceptance.
+The local functional specification and public contract define this project's
+requirements. Historical KMS screen plans document extraction and integration
+context; they do not define this library's goals or completion authority.
 
 ## Build the library
 
@@ -117,9 +114,9 @@ Copy the complete `dist/` tree to the host's served asset location. The library
 asset base defaults to `/note-gui/`; set `NOTE_GUI_ASSET_BASE` before building
 only when the served asset path differs. Keep generated chunks, local
 Excalidraw fonts and source-offer files at their generated relative paths. The
-product route `/notes/` is distinct from this static asset directory.
+host's application route is distinct from this static asset directory.
 
-The current Next.js host uses a client boundary at `/notes/`: it loads
+One existing KMS integration uses a Next.js client boundary at `/notes/`: it loads
 `/note-gui/note-gui.css`, dynamically imports `/note-gui/note-gui.js`, waits for
 the stylesheet and then calls `mountNoteGui`. Its effect guards against a late
 load after navigation and calls `unmount()` and removes its stylesheet during
@@ -167,13 +164,10 @@ isolated example origin. The fixture gate edits, saves, reloads and reopens
 native canvas content at desktop/narrow widths and checks the read-only viewer.
 It neither configures nor qualifies a production Draw.io deployment.
 
-The product host serves this module and CSS and uses the existing same-origin
-`/graphql` and `/api` endpoints. The current product host imports this module
-with the optional Vite server stopped; preserve this condition during
-acceptance and future host changes. Linking to a separate application or reverse-proxying `/notes/` to
-that server does not meet the library-host requirement. Keep complete source
-distribution available from the hosted GUI; this README does not establish
-final product, visual or host acceptance.
+The optional KMS adapter uses the host's same-origin `/graphql` and `/api`
+endpoints. Its consuming project owns the route, server configuration and
+integration checks. Other hosts inject their own API and destinations. Keep the
+matching source distribution available for the delivered library.
 
 ## Optional Vite development and demo harness
 
@@ -186,10 +180,10 @@ not start the product or prove product-host integration.
 
 The optional development server binds to `127.0.0.1:9090` and proxies `/graphql` and
 `/api` to `127.0.0.1:9086`. `NOTE_GUI_API_ORIGIN` can select another HTTP(S)
-API origin for an isolated acceptance run. Start the existing Knowledge Engine API and sign in
-through `http://localhost:9088`, then open `http://localhost:9090`. Use the
-same hostname for both applications so the product session cookie is shared.
-This repository does not start or provision those external services.
+API origin for an explicitly selected KMS-adapter demo. That demo requires an
+externally configured compatible API and session; the consuming project chooses
+and provisions those services. The independent example described above needs
+neither a KMS backend nor its cookies.
 
 Product navigation can use the configured browser-safe `VITE_WEB_ORIGIN`.
 Without that origin, the adapter preserves the current protocol/hostname and
@@ -202,7 +196,7 @@ Keep credentials out of every browser-visible setting.
 
 ## Domain API and diagrams
 
-Deploy the matching backend before using the complete KMS adapter.
+Hosts choosing the KMS adapter provide a compatible backend.
 [KMS compatibility prerequisites](CONTRACT.md#kms-compatibility-and-migration)
 identify its required current-item, authored-body, origin and relation-target
 transport. [F02, F06 and F07](docs/functional-specification.md) own the editing,
@@ -226,8 +220,9 @@ to [F08](docs/functional-specification.md#f08-native-diagrams-and-files);
 
 ## Browser verification
 
-For product integration, serve the built library through the actual Next.js
-`/notes/` host with its existing API, and stop the Vite demo server. Set
+Library qualification uses `pnpm test:independent` and the package checks above.
+The following optional real-API suite documents an existing KMS integration;
+its provisioning and product acceptance belong to the consuming project. Set
 `NOTE_GUI_E2E_BASE_URL` to the configured product URL ending in `/notes/`
 (including its trailing slash). `NOTE_GUI_E2E_SPACE` selects an isolated writable
 space for the note-creation scenarios. Demo-only checks may instead target the
@@ -274,7 +269,7 @@ required for that delivered work.
 ## Acceptance and work status
 
 [GOAL.md](GOAL.md) owns the remaining checklist and verification boundaries.
-[The consumer packet](docs/consumer-acceptance.md) records the named integration
-inputs. Historical acceptance records retain their dated workloads until their
-carried criteria and evidence are resolved; they do not establish current whole
-screen, platform, workload or release acceptance.
+[The consumer packet](docs/consumer-acceptance.md) explains the library/consumer
+responsibility boundary. Historical integration records and producer evidence
+retain their original limits. Consumer deployment, adoption and business-data
+checks do not block this independent project's completion.

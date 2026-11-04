@@ -1,94 +1,29 @@
-# Populated note-context acceptance
+# Historical populated-data integration evidence
 
-## Current adopted-host progress
+## Ownership
 
-COMPLETED bounded current-host comparison and paging checks: on 2026-11-02,
-run `024345c3b295` uses the published 0.8 GUI and pinned API through actual Next
-`/notes`. At 375/1440px, current membership and accumulation history page20+5,
-the original quote and saved before/after bodies match the API, and occurrence,
-effective and application times are shown separately. Automatic administrator
-demotion removes the open context/comparison. No page errors or model calls occur.
+The library presents supplied current items, history, immutable comparisons,
+audience/actor labels, exact destinations and bounded pages. The
+[functional specification](functional-specification.md#f07-current-knowledge-proof-and-exact-links)
+and [public contract](../CONTRACT.md) own that behavior. The independent host and
+component checks exercise representative populated results for local acceptance.
 
-Independent evidence verifies43 normal-API accepted controlled proposals, four
-unchanged authored documents, current membership counts4/25/4/4, complete
-135-table inventory hashes, original roles and owned-resource cleanup. These
-proposals are controlled test inputs, not model output. Eight NOT_FOUND reads
-each have an identical successful owner control with expected body text;
-private/administrator audience labels are also verified.
-Current-host rule-version acceptance remains NOT YET VERIFIED. Bounded legacy
-origin/restore now passes375/1440px in `d0445e4349d4`, with initial immutable rows,
-exact restored text/origin and no invented current membership. Independent
-inventories/roles/cleanup305 pass. This synthetic legacy case does not requalify
-the historical31-record legacy accumulation cohort or million-note migration.
-The historical cases below retain their limits; this document is not ready
-for retirement. F07 in the functional specification owns lasting behavior.
-Published0.8.1 ordinary-host/split/native-modal checks518 and configured-native
-checks534 pass on reviewed KMS2a33a2f. They do not requalify the populated
-current/rule cases in this record. Fresh0.8.1/2a33a2f workload582 completes
-all16 measured windows/336000 successful operations and4800 separate warmups,
-with zero errors/misses and final preservation/cleanup proof595. Interrupted
-run532 remains unaccepted. Whole AC09 also awaits KMS remote publication.
-Initial run04 lacks the ordinary durable worker required by normal rule
-validation. A later finite notifications/text-worker attempt `2b7136e2305b`
-reaches that validation and fails with `LOCATIONS_OUT_OF_SCOPE`: its fixture
-passes a space UUID instead of a shared note location. Both failures remain
-preserved, and neither attempt approves or activates a rule.
+The consuming project owns business-data provenance, rule approval, migration
+of retained corpora, backend audience filtering and product deployment. KMS's
+historical 31-record cohort, million-note migration and independent comparison
+results are not requirements or blockers for this independent library.
 
-Separate V2 run `aecb6a5a27ed` verifies the actual shared-note location through
-normal durable validation: hostPassed:true, findings:[], comparison PENDING,
-executionProfile:null. It deliberately stops at exit1/40.013seconds. No comparison
-observations, review, approval, activation, proposal or browser run occurs.
-Independent hashes, inventories, original roles and owned cleanup match.
-Genuine comparison observations and future target-subtree application remain
-required; no row-level post-validation rule-state SQL snapshot was captured.
-This bounded diagnosis does not qualify the rule-version case. Executed V1/V2
-inputs remain unchanged; further host cases need a new agreed interval.
+## Preserved record
 
-On 2026-10-24, both scenarios in `e2e/populated.spec.ts` passed against the
-isolated Knowledge Engine API and three account sessions. The database held
-31 applied changes: 25 on a shared note and three each on private and
-administrator notes. The original text and pending proposals were controlled
-test inputs persisted in the isolated database. The actual `decideChangeSet`
-API accepted them and produced notes, revisions, evidence and outbox records.
-No browser network response was mocked and no model execution was claimed.
+The [full historical journal](https://github.com/saerosoft/note-gui/blob/3d15c3e096b4fdb4fec347a01277b0780ac2ce2d/docs/populated-data-acceptance.md) retains the 2026-10-24 applied
+history/rule-link observations and later 2026-11-02 bounded checks. It also records
+the controlled inputs and the unqualified rule-validation/comparison attempts.
+`producer-evidence.json` preserves their exact tuples, counts, byte/role/cleanup
+observations and limitations. No historical controlled fixture is reclassified
+as independently generated business output.
 
-The shared history paged as 20 and five records. Opening the replacement
-record showed the former proposed November 2 date in the actual prior
-revision and the confirmed November 9 date in the actual resulting revision.
-The displayed quote matched the original source revision returned by the API.
-Original occurrence, effective time and application time were shown separately.
-The same populated layout fit a 390 by 844 pixel viewport without horizontal
-page overflow.
-
-Owner-private and administrator evidence carried their respective visibility
-labels. Another account could not read their accumulation list, comparison or
-source revision through direct API requests. After that account was promoted,
-it opened an administrator comparison; demotion removed both the note context
-and expanded comparison on the next access poll.
-
-An additional real-API scenario verified a populated applied-rule link. A
-test-only ruleset was created with four required cases, validated without an
-available model, manually reviewed through the supported API, approved and
-activated in the isolated database. A controlled proposal pinned that exact
-version and was applied through `decideChangeSet`. The GUI's rule name, version
-number and destination IDs matched the actual approved version returned by
-the API. This checks provenance and approval plumbing, not model quality or
-production rule readiness; no provider execution profile was invented.
-
-These are change-history and authorization results. The history list does not
-select currently valid knowledge. The later
-[current-knowledge run](current-knowledge-acceptance.md) verifies the separate
-backend projection and preserves this cohort's existing mixed documents with
-an explicit unclassified origin. A legacy history restore retains that origin
-and does not invent current membership.
-
-```sh
-NOTE_GUI_E2E_FIXTURE=.tmp/acceptance/fixtures.json \
-NOTE_GUI_E2E_PIPELINE=.tmp/acceptance/pipeline.json \
-NOTE_GUI_E2E_RULE=.tmp/acceptance/rule.json \
-NOTE_GUI_E2E_CHANNEL=chrome pnpm test:browser e2e/populated.spec.ts
-```
-
-Keep fixture IDs and account sessions under `.tmp/`. The suite reads existing
-applied records and changes only the peer's temporary role, restoring it in
-cleanup. It does not reset the database or invoke an LLM.
+The historical journal's pending consumer tests and retirement conditions are
+superseded as local work instructions. KMS decides whether any of those checks
+belongs in its own acceptance plan. [GOAL.md](../GOAL.md) tracks only remaining
+library work. This reference page neither requires consumer data nor claims that
+all current library presentation checks have been completed.
