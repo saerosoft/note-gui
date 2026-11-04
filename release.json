@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "repository": "saerosoft/note-gui",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "branch": "version/0.8",
-  "tag": "release/v0.8.1",
+  "tag": "release/v0.8.2",
   "contractPaths": ["CONTRACT.md", "src/host.ts", "src/model.ts", "src/access.ts", "src/collaboration.ts"],
   "artifactKind": "browser-library"
 }

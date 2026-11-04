@@ -1,6 +1,6 @@
 # Note GUI host contract
 
-This contract accompanies the 0.8.1 development candidate for the `version/0.8`
+This contract accompanies the 0.8.2 development candidate for the `version/0.8`
 release line. It adds optional collaboration capabilities and mount-local dirty
 reporting to the existing core/context/relations contract. Candidate metadata on
 `master` does not establish release qualification or publication.

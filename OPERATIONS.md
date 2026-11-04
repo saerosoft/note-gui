@@ -57,6 +57,11 @@ The core/context/relations split and explicit host contract added to package
 `release/v0.7.0`. The inherited Docmost `v0.7.0` tag identifies upstream history;
 it is unrelated to this release. Preserve inherited branches and tags.
 
+The 0.8.2 development candidate repairs opaque cursor preservation, empty-token
+continuation and tree cache key collisions within the existing 0.8 contract.
+Public types and page-size bounds are unchanged. Its release qualification and
+publication are recorded separately from the qualified 0.8.1 assets above.
+
 ## Consumer identity
 
 For the 0.8.1 patch, pin `version/0.8`, `release/v0.8.1` and exact commit
