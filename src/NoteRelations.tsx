@@ -115,7 +115,7 @@ function NoteRelationsPanel({ api, relations: suppliedRelations, note, onOpen, o
       </Group>}
     </article>)}
     {!relations.items.length && !busy && !error && <p>아직 관계가 없습니다.</p>}
-    {relations.nextCursor && <Button disabled={busy || !loaded} onClick={() => { if (loaded) void perform(async isCurrent => {
+    {relations.nextCursor !== null && <Button disabled={busy || !loaded} onClick={() => { if (loaded) void perform(async isCurrent => {
       const page = await relationApi.relations(note.id, relations.nextCursor);
       if (isCurrent()) setRelations({ items: [...relations.items, ...page.items].slice(-100), nextCursor: page.nextCursor });
     }); }}>관계 더 보기</Button>}
@@ -176,7 +176,7 @@ function SupportingEvidencePage({ api, relationId }: { api: NoteRelationsApi; re
     </article>)}
     <Group aria-label="근거 페이지">
       <Button size="xs" disabled={!cursors.length} onClick={() => setCursors(value => value.slice(0, -1))}>이전 근거</Button>
-      <Button size="xs" disabled={!page.nextCursor} onClick={() => page.nextCursor && setCursors(value => [...value, page.nextCursor!])}>다음 근거</Button>
+      <Button size="xs" disabled={page.nextCursor === null} onClick={() => page.nextCursor !== null && setCursors(value => [...value, page.nextCursor!])}>다음 근거</Button>
       <Button size="xs" onClick={() => setRefresh(value => value + 1)}>근거 새로고침</Button>
     </Group>
   </section>;

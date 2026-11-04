@@ -33,18 +33,18 @@ it('lists immutable file revisions with native authorized download links and exa
   expect(value.attachment).not.toHaveBeenCalled();
 });
 
-it('replaces bounded pages and rereads the previous cursor without duplicating rows', async () => {
+it.each(['file-49', ''])('replaces bounded pages using opaque attachment cursor %s without duplicating rows', async cursor => {
   const value = fixture();
   const first = Array.from({ length: 50 }, (_, index) => file(`file-${index}`));
-  value.files.mockResolvedValueOnce(page(first, 'file-49'))
+  value.files.mockResolvedValueOnce(page(first, cursor))
     .mockResolvedValueOnce(page([file('last')]))
-    .mockResolvedValueOnce(page(first, 'file-49'));
+    .mockResolvedValueOnce(page(first, cursor));
   render(<NoteAttachments api={value.api} noteId="note" revision={1}/>);
   await screen.findByRole('link', { name: 'file-0.pdf' });
   expect(screen.getAllByRole('link')).toHaveLength(50);
   fireEvent.click(screen.getByRole('button', { name: '다음 첨부' }));
   await screen.findByRole('link', { name: 'last.pdf' });
-  expect(value.files).toHaveBeenLastCalledWith('note', 'file-49');
+  expect(value.files).toHaveBeenLastCalledWith('note', cursor);
   expect(screen.getAllByRole('link')).toHaveLength(1);
   expect(screen.queryByRole('link', { name: 'file-0.pdf' })).toBeNull();
   expect(screen.getByRole('button', { name: '다음 첨부' }).getAttribute('disabled')).toBe('');

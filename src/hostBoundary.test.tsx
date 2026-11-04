@@ -260,13 +260,14 @@ it('reads the current association revision after conflict before permitting a fr
   expect(set.mock.calls[0][1].expectedRevision).toBe(7); expect(set.mock.calls[1][1].expectedRevision).toBe(8);
   expect(set.mock.calls[1][1].requestId).not.toBe(set.mock.calls[0][1].requestId); expect(state).toHaveBeenCalledTimes(2);
 });
-it('keeps association paging on the applied query until a new search is submitted', async () => {
+it.each(['20', ''])('keeps opaque association cursor %s on the applied query until a new search is submitted', async token => {
   const targets = vi.fn<NoteAssociationsApi['targets']>(async (noteId, query, cursor) => ({
-    noteId, total: query ? 1 : 21, nextCursor: query || cursor ? null : '20',
+    noteId, total: query ? 1 : 21, nextCursor: query || cursor !== null ? null : token,
     items: query && cursor === null ? [{ id: 'match', title: 'First matching target', revision: 1, bodyOrigin: 'HUMAN', updatedAt: '2026-11-01T00:00:00Z' }] : [],
   }));
+  const list = vi.fn<NoteAssociationsApi['list']>(async (noteId, cursor) => ({ noteId, total: 21, nextCursor: cursor !== null ? null : token, items: [] }));
   show(undefined, undefined, {
-    targets, list: async (noteId, cursor) => ({ noteId, total: 21, nextCursor: cursor ? null : '20', items: [] }),
+    targets, list,
     state: async () => null, set: async () => { throw new Error('No association write expected'); },
   });
   await screen.findByDisplayValue('Independent document');
@@ -274,11 +275,14 @@ it('keeps association paging on the applied query until a new search is submitte
   await waitFor(() => expect(screen.getByRole('button', { name: '대상 다음' })).toHaveProperty('disabled', false));
   fireEvent.change(screen.getByRole('textbox', { name: '연결 대상 검색' }), { target: { value: 'needle' } });
   fireEvent.click(screen.getByRole('button', { name: '대상 다음' }));
-  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', '20'));
+  await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', token));
   fireEvent.click(screen.getByRole('button', { name: '대상 이전' }));
   await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', null));
   await waitFor(() => expect(screen.getByRole('button', { name: '연결 다음' })).toHaveProperty('disabled', false));
   fireEvent.click(screen.getByRole('button', { name: '연결 다음' }));
+  await waitFor(() => expect(list).toHaveBeenLastCalledWith('note', token));
+  fireEvent.click(screen.getByRole('button', { name: '연결 이전' }));
+  await waitFor(() => expect(list).toHaveBeenLastCalledWith('note', null));
   await waitFor(() => expect(targets).toHaveBeenLastCalledWith('note', '', null));
   await waitFor(() => expect(screen.getByRole('button', { name: '대상 검색' })).toHaveProperty('disabled', false));
   fireEvent.click(screen.getByRole('button', { name: '대상 검색' }));

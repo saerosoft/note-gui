@@ -59,7 +59,7 @@ function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
     setAttempt(value => value + 1);
   }
   function next() {
-    if (!page?.nextCursor) return;
+    if (page?.nextCursor == null) return;
     setPrevious(values => [...values, cursor]); setCursor(page.nextCursor); setPage(undefined);
   }
   function back() {
@@ -85,7 +85,7 @@ function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
     <nav className="context-pagination" aria-label="첨부파일 페이지">
       <button type="button" disabled={!page || !previous.length} onClick={back}>이전 첨부</button>
       <span>{previous.length + 1}쪽{page ? ` · ${page.items.length}개` : ''}</span>
-      <button type="button" disabled={!page?.nextCursor} onClick={next}>다음 첨부</button>
+      <button type="button" disabled={page?.nextCursor == null} onClick={next}>다음 첨부</button>
     </nav>
   </section>;
 }

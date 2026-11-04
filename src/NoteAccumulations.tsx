@@ -8,17 +8,18 @@ import { useNoteDateTime } from './dateTime';
 const operationLabels: Record<string, string> = { CREATE_NOTE: '노트 생성', APPEND_NOTE: '추가 제안 반영', REPLACE_NOTE: '교체 제안 반영' };
 
 export function NoteAccumulations({ api, noteId }: { api: NoteKnowledgeContextApi; noteId: string }) {
-  const [offset, setOffset] = useState(0);
+  const [cursors, setCursors] = useState<string[]>([]);
+  const cursor = cursors.at(-1) ?? null;
   const [page, setPage] = useState<Page<NoteAccumulation>>();
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let alive = true;
     setPage(undefined); setError('');
-    api.accumulations(noteId, offset ? String(offset) : null).then(result => { if (alive) setPage(result); })
+    api.accumulations(noteId, cursor).then(result => { if (alive) setPage(result); })
       .catch(failure => { if (alive) setError((failure as Error).message); });
     return () => { alive = false; };
-  }, [api, noteId, offset, attempt]);
+  }, [api, noteId, cursor, attempt]);
   return <section className="context-card note-accumulations" aria-label="누적 이력">
     <h2>누적 이력</h2>
     <p className="context-muted">반영된 제안과 당시 근거를 최신순으로 보여 줍니다. 과거 자료는 현재 정리를 바꾸지 않고 이력에만 남을 수 있습니다. 실제 결과는 변경 전후에서 확인할 수 있으며, 사람이 작성한 본문과 이전 개정은 보존됩니다.</p>
@@ -28,9 +29,9 @@ export function NoteAccumulations({ api, noteId }: { api: NoteKnowledgeContextAp
       {!page.items.length && <p>반영된 정리가 없습니다.</p>}
       {page.items.map(item => <Accumulation key={item.id} api={api} item={item}/>)}
       <nav className="context-pagination" aria-label="누적 이력 페이지">
-        <button type="button" disabled={offset === 0} onClick={() => setOffset(value => Math.max(0, value - 20))}>이전 반영 내역</button>
-        <span>{offset / 20 + 1}쪽</span>
-        <button type="button" disabled={!page.nextCursor} onClick={() => setOffset(Number(page.nextCursor))}>다음 반영 내역</button>
+        <button type="button" disabled={!cursors.length} onClick={() => setCursors(value => value.slice(0, -1))}>이전 반영 내역</button>
+        <span>{cursors.length + 1}쪽</span>
+        <button type="button" disabled={page.nextCursor === null} onClick={() => { if (page.nextCursor !== null) setCursors(value => [...value, page.nextCursor!]); }}>다음 반영 내역</button>
       </nav>
     </>}
   </section>;

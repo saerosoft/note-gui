@@ -24,7 +24,7 @@ export function DocmostHistory({ api, noteId, history, busy, canRestore, onResto
   const current = pair ? history.items.find(item => item.id === pair.newerId) : history.items[index < 0 ? 0 : index];
   const previous = pair ? history.items.find(item => item.id === pair.olderId) : history.items[(index < 0 ? 0 : index) + 1];
   return <AttachmentContext.Provider value={{ api, noteId, editable: false }}>
-    <HistoryList pageId={noteId} historyItems={history.items} isLoading={busy} hasNextPage={!!history.nextCursor} fetchNextPage={onLoadMore} canRestore={canRestore}
+    <HistoryList pageId={noteId} historyItems={history.items} isLoading={busy} hasNextPage={history.nextCursor !== null} fetchNextPage={onLoadMore} canRestore={canRestore}
       confirmRestore={id => { const revision = history.items.find(item => item.id === id); if (canRestore && revision) onRestore(revision); }}/>
     {current && <>
        {(current.presentation?.bodyOrigin ?? current.bodyOrigin) === 'LEGACY_UNCLASSIFIED' && <p className="legacy-body-notice">이 개정은 작성 구분을 확인해야 하는 기존 본문입니다. 복원할 때도 원문과 작성 구분을 유지합니다.</p>}

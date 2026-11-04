@@ -118,7 +118,7 @@ export function NoteAssociations({ api, note, onOpen }: Props) {
     </article>)}
     <Group>
       <Button size="xs" disabled={!previous.length || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, previous.at(-1) ?? null, targetCursor, appliedQuery); if (current(epoch)) setPrevious(values => values.slice(0, -1)); })}>연결 이전</Button>
-      <Button size="xs" disabled={!page?.nextCursor || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, page!.nextCursor, targetCursor, appliedQuery); if (current(epoch)) setPrevious(values => [...values.slice(-30), cursor]); })}>연결 다음</Button>
+      <Button size="xs" disabled={page?.nextCursor == null || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, page!.nextCursor, targetCursor, appliedQuery); if (current(epoch)) setPrevious(values => [...values.slice(-30), cursor]); })}>연결 다음</Button>
     </Group>
     {canWrite && <>
       <form onSubmit={event => { event.preventDefault(); if (pending || busy) return; setSelection(undefined); const search = query.trim(); setAppliedQuery(search); setTargetCursor(null); setTargetPrevious([]); void perform(epoch => load(epoch, cursor, null, search)); }}>
@@ -129,7 +129,7 @@ export function NoteAssociations({ api, note, onOpen }: Props) {
       {loaded && targets?.total === 0 && <p>연결할 수 있는 노트가 없습니다.</p>}
       <Group>
         <Button size="xs" disabled={!targetPrevious.length || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, cursor, targetPrevious.at(-1) ?? null, appliedQuery); if (current(epoch)) setTargetPrevious(values => values.slice(0, -1)); })}>대상 이전</Button>
-        <Button size="xs" disabled={!targets?.nextCursor || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, cursor, targets!.nextCursor, appliedQuery); if (current(epoch)) setTargetPrevious(values => [...values.slice(-30), targetCursor]); })}>대상 다음</Button>
+        <Button size="xs" disabled={targets?.nextCursor == null || busy || !!pending} onClick={() => void perform(async epoch => { await load(epoch, cursor, targets!.nextCursor, appliedQuery); if (current(epoch)) setTargetPrevious(values => [...values.slice(-30), targetCursor]); })}>대상 다음</Button>
       </Group>
       {selection && <Group><Text size="sm">선택: {selection.target.title}</Text><Button size="xs" disabled={busy || !!pending || !loaded} onClick={() => change(selection.target.id, selection.state?.revision ?? 0, !selection.state?.linked)}>{selection.state?.linked ? '선택 연결 해제' : '연결'}</Button></Group>}
     </>}

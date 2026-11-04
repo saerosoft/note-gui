@@ -293,7 +293,8 @@
         "Keeps core comment list/input presentation and explicit bounded-page callbacks. Removes unsupported thread resolution, user queries and upstream mutations.",
         "Labeled the plain-text comment list without implying public visibility and gave its inner tab a distinct accessible name.",
         "Shows authorized emptiness only after a successful projection read, preserving the comment input during read failure and retry.",
-        "Accepts a tab-owned comment draft so tab switches preserve text, pending write identity and acknowledgment state."
+        "Accepts a tab-owned comment draft so tab switches preserve text, pending write identity and acknowledgment state.",
+        "Preserves an empty opaque continuation token; only null ends comment paging."
       ]
     },
     {

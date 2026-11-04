@@ -10,16 +10,17 @@ const claims: Record<CurrentKnowledgeItem['claimKind'], string> = {
 };
 
 export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteKnowledgeContextApi; noteId: string; spaceId: string }) {
-  const [offset, setOffset] = useState(0);
+  const [cursors, setCursors] = useState<string[]>([]);
+  const cursor = cursors.at(-1) ?? null;
   const [page, setPage] = useState<CurrentKnowledgePage>();
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let alive = true; setPage(undefined); setError('');
-    api.currentKnowledge(noteId, offset ? String(offset) : null).then(value => { if (alive) setPage(value); })
+    api.currentKnowledge(noteId, cursor).then(value => { if (alive) setPage(value); })
       .catch(failure => { if (alive) setError((failure as Error).message); });
     return () => { alive = false; };
-  }, [api, noteId, offset, attempt]);
+  }, [api, noteId, cursor, attempt]);
   return <section className="context-card note-current" aria-label="현재 정리">
     <h2>현재 정리</h2>
     <p className="context-muted">현재 유효한 항목입니다. 제안·요청과 추정은 확정 사실과 구분합니다. 이전 내용과 근거는 누적 이력에 보존됩니다.</p>
@@ -31,9 +32,9 @@ export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteKnowle
       {!page.items.length && <p>{page.bodyOrigin === 'LEGACY_UNCLASSIFIED' ? '분리 확인된 현재 항목이 없습니다.' : '현재 유효한 정리가 없습니다.'}</p>}
       {page.items.map(item => <CurrentItem key={item.id} api={api} item={item} spaceId={spaceId}/>)}
       <nav className="context-pagination" aria-label="현재 정리 페이지">
-        <button type="button" disabled={offset === 0} onClick={() => setOffset(value => Math.max(0, value - 20))}>이전 현재 항목</button>
-        <span>{offset / 20 + 1}쪽</span>
-        <button type="button" disabled={!page.nextCursor} onClick={() => setOffset(Number(page.nextCursor))}>다음 현재 항목</button>
+        <button type="button" disabled={!cursors.length} onClick={() => setCursors(value => value.slice(0, -1))}>이전 현재 항목</button>
+        <span>{cursors.length + 1}쪽</span>
+        <button type="button" disabled={page.nextCursor === null} onClick={() => { if (page.nextCursor !== null) setCursors(value => [...value, page.nextCursor!]); }}>다음 현재 항목</button>
       </nav>
     </>}
   </section>;

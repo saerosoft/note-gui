@@ -31,6 +31,31 @@ function fixture(canEdit = true) {
 function show(value: ReturnType<typeof fixture>) {
   return render(<MantineProvider><NoteRelations api={value.api} note={value.note} onOpen={vi.fn()} onRevision={value.onRevision}/></MantineProvider>);
 }
+it('passes an empty continuation through the relation list load-more control', async () => {
+  const value = fixture(); const rows = (await value.relations()).items;
+  value.relations.mockReset().mockResolvedValueOnce({ items: [rows[0]], nextCursor: '' })
+    .mockResolvedValueOnce({ items: [{ ...rows[1], title: 'Next opaque relation' }], nextCursor: null });
+  show(value);
+  fireEvent.click(await screen.findByRole('button', { name: '관계 더 보기' }));
+  await screen.findByRole('button', { name: 'Next opaque relation' });
+  expect(value.relations).toHaveBeenLastCalledWith('note', '');
+});
+
+it('passes an empty continuation through supporting evidence and returns to its first page', async () => {
+  const value = fixture();
+  const first = { items: [], nextCursor: '' };
+  const relationEvidence = vi.fn().mockResolvedValueOnce(first).mockResolvedValueOnce({ items: [{ id: 'proof', sourceRevisionId: 'original', sourceRevision: 1, spaceId: 'space', sourceTitle: 'Later proof', locator: 'line:1', excerpt: 'Opaque continuation proof', excerptTruncated: false }], nextCursor: null }).mockResolvedValueOnce(first);
+  Object.assign(value.api, { relationEvidence }); show(value);
+  fireEvent.click(await screen.findByRole('button', { name: '관계 근거 보기' }));
+  await screen.findByText('현재 볼 수 있는 근거가 없습니다.');
+  expect(screen.getByRole('button', { name: '다음 근거' })).toHaveProperty('disabled', false);
+  fireEvent.click(screen.getByRole('button', { name: '다음 근거' }));
+  await screen.findByText('Opaque continuation proof');
+  expect(relationEvidence).toHaveBeenLastCalledWith('relation', '');
+  fireEvent.click(screen.getByRole('button', { name: '이전 근거' }));
+  await screen.findByText('현재 볼 수 있는 근거가 없습니다.');
+  expect(relationEvidence).toHaveBeenLastCalledWith('relation', null);
+});
 it('shows the recorded provenance and author of the relation', async () => {
   const value = fixture();
   Object.assign(value.api, { relations: vi.fn().mockResolvedValue({ items: [{ ...((await value.relations()).items[0]), actorLabel: 'Relation author', direction: 'OUTGOING' }], nextCursor: null }) });

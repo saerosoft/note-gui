@@ -55,7 +55,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   const branchRequests = useRef(new Set<string>());
   const visibleIds = useRef(new Set<string>());
   const forceLocation = useRef(false);
-  const rootKey = `${spaceId}/${parentId}/${cursor}`;
+  const rootKey = JSON.stringify([spaceId, parentId, cursor]);
   const rootKeyRef = useRef(rootKey);
   rootKeyRef.current = rootKey;
 
@@ -102,7 +102,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   }, [api, spaceId, activeNoteId, locateAttempt]);
   useEffect(() => {
     if (activeNoteId && (located !== activeNoteId || locating)) { setBusy(false); return; }
-    let alive = true; const start = epoch.current; const key = `${spaceId}/${parentId}/${cursor}`;
+    let alive = true; const start = epoch.current; const key = JSON.stringify([spaceId, parentId, cursor]);
     setSelected([]); setError(''); const stored = cache.current.get(key);
     if (stored) { setPage(stored); setBusy(false); return; }
     setBusy(true); setPage({ items: [], nextCursor: null });
@@ -124,7 +124,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   async function loadBranch(id: string, branchCursor: string | null, previousCursors: (string | null)[]) {
     if (branchRequests.current.has(id)) return;
     const start = epoch.current; const generation = branchGeneration.current;
-    const key = `${spaceId}/${id}/${branchCursor}`;
+    const key = JSON.stringify([spaceId, id, branchCursor]);
     branchRequests.current.add(id); setLoadingBranches(values => new Set(values).add(id)); setError('');
     try {
       const value = cache.current.get(key) ?? await api.tree(spaceId, id, branchCursor);
@@ -135,7 +135,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
       setBranches(values => {
         const next = new Map(values);
         next.set(id, { cursor: branchCursor, previous: previousCursors.slice(-31) });
-        for (const [parent, entry] of next) if (!cache.current.peek(`${spaceId}/${parent}/${entry.cursor}`)) next.delete(parent);
+        for (const [parent, entry] of next) if (!cache.current.peek(JSON.stringify([spaceId, parent, entry.cursor]))) next.delete(parent);
         return next;
       });
     } catch (failure) {
@@ -156,20 +156,20 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
     // One focused page plus at most 23 expanded child pages. Opening another
     // branch collapses the least recently opened one; its cache entry may be reused.
     setOpenIds(values => values.has(id) ? values : new Set([...values, id].slice(-23)));
-    if (branch && cache.current.get(`${spaceId}/${id}/${branch.cursor}`)) return;
+    if (branch && cache.current.get(JSON.stringify([spaceId, id, branch.cursor]))) return;
     void loadBranch(id, branch?.cursor ?? null, branch?.previous ?? []);
   }
   function composeTree(items: TreeNote[], path: Set<string>): TreeNode<TreeNote>[] {
     return items.filter(value => !path.has(value.id)).map(value => {
       const branch = branches.get(value.id);
-      const children = branch && openIds.has(value.id) ? cache.current.peek(`${spaceId}/${value.id}/${branch.cursor}`)?.items : undefined;
+      const children = branch && openIds.has(value.id) ? cache.current.peek(JSON.stringify([spaceId, value.id, branch.cursor]))?.items : undefined;
       return { ...value, ...(children ? { children: composeTree(children, new Set(path).add(value.id)) } : {}) };
     });
   }
   const tree = composeTree(page.items, new Set());
   const renderedOpenIds = new Set([...openIds].filter(id => {
     const branch = branches.get(id);
-    return loadingBranches.has(id) || !!(branch && cache.current.peek(`${spaceId}/${id}/${branch.cursor}`));
+    return loadingBranches.has(id) || !!(branch && cache.current.peek(JSON.stringify([spaceId, id, branch.cursor])));
   }));
   visibleIds.current = new Set();
   function recordVisible(items: TreeNode<TreeNote>[]) { for (const value of items) { visibleIds.current.add(value.id); if (value.children) recordVisible(value.children); } }
@@ -232,18 +232,18 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
       }} onToggle={toggleBranch}
       renderRow={props => {
         const branch = branches.get(props.node.id);
-        const branchPage = branch && cache.current.peek(`${spaceId}/${props.node.id}/${branch.cursor}`);
+        const branchPage = branch && cache.current.peek(JSON.stringify([spaceId, props.node.id, branch.cursor]));
         return <SpaceTreeRow {...props} checked={selected.includes(props.node.id)} loading={loadingBranches.has(props.node.id)}
           onCheck={canWrite ? () => setSelected(values => values.includes(props.node.id) ? values.filter(id => id !== props.node.id) : [...values, props.node.id]) : undefined}
           onOpen={onOpen} onFocusTree={() => descend(props.node)}
-          pageControls={props.isOpen && branch && (branch.previous.length > 0 || branchPage?.nextCursor) ? <>
+          pageControls={props.isOpen && branch && (branch.previous.length > 0 || branchPage?.nextCursor != null) ? <>
             <ActionIcon size={20} variant="subtle" color="gray" aria-label={`${props.node.title} 하위 노트 이전`} disabled={!branch.previous.length || loadingBranches.has(props.node.id)} onClick={event => { event.stopPropagation(); void loadBranch(props.node.id, branch.previous.at(-1) ?? null, branch.previous.slice(0, -1)); }}><IconChevronLeft size={15}/></ActionIcon>
-            <ActionIcon size={20} variant="subtle" color="gray" aria-label={`${props.node.title} 하위 노트 다음`} disabled={!branchPage?.nextCursor || loadingBranches.has(props.node.id)} onClick={event => { event.stopPropagation(); if (branchPage?.nextCursor) void loadBranch(props.node.id, branchPage.nextCursor, [...branch.previous, branch.cursor]); }}><IconChevronRight size={15}/></ActionIcon>
+            <ActionIcon size={20} variant="subtle" color="gray" aria-label={`${props.node.title} 하위 노트 다음`} disabled={branchPage?.nextCursor == null || loadingBranches.has(props.node.id)} onClick={event => { event.stopPropagation(); if (branchPage?.nextCursor != null) void loadBranch(props.node.id, branchPage.nextCursor, [...branch.previous, branch.cursor]); }}><IconChevronRight size={15}/></ActionIcon>
           </> : undefined}/>;
       }}
     />
     {!page.items.length && !busy && !locating && !locationError && <p>이 경로에 노트가 없습니다.</p>}
-    <Group justify="space-between"><Button size="xs" disabled={!previous.length || busy || locating} onClick={() => { setCursor(previous.at(-1) || null); setPrevious(values => values.slice(0, -1)); }}>이전</Button><Button size="xs" disabled={!page.nextCursor || busy || locating} onClick={() => { setPrevious(values => [...values.slice(-30), cursor]); setCursor(page.nextCursor); }}>다음</Button></Group>
+    <Group justify="space-between"><Button size="xs" disabled={!previous.length || busy || locating} onClick={() => { setCursor(previous.at(-1) ?? null); setPrevious(values => values.slice(0, -1)); }}>이전</Button><Button size="xs" disabled={page.nextCursor === null || busy || locating} onClick={() => { setPrevious(values => [...values.slice(-30), cursor]); setCursor(page.nextCursor); }}>다음</Button></Group>
     {canWrite && <>{createOpen && <form aria-label="새 페이지" onSubmit={event => { event.preventDefault(); void create(); }}>{policy?.mode === 'SHARED' ? <Text size="sm">조직 구성원 공유</Text> : <Select comboboxProps={{ withinPortal: false }} label="공유 범위" value={visibility} disabled={busy || locating} data={[{value:"SPACE",label:"공간 공유"},{value:"PRIVATE",label:"나만 보기"}]} onChange={value => setVisibility(value === "PRIVATE" ? "PRIVATE" : "SPACE")}/>}<TextInput label="새 노트 제목" value={title} disabled={busy || locating} required maxLength={300} onChange={event => setTitle(event.currentTarget.value)}/>{parentId && <p>새 노트는 루트에 만든 뒤 이동할 수 있습니다.</p>}<Button type="submit" size="xs" disabled={busy || locating || !title.trim() || parentId !== null}>현재 경로에 만들기</Button></form>}
     <details><summary>선택한 노트 이동 · {selected.length}</summary><form onSubmit={event => { event.preventDefault(); if (destination && selected.includes(destination.id)) { setError('선택한 노트를 자기 하위로 이동할 수 없습니다.'); return; } void perform(() => move(selected, destination?.id ?? null, moveSpace)); }}>
       <Select comboboxProps={{ withinPortal: false }} label="대상 공간" data={writableSpaces.map(value => ({ value: value.id, label: value.name }))} value={moveSpace} disabled={busy} onChange={value => { if (value) { setMoveSpace(value); setDestination(null); } }}/>

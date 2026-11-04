@@ -97,6 +97,36 @@ it('ignores a late response from the previously selected note', async () => {
   await waitFor(() => expect(within(screen.getByRole('region', { name: '누적 이력' })).queryByText(item.preview)).toBeNull());
 });
 
+it.each(['page:next', '0007', '0', ''])('preserves opaque accumulation cursor %s through forward, retry and previous navigation', async cursor => {
+  const value = fixture();
+  const first = { items: [{ ...item, title: 'First supplied history page' }], nextCursor: cursor };
+  const second = { items: [{ ...item, title: 'Second supplied history page' }], nextCursor: 'page:last' };
+  const last = { items: [{ ...item, title: 'Last supplied history page' }], nextCursor: null };
+  value.accumulations.mockReset().mockResolvedValueOnce(first).mockResolvedValueOnce(second)
+    .mockRejectedValueOnce(new Error('Last history page unavailable')).mockResolvedValueOnce(last)
+    .mockResolvedValueOnce(second).mockResolvedValueOnce(first);
+  show(value.api);
+  await screen.findByText('First supplied history page');
+  fireEvent.click(screen.getByRole('button', { name: '다음 반영 내역' }));
+  await screen.findByText('Second supplied history page');
+  expect(value.accumulations).toHaveBeenLastCalledWith('note-a', cursor);
+  expect(screen.queryByText('First supplied history page')).toBeNull();
+  expect(screen.getByText('2쪽')).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: '다음 반영 내역' }));
+  await screen.findByText('Last history page unavailable');
+  expect(value.accumulations).toHaveBeenLastCalledWith('note-a', 'page:last');
+  fireEvent.click(screen.getByRole('button', { name: '누적 이력 다시 읽기' }));
+  await screen.findByText('Last supplied history page');
+  expect(value.accumulations).toHaveBeenLastCalledWith('note-a', 'page:last');
+  fireEvent.click(screen.getByRole('button', { name: '이전 반영 내역' }));
+  await screen.findByText('Second supplied history page');
+  expect(value.accumulations).toHaveBeenLastCalledWith('note-a', cursor);
+  fireEvent.click(screen.getByRole('button', { name: '이전 반영 내역' }));
+  await screen.findByText('First supplied history page');
+  expect(value.accumulations).toHaveBeenLastCalledWith('note-a', null);
+  expect(screen.getByRole('button', { name: '이전 반영 내역' })).toHaveProperty('disabled', true);
+});
+
 it.each([
   ['APPEND_NOTE', '추가 제안 반영'],
   ['REPLACE_NOTE', '교체 제안 반영'],

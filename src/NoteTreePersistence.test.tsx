@@ -57,8 +57,8 @@ it('keeps the native nested tree and other expanded branches when a child opens 
   expect(api.tree).toHaveBeenCalledTimes(3);
 });
 
-it('replaces a child sibling page without discarding the root or another branch', async () => {
-  const api = show(async (parent, cursor) => ({ items: parent === 'Folder A' ? [note(cursor ? 'A second' : 'A first', parent)] : parent === 'Folder B' ? [note('B child', parent)] : root, nextCursor: parent === 'Folder A' && !cursor ? 'page-2' : null }));
+it.each(['page-2', '', 'null'])('replaces a child sibling page with opaque cursor %s without discarding another branch', async token => {
+  const api = show(async (parent, cursor) => ({ items: parent === 'Folder A' ? [note(cursor !== null ? 'A second' : 'A first', parent)] : parent === 'Folder B' ? [note('B child', parent)] : root, nextCursor: parent === 'Folder A' && cursor === null ? token : null }));
   await screen.findByRole('treeitem', { name: 'Folder A' });
   toggle('Folder A');
   await screen.findByRole('treeitem', { name: 'A first' });
@@ -69,7 +69,7 @@ it('replaces a child sibling page without discarding the root or another branch'
   expect(screen.queryByRole('treeitem', { name: 'A first' })).toBeNull();
   expect(screen.getByRole('treeitem', { name: 'B child' })).toBeTruthy();
   expect(screen.getByRole('treeitem', { name: 'Folder A' })).toBeTruthy();
-  expect(api.tree).toHaveBeenLastCalledWith('space', 'Folder A', 'page-2');
+  expect(api.tree).toHaveBeenLastCalledWith('space', 'Folder A', token);
   fireEvent.click(screen.getByRole('button', { name: 'Folder A 하위 노트 이전' }));
   await screen.findByRole('treeitem', { name: 'A first' });
   expect(api.tree).toHaveBeenCalledTimes(4);
@@ -132,4 +132,39 @@ it('focuses an expanded nested subtree explicitly and retains its real parent dr
   expect(screen.queryByRole('treeitem', { name: 'Folder B' })).toBeNull();
   fireEvent.click(screen.getByRole('button', { name: '루트' }));
   await screen.findByRole('treeitem', { name: 'Folder B' });
+});
+
+
+it.each(['', 'null'])('keeps opaque root cursor %s distinct from its first page when navigating back', async token => {
+  const api = show(async (_parent, cursor) => cursor === null
+    ? { items: [root[0]], nextCursor: token }
+    : cursor === token ? { items: [root[1]], nextCursor: 'page:last' }
+      : { items: [note('Last root', null)], nextCursor: null });
+  await screen.findByRole('treeitem', { name: 'Folder A' });
+  fireEvent.click(screen.getByRole('button', { name: '다음' }));
+  await screen.findByRole('treeitem', { name: 'Folder B' });
+  expect(api.tree).toHaveBeenLastCalledWith('space', null, token);
+  fireEvent.click(screen.getByRole('button', { name: '다음' }));
+  await screen.findByRole('treeitem', { name: 'Last root' });
+  fireEvent.click(screen.getByRole('button', { name: '이전' }));
+  await screen.findByRole('treeitem', { name: 'Folder B' });
+  fireEvent.click(screen.getByRole('button', { name: '이전' }));
+  await screen.findByRole('treeitem', { name: 'Folder A' });
+  expect(api.tree).toHaveBeenCalledTimes(3);
+});
+
+
+it('keeps tree cache tuples separate when opaque parent IDs and cursors contain separators', async () => {
+  const folders = [note('Folder/A', null, true), note('Folder', null, true)];
+  const api = show(async (parent, cursor) => parent === null ? { items: folders, nextCursor: null }
+    : parent === 'Folder/A' ? { items: [note(cursor === null ? 'Slash first' : 'Slash second', parent)], nextCursor: cursor === null ? 'B' : null }
+      : { items: [note(cursor === null ? 'Other first' : 'Other second', parent)], nextCursor: cursor === null ? 'A/B' : null });
+  await screen.findByRole('treeitem', { name: 'Folder/A' });
+  toggle('Folder/A'); await screen.findByRole('treeitem', { name: 'Slash first' });
+  fireEvent.click(screen.getByRole('button', { name: 'Folder/A 하위 노트 다음' }));
+  await screen.findByRole('treeitem', { name: 'Slash second' });
+  toggle('Folder'); await screen.findByRole('treeitem', { name: 'Other first' });
+  fireEvent.click(screen.getByRole('button', { name: 'Folder 하위 노트 다음' }));
+  await screen.findByRole('treeitem', { name: 'Other second' });
+  expect(api.tree).toHaveBeenLastCalledWith('space', 'Folder', 'A/B');
 });

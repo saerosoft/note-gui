@@ -63,6 +63,24 @@ it('resets paging for a new server search and rejects a late result from the pre
   expect(screen.queryByRole('button', { name: 'Late previous target' })).toBeNull();
 });
 
+it.each(['100000', '1e8', ''])('follows a numeric-looking opaque target cursor %s without imposing an offset limit', async cursor => {
+  const first = { noteId: 'anchor', total: 3, items: [{ id: 'first', title: 'First supplied target' }], nextCursor: cursor };
+  const second = { noteId: 'anchor', total: 3, items: [{ id: 'second', title: 'Second supplied target' }], nextCursor: 'page:last' };
+  const last = { noteId: 'anchor', total: 3, items: [{ id: 'last', title: 'Last supplied target' }], nextCursor: null };
+  const value = fixture(vi.fn().mockResolvedValueOnce(first).mockResolvedValueOnce(second).mockResolvedValueOnce(last).mockResolvedValueOnce(second));
+  show(value); await settle();
+  fireEvent.click(screen.getByRole('button', { name: '다음 대상' })); await settle();
+  expect(value.findRelationNotes).toHaveBeenLastCalledWith('anchor', '', cursor);
+  expect(screen.getByRole('button', { name: '다음 대상' })).toHaveProperty('disabled', false);
+  fireEvent.click(screen.getByRole('button', { name: '다음 대상' })); await settle();
+  expect(value.findRelationNotes).toHaveBeenLastCalledWith('anchor', '', 'page:last');
+  expect(screen.getByRole('button', { name: 'Last supplied target' })).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: '이전 대상' })); await settle();
+  expect(value.findRelationNotes).toHaveBeenLastCalledWith('anchor', '', cursor);
+  expect(screen.getByRole('button', { name: 'Second supplied target' })).toBeTruthy();
+  expect(value.findNotes).not.toHaveBeenCalled();
+});
+
 it('clears a selected private title on access loss and ignores a pending page after revocation', async () => {
   let finish!: (page: RelationTargetPage) => void;
   const value = fixture(vi.fn().mockResolvedValueOnce({

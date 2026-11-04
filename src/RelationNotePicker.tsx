@@ -83,7 +83,6 @@ export function RelationNotePicker({ api, noteId, label, selected, onSelect, dis
     {fieldError && <p role="alert">{fieldError}</p>}
   </div>;
   const page = answer?.noteId === noteId ? answer : null;
-  const pagingLimit = Number(cursor ?? 0) >= 100000 && !!page?.nextCursor;
   return <div className="note-picker" aria-busy={loading}>
     <TextInput
       label={label}
@@ -106,11 +105,10 @@ export function RelationNotePicker({ api, noteId, label, selected, onSelect, dis
       <Group aria-label={label + ' 페이지'}>
         <Button size="xs" variant="subtle" disabled={disabled || loading || !cursors.length} onClick={() => { setAnswer(null); setCursors(value => value.slice(0, -1)); }}>이전 대상</Button>
         <span>{cursors.length + 1}페이지</span>
-        <Button size="xs" variant="subtle" disabled={disabled || loading || !page.nextCursor || pagingLimit} onClick={() => {
-          if (page.nextCursor) { setAnswer(null); setCursors(value => [...value, page.nextCursor!]); }
+        <Button size="xs" variant="subtle" disabled={disabled || loading || page.nextCursor === null} onClick={() => {
+          if (page.nextCursor !== null) { setAnswer(null); setCursors(value => [...value, page.nextCursor!]); }
         }}>다음 대상</Button>
       </Group>
-      {pagingLimit && <p>조회 한도에 도달했습니다. 검색어를 구체적으로 입력해 남은 대상을 찾아 주세요.</p>}
     </>}
   </div>;
 }

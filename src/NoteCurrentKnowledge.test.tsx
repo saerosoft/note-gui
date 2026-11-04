@@ -72,6 +72,36 @@ it('ignores a late current page from a previously opened note', async () => {
   await waitFor(() => expect(screen.queryByText(confirmed.body)).toBeNull());
 });
 
+it.each(['page:next', '0007', '0', ''])('preserves opaque current cursor %s through forward, retry and previous navigation', async cursor => {
+  const value = fixture();
+  const first = page([{ ...confirmed, body: 'First supplied current page' }], cursor);
+  const second = page([{ ...confirmed, body: 'Second supplied current page' }], 'page:last');
+  const last = page([{ ...confirmed, body: 'Last supplied current page' }]);
+  value.currentKnowledge.mockReset().mockResolvedValueOnce(first).mockResolvedValueOnce(second)
+    .mockRejectedValueOnce(new Error('Last current page unavailable')).mockResolvedValueOnce(last)
+    .mockResolvedValueOnce(second).mockResolvedValueOnce(first);
+  render(<NoteCurrentKnowledge api={value.api} noteId="note" spaceId="space"/>);
+  await screen.findByText('First supplied current page');
+  fireEvent.click(screen.getByRole('button', { name: '다음 현재 항목' }));
+  await screen.findByText('Second supplied current page');
+  expect(value.currentKnowledge).toHaveBeenLastCalledWith('note', cursor);
+  expect(screen.queryByText('First supplied current page')).toBeNull();
+  expect(screen.getByText('2쪽')).toBeTruthy();
+  fireEvent.click(screen.getByRole('button', { name: '다음 현재 항목' }));
+  await screen.findByText('Last current page unavailable');
+  expect(value.currentKnowledge).toHaveBeenLastCalledWith('note', 'page:last');
+  fireEvent.click(screen.getByRole('button', { name: '현재 정리 다시 읽기' }));
+  await screen.findByText('Last supplied current page');
+  expect(value.currentKnowledge).toHaveBeenLastCalledWith('note', 'page:last');
+  fireEvent.click(screen.getByRole('button', { name: '이전 현재 항목' }));
+  await screen.findByText('Second supplied current page');
+  expect(value.currentKnowledge).toHaveBeenLastCalledWith('note', cursor);
+  fireEvent.click(screen.getByRole('button', { name: '이전 현재 항목' }));
+  await screen.findByText('First supplied current page');
+  expect(value.currentKnowledge).toHaveBeenLastCalledWith('note', null);
+  expect(screen.getByRole('button', { name: '이전 현재 항목' })).toHaveProperty('disabled', true);
+});
+
 it('distinguishes unclassified legacy material from an authoritative empty human note', async () => {
   const value = fixture(); value.currentKnowledge.mockResolvedValue({ ...page([]), bodyOrigin: 'LEGACY_UNCLASSIFIED' });
   render(<NoteCurrentKnowledge api={value.api} noteId="note" spaceId="space"/>);

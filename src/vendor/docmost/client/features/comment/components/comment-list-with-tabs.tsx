@@ -25,7 +25,7 @@ export default function CommentListWithTabs({ comments, canComment, isLoading, s
       <ScrollArea mah={400} scrollbarSize={5} type="scroll"><Tabs.Panel value="open" pt="xs">
         {!comments.items.length && !isLoading && showEmpty ? <Center py="xl"><Stack align="center" gap="xs"><IconMessageOff size={32} stroke={1.5} color="var(--mantine-color-dimmed)"/><Text size="sm" c="dimmed">아직 댓글이 없습니다.</Text></Stack></Center>
           : comments.items.map(comment => <Paper shadow="sm" radius="md" p="sm" mb="sm" withBorder key={comment.id} data-comment-id={comment.id}><CommentListItem comment={comment}/></Paper>)}
-        {comments.nextCursor && <Button disabled={isLoading} onClick={onLoadMore}>댓글 더 보기</Button>}
+        {comments.nextCursor !== null && <Button disabled={isLoading} onClick={onLoadMore}>댓글 더 보기</Button>}
       </Tabs.Panel></ScrollArea>
     </Tabs>
     {canComment && <PageCommentInput onSave={onSave} isLoading={isLoading} draft={draft} onDraftChange={onDraftChange}/>}

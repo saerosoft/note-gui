@@ -1,6 +1,64 @@
 import { expect, test } from '@playwright/test';
 import type { CurrentKnowledgeItem, Note, NoteAccumulation, NoteKnowledgeContextApi, NoteRelationsApi, Relation, RelationEvidence } from '../src/model';
 
+for (const width of [1600, 390]) test(`keeps supplied current items separate from an empty authored document and human history restore at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 1000 });
+  await page.goto('./'); await page.waitForFunction(() => !!window.noteExample);
+  const fixture = await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, access, host, mounted } = window.noteExample; mounted.unmount();
+    const note = await api.create({ spaceId: 'local', title: 'Independent current note', parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() });
+    const items: CurrentKnowledgeItem[] = [{ id: 'independent-current', claimKind: 'CONFIRMED_FACT', body: 'Current knowledge supplied independently of authored history.', resultRevision: 1, appliedAt: '2026-11-04T00:00:00Z', evidenceCount: 0, evidence: [], rules: [] }];
+    Reflect.set(window, 'independentCurrentItems', items);
+    const knowledge: NoteKnowledgeContextApi = {
+      provenance: async () => ({ sources: [], rules: [], reviews: [], actions: [] }),
+      accumulations: async () => ({ items: [], nextCursor: null }),
+      currentKnowledge: async id => ({ noteId: id, revision: (await api.note(id)).revision, bodyOrigin: 'HUMAN', items: structuredClone(items), nextCursor: null }),
+      accumulationChange: async () => { throw new gui.ApiError('No saved comparison exists for this supplied current item.', 'NOT_FOUND'); },
+    };
+    const present = (value: Note): Note => ({ ...value, presentation: { bodyOrigin: 'HUMAN' } });
+    const client = { ...api,
+      note: async (id: string) => present(await api.note(id)),
+      save: async (id: string, input: import('../src/model').SaveNote) => present(await api.save(id, input)),
+      restore: async (id: string, revision: number, expectedRevision: number) => present(await api.restore(id, revision, expectedRevision)),
+    };
+    history.replaceState(null, '', `?space=local&note=${note.id}`);
+    window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host, knowledgeContext: knowledge }) };
+    return { noteId: note.id, items };
+  });
+  const body = page.getByRole('textbox', { name: '노트 본문', exact: true });
+  const save = page.getByRole('button', { name: '저장', exact: true });
+  await expect(body).toBeEditable(); await expect(body).toHaveText('');
+  await page.getByRole('button', { name: '지식 정보', exact: true }).click();
+  const current = page.getByRole('region', { name: '현재 정리', exact: true });
+  await expect(current.getByText(fixture.items[0].body, { exact: true })).toBeVisible();
+  await expect(body).toHaveText('');
+  expect((await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId)).revision).toBe(1);
+  await page.getByRole('button', { name: '지식 정보', exact: true }).click();
+  await body.fill('First authored version.'); await body.press('Control+a'); await body.press('Control+b');
+  await expect(body.locator('strong')).toHaveText('First authored version.');
+  await save.click(); await expect(save).toBeDisabled();
+  const first = await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId);
+  expect(first.revision).toBe(2);
+  await body.fill('Second authored version.'); await save.click(); await expect(save).toBeDisabled();
+  expect((await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId)).revision).toBe(3);
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
+  await page.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
+  await page.getByRole('button', { name: /개정 2 · Independent current note/ }).click();
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: '복원', exact: true }).click();
+  await expect(body.locator('strong')).toHaveText('First authored version.');
+  await expect(page.locator('.note-body-status')).toContainText('개정 4');
+  await page.getByRole('button', { name: '지식 정보', exact: true }).click();
+  await expect(current.getByText(fixture.items[0].body, { exact: true })).toBeVisible();
+  await expect(current).toContainText('노트 개정 4 기준');
+  await expect(body).not.toContainText(fixture.items[0].body);
+  const restored = await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId);
+  expect(restored.revision).toBe(4); expect(restored.bodyJson).toEqual(first.bodyJson);
+  expect(restored.presentation?.bodyOrigin).toBe('HUMAN');
+  expect(await page.evaluate(() => Reflect.get(window, 'independentCurrentItems'))).toEqual(fixture.items);
+});
+
 test('requires relation readback before offering another keyless write after an uncertain acknowledgement', async ({ page }) => {
   await page.goto('./'); await page.waitForFunction(() => !!window.noteExample);
   await page.evaluate(async () => {
@@ -35,7 +93,7 @@ test('requires relation readback before offering another keyless write after an 
   await expect(body).toHaveText('Keep this author draft after the uncertain relation.');
 });
 
-test('navigates controlled current/history and relation proof pages through exact injected destinations while retaining an authored draft', async ({ page, context }) => {
+for (const firstCursor of ['page:next', '']) test(`navigates controlled current/history and relation proof pages with ${firstCursor === '' ? 'empty' : 'opaque'} cursors while retaining an authored draft`, async ({ page, context }) => {
   await page.goto('./'); await page.waitForFunction(() => !!window.noteExample);
   await context.route('http://127.0.0.1:18139/consumer/**', async route => {
     const url = new URL(route.request().url());
@@ -44,28 +102,33 @@ test('navigates controlled current/history and relation proof pages through exac
       : url.searchParams.toString();
     await route.fulfill({ contentType: 'text/plain', body });
   });
-  const fixture = await page.evaluate(async () => {
+  const fixture = await page.evaluate(async firstCursor => {
     const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
     const { api, access, mounted } = window.noteExample; mounted.unmount();
     const note = await api.create({ spaceId: 'local', title: 'Controlled full-context host', parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() });
     const authored = 'Authored document stays separate from current knowledge. 한글 원문';
     const saved = await api.save(note.id, { title: note.title, expectedRevision: 1, idempotencyKey: crypto.randomUUID(), bodyJson: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: authored, marks: [{ type: 'bold' }] }] }] } });
     const targets: Note[] = [];
-    for (let index = 0; index < 21; index++) targets.push(await api.create({ spaceId: 'local', title: `Fixture relation target ${String(index).padStart(2, '0')}`, parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() }));
+    for (let index = 0; index < 41; index++) targets.push(await api.create({ spaceId: 'local', title: `Fixture relation target ${String(index).padStart(2, '0')}`, parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() }));
     const text = Array.from({ length: 21 }, (_, index) => `Fixture authorized quote ${index}`).join('\n');
     const source = await api.upload(note.id, new File([text], 'controlled-source.txt', { type: 'text/plain' }));
     const evidence = (index: number) => ({ id: `span-${index}`, revisionId: source.attachmentId, spaceId: 'local', title: 'Fixture immutable original', locator: `line:${index + 1}`, quote: `Fixture authorized quote ${index}`, quoteTruncated: index === 0, occurredAt: '2026-10-31T00:00:00Z', effectiveAt: '2026-10-31T01:00:00Z', visibility: 'SPACE' as const });
     const rules = [{ rulesetId: 'fixture-ruleset', versionId: 'fixture-rule-v3', name: 'Fixture rule', versionNumber: 3 }];
     const currentItems: CurrentKnowledgeItem[] = Array.from({ length: 21 }, (_, index) => ({ id: `operation-${index}`, claimKind: index % 2 ? 'REQUEST' : 'CONFIRMED_FACT', body: `Fixture current item ${String(index).padStart(2, '0')}`, resultRevision: 2, appliedAt: '2026-11-01T00:00:00Z', evidenceCount: 1, evidence: [evidence(index)], rules }));
     const historyItems: NoteAccumulation[] = currentItems.map((item, index) => ({ id: item.id, spaceId: 'local', changeSetId: 'fixture-change-set', kind: 'APPEND_NOTE', title: `Recorded historical fixture ${index}`, preview: 'Recorded older proposal, separate from the authored document.', appliedAt: item.appliedAt, actorName: 'Fixture source actor', automatic: false, reviewerName: 'Fixture reviewer', resultRevision: 2, evidenceCount: 1, evidence: item.evidence, rules }));
-    const rows: Relation[] = targets.map((target, index) => ({ id: `edge-${index}`, targetNoteId: target.id, title: target.title, predicate: index ? 'RELATED_TO' : 'SUPPORTS', legacyPredicate: null, kind: index === 1 ? 'INFERRED' : 'RECORDED', reviewState: index === 1 ? 'PROPOSED' : 'ACCEPTED', revision: 1, validFrom: null, validTo: null, evidenceCount: index === 0 ? 21 : 0, provenance: `Recorded fixture relation ${String(index).padStart(2, '0')}`, actorLabel: 'Fixture relation actor', direction: index ? 'INCOMING' : 'OUTGOING' }));
+    const rows: Relation[] = targets.slice(0, 21).map((target, index) => ({ id: `edge-${index}`, targetNoteId: target.id, title: target.title, predicate: index ? 'RELATED_TO' : 'SUPPORTS', legacyPredicate: null, kind: index === 1 ? 'INFERRED' : 'RECORDED', reviewState: index === 1 ? 'PROPOSED' : 'ACCEPTED', revision: 1, validFrom: null, validTo: null, evidenceCount: index === 0 ? 21 : 0, provenance: `Recorded fixture relation ${String(index).padStart(2, '0')}`, actorLabel: 'Fixture relation actor', direction: index ? 'INCOMING' : 'OUTGOING' }));
     const proof: RelationEvidence[] = currentItems.map((_, index) => ({ id: `proof-${index}`, sourceRevisionId: source.attachmentId, sourceRevision: 1, spaceId: 'local', sourceTitle: 'Fixture immutable original', locator: `line:${index + 1}`, excerpt: `Fixture authorized quote ${index}`, excerptTruncated: index === 0 }));
     const reads: { kind: string; cursor: string | null }[] = []; const decisions: unknown[] = []; const changes: string[] = [];
     Reflect.set(window, 'controlledContextReads', reads); Reflect.set(window, 'controlledContextDecisions', decisions); Reflect.set(window, 'controlledContextChanges', changes);
     let relationUnavailable = true; let proofUnavailable = true;
     window.addEventListener('fixture-recover-relations', () => { relationUnavailable = false; });
     window.addEventListener('fixture-recover-proof', () => { proofUnavailable = false; });
-    function slice<T>(items: T[], cursor: string | null) { const start = Number(cursor ?? 0); return structuredClone({ items: items.slice(start, start + 20), nextCursor: start + 20 < items.length ? String(start + 20) : null }); }
+    function slice<T>(items: T[], cursor: string | null, tokens = [firstCursor, 'page:last']) {
+      const index = cursor === null ? 0 : tokens.indexOf(cursor) + 1;
+      if (cursor !== null && index === 0) throw new gui.ApiError('Unknown opaque continuation.', 'INVALID_INPUT');
+      const start = index * 20;
+      return structuredClone({ items: items.slice(start, start + 20), nextCursor: start + 20 < items.length ? tokens[index] : null });
+    }
     const knowledge: NoteKnowledgeContextApi = {
       provenance: async () => ({ sources: [{ revisionId: source.attachmentId, spaceId: 'local', title: 'Fixture immutable original' }], rules: [{ rulesetId: 'fixture-ruleset', versionId: 'fixture-rule-v3', spaceId: 'local', label: 'Fixture rule v3' }], reviews: [{ id: 'fixture-change-set', spaceId: 'local', title: 'Fixture accepted review', kind: 'changeSet', status: 'ACCEPTED' }], actions: [{ id: 'fixture-action', spaceId: 'local', title: 'Fixture recorded action' }] }),
       currentKnowledge: async (id, cursor) => { reads.push({ kind: 'current', cursor }); return { ...slice(currentItems, cursor), noteId: id, revision: (await api.note(id)).revision, bodyOrigin: 'HUMAN' }; },
@@ -73,7 +136,7 @@ test('navigates controlled current/history and relation proof pages through exac
       accumulationChange: async id => { changes.push(id); return { operationBody: 'Recorded older proposal', before: { revision: 2, title: note.title, body: authored }, after: { revision: 2, title: note.title, body: authored }, preserveHumanFields: true, requireEvidence: true, excludePrivateExamples: true, reviewPolicy: 'REVIEW', allowedDocumentTypes: ['TEXT'] }; },
     };
     const relations: NoteRelationsApi = {
-      findRelationNotes: async (id, query, cursor) => { await api.note(id); const items = targets.filter(target => target.title.toLowerCase().includes(query.toLowerCase())).map(({ id, title }) => ({ id, title })); return { ...slice(items, cursor), noteId: id, total: items.length }; },
+      findRelationNotes: async (id, query, cursor) => { await api.note(id); reads.push({ kind: 'targets', cursor }); const items = targets.filter(target => target.title.toLowerCase().includes(query.toLowerCase())).map(({ id, title }) => ({ id, title })); return { ...slice(items, cursor, [firstCursor === '' ? '' : '100000', 'page:last']), noteId: id, total: items.length }; },
       relations: async (_id, cursor) => { reads.push({ kind: 'relations', cursor }); if (relationUnavailable) throw new gui.ApiError('Fixture relation projection unavailable', 'NETWORK'); return slice(rows, cursor); },
       relationEvidence: async (_id, cursor) => { reads.push({ kind: 'proof', cursor }); if (proofUnavailable) throw new gui.ApiError('Fixture proof unavailable', 'NETWORK'); return slice(proof, cursor); },
       relate: async (_id, targetId, predicate, validity) => { const target = await api.note(targetId); rows.unshift({ id: crypto.randomUUID(), targetNoteId: target.id, title: target.title, predicate, ...validity, legacyPredicate: null, kind: 'RECORDED', reviewState: 'ACCEPTED', revision: 1, evidenceCount: 0, provenance: 'Explicit fixture relation', actorLabel: 'Fixture relation actor', direction: 'OUTGOING' }); },
@@ -84,7 +147,7 @@ test('navigates controlled current/history and relation proof pages through exac
     history.replaceState(null, '', `?space=local&note=${note.id}`);
     window.noteExample = { api: client, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api: client, host, knowledgeContext: knowledge, relations, timeZone: 'Asia/Seoul' }) };
     return { noteId: note.id, sourceId: source.attachmentId, body: saved.bodyJson };
-  });
+  }, firstCursor);
   const body = page.getByRole('textbox', { name: '노트 본문', exact: true }); await body.fill('Keep this independent authored draft.');
   await page.getByRole('button', { name: '지식 정보', exact: true }).click();
   const current = page.getByRole('region', { name: '현재 정리', exact: true });
@@ -114,6 +177,20 @@ test('navigates controlled current/history and relation proof pages through exac
   await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await page.getByRole('menuitem', { name: '관계', exact: true }).click();
   await expect(page.getByRole('alert')).toHaveText('Fixture relation projection unavailable'); await expect(page.getByText('아직 관계가 없습니다.', { exact: true })).toHaveCount(0);
   await page.evaluate(() => window.dispatchEvent(new Event('fixture-recover-relations'))); await page.getByRole('button', { name: '관계 다시 읽기', exact: true }).click();
+  const picker = page.locator('.note-detail-panels .note-picker');
+  await expect(picker.getByRole('button', { name: 'Fixture relation target 00', exact: true })).toBeVisible();
+  await picker.getByRole('button', { name: '다음 대상', exact: true }).click();
+  await expect(picker.getByRole('button', { name: 'Fixture relation target 20', exact: true })).toBeVisible();
+  await expect(picker.getByRole('button', { name: '다음 대상', exact: true })).toBeEnabled();
+  await picker.getByRole('button', { name: '다음 대상', exact: true }).click();
+  await expect(picker.getByRole('button', { name: 'Fixture relation target 40', exact: true })).toBeVisible();
+  await expect(picker.getByRole('button', { name: '다음 대상', exact: true })).toBeDisabled();
+  await picker.getByRole('button', { name: '이전 대상', exact: true }).click();
+  await expect(picker.getByRole('button', { name: 'Fixture relation target 20', exact: true })).toBeVisible();
+  await picker.getByRole('button', { name: '이전 대상', exact: true }).click();
+  await expect(picker.getByRole('button', { name: 'Fixture relation target 00', exact: true })).toBeVisible();
+  const targetCursor = firstCursor === '' ? '' : '100000';
+  expect(await page.evaluate(() => (Reflect.get(window, 'controlledContextReads') as { kind: string; cursor: string | null }[]).filter(read => read.kind === 'targets').map(read => read.cursor))).toEqual([null, targetCursor, 'page:last', targetCursor, null]);
   const outgoing = page.locator('.note-detail-panels article').filter({ hasText: 'Recorded fixture relation 00' }).first();
   await expect(outgoing).toContainText('이 노트 → 연결된 노트'); await expect(outgoing).toContainText('Fixture relation actor');
   await outgoing.getByRole('button', { name: '관계 근거 보기', exact: true }).click(); await expect(outgoing.getByRole('alert')).toHaveText('Fixture proof unavailable');

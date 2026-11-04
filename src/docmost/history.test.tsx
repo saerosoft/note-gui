@@ -26,6 +26,16 @@ function show(dirty = false) {
   return { history, restore, restored };
 }
 
+it.each(['comments', 'history'] as const)('passes an empty continuation through the %s load-more control', async panel => {
+  const read = vi.fn().mockResolvedValueOnce({ items: panel === 'history' ? revisions : [], nextCursor: '' })
+    .mockResolvedValueOnce({ items: [], nextCursor: null });
+  const client = { ...api, comments: panel === 'comments' ? read : vi.fn().mockResolvedValue({ items: [], nextCursor: null }), history: panel === 'history' ? read : vi.fn().mockResolvedValue({ items: revisions, nextCursor: null }) };
+  render(<DocmostPaneProvider><NotePanels api={client} note={note} dirty={false} panel={panel} onRestore={vi.fn()} onOpen={vi.fn()} onRevision={vi.fn()}/></DocmostPaneProvider>);
+  fireEvent.click(await screen.findByRole('button', { name: panel === 'comments' ? '댓글 더 보기' : '이력 더 보기' }));
+  await waitFor(() => expect(read).toHaveBeenLastCalledWith('note', ''));
+  expect(read).toHaveBeenCalledTimes(2);
+});
+
 it.each([
   { panel: 'comments' as const, empty: '아직 댓글이 없습니다.' },
   { panel: 'history' as const, empty: '아직 저장된 페이지 기록이 없습니다.' },
