@@ -23,14 +23,15 @@
       "historicalCandidateScope",
       "historicalRemainingInputs",
       "wholeGuiLaneAccepted",
-      "retirement"
+      "retirement",
+      "historicalDevelopmentBranch"
     ],
     "qualifiedReleaseEvidence": "qualifiedPublished083Release20261104",
     "wholeProjectCompletionRequiresLocalAudit": true,
     "currentAcceptanceRecord": "docs/note-gui-acceptance.md"
   },
   "candidate": "0.8.0",
-  "developmentBranch": "master",
+  "developmentBranch": "main",
   "baselineCommit": "b9ecad5bcf99799b53cd6ef0d47cd15d5f1c912b",
   "implementationCommit": "05a6f5d5",
   "qualificationCommit": "6a52fe15",
@@ -3341,5 +3342,39 @@
       "docs/note-gui-acceptance.md"
     ],
     "postReleaseChangesAreDocumentationOnly": true
+  },
+  "historicalDevelopmentBranch": "master",
+  "repositoryRefCleanup20261104": {
+    "status": "DEVELOPMENT_BRANCH_RENAMED_AND_UNUSED_REFS_REMOVED",
+    "observedAtUtc": "2026-11-04T06:06:03.665532+00:00",
+    "developmentBranchBefore": "master",
+    "developmentBranchAfter": "main",
+    "defaultBranch": "main",
+    "remoteBranchCountBefore": 231,
+    "deletedRemoteBranches": 228,
+    "retainedRemoteBranches": [
+      "main",
+      "version/0.7",
+      "version/0.8"
+    ],
+    "remoteUpstreamTagsDeleted": 60,
+    "localUpstreamTagsDeleted": 61,
+    "retainedReleaseTags": [
+      "release/v0.7.0",
+      "release/v0.8.0",
+      "release/v0.8.1",
+      "release/v0.8.2",
+      "release/v0.8.3"
+    ],
+    "releaseTagObjectsAndVersionBranchTipsPreserved": true,
+    "upstreamRepositoryModified": false,
+    "upstreamFetchBranches": [
+      "main"
+    ],
+    "upstreamAutomaticTagFetch": false,
+    "removedRefsBackup": ".tmp/branch-cleanup-20261104/before-cleanup.bundle",
+    "removedRefsBackupSha256": "691aac50777e579e6b3081b5b31f2556c6e1f31b2946e06978e617f5d63b2860",
+    "allRemovedRefsBackedUp": true,
+    "historicalQualificationRecordsUnchanged": true
   }
 }

@@ -1,7 +1,7 @@
 # Note GUI
 
 [OPERATIONS.md](OPERATIONS.md#development-first-one-way-promotion) defines
-development on `master` and forward-only release promotion. The
+development on `main` and forward-only release promotion. The
 [functional specification](docs/functional-specification.md) and
 [host contract](CONTRACT.md) define library behavior.
 

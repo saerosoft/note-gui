@@ -11,15 +11,15 @@ does not authorize work in a consuming repository.
 
 ## Development-first, one-way promotion
 
-`master` is this repository's main development branch. All implementation, defect fixes, tests and documentation start there, including defects discovered in a released version. Do not develop fixes directly on `version/*` or create temporary work branches.
+`main` is this repository's main development branch. All implementation, defect fixes, tests and documentation start there, including defects discovered in a released version. Do not develop fixes directly on `version/*` or create temporary work branches.
 
-The only promotion direction is `master -> version/MAJOR.MINOR`. The release operator works on the receiving version branch, selects reviewed master-origin commits compatible with that line, merges the eligible development snapshot, and records its source SHAs. Do not merge a newer contract into an older patch line; if unrelated development changes prevent a safe merge, select only eligible development-origin changes with explicit provenance or require a new minor line.
+The only promotion direction is `main -> version/MAJOR.MINOR`. The release operator works on the receiving version branch, selects reviewed main-origin commits compatible with that line, merges the eligible development snapshot, and records its source SHAs. Do not merge a newer contract into an older patch line; if unrelated development changes prevent a safe merge, select only eligible development-origin changes with explicit provenance or require a new minor line.
 
-`version/* -> master` is forbidden: never merge a release branch into master, rebase master onto it, or cherry-pick/copy release-branch commits into development. If release integration exposes a defect requiring implementation changes, fix and test it on master first, then promote forward again. Release conflict resolutions only integrate the selected development changes while preserving the receiving contract; they are not an independent development path.
+`version/* -> main` is forbidden: never merge a release branch into main, rebase main onto it, or cherry-pick/copy release-branch commits into development. If release integration exposes a defect requiring implementation changes, fix and test it on main first, then promote forward again. Release conflict resolutions only integrate the selected development changes while preserving the receiving contract; they are not an independent development path.
 
-Qualify the exact clean release-branch result after promotion, not just its development source. Record selected development SHAs and the final release SHA. Only that tested result receives new immutable tags/assets. A release merge commit can differ from master; it must not flow back into development. Preserve the inherited upstream-style `main` and other legacy refs as history, not as development or consumer sources.
+Qualify the exact clean release-branch result after promotion, not just its development source. Record selected development SHAs and the final release SHA. Only that tested result receives new immutable tags/assets. A release merge commit can differ from main; it must not flow back into development. Keep `main` and `version/*` as the maintained project branches. Track the original repository separately through `upstream/main`; imported branch names are not maintained in this fork.
 
-`master` holds the latest development. `version/MAJOR.MINOR` holds a qualified
+`main` holds the latest development. `version/MAJOR.MINOR` holds a qualified
 minor contract and receives only patches that preserve it. Each release has an
 immutable annotated `release/vMAJOR.MINOR.PATCH` tag and matching GitHub assets.
 `release.json` declares the repository, version, branch, tag, public contract
@@ -55,13 +55,14 @@ an existing consumer automatically.
   additions, removed operations, limits, errors, defaults, timing and lifecycle
   guarantees. Compatibility across arbitrary minor versions is not promised.
 - Increment PATCH only for defect repairs within the unchanged intended minor
-  contract. Bring master-origin repairs forward to their version line, rerun its
+  contract. Bring main-origin repairs forward to their version line, rerun its
   complete qualification and publish a new tag and assets.
 
 The core/context/relations split and explicit host contract added to package
 0.6 establish the 0.7.0 contract. Its line is `version/0.7` and its tag is
-`release/v0.7.0`. The inherited Docmost `v0.7.0` tag identifies upstream history;
-it is unrelated to this release. Preserve inherited branches and tags.
+`release/v0.7.0`. Docmost's upstream `v0.7.0` tag is unrelated to this library release.
+Upstream tag names are not retained in this fork; provenance records retain
+their original names and exact commits.
 
 The exact overrides in `pnpm-workspace.yaml` apply only to affected versions.
 Nano ID 4 moves to 5 because its corrected release is on that line; the converter
@@ -104,10 +105,10 @@ its result. When changing transitive overrides, verify their actual installed
 graph and the affected conversion/rendering paths.
 
 1. Update the package version, `CONTRACT.md`, release identity and operational
-   references on `master`. Review status, diff and history, then commit intended
-   public files. In the release session, promote eligible master-origin commits
+   references on `main`. Review status, diff and history, then commit intended
+   public files. In the release session, promote eligible main-origin commits
    into the receiving version branch; record their source SHAs. Implementation
-   corrections must return to master first and be promoted again.
+   corrections must return to main first and be promoted again.
 2. On that exact clean release-branch result, run `make verify`. This runs the
    source-offer exclusion tests, all unit/component tests, TypeScript checks, declaration and
    production builds, distribution verification and `make import-check`. The
@@ -124,7 +125,7 @@ graph and the affected conversion/rendering paths.
    public source-archive file with the qualified commit/build, and exercise the
    packed exports from a fresh external consumer. Exclude all KMS/private
    configuration, environment files, temporary files and unrelated applications.
-5. Record selected master SHAs, the final release commit, relative commands,
+5. Record selected main SHAs, the final release commit, relative commands,
    exit codes, test counts, tool versions, contract SHA-256 values and artifact SHA-256 values in
    `.tmp/release/qualification.json`. Publish that file, the real package,
    corresponding-source archive, release identity and checksums. SHA-256
@@ -136,14 +137,14 @@ remain separate checks owned by the consumer.
 
 ## Publication and patch recovery
 
-Before creating or pushing anything, inspect remote `master`, the intended
+Before creating or pushing anything, inspect remote `main`, the intended
 version branch/tag and the GitHub release. An unexpected existing identity or
 non-fast-forward rejection stops publication for review. Never force-push,
 rewrite a published tag, overwrite a release asset or delete unrelated refs.
 
-Create a new version line from an eligible master snapshot or advance its existing
-line only with reviewed master-origin changes. Qualify that result before tagging.
-Publish master development and the intended release refs separately, never in the
+Create a new version line from an eligible main snapshot or advance its existing
+line only with reviewed main-origin changes. Qualify that result before tagging.
+Publish main development and the intended release refs separately, never in the
 reverse direction, then create the GitHub release with
 `gh release create --verify-tag`. For repositories whose SSH key is read-only,
 use direct HTTPS and the `gh auth git-credential` helper through command-local
