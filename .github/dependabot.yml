@@ -10,6 +10,9 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore(note-gui)
+    ignore:
+      # Excalidraw upgrades require reapplying the version-specific pnpm patch.
+      - dependency-name: "@excalidraw/excalidraw"
     groups:
       minor-and-patch:
         patterns: ["*"]
