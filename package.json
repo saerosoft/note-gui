@@ -32,7 +32,7 @@
     "@atlaskit/pragmatic-drag-and-drop": "1.8.1",
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "2.1.5",
     "@atlaskit/pragmatic-drag-and-drop-flourish": "2.0.15",
-    "@atlaskit/pragmatic-drag-and-drop-hitbox": "1.1.0",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "3.0.0",
     "@atlaskit/pragmatic-drag-and-drop-live-region": "2.1.0",
     "@braintree/sanitize-url": "7.1.2",
     "@excalidraw/excalidraw": "0.18.0-3a5ef40",
