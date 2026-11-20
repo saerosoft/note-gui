@@ -14,7 +14,7 @@
   "license": "AGPL-3.0-only",
   "packageManager": "pnpm@10.29.2",
   "engines": {
-    "node": ">=26 <27"
+    "node": "^24.0.0 || ^26.0.0"
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 9090",
