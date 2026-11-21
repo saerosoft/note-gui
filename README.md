@@ -81,12 +81,11 @@ a fresh consumer resolves the root, KMS and CSS
 package exports from copied distribution files and type-checks public imports
 with `skipLibCheck: false`.
 
-The package is `private: true`; these instructions do not describe an npm
-publication. Consume a qualified release pinned by version branch, immutable tag
-and exact commit as described in [OPERATIONS.md](OPERATIONS.md), and
-retain its lockfile, notices and matching corresponding-source offer.
-The current qualified patch is [0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3);
-its exact tag/commit identity is recorded in OPERATIONS.md.
+The package is published as `@saerosoft/note-gui` to GitHub Packages npm (`https://npm.pkg.github.com`).
+Configure `@saerosoft:registry=https://npm.pkg.github.com` in the consuming project's `.npmrc`,
+install an exact pinned version, and retain its bundled `dist/` tree, notices, and corresponding-source offer.
+Prior historical releases (such as [0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3)) remain
+immutable; release identities and digests are recorded in [OPERATIONS.md](OPERATIONS.md).
 
 ## Host the public library
 
@@ -107,9 +106,8 @@ capabilities, time zone, navigation callbacks and returned mount handle,
 including `unmount()` and `hasUnsavedChanges()`. Its public types include
 `NoteApi`, `NoteGuiOptions`, `MountedNoteGui` and `NoteGuiHostModule`.
 
-Consumers resolving the pinned checkout as a package can import the module from
-`@knowledge-engine/note-gui` and CSS from `@knowledge-engine/note-gui/style.css`.
-This does not imply an npm publication.
+Consumers installing the published package from GitHub Packages import types/modules from
+`@saerosoft/note-gui`, `@saerosoft/note-gui/kms`, and CSS from `@saerosoft/note-gui/style.css`.
 
 Copy the complete `dist/` tree to the host's served asset location. The library
 asset base defaults to `/note-gui/`; set `NOTE_GUI_ASSET_BASE` before building

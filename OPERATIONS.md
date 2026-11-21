@@ -27,9 +27,9 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 ## Version policy
 
-The current minor contract is 0.8.0. Optional collaboration capabilities and
-mount-local dirty reporting establish this line. The current qualified patch is
-[release/v0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3)
+The current minor contract is 0.9.0 (`version/0.9`, tag `release/v0.9.0`), which publishes the package as `@saerosoft/note-gui` to GitHub Packages npm (`https://npm.pkg.github.com`) with bundled runtime dependencies kept in `devDependencies` and only `@tiptap/core` / `@tiptap/pm` declared in `dependencies` for public `JSONContent` type compatibility.
+
+The prior 0.8.x contract line (`@knowledge-engine/note-gui`, private repository consumption) remains immutable. Its qualified patch is [release/v0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3)
 at `eb6f80843db21ea6878ecde9838ad277e12009b5`, with annotated tag object
 `f7435ccc48cbeff92d1da54b6e8587c9ea78e968`. It updates affected dependencies within the
 intended 0.8 protocol and retains the opaque-cursor and native-layout repairs.
@@ -74,21 +74,9 @@ at that run; it is not a guarantee against future vulnerabilities.
 
 ## Consumer identity
 
-The reproducible identity for patch 0.8.3 is `version/0.8`, tag `release/v0.8.3`
-and exact commit `eb6f80843db21ea6878ecde9838ad277e12009b5`, as recorded in
-`qualification.json`. Verify that the tag resolves to that commit and that the
-release identity and contract digests match the evidence. Later patches may
-advance the branch; qualification applies to the recorded source tuple.
-Each consuming project chooses its version-selection and update policy.
+For `0.9.0` and later, consume `@saerosoft/note-gui` at an exact pinned version from GitHub Packages (`https://npm.pkg.github.com`) by configuring `@saerosoft:registry=https://npm.pkg.github.com`. The published tarball contains `package.json`, `LICENSE`, `NOTICE`, `CONTRACT.md`, `OPERATIONS.md`, `release.json`, and the complete `dist/` tree (ES module entries, CSS, chunks, fonts, declarations, source offer, and notices). Hosts serving static browser assets copy the entire `dist/` tree from the installed package and load its stylesheet before mounting. The default asset base is `/note-gui/`; a different base requires a separately qualified build.
 
-Download `knowledge-engine-note-gui-0.8.3.tgz` from that release and check it against
-`SHA256SUMS`. It contains the package manifest and complete `dist/`, including
-the ES module entries, CSS, chunks, fonts, declarations, source offer and notices.
-The root, `/kms` and `/style.css` package exports retain their documented paths.
-Hosts serving static browser assets copy the entire `dist/` tree and load its
-stylesheet before mounting. The default asset base is `/note-gui/`; a different
-base requires a separately qualified build. The package remains `private: true`;
-GitHub release distribution does not publish it to an npm registry.
+The prior 0.8.3 reproducible identity (`version/0.8`, tag `release/v0.8.3`, commit `eb6f80843db21ea6878ecde9838ad277e12009b5`) and `knowledge-engine-note-gui-0.8.3.tgz` release archive remain immutable for historical consumers.
 
 Keep the matching corresponding-source archive, lockfile, patches, provenance,
 AGPL license and dependency notices available with the delivered GUI. The public

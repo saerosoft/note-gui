@@ -5,7 +5,7 @@
 <p><a href="./source/note-gui-source.zip" download>Download complete library source</a> · <a href="./source/LICENSE">License</a> · <a href="./source/NOTICE">Notices</a> · <a href="./source/upstream-manifest.json">Source provenance and changes</a></p>
 <p>Upstream: Docmost v0.96.0, commit <code>9b3e5dd3dc21588fa20c02c5b8646d2f46ee73af</code>. The extracted page, editor, tree, comments, history, diagram UI and modifications are listed in the provenance manifest. No Enterprise modules are included.</p>
 <h2>Library and host integration</h2>
-<p>The built ES module is <code>dist/note-gui.js</code>, with declarations under <code>dist/types/</code>; the separate stylesheet is <code>dist/note-gui.css</code>. A browser host loads the CSS and imports the module, calls <code>mountNoteGui</code> with its container, and calls the returned <code>unmount</code> during cleanup. Serve the complete distribution, including generated chunks, local fonts and this source offer. The package is private and consumed from its pinned public repository; no npm publication is claimed.</p>
+<p>The built ES module is <code>dist/note-gui.js</code>, with declarations under <code>dist/types/</code>; the separate stylesheet is <code>dist/note-gui.css</code>. A browser host loads the CSS and imports the module, calls <code>mountNoteGui</code> with its container, and calls the returned <code>unmount</code> during cleanup. Serve the complete distribution, including generated chunks, local fonts and this source offer. The package is published as <code>@saerosoft/note-gui</code> to GitHub Packages (<code>https://npm.pkg.github.com</code>) from its pinned public repository.</p>
 <h2>Build</h2><pre>pnpm install --frozen-lockfile
 pnpm test
 pnpm source

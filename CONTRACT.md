@@ -1,6 +1,6 @@
 # Note GUI host contract
 
-This contract defines the `version/0.8` release line. It adds optional collaboration capabilities and mount-local dirty
+This contract defines the `version/0.9` release line (`@saerosoft/note-gui` published via GitHub Packages npm at `https://npm.pkg.github.com`). It preserves the optional collaboration capabilities and mount-local dirty
 reporting to the existing core/context/relations contract. Release metadata alone does not establish qualification or publication.
 The core/context/relations split and explicit host bindings added to the former
 0.6 package establish this new minor contract. Release identity and qualification
@@ -27,8 +27,8 @@ import {
   type NoteCoreGuiOptions, type NoteGuiOptions, type NoteHost,
   type NoteDestination, type NoteAccessLifecycle, type NoteAccessController,
   type MountedNoteGui, type NoteGuiHostModule,
-} from '@knowledge-engine/note-gui';
-import '@knowledge-engine/note-gui/style.css';
+} from '@saerosoft/note-gui';
+import '@saerosoft/note-gui/style.css';
 ```
 
 The browser ESM is `dist/note-gui.js`, the stylesheet is `dist/note-gui.css`,
@@ -448,7 +448,7 @@ reset to the inspected snapshot without replacing an independent body draft.
 ```ts
 import {
   kmsNoteApi, createKmsNoteHost, clearAccess, refreshAccess,
-} from '@knowledge-engine/note-gui/kms';
+} from '@saerosoft/note-gui/kms';
 
 const host = createKmsNoteHost(href => { router.push(href); return true; });
 const mounted = mountNoteCoreGui(container, {

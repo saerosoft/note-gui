@@ -3,9 +3,9 @@ import {
   type Note, type Revision, type NoteCoreApi, type NoteKnowledgeContextApi,
   type NoteRelationsApi, type NoteCoreGuiOptions, type NoteGuiHostModule,
   type NotePolicyApi, type NoteAssociationsApi, type MountedNoteGui,
-} from '@knowledge-engine/note-gui';
-import { kmsNoteApi, kmsNotePolicy, kmsNoteAssociations, createKmsNoteHost, clearAccess, refreshAccess } from '@knowledge-engine/note-gui/kms';
-import '@knowledge-engine/note-gui/style.css';
+} from '@saerosoft/note-gui';
+import { kmsNoteApi, kmsNotePolicy, kmsNoteAssociations, createKmsNoteHost, clearAccess, refreshAccess } from '@saerosoft/note-gui/kms';
+import '@saerosoft/note-gui/style.css';
 
 const access = createNoteAccess();
 const api: NoteCoreApi = createLocalNoteApi({ namespace: 'clean-export-consumer' });

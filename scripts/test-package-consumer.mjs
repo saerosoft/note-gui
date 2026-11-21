@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const fixture = join(root, '.tmp/package-consumer');
-const packageRoot = join(fixture, 'node_modules/@knowledge-engine/note-gui');
+const packageRoot = join(fixture, 'node_modules/@saerosoft/note-gui');
 await rm(fixture, { recursive: true, force: true });
 await mkdir(packageRoot, { recursive: true });
 for (const path of ['dist', 'package.json', 'LICENSE', 'NOTICE']) await cp(join(root, path), join(packageRoot, path), { recursive: true });
@@ -19,7 +19,7 @@ await writeFile(join(fixture, 'tsconfig.json'), JSON.stringify({
 await writeFile(join(fixture, 'resolve.mjs'), `import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-for (const [specifier, target] of ${JSON.stringify([['@knowledge-engine/note-gui', '/dist/note-gui.js'], ['@knowledge-engine/note-gui/kms', '/dist/kms.js'], ['@knowledge-engine/note-gui/style.css', '/dist/note-gui.css']])}) {
+for (const [specifier, target] of ${JSON.stringify([['@saerosoft/note-gui', '/dist/note-gui.js'], ['@saerosoft/note-gui/kms', '/dist/kms.js'], ['@saerosoft/note-gui/style.css', '/dist/note-gui.css']])}) {
   const path = fileURLToPath(import.meta.resolve(specifier));
   assert.equal(path, ${JSON.stringify(packageRoot)} + target);
   assert.ok(existsSync(path));
