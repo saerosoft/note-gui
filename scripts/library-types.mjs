@@ -5,3 +5,4 @@ const entryTypesPath = 'dist/types/index.d.ts';
 const entryTypes = await readFile(entryTypesPath, 'utf8');
 const cleaned = entryTypes.replace(/^import\s+['"][^'"]+\.css['"];?\r?\n/gm, '');
 await writeFile(entryTypesPath, cleaned, 'utf8');
+await writeFile('dist/types/style.css.d.ts', 'export {};\n', 'utf8');

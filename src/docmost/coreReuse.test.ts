@@ -1,7 +1,6 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import ts from 'typescript';
 import { describe, expect, it } from 'vitest';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -40,35 +39,84 @@ interface SourceEntry { source: string; destination: string; upstreamSha256: str
 interface Manifest { commit: string; files: SourceEntry[] }
 const manifest: Manifest = JSON.parse(readFileSync(resolve(root, 'upstream-manifest.json'), 'utf8'));
 
+function stripComments(source: string): string {
+  return source.replace(/\/\*[\s\S]*?\*\/|(?<![:\\])\/\/[^\n]*/g, '');
+}
+
+function isFile(path: string): boolean {
+  return existsSync(path) && statSync(path).isFile();
+}
+
+function resolveLocalModule(specifier: string, fromPath: string, paths: Record<string, string[]>): string | null {
+  let candidateBase: string | null = null;
+  if (specifier.startsWith('.')) {
+    candidateBase = resolve(dirname(fromPath), specifier);
+  } else {
+    for (const [pattern, targets] of Object.entries(paths)) {
+      const prefix = pattern.replace(/\*$/, '');
+      if (pattern.endsWith('*') && specifier.startsWith(prefix) && targets[0]) {
+        candidateBase = resolve(root, targets[0].replace(/\*$/, '') + specifier.slice(prefix.length));
+        break;
+      }
+    }
+  }
+  if (!candidateBase) return null;
+  if (isFile(candidateBase)) return candidateBase;
+  const extensions = ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs', '.json'];
+  for (const ext of extensions) {
+    if (isFile(candidateBase + ext)) return candidateBase + ext;
+  }
+  for (const ext of extensions) {
+    if (isFile(resolve(candidateBase, 'index' + ext))) return resolve(candidateBase, 'index' + ext);
+  }
+  return null;
+}
+
+function isNamedTypeOnly(clause: string): boolean {
+  const match = /^\{\s*([\s\S]*?)\s*\}$/.exec(clause.trim());
+  if (!match) return false;
+  const parts = match[1].split(',').map(part => part.trim()).filter(Boolean);
+  return parts.length > 0 && parts.every(part => /^type\s+/.test(part));
+}
+
 function runtimeGraph() {
-  const config = ts.readConfigFile(resolve(root, 'tsconfig.json'), ts.sys.readFile);
-  const options = ts.parseJsonConfigFileContent(config.config, ts.sys, root).options;
+  const tsconfig = JSON.parse(readFileSync(resolve(root, 'tsconfig.json'), 'utf8')) as {
+    compilerOptions?: { paths?: Record<string, string[]> };
+  };
+  const paths = tsconfig.compilerOptions?.paths ?? {};
   const files = new Set<string>();
   const imports = new Set<string>();
+  const sourceExtensions = new Set(['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs']);
+
   function visit(path: string) {
     if (files.has(path)) return;
     files.add(path);
-    const source = ts.createSourceFile(path, readFileSync(path, 'utf8'), ts.ScriptTarget.Latest, true);
+    const dot = path.lastIndexOf('.');
+    if (dot < 0 || !sourceExtensions.has(path.slice(dot)) || path.endsWith('.d.ts')) return;
+    const text = stripComments(readFileSync(path, 'utf8'));
+
     function dependency(specifier: string) {
       imports.add(specifier);
-      const found = ts.resolveModuleName(specifier, path, options, ts.sys).resolvedModule;
-      if (found && !found.isExternalLibraryImport && !found.resolvedFileName.endsWith('.d.ts')) visit(found.resolvedFileName);
-      else if (specifier.startsWith('.') && existsSync(resolve(dirname(path), specifier))) files.add(resolve(dirname(path), specifier));
+      const found = resolveLocalModule(specifier, path, paths);
+      if (found && !found.endsWith('.d.ts')) visit(found);
     }
-    function scan(node: ts.Node) {
-      if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
-        const clause = node.importClause;
-        const names = clause?.namedBindings;
-        const onlyTypes = clause?.isTypeOnly || (!clause?.name && names && ts.isNamedImports(names) && names.elements.every(item => item.isTypeOnly));
-        if (!onlyTypes) dependency(node.moduleSpecifier.text);
-      } else if (ts.isExportDeclaration(node) && !node.isTypeOnly && node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier)) {
-        dependency(node.moduleSpecifier.text);
-      } else if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword && node.arguments[0] && ts.isStringLiteral(node.arguments[0])) {
-        dependency(node.arguments[0].text);
-      }
-      ts.forEachChild(node, scan);
+
+    const importFromRe = /\bimport\s+(type\s+)?([\s\S]*?)\s+from\s+['"]([^'"]+)['"]/g;
+    for (const m of text.matchAll(importFromRe)) {
+      if (m[1]) continue;
+      if (isNamedTypeOnly(m[2])) continue;
+      dependency(m[3]);
     }
-    scan(source);
+    const sideEffectImportRe = /(?:^|[;\n])\s*import\s+['"]([^'"]+)['"]/g;
+    for (const m of text.matchAll(sideEffectImportRe)) dependency(m[1]);
+
+    const exportFromRe = /\bexport\s+(type\s+)?(?:\*(?:\s+as\s+[\w$]+)?|\{[\s\S]*?\})\s+from\s+['"]([^'"]+)['"]/g;
+    for (const m of text.matchAll(exportFromRe)) {
+      if (m[1]) continue;
+      dependency(m[2]);
+    }
+    const dynamicImportRe = /\bimport\s*\(\s*['"]([^'"]+)['"]\s*\)/g;
+    for (const m of text.matchAll(dynamicImportRe)) dependency(m[1]);
   }
   visit(resolve(root, 'src/main.tsx'));
   return { files, imports };

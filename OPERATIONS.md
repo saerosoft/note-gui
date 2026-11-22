@@ -85,7 +85,7 @@ its own source obligations. See [README.md](README.md#source-distribution).
 
 ## Qualification
 
-Use Node.js 26 for release qualification, with pnpm 10.29.2, Python 3.11 or later
+Use Node.js 26 for release qualification, with pnpm 12.21.0, Python 3.11 or later
 and GNU Make. Install frozen dependencies with `make bootstrap`. Keep logs and
 generated qualification files under `.tmp/release/`. Keep credentials and local
 host configuration outside published assets. Run `pnpm audit --json` against the frozen lockfile and retain

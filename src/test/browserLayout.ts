@@ -1,5 +1,17 @@
 import { afterEach, beforeEach } from 'vitest';
 
+// JSDOM has no Canvas 2D implementation; @excalidraw/excalidraw inspects `getContext('2d')` at module import time.
+if (typeof HTMLCanvasElement !== 'undefined') {
+  Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+    configurable: true,
+    value: () => ({
+      filter: 'none',
+      font: '',
+      measureText: (text: string) => ({ width: text.length * 10, actualBoundingBoxAscent: 10, actualBoundingBoxDescent: 2 }),
+    }),
+  });
+}
+
 // JSDOM has no layout; virtualized core UI needs finite browser viewport measurements.
 const restore: (() => void)[] = [];
 beforeEach(() => {

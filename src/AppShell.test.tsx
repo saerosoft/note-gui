@@ -58,7 +58,8 @@ it('collapses and restores native navigation without remounting a dirty page', (
   show();
   const draft = screen.getByLabelText('왼쪽 draft') as HTMLInputElement;
   fireEvent.change(draft, { target: { value: 'Unsubmitted text' } });
-  const toggle = screen.getAllByRole('button', { name: '페이지 탐색' })[1];
+  const toggles = screen.getAllByRole('button', { name: '페이지 탐색' });
+  const toggle = toggles.find(button => button.getAttribute('aria-expanded') === 'true') ?? toggles[0];
   fireEvent.click(toggle);
   expect(toggle.getAttribute('aria-expanded')).toBe('false');
   expect(screen.getByLabelText('왼쪽 draft')).toBe(draft);

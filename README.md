@@ -58,7 +58,7 @@ context; they do not define this library's goals or completion authority.
 
 ## Build the library
 
-Use Node.js 24 or 26, pnpm 10.29.2 and Python 3.11 or later. Keep the release
+Use Node.js 26, pnpm 12.21.0 and Python 3.11 or later. Keep the release
 lockfile and dependency patch. The default Python command on Linux is `python3`.
 Set `PYTHON` to use a different command. Windows OS support is outside the
 required scope.
