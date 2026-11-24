@@ -220,7 +220,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
     {ancestors.length > 0 && <p className="breadcrumb">{ancestors.map(value => value.title).join(' / ')}</p>}
     {error && <p role="alert">{error}</p>}{locationError && <p role="alert">{locationError}</p>}{locating && <p role="status">노트 위치 읽는 중…</p>}{busy && <p role="status">읽는 중…</p>}
     <DocTree uniqueContextId={dragContextId} data={tree} openIds={renderedOpenIds} selectedId={activeNoteId || undefined} aria-label="현재 경로의 노트"
-      readOnly={busy || !canWrite} rowHeight={narrow ? 44 : 36} getDragLabel={node => node.title}
+      readOnly={busy || !canWrite} rowHeight={narrow ? 44 : 32} getDragLabel={node => node.title}
       onSelect={onOpen}
       onMove={async (id, op) => {
         const ids = selected.includes(id) ? selected : [id];
@@ -243,9 +243,9 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
       }}
     />
     {!page.items.length && !busy && !locating && !locationError && <p>이 경로에 노트가 없습니다.</p>}
-    <Group justify="space-between"><Button size="xs" disabled={!previous.length || busy || locating} onClick={() => { setCursor(previous.at(-1) ?? null); setPrevious(values => values.slice(0, -1)); }}>이전</Button><Button size="xs" disabled={page.nextCursor === null || busy || locating} onClick={() => { setPrevious(values => [...values.slice(-30), cursor]); setCursor(page.nextCursor); }}>다음</Button></Group>
+    <Group justify="space-between" className={treeStyles.pagerRow}><Button size="xs" variant="subtle" color="gray" disabled={!previous.length || busy || locating} onClick={() => { setCursor(previous.at(-1) ?? null); setPrevious(values => values.slice(0, -1)); }}>이전</Button><Button size="xs" variant="subtle" color="gray" disabled={page.nextCursor === null || busy || locating} onClick={() => { setPrevious(values => [...values.slice(-30), cursor]); setCursor(page.nextCursor); }}>다음</Button></Group>
     {canWrite && <>{createOpen && <form aria-label="새 페이지" onSubmit={event => { event.preventDefault(); void create(); }}>{policy?.mode === 'SHARED' ? <Text size="sm">조직 구성원 공유</Text> : <Select comboboxProps={{ withinPortal: false }} label="공유 범위" value={visibility} disabled={busy || locating} data={[{value:"SPACE",label:"공간 공유"},{value:"PRIVATE",label:"나만 보기"}]} onChange={value => setVisibility(value === "PRIVATE" ? "PRIVATE" : "SPACE")}/>}<TextInput label="새 노트 제목" value={title} disabled={busy || locating} required maxLength={300} onChange={event => setTitle(event.currentTarget.value)}/>{parentId && <p>새 노트는 루트에 만든 뒤 이동할 수 있습니다.</p>}<Button type="submit" size="xs" disabled={busy || locating || !title.trim() || parentId !== null}>현재 경로에 만들기</Button></form>}
-    <details><summary>선택한 노트 이동 · {selected.length}</summary><form onSubmit={event => { event.preventDefault(); if (destination && selected.includes(destination.id)) { setError('선택한 노트를 자기 하위로 이동할 수 없습니다.'); return; } void perform(() => move(selected, destination?.id ?? null, moveSpace)); }}>
+    <details className={treeStyles.bulkMove}><summary>선택한 노트 이동 · {selected.length}</summary><form onSubmit={event => { event.preventDefault(); if (destination && selected.includes(destination.id)) { setError('선택한 노트를 자기 하위로 이동할 수 없습니다.'); return; } void perform(() => move(selected, destination?.id ?? null, moveSpace)); }}>
       <Select comboboxProps={{ withinPortal: false }} label="대상 공간" data={writableSpaces.map(value => ({ value: value.id, label: value.name }))} value={moveSpace} disabled={busy} onChange={value => { if (value) { setMoveSpace(value); setDestination(null); } }}/>
       <NotePicker api={api} spaceId={moveSpace} label="대상 상위 노트 (선택하지 않으면 루트)" selected={destination} onSelect={setDestination} exclude={selected} disabled={busy}/>
       <p>노트를 끌어 다른 노트 위에 놓으면 그 아래로, 루트·상위 버튼에 놓으면 그 위치로 이동합니다. 선택한 노트를 끌면 선택한 노트 전체가 이동합니다.</p>

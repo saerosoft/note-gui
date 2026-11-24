@@ -1,8 +1,24 @@
-.navigation { display: flex; flex-direction: column; height: 100%; min-height: 20rem; min-width: 0; gap: 8px; }
+.navigation { display: flex; flex-direction: column; height: 100%; min-height: 20rem; min-width: 0; gap: 6px; }
 .navigation form { display: grid; gap: 8px; }
 .navigation > :not(.treeContainer) { flex-shrink: 0; }
 .treeContainer { flex: 1; min-height: 12rem; }
-.treeRow { display: flex; align-items: center; width: 100%; min-width: 0; height: 36px; gap: 4px; }
-.selection { flex-shrink: 0; }
+.treeRow { display: flex; align-items: center; width: 100%; min-width: 0; height: 32px; gap: 4px; }
+.selection { flex-shrink: 0; transition: opacity 120ms ease; }
+@media (hover: hover) {
+  .treeRow .selection { opacity: 0; }
+  .treeRow:hover .selection,
+  .treeRow:focus-within .selection,
+  .treeRow .selection[data-checked="true"],
+  .navigation:has(.selection[data-checked="true"]) .selection { opacity: 1; }
+}
 .pagination { display: inline-flex; flex-shrink: 0; margin-left: 2px; }
+.pagerRow { padding-top: 4px; border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); }
+.bulkMove { border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); padding-top: 6px; font-size: var(--mantine-font-size-xs); color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
+.bulkMove > summary { cursor: pointer; list-style: none; padding: 4px 6px; border-radius: var(--mantine-radius-sm); font-weight: 500; user-select: none; }
+.bulkMove > summary::-webkit-details-marker { display: none; }
+.bulkMove > summary::before { content: "▸ "; display: inline-block; width: 14px; color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3)); }
+.bulkMove[open] > summary::before { content: "▾ "; }
+.bulkMove > summary:hover { background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6)); color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0)); }
+.bulkMove form { margin-top: 8px; padding: 8px; border-radius: var(--mantine-radius-sm); background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)); border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); }
+.bulkMove p { margin: 0; line-height: 1.5; color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
 @media (max-width: 48em) { .treeRow { height: 44px; } }

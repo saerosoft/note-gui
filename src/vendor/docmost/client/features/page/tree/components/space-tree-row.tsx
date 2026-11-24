@@ -17,12 +17,12 @@ type Props = RenderRowProps<TreeNote> & {
 
 export function SpaceTreeRow({ node, isOpen, hasChildren, toggleOpen, rowRef, tabIndex, treeItemProps, checked, onCheck, onOpen, onFocusTree, loading, pageControls }: Props) {
   return <div className={`tree-row ${layout.treeRow}`}>
-    <Checkbox className={layout.selection} data-checked={checked || undefined} aria-label={`${node.title} 선택`} checked={checked} onChange={onCheck} disabled={!onCheck}/>
+    <Checkbox size="xs" className={layout.selection} data-checked={checked || undefined} aria-label={`${node.title} 선택`} checked={checked} onChange={onCheck} disabled={!onCheck}/>
     <div ref={element => { if (typeof rowRef === "function") rowRef(element); else if (rowRef) rowRef.current = element; }}
       className={classes.node} tabIndex={tabIndex} {...treeItemProps} onClick={() => onOpen(node.id)}
       onKeyDown={event => { if (event.key === "Enter") onOpen(node.id); }}>
       <PageArrow isOpen={isOpen} hasChildren={hasChildren} onToggle={toggleOpen} label={`${node.title} 하위 트리 보기`}/>
-      <IconFileDescription size={18}/>
+      <IconFileDescription size={16} stroke={1.7} className={classes.icon}/>
       <span className={classes.text}>{node.title}</span>
       {loading && <Loader size={12} aria-label={`${node.title} 하위 노트 읽는 중`}/>}
       {pageControls && <span className={layout.pagination}>{pageControls}</span>}

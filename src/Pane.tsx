@@ -135,9 +135,9 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
       <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
         {tabs.map((id, index) => <Group key={id} gap={0} wrap="nowrap">
           <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || (id === active && nativeDirty) || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
-          <ActionIcon variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
-          <ActionIcon variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
-          <ActionIcon variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
+          <ActionIcon size="xs" variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
+          <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
+          <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
         </Group>)}
       </Tabs.List>
     </Tabs></Box>

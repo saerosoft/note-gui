@@ -53,8 +53,9 @@
 
 
 .icon {
-    margin: 0 rem(10px);
+    margin: 0 rem(6px) 0 rem(4px);
     flex-shrink: 0;
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2));
 }
 
 .actionIcon {

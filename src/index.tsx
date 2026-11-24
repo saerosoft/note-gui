@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 import { DEFAULT_THEME, MantineProvider } from '@mantine/core';
 import { I18nextProvider } from 'react-i18next';
 import { docmostI18n } from './docmost/i18n';
-import '@mantine/core/styles.css';
+import '@mantine/core/styles.layer.css';
 import '@excalidraw/excalidraw/index.css';
 import '@fontsource-variable/noto-sans-kr/wght.css';
 import './vendor/docmost/client/styles/a11y-overrides.css';

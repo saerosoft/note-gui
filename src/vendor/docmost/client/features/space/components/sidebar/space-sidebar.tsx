@@ -46,6 +46,6 @@ export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, set
         onChange={onTargetChange} data={[{ value: 'left', label: '왼쪽 창' }, { value: 'right', label: '오른쪽 창' }]}/>
     </div>}
     <div className={classes.section + ' ' + layout.sectionPages}><div className={layout.pages}>{children}</div></div>
-    <Text size="xs" pt="sm"><a href={sourceHref} target="_blank" rel="noreferrer">소스 · AGPL</a></Text>
+    <Text size="xs" pt="xs" c="dimmed"><a href={sourceHref} target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>소스 · AGPL</a></Text>
   </div>;
 }
