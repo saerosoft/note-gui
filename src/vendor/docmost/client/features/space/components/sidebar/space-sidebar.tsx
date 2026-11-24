@@ -22,7 +22,7 @@ interface Props {
 export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, settingsHref,
   sourceHref, onNavigate, onSearch, split, target, onTargetChange, children }: Props) {
   return <div className={classes.navbar}>
-    <div className={classes.section} style={{ border: 'none', marginTop: 2, marginBottom: 3 }}>
+    <div className={classes.section + ' ' + classes.spaceSection}>
       <Group gap={4} wrap="nowrap" justify="space-between" style={{ width: '100%' }}>
         <SwitchSpace spaces={spaces} value={spaceId} onChange={onSpaceChange}/>
       </Group>
@@ -45,7 +45,9 @@ export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, set
       <SegmentedControl size="xs" fullWidth aria-label="노트를 열 창" value={target}
         onChange={onTargetChange} data={[{ value: 'left', label: '왼쪽 창' }, { value: 'right', label: '오른쪽 창' }]}/>
     </div>}
-    <div className={classes.section + ' ' + layout.sectionPages}><div className={layout.pages}>{children}</div></div>
-    <Text size="xs" pt="xs" c="dimmed"><a href={sourceHref} target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>소스 · AGPL</a></Text>
+    <div className={`${classes.section} ${classes.sectionPages} ${layout.sectionPages}`}><div className={`${classes.pages} ${layout.pages}`}>{children}</div></div>
+    <div className={classes.footer}>
+      <Text size="xs" c="dimmed"><a href={sourceHref} target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>소스 · AGPL</a></Text>
+    </div>
   </div>;
 }

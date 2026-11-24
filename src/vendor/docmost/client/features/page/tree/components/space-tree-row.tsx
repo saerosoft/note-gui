@@ -17,7 +17,6 @@ type Props = RenderRowProps<TreeNote> & {
 
 export function SpaceTreeRow({ node, isOpen, hasChildren, toggleOpen, rowRef, tabIndex, treeItemProps, checked, onCheck, onOpen, onFocusTree, loading, pageControls }: Props) {
   return <div className={`tree-row ${layout.treeRow}`}>
-    <Checkbox size="xs" className={layout.selection} data-checked={checked || undefined} aria-label={`${node.title} 선택`} checked={checked} onChange={onCheck} disabled={!onCheck}/>
     <div ref={element => { if (typeof rowRef === "function") rowRef(element); else if (rowRef) rowRef.current = element; }}
       className={classes.node} tabIndex={tabIndex} {...treeItemProps} onClick={() => onOpen(node.id)}
       onKeyDown={event => { if (event.key === "Enter") onOpen(node.id); }}>
@@ -28,6 +27,7 @@ export function SpaceTreeRow({ node, isOpen, hasChildren, toggleOpen, rowRef, ta
       {pageControls && <span className={layout.pagination}>{pageControls}</span>}
       {hasChildren && onFocusTree && <span className={classes.actions}><ActionIcon size={20} variant="subtle" color="gray" aria-label={`${node.title} 하위 트리에 집중`} onClick={event => { event.stopPropagation(); onFocusTree(); }}><IconFocus2 size={15}/></ActionIcon></span>}
     </div>
+    <Checkbox size="xs" className={layout.selection} data-checked={checked || undefined} aria-label={`${node.title} 선택`} checked={checked} onChange={onCheck} disabled={!onCheck}/>
   </div>;
 }
 

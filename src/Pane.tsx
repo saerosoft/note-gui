@@ -133,11 +133,11 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   return <NativeDraftContext.Provider value={reportNativeDraft}><DocmostPaneProvider><section className="pane note-gui-pane" aria-label={`${paneId} 편집 창`} onFocusCapture={onActivate} onPointerDownCapture={onActivate}>
     <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) void open(id); }}>
       <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
-        {tabs.map((id, index) => <Group key={id} gap={0} wrap="nowrap">
+        {tabs.map((id, index) => <Group key={id} gap={2} wrap="nowrap" className="note-gui-tab-item">
           <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || (id === active && nativeDirty) || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
           <ActionIcon size="xs" variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
-          <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>
-          <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>
+          {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>}
+          {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>}
         </Group>)}
       </Tabs.List>
     </Tabs></Box>
@@ -151,7 +151,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
         <Group gap="xs" wrap="nowrap" className="note-page-breadcrumb"><IconFileText size={17} stroke={1.5}/><Text size="sm" truncate>{draft.title || '제목 없음'}</Text></Group>
         <Group gap="xs" wrap="nowrap" className="note-page-actions">
         <Tooltip label="최신 버전 확인" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="최신 버전 확인" disabled={busy} onClick={async () => { const id = active; const epoch = sessionEpoch.current; setError(''); try { const note = await api.note(id); if (epoch === sessionEpoch.current && activeRef.current === id && ownsTab()) setLatest(openDraft(note)); } catch (e) { if (epoch === sessionEpoch.current && ownsTab()) setError((e as Error).message); } }}><IconRefresh size={18}/></ActionIcon></Tooltip>
-        <Button size="xs" disabled={!canEdit || !draft.dirty || busy || invalid[active]} onClick={() => void save()}>저장</Button>
+        <Button size="xs" variant={draft.dirty ? 'filled' : 'subtle'} color={draft.dirty ? 'blue' : 'gray'} disabled={!canEdit || !draft.dirty || busy || invalid[active]} onClick={() => void save()}>저장</Button>
         <Tooltip label="댓글" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="댓글 및 노트 상세" aria-expanded={details === 'details'} onClick={() => { if (details === 'details') setDetails(null); else openDetails('comments'); }}><IconMessage size={20} stroke={1.5}/></ActionIcon></Tooltip>
          {knowledgeContext && <Tooltip label="현재 정리·근거·누적 이력" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="지식 정보" aria-expanded={details === 'knowledge'} onClick={toggleKnowledge}><IconInfoCircle size={20} stroke={1.5}/></ActionIcon></Tooltip>}
         <Menu position="bottom-end" withinPortal={false}><Menu.Target><ActionIcon variant="subtle" color="gray" aria-label="페이지 메뉴"><IconDots size={20}/></ActionIcon></Menu.Target>

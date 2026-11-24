@@ -14,20 +14,23 @@
 
 .node {
     position: relative;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 0 8px 0 4px;
     display: flex;
     align-items: center;
     height: 100%;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
     text-decoration: none;
     color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
 
     /* Gate hover styles to mouse-capable devices. Touch browsers synthesize
        :hover on the first tap (sticky hover) and only fire click on the
        second tap, requiring a double-tap to navigate. */
-    @media (hover: hover) {
+    @media (any-hover: hover) {
         &:hover {
-            background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-5));
+            background-color: light-dark(#eaedf1, var(--mantine-color-dark-5));
         }
 
         &:hover .actions {
@@ -117,8 +120,12 @@
 
 .node[data-selected="true"] {
     background-color: light-dark(
-        var(--mantine-color-gray-3),
+        #e5e9f0,
         var(--mantine-color-dark-6)
+    );
+    color: light-dark(
+        var(--mantine-color-gray-9),
+        var(--mantine-color-white)
     );
 }
 

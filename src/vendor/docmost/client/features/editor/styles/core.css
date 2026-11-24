@@ -289,10 +289,11 @@
 }
 
 .page-title .ProseMirror h1 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
+  line-height: 1.25;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: 0.75em;
+  margin-bottom: 0.35em;
 }
 
 /* The full-page base view positions its title with its own outer

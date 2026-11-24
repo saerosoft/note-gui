@@ -38,7 +38,7 @@ export default function GlobalAppShell({ children, header, sidebar }: Props) {
       width: sidebarWidth, breakpoint: 'sm',
       collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
     }} padding={0}>
-      <AppShell.Header px="md" className={classes.header + " " + layout.header}>
+      <AppShell.Header className={classes.header + " " + layout.header}>
         <AppHeader {...header} mobileOpened={mobileOpened} desktopOpened={desktopOpened}
           toggleMobile={() => setMobileOpened(value => !value)}
           toggleDesktop={() => setDesktopOpened(value => !value)}/>

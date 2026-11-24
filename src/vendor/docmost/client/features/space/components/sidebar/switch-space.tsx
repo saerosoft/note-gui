@@ -14,7 +14,7 @@ export function SwitchSpace({ spaces, value, onChange }: Props) {
   return <Popover width={280} position="bottom" withArrow shadow="md" opened={opened}
     onChange={setOpened} trapFocus returnFocus withinPortal={false}>
     <Popover.Target>
-      <Button variant="subtle" fullWidth justify="space-between" color="gray"
+      <Button variant="subtle" fullWidth justify="space-between" color="gray" px={10}
         aria-label="공간 선택" aria-expanded={opened}
         rightSection={opened ? <IconChevronUp size={18}/> : <IconChevronDown size={18}/>}
         onClick={() => setOpened(value => !value)}>
