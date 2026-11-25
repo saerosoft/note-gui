@@ -3,7 +3,7 @@ import { act, cleanup, fireEvent, screen, waitFor } from '@testing-library/react
 import { render } from './test/legacyRender';
 import { afterEach, expect, it, vi } from 'vitest';
 import type { NoteApi, NoteFile, Page } from './model';
-import { NoteAttachments } from './NoteAttachments';
+import { formatByteSize, NoteAttachments } from './NoteAttachments';
 import { clearAccess, refreshAccess } from './transport';
 
 afterEach(cleanup);
@@ -28,8 +28,9 @@ it('lists immutable file revisions with native authorized download links and exa
   const links = await screen.findAllByRole('link', { name: '같은 자료.pdf' });
   expect(links.map(link => link.getAttribute('href'))).toEqual(['/api/files/old', '/api/files/current']);
   expect(links.map(link => link.getAttribute('download'))).toEqual(['같은 자료.pdf', '같은 자료.pdf']);
-  expect(screen.getByText('버전 1 · application/pdf · 248,710,446 바이트')).toBeTruthy();
-  expect(screen.getByText('버전 2 · application/pdf · 248,710,446 바이트')).toBeTruthy();
+  expect(screen.getByText((_, element) => element?.tagName === 'P' && element.textContent === '버전 1 · application/pdf · 237.2 MB')).toBeTruthy();
+  expect(screen.getByText((_, element) => element?.tagName === 'P' && element.textContent === '버전 2 · application/pdf · 237.2 MB')).toBeTruthy();
+  expect(screen.getAllByTitle('248,710,446 바이트')).toHaveLength(2);
   expect(value.attachment).not.toHaveBeenCalled();
 });
 
@@ -125,4 +126,18 @@ it('starts from the first page after a saved note revision changes', async () =>
   expect(screen.queryByRole('link', { name: 'second.pdf' })).toBeNull();
   expect(value.files).toHaveBeenLastCalledWith('note', null);
   expect(screen.getByRole('button', { name: '이전 첨부' }).getAttribute('disabled')).toBe('');
+});
+
+it('formats attachment byte sizes into human-readable units to one decimal place', () => {
+  expect(formatByteSize(0)).toBe('0 B');
+  expect(formatByteSize(-10)).toBe('0 B');
+  expect(formatByteSize(Number.NaN)).toBe('0 B');
+  expect(formatByteSize(512)).toBe('512 B');
+  expect(formatByteSize(1023)).toBe('1023 B');
+  expect(formatByteSize(1024)).toBe('1.0 KB');
+  expect(formatByteSize(12345)).toBe('12.1 KB');
+  expect(formatByteSize(1024 * 1024 - 1)).toBe('1.0 MB');
+  expect(formatByteSize(1536 * 1024)).toBe('1.5 MB');
+  expect(formatByteSize(248710446)).toBe('237.2 MB');
+  expect(formatByteSize(2 * 1024 * 1024 * 1024)).toBe('2.0 GB');
 });

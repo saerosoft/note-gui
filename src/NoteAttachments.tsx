@@ -5,6 +5,23 @@ import { useNoteAccess, useNoteHost } from './hostRuntime';
 interface Props { api: NoteCoreApi; noteId: string; revision: number }
 const date = (value: string) => new Date(value).toLocaleString('ko-KR', { dateStyle: 'medium', timeStyle: 'short' });
 
+export function formatByteSize(bytes: number): string {
+  const value = Number.isFinite(bytes) && bytes > 0 ? bytes : 0;
+  if (value < 1024) return `${Math.round(value)} B`;
+  const units = ['KB', 'MB', 'GB', 'TB'];
+  let scaled = value / 1024;
+  let index = 0;
+  while (scaled >= 1024 && index < units.length - 1) {
+    scaled /= 1024;
+    index++;
+  }
+  const rounded = Math.round(scaled * 10) / 10;
+  if (rounded >= 1024 && index < units.length - 1) {
+    return `${(rounded / 1024).toFixed(1)} ${units[index + 1]}`;
+  }
+  return `${rounded.toLocaleString('ko-KR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${units[index]}`;
+}
+
 export function NoteAttachments({ api, noteId, revision }: Props) {
   return <AttachmentPage key={`${noteId}:${revision}`} api={api} noteId={noteId}/>;
 }
@@ -77,7 +94,7 @@ function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
       {!page.items.length && <p>현재 볼 수 있는 첨부파일이 없습니다.</p>}
       {page.items.map(file => <article key={file.id}>
          {host.attachmentUrl?.(file.id, 1) ? <a href={host.attachmentUrl(file.id, 1)} download={file.fileName}>{file.fileName}</a> : <button type="button" onClick={() => void download(file)}>{file.fileName}</button>}
-        <p className="context-muted">버전 {file.revision} · {file.mediaType} · {file.byteSize.toLocaleString('ko-KR')} 바이트</p>
+        <p className="context-muted">버전 {file.revision} · {file.mediaType} · <span title={`${file.byteSize.toLocaleString('ko-KR')} 바이트`}>{formatByteSize(file.byteSize)}</span></p>
         <time dateTime={file.createdAt}>{date(file.createdAt)}</time>
         <details><summary>파일 무결성 정보</summary><p className="context-muted">SHA-256: <code>{file.checksum}</code></p></details>
       </article>)}
