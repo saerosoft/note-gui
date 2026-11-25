@@ -33,10 +33,10 @@ it('confirms deletion, sends the saved property identity and reloads the note re
   expect(value.onRevision).toHaveBeenCalledWith(expect.objectContaining({ revision: 5 }));
 });
 it('retains the property when deletion is refused', async () => {
-  const value = fixture(); value.deleteProperty.mockRejectedValue(new Error('개정이 변경되었습니다.')); show(value);
+  const value = fixture(); value.deleteProperty.mockRejectedValue(new Error('버전이 변경되었습니다.')); show(value);
   fireEvent.click(await screen.findByRole('button', { name: 'Owner 속성 삭제' }));
   fireEvent.click(await screen.findByRole('button', { name: '삭제 확인' }));
-  await screen.findByText('개정이 변경되었습니다.');
+  await screen.findByText('버전이 변경되었습니다.');
   fireEvent.click(screen.getByRole('button', { name: '취소' }));
   const propertyName = await screen.findByRole('textbox', { name: '속성 이름' });
   expect((propertyName as HTMLInputElement).value).toBe('Owner');

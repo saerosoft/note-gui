@@ -26,7 +26,7 @@ test('pages real accumulation history and shows original evidence and actual bef
     await expect(history.locator('article.accumulation-item')).toHaveCount(20);
     await history.getByRole('button', { name: '다음 반영 내역', exact: true }).click();
     await expect(history.locator('article.accumulation-item')).toHaveCount(5);
-    const replaced = history.locator('article.accumulation-item').filter({ has: page.getByText('개정 2', { exact: true }) });
+    const replaced = history.locator('article.accumulation-item').filter({ has: page.getByText('버전 2', { exact: true }) });
     await replaced.locator('summary').click();
     await expect(replaced).toContainText('The confirmed delivery date is November 9.');
     await expect(replaced.locator('blockquote')).toHaveText('Acceptance original: The confirmed delivery date is November 9. The former proposed date is superseded.');
@@ -116,7 +116,7 @@ test('restores a legacy revision without reclassifying its mixed body as human o
     const page = await owner.newPage();
     await page.goto(`./?space=${fixture!.space}&note=${records!.SPACE.noteId}`);
     await page.getByRole('tab', { name: '이력', exact: true }).click();
-    await expect(page.getByText('이 개정은 작성 구분을 확인해야 하는 기존 본문입니다. 복원할 때도 원문과 작성 구분을 유지합니다.', { exact: true })).toBeVisible();
+    await expect(page.getByText('이 버전은 작성 구분을 확인해야 하는 기존 본문입니다. 복원할 때도 원문과 작성 구분을 유지합니다.', { exact: true })).toBeVisible();
     page.once('dialog', dialog => void dialog.accept());
     await page.getByRole('button', { name: '복원', exact: true }).click();
     await expect.poll(async () => (await graphql<NoteState>(owner.request, query, { id: records!.SPACE.noteId })).knowledgeNote.revision).toBe(before.revision + 1);

@@ -44,14 +44,14 @@ for (const width of [1600, 390]) test(`keeps supplied current items separate fro
   expect((await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId)).revision).toBe(3);
   await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
   await page.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
-  await page.getByRole('button', { name: /개정 2 · Independent current note/ }).click();
+  await page.getByRole('button', { name: /버전 2 · Independent current note/ }).click();
   page.once('dialog', dialog => dialog.accept());
   await page.getByRole('button', { name: '복원', exact: true }).click();
   await expect(body.locator('strong')).toHaveText('First authored version.');
-  await expect(page.locator('.note-body-status')).toContainText('개정 4');
+  await expect(page.locator('.note-body-status')).toContainText('버전 4');
   await page.getByRole('button', { name: '지식 정보', exact: true }).click();
   await expect(current.getByText(fixture.items[0].body, { exact: true })).toBeVisible();
-  await expect(current).toContainText('노트 개정 4 기준');
+  await expect(current).toContainText('노트 버전 4 기준');
   await expect(body).not.toContainText(fixture.items[0].body);
   const restored = await page.evaluate(id => window.noteExample.api.note(id), fixture.noteId);
   expect(restored.revision).toBe(4); expect(restored.bodyJson).toEqual(first.bodyJson);

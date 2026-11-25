@@ -78,7 +78,7 @@ export default function DrawioView(props: NodeViewProps) {
               onChange={event => { xml.current = event.currentTarget.value; setInitialXML(xml.current); setDirty(true); }}/>
           </details>
           {(stored.error || messageError) && <Text role="alert" c="red">{stored.error || messageError}</Text>}
-          <Group justify="flex-end" mt="sm"><Button onClick={() => void apply(xml.current)} loading={stored.busy} disabled={!stored.editable}>첨부 개정 저장 후 노트에 적용</Button></Group>
+          <Group justify="flex-end" mt="sm"><Button onClick={() => void apply(xml.current)} loading={stored.busy} disabled={!stored.editable}>첨부 버전 저장 후 노트에 적용</Button></Group>
         </Modal.Body>
       </Modal.Content>
     </Modal.Root>

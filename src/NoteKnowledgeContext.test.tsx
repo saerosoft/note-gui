@@ -41,7 +41,7 @@ function show(api: NoteApi, value = note) {
 it('shows recorded knowledge, source visibility and distinct source and application times beside the human editor', async () => {
   const value = fixture(); show(value.api);
   expect(await screen.findByText(item.preview)).toBeTruthy();
-  fireEvent.click(screen.getByText('개정 4', { exact: true }).closest('summary')!);
+  fireEvent.click(screen.getByText('버전 4', { exact: true }).closest('summary')!);
   expect(screen.getByRole('heading', { name: '새 소스 반영 기준' })).toBeTruthy();
   expect(screen.getByRole('heading', { name: '누적 이력' })).toBeTruthy();
   expect(screen.getByText('본인만')).toBeTruthy();
@@ -58,7 +58,7 @@ it('shows recorded knowledge, source visibility and distinct source and applicat
 it('loads the saved comparison and actual rule conditions only when opened', async () => {
   const value = fixture(); show(value.api);
   await screen.findByText(item.preview);
-  const summary = screen.getByText('개정 4', { exact: true }).closest('summary');
+  const summary = screen.getByText('버전 4', { exact: true }).closest('summary');
   expect(summary?.closest('details')?.open).toBe(false);
   fireEvent.click(summary!);
   expect(summary?.closest('details')?.open).toBe(true);
@@ -141,7 +141,7 @@ it.each([
   });
   show(value.api);
   const summary = (await screen.findByText(label)).closest('summary')!;
-  expect(summary.textContent).toContain(label + ' · 개정 4 · ');
+  expect(summary.textContent).toContain(label + ' · 버전 4 · ');
   expect(screen.queryByText('현재 정리 갱신')).toBeNull();
   expect(screen.getByText(/과거 자료는 현재 정리를 바꾸지 않고 이력에만/)).toBeTruthy();
   fireEvent.click(summary);

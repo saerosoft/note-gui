@@ -46,7 +46,7 @@ it('reopens authorized Draw.io XML and saves its bytes as a new immutable attach
   const value = client(); render(show('drawio', value));
   const source = await openDrawio(); expect(source.value).toBe(xml);
   fireEvent.change(source, { target: { value: changedXml } });
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await waitFor(() => expect(value.upload).toHaveBeenCalledTimes(1));
   const [noteId, file, previous] = value.upload.mock.calls[0];
   expect(noteId).toBe('diagram-note'); expect(await text(file)).toBe(changedXml);
@@ -76,11 +76,11 @@ it('retains XML and attachment identity when validation or upload fails', async 
   const value = client(); value.upload.mockRejectedValue(new Error('Upload failed'));
   render(show('drawio', value)); const source = await openDrawio();
   fireEvent.change(source, { target: { value: '<broken>' } });
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await screen.findAllByRole('alert'); expect(value.upload).not.toHaveBeenCalled();
   expect(editor?.getJSON().content?.[0].attrs?.fileId).toBe('original-file');
   fireEvent.change(source, { target: { value: changedXml } });
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await screen.findAllByText('Upload failed'); expect(source.value).toBe(changedXml);
   expect(editor?.getJSON().content?.[0].attrs?.fileId).toBe('original-file');
 });
@@ -100,7 +100,7 @@ it.each(['read-only', 'revoked'] as const)('ignores a completed diagram upload a
   value.upload.mockImplementation(() => new Promise(resolve => { complete = resolve; }));
   const view = render(show('drawio', value)); const source = await openDrawio();
   fireEvent.change(source, { target: { value: changedXml } });
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await waitFor(() => expect(value.upload).toHaveBeenCalledTimes(1));
   if (mode === 'read-only') view.rerender(show('drawio', value, false));
   else act(() => clearAccess());
@@ -115,7 +115,7 @@ it('edits the real Mermaid source UI and preserves exact source in the new attac
   await waitFor(() => expect(open.hasAttribute('disabled')).toBe(false)); fireEvent.click(open);
   const source = await screen.findByRole<HTMLTextAreaElement>('textbox', { name: 'Mermaid 원본' }); expect(source.value).toBe(mermaid);
   const changed = 'graph TD\n A[수정] --> B'; fireEvent.change(source, { target: { value: changed } });
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await waitFor(() => expect(value.upload).toHaveBeenCalledTimes(1));
   expect(await text(value.upload.mock.calls[0][1])).toBe(changed);
   await waitFor(() => expect(editor?.getJSON().content?.[0].attrs).toMatchObject({ fileId: 'new-immutable-file', source: changed }));
@@ -153,7 +153,7 @@ it('keeps a configured Draw.io frame URL and accepts its delayed autosave during
   expect(await screen.findByTitle('Draw.io editor')).toBe(frame);
   expect(frame.src).toBe(url); expect(frame.contentWindow).toBe(nativeWindow);
   expect(screen.getByLabelText<HTMLTextAreaElement>('Draw.io XML').value).toBe(changedXml);
-  fireEvent.click(screen.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용' }));
+  fireEvent.click(screen.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용' }));
   await waitFor(() => expect(value.upload).toHaveBeenCalledOnce());
   expect(await text(value.upload.mock.calls[0][1])).toBe(changedXml);
 });

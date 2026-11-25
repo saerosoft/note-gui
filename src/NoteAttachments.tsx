@@ -70,14 +70,14 @@ function AttachmentPage({ api, noteId }: Omit<Props, 'revision'>) {
     <div className="context-actions"><h2>첨부파일</h2>
       <button type="button" disabled={revoked || (!page && !error)} onClick={reload}>첨부 새로고침</button>
     </div>
-    <p className="context-muted">본문에 표시되지 않은 파일과 이전 파일 개정도 포함합니다. 파일 이름을 선택하면 해당 개정을 내려받습니다.</p>
+    <p className="context-muted">본문에 표시되지 않은 파일과 이전 파일 버전도 포함합니다. 파일 이름을 선택하면 해당 버전을 내려받습니다.</p>
     {error && <div role="alert"><p>{error}</p>{!revoked && <button type="button" onClick={() => setAttempt(value => value + 1)}>첨부 다시 읽기</button>}</div>}
     {!page && !error && <p role="status">첨부파일을 읽는 중…</p>}
     {page && <>
       {!page.items.length && <p>현재 볼 수 있는 첨부파일이 없습니다.</p>}
       {page.items.map(file => <article key={file.id}>
          {host.attachmentUrl?.(file.id, 1) ? <a href={host.attachmentUrl(file.id, 1)} download={file.fileName}>{file.fileName}</a> : <button type="button" onClick={() => void download(file)}>{file.fileName}</button>}
-        <p className="context-muted">개정 {file.revision} · {file.mediaType} · {file.byteSize.toLocaleString('ko-KR')} 바이트</p>
+        <p className="context-muted">버전 {file.revision} · {file.mediaType} · {file.byteSize.toLocaleString('ko-KR')} 바이트</p>
         <time dateTime={file.createdAt}>{date(file.createdAt)}</time>
         <details><summary>파일 무결성 정보</summary><p className="context-muted">SHA-256: <code>{file.checksum}</code></p></details>
       </article>)}

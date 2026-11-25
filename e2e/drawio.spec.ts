@@ -137,7 +137,7 @@ test('shows a shared diagram to a viewer without graphical editing or file write
     await frame.getByText('Original graphical shape', { exact: true }).dblclick();
     await expect(frame.locator('.mxCellEditor[contenteditable="true"]')).toHaveCount(0);
     await expect(frame.getByText('Save', { exact: true })).toHaveCount(0);
-    await expect(page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true })).toBeDisabled();
+    await expect(page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true })).toBeDisabled();
     const csrf = await (await peer.request.get('/api/csrf')).json();
     const denied = await peer.request.post('/api/files', { headers: { 'X-XSRF-TOKEN': csrf.token }, multipart: { noteId: created.id, spaceId: fixture!.space, visibility: 'SPACE', file: { name: 'unauthorized.drawio', mimeType: 'application/octet-stream', buffer: Buffer.from(initial) } } });
     expect(denied.status()).toBe(403);

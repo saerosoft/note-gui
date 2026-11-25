@@ -112,7 +112,7 @@ export function NoteAssociations({ api, note, onOpen }: Props) {
     {loaded && page?.total === 0 && <p>연결된 노트가 없습니다.</p>}
     {page?.items.map(item => <article key={item.id}>
       <Button variant="subtle" onClick={() => onOpen(item.targetNoteId)}>{item.title}</Button>
-      <Text size="xs" c="dimmed">작성자: {item.creatorName ?? item.creatorId} · 연결 개정 {item.revision}</Text>
+      <Text size="xs" c="dimmed">작성자: {item.creatorName ?? item.creatorId} · 연결 버전 {item.revision}</Text>
       {item.authoredBody !== null && <p>{item.authoredBody}{item.authoredBodyTruncated ? '…' : ''}</p>}
       {canWrite && <Button size="xs" disabled={busy || !!pending || !loaded} onClick={() => change(item.targetNoteId, item.revision, false)}>연결 해제</Button>}
     </article>)}

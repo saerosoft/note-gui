@@ -61,7 +61,7 @@ export function NoteProperties({ api, note, dirty, draft: suppliedDraft, onDraft
     if (!ownsTab() || generation !== access.generation) return;
     const current = await api.note(note.id);
     if (!ownsTab() || generation !== access.generation) return;
-    if (before.revision !== current.revision) throw new ApiError('속성을 읽는 동안 개정이 변경되었습니다. 초안은 보존했으니 다시 읽어 주세요.', 'CONFLICT');
+    if (before.revision !== current.revision) throw new ApiError('속성을 읽는 동안 버전이 변경되었습니다. 초안은 보존했으니 다시 읽어 주세요.', 'CONFLICT');
     update(value => {
       const matching = samePropertyValues(value.values, values);
       const unchanged = samePropertyValues(value.baseline, values);
@@ -96,7 +96,7 @@ export function NoteProperties({ api, note, dirty, draft: suppliedDraft, onDraft
     {message && <p role="status">{message}</p>}
     {dirty && <p>노트 본문 변경을 먼저 저장한 뒤 속성을 변경해 주세요.</p>}
     {needsReload && <p>{state.accepted ? '변경은 저장되었습니다. 최신 속성을 다시 읽어 주세요.' : '변경 결과를 최신 속성에서 확인해 주세요. 확인 전에는 쓰기를 반복하지 않습니다.'}</p>}
-    {authorized && state.comparison?.generation === access.generation && <section aria-label="조회한 현재 속성"><p>조회한 개정 {state.comparison.revision}</p><ul>{state.comparison.values.map(value => <li key={value.id ?? value.key}>{value.key}: {value.value}</li>)}</ul><Button variant="subtle" disabled={busy} onClick={() => {
+    {authorized && state.comparison?.generation === access.generation && <section aria-label="조회한 현재 속성"><p>조회한 버전 {state.comparison.revision}</p><ul>{state.comparison.values.map(value => <li key={value.id ?? value.key}>{value.key}: {value.value}</li>)}</ul><Button variant="subtle" disabled={busy} onClick={() => {
       const comparison = state.comparison;
       if (comparison && ownsTab() && window.confirm('입력한 속성 초안만 버리고 조회한 속성으로 되돌릴까요?')) update(value => comparison.generation === access.generation ? { ...value, values: comparison.values, baseline: comparison.values, revision: comparison.revision, comparison: undefined, accepted: false, needsReload: false, error: '', message: '조회한 속성을 불러왔습니다.' } : value);
     }}>조회한 속성으로 되돌리기</Button></section>}
@@ -118,7 +118,7 @@ export function NoteProperties({ api, note, dirty, draft: suppliedDraft, onDraft
       onClick={() => setProperties(values => [...values, { key: '', valueType: 'TEXT', value: '' }])}>속성 추가</Button>}
     </>}
     <Modal opened={!!deleting && authorized && !accessFailure} onClose={() => !busy && setDeleting(undefined)} title="속성 삭제 확인" closeOnEscape={!busy} closeOnClickOutside={!busy}>
-      <p>“{deleting?.key}” 속성을 삭제할까요? 노트 본문과 개정 이력은 보존됩니다.</p>
+      <p>“{deleting?.key}” 속성을 삭제할까요? 노트 본문과 버전 이력은 보존됩니다.</p>
       {error && <p role="alert">{error}</p>}
       <Group><Button data-autofocus variant="default" disabled={busy} onClick={() => setDeleting(undefined)}>취소</Button>
         <Button color="red" disabled={writeDisabled || !deleting?.id} onClick={() => {

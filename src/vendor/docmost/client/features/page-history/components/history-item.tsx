@@ -82,7 +82,7 @@ const HistoryItem = memo(function HistoryItem({
       >
         <Text size="sm">{date}</Text>
 
-        <Text size="sm" c="dimmed">개정 {historyItem.revision} · {historyItem.title}</Text>
+        <Text size="sm" c="dimmed">버전 {historyItem.revision} · {historyItem.title}</Text>
         <Text size="xs" c="dimmed">{historyItem.editorName ? `편집자: ${historyItem.editorName}` : '편집자 정보 없음'}</Text>
       </UnstyledButton>
 

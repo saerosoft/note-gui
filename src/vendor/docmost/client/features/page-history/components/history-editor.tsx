@@ -34,7 +34,7 @@ export function HistoryEditor({
   const editor = useEditor({
     extensions: editorExtensions(),
     editable: false,
-    editorProps: { attributes: { role: "textbox", "aria-label": "개정 원문" } },
+    editorProps: { attributes: { role: "textbox", "aria-label": "버전 원문" } },
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function HistoryEditor({
     queueMicrotask(() => {
       if (!active || editor.isDestroyed) return;
       if (!validateDocument(content, editor.schema) || (previousContent && !validateDocument(previousContent, editor.schema))) {
-        setError("이 개정에는 지원하지 않는 내용이 있습니다. 원문은 보존됩니다."); return;
+        setError("이 버전에는 지원하지 않는 내용이 있습니다. 원문은 보존됩니다."); return;
       }
       setError("");
       let decorationSet = DecorationSet.empty;
@@ -165,7 +165,7 @@ export function HistoryEditor({
 
           decorationSet = DecorationSet.create(newContent, decorations);
         } catch {
-          setError("개정 비교를 표시하지 못했습니다. 선택한 원문은 변경되지 않습니다.");
+          setError("버전 비교를 표시하지 못했습니다. 선택한 원문은 변경되지 않습니다.");
           editor.commands.setContent(content);
         }
       } else {

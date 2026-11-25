@@ -46,7 +46,7 @@ export default function MermaidView(props: NodeViewProps) {
     <Modal opened={opened && stored.loaded} keepMounted={opened} onClose={close} title="Mermaid" closeOnEscape={!stored.busy} closeButtonProps={{ 'aria-label': 'Mermaid 닫기' }}>
       <Textarea label="Mermaid 원본" value={source} onChange={event => { setSource(event.currentTarget.value); setDirty(true); }} readOnly={!stored.editable || stored.busy} autosize minRows={8}/>
       {stored.error && <p role="alert">{stored.error}</p>}
-      <Button loading={stored.busy} disabled={!stored.editable} onClick={async () => { if (await stored.saveData(source)) { setDirty(false); setOpened(false); } }}>첨부 개정 저장 후 노트에 적용</Button>
+      <Button loading={stored.busy} disabled={!stored.editable} onClick={async () => { if (await stored.saveData(source)) { setDirty(false); setOpened(false); } }}>첨부 버전 저장 후 노트에 적용</Button>
     </Modal>
   </NodeViewWrapper>;
 }

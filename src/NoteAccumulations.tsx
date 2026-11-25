@@ -22,7 +22,7 @@ export function NoteAccumulations({ api, noteId }: { api: NoteKnowledgeContextAp
   }, [api, noteId, cursor, attempt]);
   return <section className="context-card note-accumulations" aria-label="누적 이력">
     <h2>누적 이력</h2>
-    <p className="context-muted">반영된 제안과 당시 근거를 최신순으로 보여 줍니다. 과거 자료는 현재 정리를 바꾸지 않고 이력에만 남을 수 있습니다. 실제 결과는 변경 전후에서 확인할 수 있으며, 사람이 작성한 본문과 이전 개정은 보존됩니다.</p>
+    <p className="context-muted">반영된 제안과 당시 근거를 최신순으로 보여 줍니다. 과거 자료는 현재 정리를 바꾸지 않고 이력에만 남을 수 있습니다. 실제 결과는 변경 전후에서 확인할 수 있으며, 사람이 작성한 본문과 이전 버전은 보존됩니다.</p>
     {error && <p role="alert">{error} <button type="button" onClick={() => setAttempt(value => value + 1)}>누적 이력 다시 읽기</button></p>}
     {!page && !error && <p role="status">누적 이력을 읽는 중…</p>}
     {page && <>
@@ -41,7 +41,7 @@ function Accumulation({ api, item }: { api: NoteKnowledgeContextApi; item: NoteA
   const date = useNoteDateTime();
   const [expanded, setExpanded] = useState(false);
   return <article className="accumulation-item">
-    <details><summary><span className="accumulation-heading"><span>{operationLabels[item.kind] || item.kind}</span>{' · '}<span>개정 {item.resultRevision}</span></span>{' · '}<time className="context-muted" dateTime={item.appliedAt}>{date(item.appliedAt)}</time></summary>
+    <details><summary><span className="accumulation-heading"><span>{operationLabels[item.kind] || item.kind}</span>{' · '}<span>버전 {item.resultRevision}</span></span>{' · '}<time className="context-muted" dateTime={item.appliedAt}>{date(item.appliedAt)}</time></summary>
     <h3>{item.title}</h3>
     <p className="preserve">{item.preview}</p>
     <p className="context-muted">반영 시각 <time dateTime={item.appliedAt}>{date(item.appliedAt)}</time> · {item.actorName || '알 수 없는 사용자'} · {item.automatic ? '정책에 따라 자동 반영' : `${item.reviewerName || '알 수 없는 사용자'} 검토 후 반영`}</p>

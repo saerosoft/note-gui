@@ -87,14 +87,14 @@ it.each([false, true])('accepts a delayed restore without discarding a later dra
   await screen.findByDisplayValue('Independent document');
   fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' }));
   fireEvent.click(await screen.findByRole('menuitem', { name: '페이지 이력' }));
-  await screen.findByRole('textbox', { name: '개정 원문' });
+  await screen.findByRole('textbox', { name: '버전 원문' });
   vi.spyOn(window, 'confirm').mockReturnValue(true);
   fireEvent.click(screen.getByRole('button', { name: /^복원$/ }));
   await waitFor(() => expect(restore).toHaveBeenCalledExactlyOnceWith('note', 1, 1));
   if (edited) fireEvent.change(screen.getByLabelText('Draft title'), { target: { value: 'Written while restoring' } });
   await act(async () => finish(restored));
   expect(screen.getByLabelText<HTMLInputElement>('Draft title').value).toBe(edited ? 'Written while restoring' : 'Restored document');
-  expect(document.querySelector('.note-body-status')?.textContent).toContain(`개정 ${edited ? 1 : 2}`);
+  expect(document.querySelector('.note-body-status')?.textContent).toContain(`버전 ${edited ? 1 : 2}`);
   expect(screen.getByRole('button', { name: /^저장$/ }).hasAttribute('disabled')).toBe(!edited);
 });
 it('shows supported context denial honestly while preserving an unsaved core draft', async () => {
@@ -579,4 +579,17 @@ it('keeps desktop empty-state guidance on wide viewports and opens the navigatio
   expect(screen.queryByRole('button', { name: '페이지 탐색 닫기' })).toBeNull();
   fireEvent.click(screen.getByRole('button', { name: '노트 목록 열기' }));
   expect(await screen.findByRole('button', { name: '페이지 탐색 닫기' })).toBeTruthy();
+});
+it('uses unified KMS space-visibility and version labels in pane status and menu', async () => {
+  const access = createNoteAccess();
+  const client = { ...core(), note: async () => ({ ...note, visibility: 'SPACE' as const, revision: 3 }) };
+  render(<MantineProvider env="test"><NoteHostProvider api={client} host={{ access, destinations: {} }}>
+    <Pane api={client} paneId="Independent" requestedId="note" onLocation={() => {}} onDirty={() => {}} onActivate={() => {}}/>
+  </NoteHostProvider></MantineProvider>);
+  await screen.findByDisplayValue('Independent document');
+  expect(document.querySelector('.note-body-status')?.textContent).toBe('공간 구성원 · 버전 3 · 저장됨');
+  fireEvent.click(screen.getByRole('button', { name: '페이지 메뉴' }));
+  expect(await screen.findByText('공간 구성원 · 버전 3')).toBeTruthy();
+  expect(document.body.textContent).not.toContain('개정');
+  expect(document.body.textContent).not.toContain('공간 공유');
 });

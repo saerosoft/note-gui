@@ -94,7 +94,7 @@ export function NotePanels({ api, note, dirty, panel: selectedPanel, onPanelChan
     {visited.includes('history') && <div hidden={panel !== 'history'} className="note-panel-content">
       {dirty && <p>현재 변경을 먼저 저장한 뒤 복원해 주세요.</p>}
       <DocmostHistory api={api} noteId={note.id} history={history} busy={busy || !loaded} canRestore={note.canEdit && loaded && !dirty && !busy}
-        onRestore={revision => { if (window.confirm(`개정 ${revision.revision}을 새 개정으로 복원할까요?`)) void perform(async () => onRestore(await api.restore(note.id, revision.revision, note.revision))); }}
+        onRestore={revision => { if (window.confirm(`버전 ${revision.revision}을 새 버전으로 복원할까요?`)) void perform(async () => onRestore(await api.restore(note.id, revision.revision, note.revision))); }}
         onLoadMore={() => void perform(async () => { const page = await api.history(note.id, history.nextCursor); setHistory({ items: [...history.items, ...page.items].slice(-100), nextCursor: page.nextCursor }); })}/>
     </div>}
     {visited.includes('properties') && <div hidden={panel !== 'properties'} className="note-panel-content"><NoteProperties api={api} note={note} dirty={dirty} draft={propertyDraft} onDraftChange={onPropertyDraftChange} isCurrent={ownsTab} onRevision={onRevision}/></div>}

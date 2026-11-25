@@ -39,7 +39,7 @@ for (const width of [1600, 390]) test(`offers shared creation and bounded associ
   await panel.getByRole('button', { name: '대상 다음', exact: true }).click();
   await panel.getByRole('button', { name: 'Shared organization target', exact: true }).click();
   await panel.getByRole('button', { name: '연결', exact: true }).click();
-  await expect(panel.getByText('작성자: original-creator · 연결 개정 1', { exact: true })).toBeVisible();
+  await expect(panel.getByText('작성자: original-creator · 연결 버전 1', { exact: true })).toBeVisible();
   await panel.getByRole('button', { name: '연결 해제', exact: true }).click();
   await expect(panel.getByText('연결된 노트가 없습니다.', { exact: true })).toBeVisible();
   const writes = await page.evaluate(() => window.collaborationWrites);

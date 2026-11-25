@@ -102,7 +102,7 @@ test('keeps the actual native diagram read-only after effective edit permission 
   await frame.getByText('Original native shape', { exact: true }).dblclick();
   await expect(frame.locator('.mxCellEditor[contenteditable="true"]')).toHaveCount(0);
   await expect(frame.getByText('Save', { exact: true })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true })).toBeDisabled();
 });
 
 test('restores a native diagram revision without replacing the other same-note pane draft', async ({ page }) => {
@@ -126,9 +126,9 @@ test('restores a native diagram revision without replacing the other same-note p
   await frame.getByText('Save', { exact: true }).click(); await left.getByRole('button', { name: '저장', exact: true }).click();
   await expect(left.getByRole('button', { name: '저장', exact: true })).toBeDisabled();
   await left.getByRole('button', { name: '페이지 메뉴', exact: true }).click(); await left.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
-  await left.getByRole('button', { name: /개정 2 · Same-note native panes/ }).click();
+  await left.getByRole('button', { name: /버전 2 · Same-note native panes/ }).click();
   page.once('dialog', dialog => dialog.accept()); await left.getByRole('button', { name: '복원', exact: true }).click();
-  await expect(left.locator('.note-body-status')).toContainText('개정 4'); await expect(rightBody).toHaveText(rightDraft!);
+  await expect(left.locator('.note-body-status')).toContainText('버전 4'); await expect(rightBody).toHaveText(rightDraft!);
   expect(await rightBody.evaluate((element, original) => element === original, originalEditor)).toBe(true);
   await left.getByRole('button', { name: '노트 상세 닫기', exact: true }).click(); await leftBody.getByRole('button', { name: '다이어그램 편집', exact: true }).click();
   await expect(frame.getByText('Original native shape', { exact: true })).toBeVisible();

@@ -128,7 +128,7 @@ for (const width of [1600, 390]) test(`retains edits made during a delayed histo
   if (width === 1600) await right.fill('Independent right draft.');
   await left.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
   await left.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
-  await left.getByRole('button', { name: /개정 1 · Historical title/ }).click();
+  await left.getByRole('button', { name: /버전 1 · Historical title/ }).click();
   page.once('dialog', dialog => dialog.accept());
   await left.getByRole('button', { name: '복원', exact: true }).click();
   await page.waitForFunction(() => Reflect.get(window, 'restoreCommitted') === 3);
@@ -139,7 +139,7 @@ for (const width of [1600, 390]) test(`retains edits made during a delayed histo
   await expect(title).toHaveText('Title typed while restoring');
   await expect(body).toHaveText('Body typed while restoring.');
   expect(await body.evaluate((element, original) => element === original, originalEditor)).toBe(true);
-  await expect(left.locator('.note-body-status')).toContainText('개정 2');
+  await expect(left.locator('.note-body-status')).toContainText('버전 2');
   if (width === 1600) await expect(right).toHaveText('Independent right draft.');
   await left.getByRole('button', { name: '저장', exact: true }).click();
   await expect(left.getByRole('alert')).toContainText('newer revision');
@@ -147,7 +147,7 @@ for (const width of [1600, 390]) test(`retains edits made during a delayed histo
   const committed = await page.evaluate(id => window.noteExample.api.note(id), note.id);
   expect(committed.title).toBe('Historical title'); expect(committed.revision).toBe(3);
   await left.getByRole('button', { name: '최신 버전 확인', exact: true }).click();
-  await expect(left.getByRole('alert').filter({ hasText: '서버 개정 3 · Historical title.' })).toBeVisible();
+  await expect(left.getByRole('alert').filter({ hasText: '서버 버전 3 · Historical title.' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await page.screenshot({ path: `.tmp/restore-draft-${width}.png`, fullPage: true });
   page.once('dialog', dialog => dialog.accept());
@@ -171,7 +171,7 @@ for (const closeTarget of [false, true]) test(`isolates a pending restore after 
   });
   await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
   await page.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
-  await page.getByRole('button', { name: /개정 1 · Historical original/ }).click();
+  await page.getByRole('button', { name: /버전 1 · Historical original/ }).click();
   page.once('dialog', dialog => dialog.accept()); await page.getByRole('button', { name: '복원', exact: true }).click();
   await page.waitForFunction(() => Reflect.get(window, 'tabRestoreCommitted'));
   await page.getByRole('treeitem', { name: 'Independent active tab', exact: true }).click();
@@ -206,13 +206,13 @@ test('round-trips native local diagrams and revalidates their dirty media lifecy
   await page.getByRole('button', { name: '원본 편집', exact: true }).click();
   const mermaid = 'graph TD\n  Author --> Revision';
   await page.getByLabel('Mermaid 원본', { exact: true }).fill(mermaid);
-  await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+  await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   await save(); await page.reload(); await expect(body.locator('svg')).toContainText('Author');
   await insert('drawio');
   await page.getByRole('button', { name: '다이어그램 편집', exact: true }).click();
   const xml = '<mxfile><diagram name="Local XML"><mxGraphModel><root><mxCell id="0"/></root></mxGraphModel></diagram></mxfile>';
   await page.getByLabel('Draw.io XML', { exact: true }).fill(xml);
-  await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+  await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   await save(); await page.reload();
   await page.getByRole('button', { name: '다이어그램 편집', exact: true }).click();
   await expect(page.getByLabel('Draw.io XML', { exact: true })).toHaveValue(xml);
@@ -285,7 +285,7 @@ test('replays exact committed create save and comment intents after lost acknowl
   await body.fill('Frozen save intent.'); await page.getByRole('button', { name: '저장', exact: true }).click();
   await expect(page.getByRole('alert')).toHaveText('Save acknowledgement lost');
   await body.fill('Later independent draft.'); await page.getByRole('button', { name: '저장', exact: true }).click();
-  await expect(page.locator('.note-body-status')).toContainText('개정 2');
+  await expect(page.locator('.note-body-status')).toContainText('버전 2');
   await expect(body).toHaveText('Later independent draft.');
   await expect(page.getByRole('button', { name: '저장', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: '저장', exact: true }).click();
@@ -552,7 +552,7 @@ test('does not install an old latest-version lookup into a reopened tab for the 
   await page.evaluate(() => window.dispatchEvent(new Event('fixture-release-latest'))); await page.waitForFunction(() => Reflect.get(window, 'oldLatestDelivered'));
   await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   await expect(page.getByRole('button', { name: '서버 버전 열기', exact: true })).toHaveCount(0);
-  await expect(page.locator('.note-body-status')).toContainText('개정 2');
+  await expect(page.locator('.note-body-status')).toContainText('버전 2');
 });
 
 test('revalidates cached inactive-tab properties after the host access generation changes', async ({ page }) => {
@@ -711,7 +711,7 @@ test('refreshes the open note metadata after a core-only tree move', async ({ pa
   await page.getByRole('textbox', { name: '대상 상위 노트 (선택하지 않으면 루트)', exact: true }).fill('Move parent');
   await page.getByRole('button', { name: 'Move parent', exact: true }).click();
   await page.getByRole('button', { name: '선택 노트 이동', exact: true }).click();
-  await expect(page.locator('.note-body-status')).toContainText('개정 2');
+  await expect(page.locator('.note-body-status')).toContainText('버전 2');
   expect((await page.evaluate(id => window.noteExample.api.note(id), note.id)).parentId).toBe(parent.id);
 });
 
@@ -882,7 +882,7 @@ test('preserves a configured iframe native document and pending autosave through
   await expect(input).toBeVisible(); await expect(input).toHaveValue(changed);
   expect(await nativeFrame.evaluate(() => ({ token: Reflect.get(window, 'nativeToken'), undo: Reflect.get(window, 'undoStack') }))).toEqual(state);
   expect(frameNavigations).toBe(1); await expect(iframe).toHaveAttribute('src', nativeBefore.src);
-  await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+  await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Draw.io', exact: true })).toBeHidden();
   await page.getByRole('button', { name: '저장', exact: true }).click(); await expect(page.getByRole('button', { name: '저장', exact: true })).toBeDisabled();
   const saved = await page.evaluate(async id => {

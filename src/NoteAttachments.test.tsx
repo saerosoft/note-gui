@@ -28,8 +28,8 @@ it('lists immutable file revisions with native authorized download links and exa
   const links = await screen.findAllByRole('link', { name: '같은 자료.pdf' });
   expect(links.map(link => link.getAttribute('href'))).toEqual(['/api/files/old', '/api/files/current']);
   expect(links.map(link => link.getAttribute('download'))).toEqual(['같은 자료.pdf', '같은 자료.pdf']);
-  expect(screen.getByText('개정 1 · application/pdf · 248,710,446 바이트')).toBeTruthy();
-  expect(screen.getByText('개정 2 · application/pdf · 248,710,446 바이트')).toBeTruthy();
+  expect(screen.getByText('버전 1 · application/pdf · 248,710,446 바이트')).toBeTruthy();
+  expect(screen.getByText('버전 2 · application/pdf · 248,710,446 바이트')).toBeTruthy();
   expect(value.attachment).not.toHaveBeenCalled();
 });
 

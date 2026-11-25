@@ -96,7 +96,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
   const policyApi = useNotePolicy();
   const policy = useNoteContentAccess(draft?.note.spaceId ?? '');
   const canEdit = !!draft?.note.canEdit && (!policyApi || !!(policy?.capabilities.read && policy.capabilities.write));
-  const audience = policy?.mode === 'SHARED' ? '조직 구성원 공유' : policyApi && !policy ? '공개 범위 확인 중' : draft?.note.visibility === 'PRIVATE' ? '나만 보기' : draft?.note.visibility === 'ADMINISTRATORS' ? '관리자 전용' : '공간 공유';
+  const audience = policy?.mode === 'SHARED' ? '조직 구성원 공유' : policyApi && !policy ? '공개 범위 확인 중' : draft?.note.visibility === 'PRIVATE' ? '나만 보기' : draft?.note.visibility === 'ADMINISTRATORS' ? '관리자 전용' : '공간 구성원';
   const activeOwner = active ? tabOwners.current[active] : undefined;
   const ownsTab = () => active !== null && tabOwners.current[active] === activeOwner;
   useEffect(() => { setLatest(undefined); }, [active]);
@@ -145,7 +145,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     </Tabs></Box>
     {error && <Alert color="red" role="alert">{error}</Alert>}{busy && <p role="status">처리 중…</p>}
     {!draft || !active ? <div className="empty"><h2>노트를 선택해 주세요</h2>{narrow ? <><p>노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>{onOpenTree && <Button variant="light" size="sm" aria-controls="page-navigation" onClick={onOpenTree}>노트 목록 열기</Button>}</> : <p>왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>}</div> : <div className="note-gui-page">
-      {latest && <Alert color="orange"><p>서버 개정 {latest.note.revision} · {latest.title}. 현재 편집은 그대로 보존됩니다.</p><details><summary>서버 원문 확인</summary><pre>{JSON.stringify(latest.body, null, 2)}</pre></details><Group>
+      {latest && <Alert color="orange"><p>서버 버전 {latest.note.revision} · {latest.title}. 현재 편집은 그대로 보존됩니다.</p><details><summary>서버 원문 확인</summary><pre>{JSON.stringify(latest.body, null, 2)}</pre></details><Group>
         <Button onClick={() => { if (window.confirm('내 변경을 버리고 서버 버전을 열까요?')) { update(active, () => latest); setEditorEpoch(value => value + 1); setLatest(undefined); } }}>서버 버전 열기</Button>
         <Button variant="subtle" onClick={() => setLatest(undefined)}>내 편집 계속</Button>
       </Group></Alert>}
@@ -158,7 +158,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
          {knowledgeContext && <Tooltip label="현재 정리·근거·누적 이력" withinPortal={false}><ActionIcon variant="subtle" color="gray" aria-label="지식 정보" aria-expanded={details === 'knowledge'} onClick={toggleKnowledge}><IconInfoCircle size={20} stroke={1.5}/></ActionIcon></Tooltip>}
         <Menu position="bottom-end" withinPortal={false}><Menu.Target><ActionIcon variant="subtle" color="gray" aria-label="페이지 메뉴"><IconDots size={20}/></ActionIcon></Menu.Target>
           <Menu.Dropdown>
-            <Menu.Label>{audience} · 개정 {draft.note.revision}</Menu.Label>
+            <Menu.Label>{audience} · 버전 {draft.note.revision}</Menu.Label>
             <Menu.Item leftSection={<IconHistory size={16}/>} onClick={() => openDetails('history')}>페이지 이력</Menu.Item>
             <Menu.Item onClick={() => openDetails('properties')}>속성</Menu.Item>
              {relations && <Menu.Item onClick={() => openDetails('relations')}>관계</Menu.Item>}
@@ -171,7 +171,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
         </Menu>
       </Group></>} editor={{
         api, pageId: active, title: draft.title, content: draft.body, showToolbar, editable: canEdit && !invalid[active],
-         byline: <Text size="xs" c="dimmed" className="note-body-status">{(draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'HUMAN' ? '사람이 작성한 본문 · ' : (draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'LEGACY_UNCLASSIFIED' ? '기존 본문 · ' : ''}{audience} · 개정 {draft.note.revision} · {draft.dirty ? '저장하지 않은 변경' : '저장됨'}</Text>,
+         byline: <Text size="xs" c="dimmed" className="note-body-status">{(draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'HUMAN' ? '사람이 작성한 본문 · ' : (draft.note.presentation?.bodyOrigin ?? draft.note.bodyOrigin) === 'LEGACY_UNCLASSIFIED' ? '기존 본문 · ' : ''}{audience} · 버전 {draft.note.revision} · {draft.dirty ? '저장하지 않은 변경' : '저장됨'}</Text>,
         onTitleChange: title => update(active, value => editDraft(value, { title })),
         onInvalid: () => setInvalid(values => ({ ...values, [active]: true })),
         onChange: body => update(active, value => editDraft(value, { body })),

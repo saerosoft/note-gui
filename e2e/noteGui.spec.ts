@@ -153,7 +153,7 @@ test('preserves tab drafts, isolates split panes, rejects stale saves and restor
   await expect(rightBody).toHaveText('First writer through the left pane.');
   await right.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
   await right.getByRole('menuitem', { name: '페이지 이력', exact: true }).click();
-  await right.getByRole('button', { name: /개정 2 ·/ }).click();
+  await right.getByRole('button', { name: /버전 2 ·/ }).click();
   page.once('dialog', dialog => dialog.accept());
   await right.getByRole('button', { name: '복원', exact: true }).click();
   await expect(rightBody).toHaveText('Draft retained across tabs.');
@@ -186,14 +186,14 @@ test('round-trips editable Mermaid, Draw.io and Excalidraw attachment revisions'
   await insert('mermaid');
   await page.getByRole('button', { name: '원본 편집', exact: true }).click();
   await page.getByLabel('Mermaid 원본', { exact: true }).fill('graph TD\n  API --> Note');
-  await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+  await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   await saveNote();
   await page.reload();
   await expect(body.locator('svg')).toContainText('API');
   await page.getByRole('button', { name: '원본 편집', exact: true }).click();
   await expect(page.getByLabel('Mermaid 원본', { exact: true })).toHaveValue('graph TD\n  API --> Note');
   await page.getByLabel('Mermaid 원본', { exact: true }).fill('graph TD\n  API --> Note --> History');
-  await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+  await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   await saveNote();
   await insert('drawio');
   await page.getByRole('button', { name: '다이어그램 편집', exact: true }).click();
@@ -221,7 +221,7 @@ test('round-trips editable Mermaid, Draw.io and Excalidraw attachment revisions'
     await page.reload();
   } else {
     await page.getByLabel('Draw.io XML', { exact: true }).fill(xml);
-    await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+    await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
     await saveNote();
     await page.reload();
   }
@@ -243,7 +243,7 @@ test('round-trips editable Mermaid, Draw.io and Excalidraw attachment revisions'
     await expect(page.getByRole('dialog')).toHaveCount(0);
   } else {
     await page.getByLabel('Draw.io XML', { exact: true }).fill(updatedXml);
-    await page.getByRole('button', { name: '첨부 개정 저장 후 노트에 적용', exact: true }).click();
+    await page.getByRole('button', { name: '첨부 버전 저장 후 노트에 적용', exact: true }).click();
   }
   await insert('excalidraw');
   await page.getByRole('button', { name: '드로잉 편집', exact: true }).click();

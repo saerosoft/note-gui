@@ -63,7 +63,7 @@ it.each([
 
 it('renders the selected immutable revision in the real core history editor and restores through the current revision guard', async () => {
   const value = show(); vi.spyOn(window, 'confirm').mockReturnValue(true);
-  const editor = await screen.findByRole('textbox', { name: '개정 원문' });
+  const editor = await screen.findByRole('textbox', { name: '버전 원문' });
   expect(editor.textContent).toContain('New body');
   expect(editor.getAttribute('contenteditable')).toBe('false');
   fireEvent.click(screen.getByRole('button', { name: '복원' }));
@@ -80,7 +80,7 @@ it('displays supplied revision editors without attributing an unknown editor to 
 
 it('keeps the revision viewer read-only and blocks restore while the current pane has an unsaved draft', async () => {
   const value = show(true);
-  await screen.findByRole('textbox', { name: '개정 원문' });
+  await screen.findByRole('textbox', { name: '버전 원문' });
   expect(screen.getByRole('button', { name: '복원' }).getAttribute('disabled')).toBe('');
   fireEvent.click(screen.getByRole('button', { name: '복원' }));
   expect(value.restore).not.toHaveBeenCalled();
@@ -98,10 +98,10 @@ it('keeps history selection and comment drafts independent for the same note in 
   expect(right.getByRole('textbox', { name: '댓글' }).textContent).toBe('');
   fireEvent.click(left.getByRole('tab', { name: '이력' }));
   fireEvent.click(right.getByRole('tab', { name: '이력' }));
-  await left.findByRole('textbox', { name: '개정 원문' }); await right.findByRole('textbox', { name: '개정 원문' });
-  fireEvent.click(left.getByRole('button', { name: /개정 1 · Title 1/ }));
-  await waitFor(() => expect(left.getByRole('textbox', { name: '개정 원문' }).textContent).toContain('Old body'));
-  expect(right.getByRole('textbox', { name: '개정 원문' }).textContent).toContain('New body');
+  await left.findByRole('textbox', { name: '버전 원문' }); await right.findByRole('textbox', { name: '버전 원문' });
+  fireEvent.click(left.getByRole('button', { name: /버전 1 · Title 1/ }));
+  await waitFor(() => expect(left.getByRole('textbox', { name: '버전 원문' }).textContent).toContain('Old body'));
+  expect(right.getByRole('textbox', { name: '버전 원문' }).textContent).toContain('New body');
 });
 
 it('retains an unsent comment when switching contextual panels and hiding the entire sidebar', async () => {
@@ -114,7 +114,7 @@ it('retains an unsent comment when switching contextual panels and hiding the en
   await waitFor(() => expect(comment.getAttribute('contenteditable')).toBe('true'));
   comment.textContent = 'Keep this unsent comment'; fireEvent.input(comment);
   fireEvent.click(screen.getByRole('tab', { name: '이력' }));
-  await screen.findByRole('textbox', { name: '개정 원문' });
+  await screen.findByRole('textbox', { name: '버전 원문' });
   expect(screen.queryByRole('textbox', { name: '댓글' })).toBeNull();
   fireEvent.click(screen.getByRole('tab', { name: '댓글' }));
   expect(screen.getByRole('textbox', { name: '댓글' }).textContent).toBe('Keep this unsent comment');
@@ -145,7 +145,7 @@ it('renders and compares real React node views without flushing during a React l
   const errors = vi.spyOn(console, 'error');
   try {
     const current = render(historyView('const current = 2;'));
-    const document = await screen.findByRole('textbox', { name: '개정 원문' });
+    const document = await screen.findByRole('textbox', { name: '버전 원문' });
     await waitFor(() => expect(historyCodeText(document, 'current')).toBe('const current = 2;'));
     expect(historyCodeText(document, 'previous')).toBe('const previous = 1;');
     expect([...document.querySelectorAll('.history-diff-deleted')].map(node => node.textContent).join('')).toBe('previous1');
@@ -164,7 +164,7 @@ it('keeps the latest rapid history selection and cancels pending work on unmount
     const current = render(historyView('const first = 1;'));
     current.rerender(historyView('const intermediate = 2;'));
     current.rerender(historyView('const last = 3;'));
-    const document = await screen.findByRole('textbox', { name: '개정 원문' });
+    const document = await screen.findByRole('textbox', { name: '버전 원문' });
     await waitFor(() => expect(historyCodeText(document, 'current')).toBe('const last = 3;'));
     expect(historyCodeText(document, 'previous')).toBe('const previous = 1;');
     expect([...document.querySelectorAll('.history-diff-deleted')].map(node => node.textContent).join('')).toBe('previous1');
@@ -172,7 +172,7 @@ it('keeps the latest rapid history selection and cancels pending work on unmount
     current.rerender(historyView('const cancelled = 4;'));
     current.unmount();
     await act(async () => { await Promise.resolve(); });
-    expect(screen.queryByRole('textbox', { name: '개정 원문' })).toBeNull();
+    expect(screen.queryByRole('textbox', { name: '버전 원문' })).toBeNull();
     expect(errors.mock.calls.flat().map(String).join('\n')).not.toContain('flushSync was called from inside a lifecycle method');
   } finally { errors.mockRestore(); }
 });

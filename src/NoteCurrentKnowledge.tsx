@@ -27,7 +27,7 @@ export function NoteCurrentKnowledge({ api, noteId, spaceId }: { api: NoteKnowle
     {error && <div role="alert"><p>{error}</p><button type="button" onClick={() => setAttempt(value => value + 1)}>현재 정리 다시 읽기</button></div>}
     {!page && !error && <p role="status">현재 정리를 읽는 중…</p>}
     {page && <>
-      <p className="context-muted">노트 개정 {page.revision} 기준</p>
+      <p className="context-muted">노트 버전 {page.revision} 기준</p>
       {page.bodyOrigin === 'LEGACY_UNCLASSIFIED' && <p className="legacy-body-notice">기존 본문은 작성 구분과 유효성을 확인해야 합니다.</p>}
       {!page.items.length && <p>{page.bodyOrigin === 'LEGACY_UNCLASSIFIED' ? '분리 확인된 현재 항목이 없습니다.' : '현재 유효한 정리가 없습니다.'}</p>}
       {page.items.map(item => <CurrentItem key={item.id} api={api} item={item} spaceId={spaceId}/>)}
@@ -48,7 +48,7 @@ function CurrentItem({ api, item, spaceId }: { api: NoteKnowledgeContextApi; ite
     <p className="preserve">{item.body}</p>
     <details><summary>근거·반영 기록 · {item.evidenceCount}</summary>
       <NoteEvidence evidence={item.evidence} evidenceCount={item.evidenceCount}/>
-      <p className="context-muted">반영 시각 <time dateTime={item.appliedAt}>{date(item.appliedAt)}</time> · 개정 {item.resultRevision}</p>
+      <p className="context-muted">반영 시각 <time dateTime={item.appliedAt}>{date(item.appliedAt)}</time> · 버전 {item.resultRevision}</p>
        <p className="applied-rules">적용 규칙: {item.rules.length ? item.rules.map(rule => <HostLink key={rule.versionId} destination={{ kind: 'rule', spaceId, rulesetId: rule.rulesetId, versionId: rule.versionId }}>{rule.name} v{rule.versionNumber}</HostLink>) : '적용 기록 없음'}</p>
       <div className="context-actions"><button type="button" aria-expanded={expanded} onClick={() => setExpanded(value => !value)}>{expanded ? '변경 전후·반영 기준 닫기' : '변경 전후·반영 기준 보기'}</button></div>
       {expanded && <NoteAccumulationChange api={api} id={item.id}/>}
