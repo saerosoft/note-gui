@@ -134,10 +134,12 @@ it('formats attachment byte sizes into human-readable units to one decimal place
   expect(formatByteSize(Number.NaN)).toBe('0 B');
   expect(formatByteSize(512)).toBe('512 B');
   expect(formatByteSize(1023)).toBe('1023 B');
+  expect(formatByteSize(1023.6)).toBe('1.0 KB');
   expect(formatByteSize(1024)).toBe('1.0 KB');
   expect(formatByteSize(12345)).toBe('12.1 KB');
   expect(formatByteSize(1024 * 1024 - 1)).toBe('1.0 MB');
   expect(formatByteSize(1536 * 1024)).toBe('1.5 MB');
   expect(formatByteSize(248710446)).toBe('237.2 MB');
   expect(formatByteSize(2 * 1024 * 1024 * 1024)).toBe('2.0 GB');
+  expect(formatByteSize(1024 ** 4 - 1)).toBe('1.0 TB');
 });

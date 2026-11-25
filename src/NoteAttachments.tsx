@@ -6,8 +6,8 @@ interface Props { api: NoteCoreApi; noteId: string; revision: number }
 const date = (value: string) => new Date(value).toLocaleString('ko-KR', { dateStyle: 'medium', timeStyle: 'short' });
 
 export function formatByteSize(bytes: number): string {
-  const value = Number.isFinite(bytes) && bytes > 0 ? bytes : 0;
-  if (value < 1024) return `${Math.round(value)} B`;
+  const value = Number.isFinite(bytes) && bytes > 0 ? Math.round(bytes) : 0;
+  if (value < 1024) return `${value} B`;
   const units = ['KB', 'MB', 'GB', 'TB'];
   let scaled = value / 1024;
   let index = 0;
