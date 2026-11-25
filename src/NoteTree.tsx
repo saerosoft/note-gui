@@ -21,7 +21,7 @@ export function NoteTree({ api, spaceId, activeNoteId, onOpen }: Props) {
   const policyApi = useNotePolicy();
   const policy = useNoteContentAccess(spaceId);
   const policies = useContext(NotePolicyContext);
-  const narrow = useMediaQuery('(max-width: 47.99em)');
+  const narrow = useMediaQuery('(max-width: 47.99em)', undefined, { getInitialValueInEffect: false });
   const [parentId, setParentId] = useState<string | null>(null);
   const [ancestors, setAncestors] = useState<{ id: string | null; title: string }[]>([]);
   const [cursor, setCursor] = useState<string | null>(null);

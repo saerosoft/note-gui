@@ -30,4 +30,4 @@
 .bulkMove > summary:hover { background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6)); color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0)); }
 .bulkMove form { margin-top: 8px; padding: 10px; border-radius: 6px; background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)); border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); }
 .bulkMove p { margin: 0; line-height: 1.5; color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
-@media (max-width: 48em) { .treeRow { height: 44px; } }
+@media (max-width: 47.99em) { .treeRow { height: 44px; } }

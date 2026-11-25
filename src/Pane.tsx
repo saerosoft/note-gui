@@ -18,7 +18,7 @@ import { NativeDraftContext } from './docmost/nativeDraft';
 interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void; onOpenTree?: () => void }
 export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate, onOpenTree }: Props) {
   const api = useNoteCore(suppliedApi);
-  const narrow = useMediaQuery('(max-width: 47.99em)');
+  const narrow = useMediaQuery('(max-width: 47.99em)', undefined, { getInitialValueInEffect: false });
   const knowledgeContext = useKnowledgeContext();
   const relations = useRelations();
   const associations = useNoteAssociations();

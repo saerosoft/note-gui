@@ -48,7 +48,7 @@
   .note-gui-panes[data-split=true] { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }
   .note-gui-panes[data-split=true] .note-gui-pane-root { min-height: 70dvh; }
 }
-@media (max-width: 48em) {
+@media (max-width: 47.99em) {
   .note-page-breadcrumb > svg { display: none; }
   .note-gui-tabs [role=tab] { max-width: 160px; }
   .note-gui-pane .empty button { margin-top: 8px; min-height: 44px; }

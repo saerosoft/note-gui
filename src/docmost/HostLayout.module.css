@@ -4,7 +4,10 @@
 .paneTarget { padding-bottom: var(--mantine-spacing-sm); }
 .sectionPages { min-height: 0; flex: 1; display: flex; flex-direction: column; }
 .pages { min-height: 0; flex: 1; overflow: auto; }
-@media (max-width: 48em) {
+@media (min-width: 48em) {
+  .navbar { width: var(--app-shell-navbar-width); }
+}
+@media (max-width: 47.99em) {
   .navbar { width: min(320px, calc(100vw - 48px)); }
   .header { padding-left: 0; padding-right: 0; }
   .header button, .header a { min-height: 44px; min-width: 44px; }
@@ -12,4 +15,7 @@
   .header svg { display: block; width: 20px; height: 20px; }
   .mobileBackdrop { display: block; position: fixed; inset: 45px 0 0 min(320px, calc(100vw - 48px)); z-index: 119; }
   .resizeHandle { display: none; }
+}
+@media (max-width: 24em) {
+  .header { --mantine-spacing-md: 8px; --mantine-spacing-sm: 4px; }
 }
