@@ -8,6 +8,8 @@
   .navbar { width: min(320px, calc(100vw - 48px)); }
   .header { padding-left: 0; padding-right: 0; }
   .header button, .header a { min-height: 44px; min-width: 44px; }
+  .header a { display: inline-flex; align-items: center; justify-content: center; }
+  .header svg { display: block; width: 20px; height: 20px; }
   .mobileBackdrop { display: block; position: fixed; inset: 45px 0 0 min(320px, calc(100vw - 48px)); z-index: 119; }
   .resizeHandle { display: none; }
 }

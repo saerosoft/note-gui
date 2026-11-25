@@ -32,7 +32,7 @@ export function AppHeader({ mobileOpened, desktopOpened, toggleMobile, toggleDes
           onClick={toggleDesktop} visibleFrom="sm" size="sm"/>
       </Tooltip>
       <Anchor component={homeHref ? 'a' : 'span'} href={homeHref} c="inherit" underline="never" onClick={homeHref ? onNavigate : undefined} aria-label="Knowledge Engine 홈">
-        <Box hiddenFrom="sm"><IconBook2 size={22} stroke={1.7}/></Box>
+        <Box hiddenFrom="sm"><IconBook2 size={20} stroke={1.7}/></Box>
         <Text component="span" size="lg" fw={600} visibleFrom="sm">Knowledge Engine</Text>
       </Anchor>
       {homeHref && <a href={homeHref} className={classes.link + ' desktop-home-link'} onClick={onNavigate}>홈</a>}
