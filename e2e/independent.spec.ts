@@ -947,3 +947,93 @@ test('awaits selected and paged relation-query replacements and retains the core
     await expect(body).toBeVisible(); await expect(body).toBeEditable(); await expect(body).toHaveText('Relation refresh core draft.');
   }
 });
+
+test('keeps single-page tree pager hidden, formats attachment sizes, aligns mobile header controls and opens mobile tree from empty state', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const longTitle = '[UI Audit] 매우 긴 노트 제목이 트리에서 말줄임될 때 전체 제목을 title 속성으로 제공해야 합니다';
+  const note = await page.evaluate(async title => window.noteExample.api.create({ spaceId: 'local', title, parentId: null, visibility: 'SPACE', idempotencyKey: crypto.randomUUID() }), longTitle);
+  await page.evaluate(async id => {
+    const payload = new Uint8Array(1536 * 1024);
+    await window.noteExample.api.upload(id, new File([payload], 'audit-report.pdf', { type: 'application/pdf' }));
+  }, note.id);
+
+  // Desktop empty state: no dead pager on single-page tree, full title tooltip on rows, desktop copy preserved.
+  await page.goto('./?space=local');
+  const tree = page.getByRole('navigation', { name: '노트 트리', exact: true });
+  const row = tree.getByRole('treeitem', { name: longTitle, exact: true });
+  await expect(row).toBeVisible();
+  await expect(row.locator(`[title="${longTitle}"]`)).toHaveCount(1);
+  await expect(tree.getByRole('button', { name: '이전', exact: true })).toHaveCount(0);
+  await expect(tree.getByRole('button', { name: '다음', exact: true })).toHaveCount(0);
+  await expect(page.getByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '노트 목록 열기', exact: true })).toHaveCount(0);
+
+  // Desktop note & attachment panel: unified KMS terms and human-readable file size with exact byte title.
+  await row.click();
+  await expect(page.locator('.note-body-status')).toContainText('공간 구성원 · 버전 1 · 저장됨');
+  await page.getByRole('button', { name: '페이지 메뉴', exact: true }).click();
+  await expect(page.getByText('공간 구성원 · 버전 1', { exact: true })).toBeVisible();
+  await page.getByRole('menuitem', { name: '첨부파일', exact: true }).click();
+  const sizeBadge = page.locator('.note-attachments [title="1,572,864 바이트"]');
+  await expect(sizeBadge).toHaveText('1.5 MB');
+  expect(await page.evaluate(() => document.body.innerText)).not.toContain('개정');
+  expect(await page.evaluate(() => document.body.innerText)).not.toContain('공간 공유');
+
+  // Exact 768px (48em) tablet boundary stays in desktop mode without mobile navbar overlap.
+  await page.setViewportSize({ width: 768, height: 900 });
+  await page.goto('./?space=local');
+  await expect(page.getByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.', { exact: true })).toBeVisible();
+  const tabletMetrics = await page.evaluate(() => {
+    const nav = document.getElementById('page-navigation')!.getBoundingClientRect();
+    const main = document.getElementById('main-content')!;
+    const handle = getComputedStyle(document.querySelector('[role="separator"][aria-label="탐색 영역 너비"]')!).display;
+    return { navWidth: Math.round(nav.width), mainPadLeft: Math.round(parseFloat(getComputedStyle(main).paddingLeft)), handle };
+  });
+  expect(tabletMetrics).toEqual({ navWidth: 300, mainPadLeft: 300, handle: 'block' });
+
+  // Mobile 390px & 320px with full 6-control KMS-like header (home + ask): vertical icon alignment, zero overflow, empty-state drawer button.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./?space=local');
+  await page.waitForFunction(() => !!window.noteExample);
+  await page.evaluate(async () => {
+    const entry = '/note-gui/note-gui.js'; const gui: typeof import('../src/index') = await import(entry);
+    const { api, mounted } = window.noteExample; mounted.unmount();
+    const access = gui.createNoteAccess();
+    const host = {
+      access,
+      destinations: { home: '/home', resolve: (d: { kind: string }) => d.kind === 'ask' ? '/ask' : undefined },
+      onNavigate: () => true,
+    };
+    window.noteExample = { api, access, host, mounted: gui.mountNoteCoreGui(document.getElementById('notes')!, { api, host }) };
+  });
+  await expect(page.getByText('노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.', { exact: true })).toBeVisible();
+  await expect(page.getByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.', { exact: true })).toHaveCount(0);
+
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    const headerCheck = await page.evaluate(() => {
+      const header = document.querySelector('header')!;
+      const controls = [...header.querySelectorAll('button, a')].filter(el => {
+        const r = el.getBoundingClientRect();
+        return getComputedStyle(el).display !== 'none' && r.width > 0 && r.height > 0;
+      });
+      const svgs = controls.map(el => [...el.querySelectorAll('svg')].find(s => s.getBoundingClientRect().width > 0)).filter(Boolean) as SVGElement[];
+      return {
+        controlCount: controls.length,
+        overflow: header.scrollWidth > header.clientWidth + 1,
+        centers: svgs.map(s => Math.round((s.getBoundingClientRect().top + s.getBoundingClientRect().height / 2) * 10) / 10),
+        sizes: svgs.map(s => [Math.round(s.getBoundingClientRect().width), Math.round(s.getBoundingClientRect().height)]),
+      };
+    });
+    expect(headerCheck.controlCount).toBe(6);
+    expect(headerCheck.overflow).toBe(false);
+    expect(headerCheck.sizes).toEqual(Array(5).fill([20, 20]));
+    for (const cY of headerCheck.centers) expect(Math.abs(cY - headerCheck.centers[0])).toBeLessThanOrEqual(0.5);
+  }
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: '노트 목록 열기', exact: true }).click();
+  await expect(page.getByRole('button', { name: '페이지 탐색 닫기', exact: true })).toBeVisible();
+  await tree.getByRole('treeitem', { name: longTitle, exact: true }).click();
+  await expect(page.getByRole('textbox', { name: '노트 제목', exact: true })).toHaveText(longTitle);
+});

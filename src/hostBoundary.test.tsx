@@ -573,12 +573,26 @@ it('keeps desktop empty-state guidance on wide viewports and opens the navigatio
   Object.defineProperty(window, 'matchMedia', { configurable: true, value: vi.fn((query: string) => ({
     matches: query.includes('47.99em'), media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, dispatchEvent() { return false; },
   })) });
-  render(<MantineProvider env="test"><NoteHostProvider api={api} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
-  await screen.findByText('노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.');
-  expect(screen.queryByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.')).toBeNull();
-  expect(screen.queryByRole('button', { name: '페이지 탐색 닫기' })).toBeNull();
-  fireEvent.click(screen.getByRole('button', { name: '노트 목록 열기' }));
-  expect(await screen.findByRole('button', { name: '페이지 탐색 닫기' })).toBeTruthy();
+  const seenDesktopCopy: string[] = [];
+  const observer = new MutationObserver(records => {
+    for (const record of records) {
+      for (const node of [...record.addedNodes, ...record.removedNodes]) {
+        if (node.textContent?.includes('왼쪽 트리')) seenDesktopCopy.push(node.textContent);
+      }
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  try {
+    render(<MantineProvider env="test"><NoteHostProvider api={api} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+    await screen.findByText('노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.');
+    expect(seenDesktopCopy).toEqual([]);
+    expect(screen.queryByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.')).toBeNull();
+    expect(screen.queryByRole('button', { name: '페이지 탐색 닫기' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: '노트 목록 열기' }));
+    expect(await screen.findByRole('button', { name: '페이지 탐색 닫기' })).toBeTruthy();
+  } finally {
+    observer.disconnect();
+  }
 });
 it('uses unified KMS space-visibility and version labels in pane status and menu', async () => {
   const access = createNoteAccess();

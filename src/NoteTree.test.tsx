@@ -386,9 +386,19 @@ it('rejects a native root drop while another move is pending', async () => {
 });
 
 it('omits the tree pager row on a single page and provides full-title tooltips on rows', async () => {
-  show();
+  const api = {
+    spaces: vi.fn().mockResolvedValue([{ id: 'space', name: 'Space', accessEpoch: 1, myRole: 'OWNER' }]),
+    tree: vi.fn().mockResolvedValue({
+      items: [...notes, { id: 'note-empty', title: '', parentId: null, hasChildren: false, revision: 1 }],
+      nextCursor: null,
+    }),
+  } as unknown as NoteApi;
+  render(<MantineProvider><NoteTree api={api} spaceId="space" activeNoteId={null} onOpen={vi.fn()}/></MantineProvider>);
   const alpha = await screen.findByRole('treeitem', { name: 'Alpha' });
   expect(alpha.querySelector('[title="Alpha"]')).toBeTruthy();
+  const emptyRow = document.querySelector('[data-row-id="note-empty"]');
+  expect(emptyRow).toBeTruthy();
+  expect(emptyRow?.querySelector('[title]')).toBeNull();
   expect(screen.queryByRole('button', { name: '이전' })).toBeNull();
   expect(screen.queryByRole('button', { name: '다음' })).toBeNull();
 });
