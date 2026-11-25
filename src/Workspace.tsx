@@ -102,15 +102,15 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
         onSearch={() => { closeMobile(); setSearchOpened(true); }} split={split} target={target} onTargetChange={setTarget}>
         {spaceId && <NoteTree key={spaceId} api={api} spaceId={spaceId} activeNoteId={target === 'right' && split ? right : left}
           onOpen={id => { open(id); closeMobile(); }}/>}
-      </SpaceSidebar>}>
+      </SpaceSidebar>}>{openMobile => <>
         {error && <Alert color="red" role="alert">{error} {destination({ kind: 'login' }) && <a href={destination({ kind: 'login' })} onClick={navigate}>로그인</a>}</Alert>}
         <div className="note-gui-panes" data-split={split}>
           <Pane key={`${spaceId}:left`} api={api} paneId="왼쪽" requestedId={left} onLocation={setLeft}
-            onDirty={leftDirty} onActivate={() => setTarget('left')}/>
+            onDirty={leftDirty} onActivate={() => setTarget('left')} onOpenTree={spaceId ? openMobile : undefined}/>
           {split && <Pane key={`${spaceId}:right`} api={api} paneId="오른쪽" requestedId={right} onLocation={setRight}
-            onDirty={rightDirty} onActivate={() => setTarget('right')}/>}
+            onDirty={rightDirty} onActivate={() => setTarget('right')} onOpenTree={spaceId ? openMobile : undefined}/>}
         </div>
-      </GlobalAppShell>
+      </>}</GlobalAppShell>
       {searchOpened && spaceId && access.ready && !access.refreshing && !access.failure && <Modal opened onClose={() => setSearchOpened(false)} title="노트 검색" centered>
         <NotePicker key={spaceId} api={api} spaceId={spaceId} label="노트 제목" selected={null}
           onSelect={note => { if (note) { open(note.id); setSearchOpened(false); } }}/>

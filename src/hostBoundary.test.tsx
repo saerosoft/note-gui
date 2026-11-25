@@ -562,3 +562,21 @@ it.each(['NETWORK', 'ACCESS_DENIED'] as const)('does not suppress a core %s fail
   else { await screen.findByText(/Core note verification unavailable/); expect(screen.getByDisplayValue('Protected core draft')).toBe(editor); }
   expect(screen.queryByRole('textbox', { name: 'Draft title' })).toBeNull();
 });
+it('keeps desktop empty-state guidance on wide viewports and opens the navigation drawer from mobile empty state', async () => {
+  window.history.replaceState(null, '', '/independent?space=space');
+  const api = core();
+  const wide = render(<MantineProvider env="test"><NoteHostProvider api={api} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.');
+  expect(screen.queryByRole('button', { name: '노트 목록 열기' })).toBeNull();
+  wide.unmount();
+
+  Object.defineProperty(window, 'matchMedia', { configurable: true, value: vi.fn((query: string) => ({
+    matches: query.includes('47.99em'), media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, dispatchEvent() { return false; },
+  })) });
+  render(<MantineProvider env="test"><NoteHostProvider api={api} host={{ access: createNoteAccess(), destinations: {} }}><Workspace api={api}/></NoteHostProvider></MantineProvider>);
+  await screen.findByText('노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.');
+  expect(screen.queryByText('왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.')).toBeNull();
+  expect(screen.queryByRole('button', { name: '페이지 탐색 닫기' })).toBeNull();
+  fireEvent.click(screen.getByRole('button', { name: '노트 목록 열기' }));
+  expect(await screen.findByRole('button', { name: '페이지 탐색 닫기' })).toBeTruthy();
+});

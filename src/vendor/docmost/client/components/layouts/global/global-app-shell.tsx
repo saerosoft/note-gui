@@ -6,7 +6,7 @@ import { SkipToMain } from '@/components/ui/skip-to-main';
 import layout from '@knowledge/docmost/HostLayout.module.css';
 
 interface Props {
-  children: ReactNode;
+  children: ReactNode | ((openMobile: () => void) => ReactNode);
   header: Omit<AppHeaderProps, 'mobileOpened' | 'desktopOpened' | 'toggleMobile' | 'toggleDesktop'>;
   sidebar: (closeMobile: () => void) => ReactNode;
 }
@@ -18,6 +18,7 @@ export default function GlobalAppShell({ children, header, sidebar }: Props) {
   const [sidebarWidth, setSidebarWidth] = useState(300);
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const openMobile = useCallback(() => setMobileOpened(true), []);
   const stopResizing = useCallback(() => setIsResizing(false), []);
   const resize = useCallback((event: MouseEvent) => {
     if (!isResizing || !sidebarRef.current) return;
@@ -60,7 +61,7 @@ export default function GlobalAppShell({ children, header, sidebar }: Props) {
           }}/>
         {sidebar(() => setMobileOpened(false))}
       </AppShell.Navbar>
-      <AppShell.Main id="main-content" tabIndex={-1} className={layout.main}>{children}</AppShell.Main>
+      <AppShell.Main id="main-content" tabIndex={-1} className={layout.main}>{typeof children === 'function' ? children(openMobile) : children}</AppShell.Main>
     </AppShell>
   </>;
 }

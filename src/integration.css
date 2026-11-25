@@ -11,9 +11,9 @@
 .note-gui-tabs [role=tab] span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .note-gui-panes[data-split=true] .ProseMirror { padding-left: 1.5rem; padding-right: 1.5rem; }
 .note-gui-panes[data-split=true] .note-body-status { margin-left: 0; }
-.note-gui-pane .empty { display: grid; place-content: center; gap: 8px; flex: 1; padding: 48px 24px; text-align: center; color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
+.note-gui-pane .empty { display: grid; place-content: center; justify-items: center; gap: 8px; flex: 1; padding: 48px 24px; text-align: center; color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
 .note-gui-pane .empty h2 { margin: 0; font-size: var(--mantine-font-size-lg); font-weight: 600; color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0)); }
-.note-gui-pane .empty p { margin: 0; font-size: var(--mantine-font-size-sm); }
+.note-gui-pane .empty p { margin: 0; font-size: var(--mantine-font-size-sm); word-break: keep-all; }
 .note-page-breadcrumb { flex: 1; min-width: 0; }
 .note-page-breadcrumb > svg, .note-page-actions { flex-shrink: 0; }
 .note-panel-content, .note-detail-panels, .note-knowledge-panels { min-width: 0; overflow-wrap: anywhere; }
@@ -51,4 +51,5 @@
 @media (max-width: 48em) {
   .note-page-breadcrumb > svg { display: none; }
   .note-gui-tabs [role=tab] { max-width: 160px; }
+  .note-gui-pane .empty button { margin-top: 8px; min-height: 44px; }
 }

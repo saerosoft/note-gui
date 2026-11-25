@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActionIcon, Alert, Box, Button, Group, Menu, Tabs, Text, Tooltip } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconDots, IconFileText, IconHistory, IconInfoCircle, IconMessage, IconPaperclip, IconRefresh } from '@tabler/icons-react';
 import Aside from './vendor/docmost/client/components/layouts/global/aside';
 import type { Note, NoteCoreApi } from './model';
@@ -14,9 +15,10 @@ import { ApiError } from './access';
 import { useNoteAccess, useNoteCore, useKnowledgeContext, useRelations, useNotePolicy, useNoteContentAccess, useNoteAssociations } from './hostRuntime';
 import { NativeDraftContext } from './docmost/nativeDraft';
 
-interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void }
-export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate }: Props) {
+interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void; onOpenTree?: () => void }
+export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate, onOpenTree }: Props) {
   const api = useNoteCore(suppliedApi);
+  const narrow = useMediaQuery('(max-width: 47.99em)');
   const knowledgeContext = useKnowledgeContext();
   const relations = useRelations();
   const associations = useNoteAssociations();
@@ -142,7 +144,7 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
       </Tabs.List>
     </Tabs></Box>
     {error && <Alert color="red" role="alert">{error}</Alert>}{busy && <p role="status">처리 중…</p>}
-    {!draft || !active ? <div className="empty"><h2>노트를 선택해 주세요</h2><p>왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p></div> : <div className="note-gui-page">
+    {!draft || !active ? <div className="empty"><h2>노트를 선택해 주세요</h2>{narrow ? <><p>노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>{onOpenTree && <Button variant="light" size="sm" aria-controls="page-navigation" onClick={onOpenTree}>노트 목록 열기</Button>}</> : <p>왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>}</div> : <div className="note-gui-page">
       {latest && <Alert color="orange"><p>서버 개정 {latest.note.revision} · {latest.title}. 현재 편집은 그대로 보존됩니다.</p><details><summary>서버 원문 확인</summary><pre>{JSON.stringify(latest.body, null, 2)}</pre></details><Group>
         <Button onClick={() => { if (window.confirm('내 변경을 버리고 서버 버전을 열까요?')) { update(active, () => latest); setEditorEpoch(value => value + 1); setLatest(undefined); } }}>서버 버전 열기</Button>
         <Button variant="subtle" onClick={() => setLatest(undefined)}>내 편집 계속</Button>
