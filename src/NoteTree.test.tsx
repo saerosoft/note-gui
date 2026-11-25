@@ -384,3 +384,32 @@ it('rejects a native root drop while another move is pending', async () => {
   expect(value.move).toHaveBeenCalledTimes(1);
   await act(async () => { finish(); await pending; });
 });
+
+it('omits the tree pager row on a single page and provides full-title tooltips on rows', async () => {
+  show();
+  const alpha = await screen.findByRole('treeitem', { name: 'Alpha' });
+  expect(alpha.querySelector('[title="Alpha"]')).toBeTruthy();
+  expect(screen.queryByRole('button', { name: '이전' })).toBeNull();
+  expect(screen.queryByRole('button', { name: '다음' })).toBeNull();
+});
+
+it.each(['page-2', ''])('renders the tree pager row whenever pagination is available for opaque cursor %j', async nextCursor => {
+  const api = {
+    spaces: vi.fn().mockResolvedValue([{ id: 'space', name: 'Space', accessEpoch: 1, myRole: 'OWNER' }]),
+    tree: vi.fn()
+      .mockResolvedValueOnce({ items: [notes[0]], nextCursor })
+      .mockResolvedValueOnce({ items: [notes[1]], nextCursor: null }),
+  } as unknown as NoteApi;
+  render(<MantineProvider><NoteTree api={api} spaceId="space" activeNoteId={null} onOpen={vi.fn()}/></MantineProvider>);
+  await screen.findByRole('treeitem', { name: 'Alpha' });
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '이전' }).disabled).toBe(true);
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '다음' }).disabled).toBe(false);
+  fireEvent.click(screen.getByRole('button', { name: '다음' }));
+  await screen.findByRole('treeitem', { name: 'Beta' });
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '이전' }).disabled).toBe(false);
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '다음' }).disabled).toBe(true);
+  fireEvent.click(screen.getByRole('button', { name: '이전' }));
+  await screen.findByRole('treeitem', { name: 'Alpha' });
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '이전' }).disabled).toBe(true);
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: '다음' }).disabled).toBe(false);
+});

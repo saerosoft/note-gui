@@ -22,7 +22,7 @@ export function SpaceTreeRow({ node, isOpen, hasChildren, toggleOpen, rowRef, ta
       onKeyDown={event => { if (event.key === "Enter") onOpen(node.id); }}>
       <PageArrow isOpen={isOpen} hasChildren={hasChildren} onToggle={toggleOpen} label={`${node.title} 하위 트리 보기`}/>
       <IconFileDescription size={16} stroke={1.7} className={classes.icon}/>
-      <span className={classes.text}>{node.title}</span>
+      <span className={classes.text} title={node.title}>{node.title}</span>
       {loading && <Loader size={12} aria-label={`${node.title} 하위 노트 읽는 중`}/>}
       {pageControls && <span className={layout.pagination}>{pageControls}</span>}
       {hasChildren && onFocusTree && <span className={classes.actions}><ActionIcon size={20} variant="subtle" color="gray" aria-label={`${node.title} 하위 트리에 집중`} onClick={event => { event.stopPropagation(); onFocusTree(); }}><IconFocus2 size={15}/></ActionIcon></span>}
