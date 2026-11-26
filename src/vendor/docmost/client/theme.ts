@@ -129,5 +129,16 @@ export const mantineCssResolver: CSSVariablesResolver = (theme) => ({
     ...v8CssVariablesResolver(theme).dark,
     "--mantine-color-dark-light-color": "var(--mantine-color-gray-4)",
     "--mantine-color-dark-light-hover": "var(--mantine-color-default-hover)",
+    // Mantine's default dark dimmed (#828282) and placeholder (#696969) drop
+    // below WCAG AA 4.5:1 on dark-8 (#1f1f1f), dark-7 (#242424), dark-6
+    // (#2e2e2e), and dark-5 (#3b3b3b). #a6a6a6 clears 4.5:1 across all four
+    // surfaces (6.77:1 / 6.38:1 / 5.58:1 / 4.60:1).
+    "--mantine-color-dimmed": "#a6a6a6",
+    "--mantine-color-placeholder": "#a6a6a6",
+    "--mantine-color-anchor": "var(--mantine-color-blue-3)",
+    "--mantine-color-blue-text": "var(--mantine-color-blue-3)",
+    "--mantine-color-error": "#f28b8a",
+    "--mantine-color-red-text": "#f28b8a",
+    "--mantine-color-red-light-color": "#f28b8a",
   },
 });

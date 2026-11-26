@@ -1,9 +1,16 @@
+.note-gui-root { background-color: var(--mantine-color-body); color: var(--mantine-color-text); color-scheme: var(--mantine-color-scheme); }
+.note-gui-root[data-chrome="embedded"] { height: 100%; min-height: 0; display: flex; flex-direction: column; flex: 1; }
+.note-gui-shell-wrap[data-chrome="embedded"] { height: 100%; min-height: 0; flex: 1; display: flex; flex-direction: column; }
+.note-gui-shell-wrap[hidden] { display: none; }
 .note-gui-panes { display: grid; flex: 1; min-height: 0; min-width: 0; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
 .note-gui-panes[data-split=true] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .note-gui-pane-root { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
-.note-gui-pane { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.note-gui-pane { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background-color: var(--mantine-color-body); color: var(--mantine-color-text); }
 .note-gui-page { display: flex; flex: 1; flex-direction: column; min-height: 0; min-width: 0; overflow: hidden; }
 .note-gui-tabs { flex-shrink: 0; min-width: 0; overflow-x: auto; overflow-y: hidden; background-color: light-dark(#f6f7f9, var(--mantine-color-dark-8)); padding: 4px 16px 0; border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); }
+.note-gui-tabs[data-has-controls="true"] { display: flex; align-items: center; gap: 6px; padding: 4px 8px 0; overflow: visible; }
+.note-gui-tabs-scroll { flex: 1; min-width: 0; overflow-x: auto; overflow-y: hidden; }
+.note-gui-tabs-controls { flex-shrink: 0; padding-bottom: 4px; }
 .note-gui-tabs [role=tablist] { min-width: max-content; gap: 4px; border-bottom: 0; }
 .note-gui-tabs [role=tablist]::before { border-color: transparent; }
 .note-gui-tab-item { padding-right: 4px; }
@@ -11,7 +18,7 @@
 .note-gui-tabs [role=tab] span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .note-gui-panes[data-split=true] .ProseMirror { padding-left: 1.5rem; padding-right: 1.5rem; }
 .note-gui-panes[data-split=true] .note-body-status { margin-left: 0; }
-.note-gui-pane .empty { display: grid; place-content: center; justify-items: center; gap: 8px; flex: 1; padding: 48px 24px; text-align: center; color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
+.note-gui-pane .empty { display: grid; place-content: center; justify-items: center; gap: 8px; flex: 1; padding: 48px 24px; text-align: center; color: var(--mantine-color-dimmed); }
 .note-gui-pane .empty h2 { margin: 0; font-size: var(--mantine-font-size-lg); font-weight: 600; color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0)); }
 .note-gui-pane .empty p { margin: 0; font-size: var(--mantine-font-size-sm); word-break: keep-all; }
 .note-page-breadcrumb { flex: 1; min-width: 0; }
@@ -29,8 +36,8 @@
 .context-card button, .context-actions a { display: inline-flex; align-items: center; justify-content: center; padding: 5px 10px; border-radius: 6px; border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); background: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6)); color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-dark-0)); font-size: var(--mantine-font-size-xs); font-weight: 500; text-decoration: none; cursor: pointer; }
 .context-card button:disabled { opacity: 0.45; cursor: not-allowed; }
 .context-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.context-muted { font-size: var(--mantine-font-size-xs); color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
-.context-pagination { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; font-size: var(--mantine-font-size-xs); color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2)); }
+.context-muted { font-size: var(--mantine-font-size-xs); color: var(--mantine-color-dimmed); }
+.context-pagination { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; font-size: var(--mantine-font-size-xs); color: var(--mantine-color-dimmed); }
 .claim-label { display: inline-flex; align-self: flex-start; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; background: light-dark(var(--mantine-color-blue-0), var(--mantine-color-dark-5)); color: light-dark(var(--mantine-color-blue-7), var(--mantine-color-blue-3)); }
 .note-gui-pane .preserve { white-space: pre-wrap; overflow-wrap: anywhere; }
 .note-gui-pane pre { max-width: 100%; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-family: "JetBrainsMono", var(--mantine-font-family-monospace); }
@@ -51,5 +58,6 @@
 @media (max-width: 47.99em) {
   .note-page-breadcrumb > svg { display: none; }
   .note-gui-tabs [role=tab] { max-width: 160px; }
+  .note-gui-tabs-controls button { min-height: 36px; min-width: 36px; }
   .note-gui-pane .empty button { margin-top: 8px; min-height: 44px; }
 }

@@ -1,12 +1,15 @@
 import { useCallback, useContext, useEffect, useRef, useState, type MouseEvent } from 'react';
-import { Alert, Button, Modal, Text } from '@mantine/core';
+import { ActionIcon, Alert, Button, Modal, Text, Tooltip } from '@mantine/core';
+import { IconLayoutColumns, IconLayoutSidebar } from '@tabler/icons-react';
 import type { NoteCoreApi } from './model';
 import { NoteTree } from './NoteTree';
 import { NotePicker } from './NotePicker';
 import { Pane } from './Pane';
 import { NoteDirtyContext, NotePolicyContext, useNoteAccess, useNoteCore, useNoteDestination, useNoteHost } from './hostRuntime';
 import { useSpaceAccess } from './useSpaceAccess';
+import { useNoteAppearance } from './appearance';
 import GlobalAppShell from './vendor/docmost/client/components/layouts/global/global-app-shell';
+import SidebarToggle from './vendor/docmost/client/components/ui/sidebar-toggle-button';
 import { SpaceSidebar } from './vendor/docmost/client/features/space/components/sidebar/space-sidebar';
 
 export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
@@ -14,6 +17,8 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
   const { onAccessLost } = useNoteAccess();
   const { onNavigate } = useNoteHost();
   const destination = useNoteDestination();
+  const { chrome } = useNoteAppearance();
+  const embedded = chrome === 'embedded';
   const params = new URLSearchParams(window.location.search);
   const access = useSpaceAccess(api);
   const { spaces } = access;
@@ -55,6 +60,7 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
     return () => window.removeEventListener('beforeunload', leave);
   }, []);
   useEffect(() => {
+    if (embedded) return;
     const search = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' && access.ready && !access.refreshing && !access.failure && spaceId) {
         event.preventDefault(); setSearchOpened(true);
@@ -62,7 +68,7 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
     };
     window.addEventListener('keydown', search);
     return () => window.removeEventListener('keydown', search);
-  }, [access.ready, access.refreshing, access.failure, spaceId]);
+  }, [embedded, access.ready, access.refreshing, access.failure, spaceId]);
 
   function navigate(event: MouseEvent<HTMLAnchorElement>) {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0 || event.currentTarget.target === '_blank') return;
@@ -87,34 +93,56 @@ export function Workspace({ api: suppliedApi }: { api: NoteCoreApi }) {
     if (target === 'right' && split) setRight(id); else setLeft(id);
   }
   const currentSpace = spaces.find(value => value.id === spaceId);
-  return <NotePolicyContext.Provider value={access.policies}>
+  const askHref = spaceId ? destination({ kind: 'ask', spaceId }) : undefined;
+  return <NotePolicyContext.Provider value={access.policies}><div className="note-gui-root" data-chrome={chrome}>
     {access.failure && <Alert color="red" role="alert">{access.failure.message} <Button onClick={() => void access.recheck()}>접근 권한 다시 확인</Button></Alert>}
     {(!access.ready || access.refreshing) && <Text p="md" role="status">접근 권한 확인 중…</Text>}
-    <div hidden={!access.ready || access.refreshing || !!access.failure}>
-      <GlobalAppShell header={{
-        homeHref: destination({ kind: 'home' }), askHref: spaceId ? destination({ kind: 'ask', spaceId }) : undefined,
+    <div className="note-gui-shell-wrap" data-chrome={chrome} hidden={!access.ready || access.refreshing || !!access.failure}>
+      <GlobalAppShell embedded={embedded} header={{
+        homeHref: destination({ kind: 'home' }), askHref,
         onNavigate: navigate, onSearch: () => setSearchOpened(true), searchDisabled: !spaceId,
         split, onSplit: toggleSplit,
       }} sidebar={closeMobile => <SpaceSidebar spaces={spaces} spaceId={spaceId} onSpaceChange={changeSpace}
         overviewHref={spaceId ? destination({ kind: 'overview', spaceId }) : undefined}
+        askHref={embedded ? askHref : undefined}
         settingsHref={spaceId && currentSpace?.myRole === 'OWNER' ? destination({ kind: 'settings', spaceId }) : undefined}
         sourceHref={`${import.meta.env.BASE_URL}source.html`} onNavigate={navigate}
         onSearch={() => { closeMobile(); setSearchOpened(true); }} split={split} target={target} onTargetChange={setTarget}>
         {spaceId && <NoteTree key={spaceId} api={api} spaceId={spaceId} activeNoteId={target === 'right' && split ? right : left}
           onOpen={id => { open(id); closeMobile(); }}/>}
-      </SpaceSidebar>}>{openMobile => <>
-        {error && <Alert color="red" role="alert">{error} {destination({ kind: 'login' }) && <a href={destination({ kind: 'login' })} onClick={navigate}>로그인</a>}</Alert>}
-        <div className="note-gui-panes" data-split={split}>
-          <Pane key={`${spaceId}:left`} api={api} paneId="왼쪽" requestedId={left} onLocation={setLeft}
-            onDirty={leftDirty} onActivate={() => setTarget('left')} onOpenTree={spaceId ? openMobile : undefined}/>
-          {split && <Pane key={`${spaceId}:right`} api={api} paneId="오른쪽" requestedId={right} onLocation={setRight}
-            onDirty={rightDirty} onActivate={() => setTarget('right')} onOpenTree={spaceId ? openMobile : undefined}/>}
-        </div>
-      </>}</GlobalAppShell>
+      </SpaceSidebar>}>{controls => {
+        const navControls = embedded ? <>
+          <Tooltip label="페이지 탐색" withinPortal={false}>
+            <SidebarToggle aria-label="페이지 탐색" aria-controls="page-navigation" opened={controls.mobileOpened}
+              onClick={controls.toggleMobile} hiddenFrom="sm" size="sm"/>
+          </Tooltip>
+          <Tooltip label="페이지 탐색" withinPortal={false}>
+            <SidebarToggle aria-label="페이지 탐색" aria-controls="page-navigation" opened={controls.desktopOpened}
+              onClick={controls.toggleDesktop} visibleFrom="sm" size="sm"/>
+          </Tooltip>
+        </> : undefined;
+        const splitControl = embedded ? <Tooltip label={split ? '한 창으로' : '두 창으로'} withinPortal={false}>
+          <ActionIcon variant="subtle" color="gray" size="sm" onClick={toggleSplit}
+            aria-label={split ? '한 창으로' : '두 창으로'} aria-pressed={split}>
+            {split ? <IconLayoutSidebar size={18}/> : <IconLayoutColumns size={18}/>}
+          </ActionIcon>
+        </Tooltip> : undefined;
+        return <>
+          {error && <Alert color="red" role="alert">{error} {destination({ kind: 'login' }) && <a href={destination({ kind: 'login' })} onClick={navigate}>로그인</a>}</Alert>}
+          <div className="note-gui-panes" data-split={split}>
+            <Pane key={`${spaceId}:left`} api={api} paneId="왼쪽" requestedId={left} onLocation={setLeft}
+              onDirty={leftDirty} onActivate={() => setTarget('left')} onOpenTree={spaceId ? controls.openMobile : undefined}
+              leadingTabControls={navControls} trailingTabControls={!split ? splitControl : undefined}/>
+            {split && <Pane key={`${spaceId}:right`} api={api} paneId="오른쪽" requestedId={right} onLocation={setRight}
+              onDirty={rightDirty} onActivate={() => setTarget('right')} onOpenTree={spaceId ? controls.openMobile : undefined}
+              trailingTabControls={splitControl}/>}
+          </div>
+        </>;
+      }}</GlobalAppShell>
       {searchOpened && spaceId && access.ready && !access.refreshing && !access.failure && <Modal opened onClose={() => setSearchOpened(false)} title="노트 검색" centered>
         <NotePicker key={spaceId} api={api} spaceId={spaceId} label="노트 제목" selected={null}
           onSelect={note => { if (note) { open(note.id); setSearchOpened(false); } }}/>
       </Modal>}
     </div>
-  </NotePolicyContext.Provider>;
+  </div></NotePolicyContext.Provider>;
 }

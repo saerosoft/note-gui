@@ -43,7 +43,9 @@
       "source": "apps/client/src/features/editor/components/fixed-toolbar/fixed-toolbar.module.css",
       "destination": "src/vendor/docmost/client/features/editor/components/fixed-toolbar/fixed-toolbar.module.css",
       "upstreamSha256": "ad67f92895568b733d3bc0d3c53446e61d4a45fbc8f0d91207a9be1ec1679ae1",
-      "changes": []
+      "changes": [
+        "Uses blue-3 active toolbar icon color in dark mode to maintain WCAG AA contrast."
+      ]
     },
     {
       "source": "apps/client/src/features/editor/components/fixed-toolbar/use-toolbar-state.ts",
@@ -123,7 +125,9 @@
       "source": "apps/client/src/features/editor/styles/code.css",
       "destination": "src/vendor/docmost/client/features/editor/styles/code.css",
       "upstreamSha256": "a8fb09b53e33fbb2ab00d1d312365e8601949647e7f5a62d58caa00524ca8ada",
-      "changes": []
+      "changes": [
+        "Uses var(--mantine-color-dimmed) for comments/quotes and var(--mantine-color-red-3) for dark-mode string/variable tokens so code blocks retain WCAG AA 4.5:1 contrast."
+      ]
     },
     {
       "source": "apps/client/src/features/editor/styles/page-break.css",
@@ -632,7 +636,9 @@
       "source": "apps/client/src/theme.ts",
       "destination": "src/vendor/docmost/client/theme.ts",
       "upstreamSha256": "fbe2ce943b82991ee9c679928c43414fc287299e5a1e3d5d210b6ea4171b53ee",
-      "changes": []
+      "changes": [
+        "Overrides dark-mode dimmed, placeholder, anchor, blue-text and error/red text variables to maintain WCAG AA 4.5:1 contrast on dark surfaces."
+      ]
     },
     {
       "source": "apps/client/src/styles/a11y-overrides.css",
@@ -650,7 +656,9 @@
       "source": "apps/client/src/components/layouts/global/app-shell.module.css",
       "destination": "src/vendor/docmost/client/components/layouts/global/app-shell.module.css",
       "upstreamSha256": "82c28068bacee41d85fb14d9b0e378a432082e3fc5f0c313fe5365052c3c9a1c",
-      "changes": []
+      "changes": [
+        "Uses var(--app-shell-header-offset, 0px) for mobile aside top offset so embedded chrome without an app header aligns cleanly."
+      ]
     },
     {
       "source": "apps/client/src/components/layouts/global/app-header.module.css",
@@ -682,7 +690,8 @@
       "upstreamSha256": "3896ff5f23e7aece5eb495b33923f234482ab2a15f84bdbfeb40b9832b53d87f",
       "changes": [
         "Restores the native core shell/navigation/control composition and styling with explicit authorized product adapter props; excludes upstream routes, account services, storage and Enterprise imports. Retains pane-local editing and product permission ownership.",
-        "Allows main slot children to receive an openMobile callback so narrow-viewport empty states can open the navigation drawer."
+        "Allows main slot children to receive an openMobile callback so narrow-viewport empty states can open the navigation drawer.",
+        "Supports embedded chrome without AppShell.Header using static container-bounded layout and passes sidebar toggle controls to main children without remounting on live chrome changes."
       ]
     },
     {
@@ -716,7 +725,8 @@
       "destination": "src/vendor/docmost/client/features/space/components/sidebar/space-sidebar.tsx",
       "upstreamSha256": "04189607e23cd9edfbe98b498232da86180393ab6604c1a8c9ea4c322d6c754c",
       "changes": [
-        "Restores the native core shell/navigation/control composition and styling with explicit authorized product adapter props; excludes upstream routes, account services, storage and Enterprise imports. Retains pane-local editing and product permission ownership."
+        "Restores the native core shell/navigation/control composition and styling with explicit authorized product adapter props; excludes upstream routes, account services, storage and Enterprise imports. Retains pane-local editing and product permission ownership.",
+        "Renders an optional AI chat link when supplied so embedded chrome keeps the host ask destination reachable without AppHeader."
       ]
     },
     {

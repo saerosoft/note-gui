@@ -1,5 +1,5 @@
 import { Group, SegmentedControl, Text, UnstyledButton } from '@mantine/core';
-import { IconHome, IconSearch, IconSettings } from '@tabler/icons-react';
+import { IconHome, IconMessages, IconSearch, IconSettings } from '@tabler/icons-react';
 import type { MouseEventHandler, ReactNode } from 'react';
 import { SwitchSpace } from './switch-space';
 import classes from './space-sidebar.module.css';
@@ -10,6 +10,7 @@ interface Props {
   spaceId: string | null;
   onSpaceChange: (id: string) => void;
   overviewHref?: string;
+  askHref?: string;
   settingsHref?: string;
   sourceHref: string;
   onNavigate: MouseEventHandler<HTMLAnchorElement>;
@@ -19,7 +20,7 @@ interface Props {
   onTargetChange: (target: string) => void;
   children: ReactNode;
 }
-export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, settingsHref,
+export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, askHref, settingsHref,
   sourceHref, onNavigate, onSearch, split, target, onTargetChange, children }: Props) {
   return <div className={classes.navbar}>
     <div className={classes.section + ' ' + classes.spaceSection}>
@@ -35,6 +36,9 @@ export function SpaceSidebar({ spaces, spaceId, onSpaceChange, overviewHref, set
         <UnstyledButton className={classes.menu} onClick={onSearch} disabled={!spaceId}>
           <div className={classes.menuItemInner}><IconSearch size={18} className={classes.menuItemIcon} stroke={2}/><span>검색</span></div>
         </UnstyledButton>
+        {askHref && <UnstyledButton component="a" href={askHref} onClick={onNavigate} className={classes.menu}>
+          <div className={classes.menuItemInner}><IconMessages size={18} className={classes.menuItemIcon} stroke={2}/><span>AI 대화</span></div>
+        </UnstyledButton>}
         {settingsHref && <UnstyledButton component="a" href={settingsHref} onClick={onNavigate} className={classes.menu}>
           <div className={classes.menuItemInner}><IconSettings size={18} className={classes.menuItemIcon} stroke={2}/><span>공간 설정</span></div>
         </UnstyledButton>}

@@ -1,5 +1,8 @@
-.main { height: 100dvh; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.main { height: 100dvh; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background-color: var(--mantine-color-body); color: var(--mantine-color-text); }
 .navbar { overflow: hidden; }
+.embeddedShell { height: 100%; min-height: 0; flex: 1; overflow: hidden; grid-template-columns: var(--app-shell-navbar-width, 0) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.embeddedNavbar { grid-row: 1; height: 100%; min-height: 0; }
+.embeddedMain { height: 100%; min-height: 0; grid-row: 1; }
 .mobileBackdrop { display: none; }
 .paneTarget { padding-bottom: var(--mantine-spacing-sm); }
 .sectionPages { min-height: 0; flex: 1; display: flex; flex-direction: column; }
@@ -9,11 +12,14 @@
 }
 @media (max-width: 47.99em) {
   .navbar { width: min(320px, calc(100vw - 48px)); }
+  .embeddedShell { grid-template-columns: minmax(0, 1fr); }
+  .embeddedNavbar { position: absolute; inset-block: 0; inset-inline-start: 0; width: min(320px, calc(100% - 48px)); height: 100%; }
   .header { padding-left: 0; padding-right: 0; }
   .header button, .header a { min-height: 44px; min-width: 44px; }
   .header a { display: inline-flex; align-items: center; justify-content: center; }
   .header svg { display: block; width: 20px; height: 20px; }
-  .mobileBackdrop { display: block; position: fixed; inset: 45px 0 0 min(320px, calc(100vw - 48px)); z-index: 119; }
+  .mobileBackdrop { display: block; position: fixed; inset: 45px 0 0 min(320px, calc(100vw - 48px)); z-index: 119; border: 0; padding: 0; background: rgba(0, 0, 0, 0.4); cursor: pointer; }
+  .embeddedBackdrop { position: absolute; inset: 0 0 0 min(320px, calc(100% - 48px)); }
   .resizeHandle { display: none; }
 }
 @media (max-width: 24em) {

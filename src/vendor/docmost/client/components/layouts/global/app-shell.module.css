@@ -10,7 +10,7 @@
 
 .aside {
   @media (max-width: $mantine-breakpoint-sm) {
-    margin-top: 45px;
+    margin-top: var(--app-shell-header-offset, 0px);
   }
 }
 

@@ -59,7 +59,7 @@
 
 .active,
 .active:hover {
-  color: var(--mantine-color-blue-6);
+  color: light-dark(var(--mantine-color-blue-6), var(--mantine-color-blue-3));
   background-color: light-dark(
     var(--mantine-color-gray-1),
     var(--mantine-color-dark-5)

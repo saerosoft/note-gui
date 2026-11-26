@@ -18,6 +18,13 @@ export interface NoteHost {
   /** Optional authorized native download; otherwise the GUI reads bytes through core.attachment. */
   attachmentUrl?: (id: string, revision: number) => string | undefined;
 }
+export type NoteColorScheme = 'light' | 'dark';
+export interface NoteAppearance {
+  /** Host-controlled colour scheme. When set, the GUI ignores its own stored preference and OS setting. */
+  colorScheme?: NoteColorScheme;
+  /** 'embedded' hides the GUI's own application header (brand, home link, global search, header toggles) for hosts that provide that chrome. Default 'full'. */
+  chrome?: 'full' | 'embedded';
+}
 export interface NoteCoreGuiOptions {
   api: NoteCoreApi;
   host: NoteHost;
@@ -27,6 +34,7 @@ export interface NoteCoreGuiOptions {
   associations?: NoteAssociationsApi;
   timeZone?: string;
   onDirtyChange?: (dirty: boolean) => void;
+  appearance?: NoteAppearance;
 }
 
 export interface NoteGuiOptions {
@@ -38,9 +46,14 @@ export interface NoteGuiOptions {
   /** Return true when the host handles a confirmed, unmodified product-link navigation. */
   onNavigate?: (href: string) => boolean;
   onDirtyChange?: (dirty: boolean) => void;
+  appearance?: NoteAppearance;
 }
 
-export interface MountedNoteGui { unmount: () => void; hasUnsavedChanges: () => boolean }
+export interface MountedNoteGui {
+  unmount: () => void;
+  hasUnsavedChanges: () => boolean;
+  setAppearance: (appearance: NoteAppearance) => void;
+}
 
 /** The framework-neutral contract used by browser hosts of the ESM distribution. */
 export interface NoteGuiHostModule {

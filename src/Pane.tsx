@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { ActionIcon, Alert, Box, Button, Group, Menu, Tabs, Text, Tooltip } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconDots, IconFileText, IconHistory, IconInfoCircle, IconMessage, IconPaperclip, IconRefresh } from '@tabler/icons-react';
@@ -15,8 +15,8 @@ import { ApiError } from './access';
 import { useNoteAccess, useNoteCore, useKnowledgeContext, useRelations, useNotePolicy, useNoteContentAccess, useNoteAssociations } from './hostRuntime';
 import { NativeDraftContext } from './docmost/nativeDraft';
 
-interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void; onOpenTree?: () => void }
-export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate, onOpenTree }: Props) {
+interface Props { api: NoteCoreApi; paneId: string; requestedId: string | null; onLocation: (id: string | null) => void; onDirty: (value: boolean) => void; onActivate: () => void; onOpenTree?: () => void; leadingTabControls?: ReactNode; trailingTabControls?: ReactNode }
+export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirty, onActivate, onOpenTree, leadingTabControls, trailingTabControls }: Props) {
   const api = useNoteCore(suppliedApi);
   const narrow = useMediaQuery('(max-width: 47.99em)', undefined, { getInitialValueInEffect: false });
   const knowledgeContext = useKnowledgeContext();
@@ -133,16 +133,20 @@ export function Pane({ api: suppliedApi, paneId, requestedId, onLocation, onDirt
     setOpenedKnowledge(true); setDetails(value => value === 'knowledge' ? null : 'knowledge');
   }
   return <NativeDraftContext.Provider value={reportNativeDraft}><DocmostPaneProvider><section className="pane note-gui-pane" aria-label={`${paneId} 편집 창`} onFocusCapture={onActivate} onPointerDownCapture={onActivate}>
-    <Box className="note-gui-tabs"><Tabs value={active} onChange={id => { if (id) void open(id); }}>
-      <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
-        {tabs.map((id, index) => <Group key={id} gap={2} wrap="nowrap" className="note-gui-tab-item">
-          <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || (id === active && nativeDirty) || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
-          <ActionIcon size="xs" variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
-          {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>}
-          {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>}
-        </Group>)}
-      </Tabs.List>
-    </Tabs></Box>
+    <Box className="note-gui-tabs" data-has-controls={Boolean(leadingTabControls || trailingTabControls) || undefined}>
+      {leadingTabControls && <Group gap={4} wrap="nowrap" className="note-gui-tabs-controls note-gui-tabs-leading">{leadingTabControls}</Group>}
+      <Box className="note-gui-tabs-scroll"><Tabs value={active} onChange={id => { if (id) void open(id); }}>
+        <Tabs.List aria-label={`${paneId} 노트 탭`} style={{ flexWrap: 'nowrap' }}>
+          {tabs.map((id, index) => <Group key={id} gap={2} wrap="nowrap" className="note-gui-tab-item">
+            <Tabs.Tab value={id} onKeyDown={event => { if (event.altKey && ['ArrowLeft', 'ArrowRight'].includes(event.key)) { event.preventDefault(); setTabs(values => reorder(values, index, index + (event.key === 'ArrowLeft' ? -1 : 1))); } }}>{drafts[id]?.title || '노트'}{drafts[id]?.dirty || (id === active && nativeDirty) || commentDrafts[id]?.body.trim() || commentDrafts[id]?.busy || propertyDrafts[id]?.dirty || propertyDrafts[id]?.busy ? ' •' : ''}</Tabs.Tab>
+            <ActionIcon size="xs" variant="subtle" color="gray" aria-label={`${drafts[id]?.title} 탭 닫기`} disabled={busy} onClick={() => close(id)}>×</ActionIcon>
+            {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 왼쪽으로 이동" disabled={index === 0} onClick={() => setTabs(values => reorder(values, index, index - 1))}>‹</ActionIcon>}
+            {tabs.length > 1 && <ActionIcon size="xs" variant="subtle" color="gray" aria-label="탭 오른쪽으로 이동" disabled={index === tabs.length - 1} onClick={() => setTabs(values => reorder(values, index, index + 1))}>›</ActionIcon>}
+          </Group>)}
+        </Tabs.List>
+      </Tabs></Box>
+      {trailingTabControls && <Group gap={4} wrap="nowrap" className="note-gui-tabs-controls note-gui-tabs-trailing">{trailingTabControls}</Group>}
+    </Box>
     {error && <Alert color="red" role="alert">{error}</Alert>}{busy && <p role="status">처리 중…</p>}
     {!draft || !active ? <div className="empty"><h2>노트를 선택해 주세요</h2>{narrow ? <><p>노트 목록에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>{onOpenTree && <Button variant="light" size="sm" aria-controls="page-navigation" onClick={onOpenTree}>노트 목록 열기</Button>}</> : <p>왼쪽 트리에서 노트를 열거나 새 노트를 작성할 수 있습니다.</p>}</div> : <div className="note-gui-page">
       {latest && <Alert color="orange"><p>서버 버전 {latest.note.revision} · {latest.title}. 현재 편집은 그대로 보존됩니다.</p><details><summary>서버 원문 확인</summary><pre>{JSON.stringify(latest.body, null, 2)}</pre></details><Group>

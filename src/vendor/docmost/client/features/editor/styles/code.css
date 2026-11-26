@@ -32,10 +32,7 @@
     /* Code styling */
     .hljs-comment,
     .hljs-quote {
-      color: light-dark(
-        var(--mantine-color-gray-6),
-        var(--mantine-color-dark-2)
-      );
+      color: var(--mantine-color-dimmed);
     }
 
     .hljs-variable,
@@ -48,7 +45,7 @@
     .hljs-name,
     .hljs-selector-id,
     .hljs-selector-class {
-      color: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-5));
+      color: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-3));
     }
 
     .hljs-number,
@@ -67,7 +64,7 @@
     .hljs-string,
     .hljs-symbol,
     .hljs-bullet {
-      color: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-5));
+      color: light-dark(var(--mantine-color-red-7), var(--mantine-color-red-3));
     }
 
     .hljs-title,
