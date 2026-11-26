@@ -27,7 +27,9 @@ paths and artifact kind. It declares identity; qualification is separate evidenc
 
 ## Version policy
 
-The current minor contract is 0.9.0 (`version/0.9`, tag `release/v0.9.0`), which publishes the package as `@saerosoft/note-gui` to GitHub Packages npm (`https://npm.pkg.github.com`) with bundled runtime dependencies kept in `devDependencies` and only `@tiptap/core` / `@tiptap/pm` declared in `dependencies` for public `JSONContent` type compatibility.
+The current minor contract is 0.10.0 (`version/0.10`, tag `release/v0.10.0`), which adds host-controlled `appearance` (`colorScheme` and `chrome`) and live `MountedNoteGui.setAppearance` updates to `@saerosoft/note-gui` published on GitHub Packages npm (`https://npm.pkg.github.com`), with bundled runtime dependencies kept in `devDependencies` and only `@tiptap/core` / `@tiptap/pm` declared in `dependencies` for public `JSONContent` type compatibility.
+
+The prior 0.9.x contract line (`version/0.9`, latest qualified patch [release/v0.9.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.9.3) at `78fe988515293b845afc521849f2f882241c2cbd`, annotated tag object `0f3891b7acdb6c91c8f4b94525cd20ab4015e52a`) remains immutable on GitHub Releases and GitHub Packages.
 
 The prior 0.8.x contract line (`@knowledge-engine/note-gui`, private repository consumption) remains immutable. Its qualified patch is [release/v0.8.3](https://github.com/saerosoft/note-gui/releases/tag/release/v0.8.3)
 at `eb6f80843db21ea6878ecde9838ad277e12009b5`, with annotated tag object

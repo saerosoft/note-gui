@@ -102,9 +102,11 @@ The module exports `mountNoteCoreGui`, `mountNoteGui`, `createNoteAccess`,
 Use `mountNoteCoreGui(container, { api, host })` for an injected host, or
 `mountNoteGui(container, options?)` for the complete compatibility entrypoint.
 [The host contract](CONTRACT.md#imports-and-mount-lifetime) defines the optional
-capabilities, time zone, navigation callbacks and returned mount handle,
-including `unmount()` and `hasUnsavedChanges()`. Its public types include
-`NoteApi`, `NoteGuiOptions`, `MountedNoteGui` and `NoteGuiHostModule`.
+capabilities, time zone, host-controlled `appearance` (`colorScheme` and `chrome`),
+navigation callbacks and returned mount handle, including `unmount()`,
+`hasUnsavedChanges()` and `setAppearance(appearance)`. Its public types include
+`NoteApi`, `NoteGuiOptions`, `NoteColorScheme`, `NoteAppearance`,
+`MountedNoteGui` and `NoteGuiHostModule`.
 
 Consumers installing the published package from GitHub Packages import types/modules from
 `@saerosoft/note-gui`, `@saerosoft/note-gui/kms`, and CSS from `@saerosoft/note-gui/style.css`.

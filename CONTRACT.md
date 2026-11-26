@@ -1,12 +1,11 @@
 # Note GUI host contract
 
-This contract defines the `version/0.9` release line (`@saerosoft/note-gui` published via GitHub Packages npm at `https://npm.pkg.github.com`). It preserves the optional collaboration capabilities and mount-local dirty
-reporting to the existing core/context/relations contract. Release metadata alone does not establish qualification or publication.
+This contract defines the `version/0.10` release line (`@saerosoft/note-gui` published via GitHub Packages npm at `https://npm.pkg.github.com`). It adds host-controlled appearance (`colorScheme` and `chrome`) and live `MountedNoteGui.setAppearance` updates while preserving full backward compatibility with `0.9.x` hosts, optional collaboration capabilities, and mount-local dirty reporting. Release metadata alone does not establish qualification or publication.
 The core/context/relations split and explicit host bindings added to the former
-0.6 package establish this new minor contract. Release identity and qualification
+0.6 package establish the reusable contract foundation. Release identity and qualification
 follow [OPERATIONS.md](OPERATIONS.md) and `release.json`; no blanket compatibility
 across minor versions is promised. The public declarations are
-emitted from `src/index.tsx`, `src/model.ts`, `src/host.ts` and `src/access.ts`.
+emitted from `src/index.tsx`, `src/model.ts`, `src/host.ts`, `src/access.ts` and `src/collaboration.ts`.
 The legacy complete API remains supported. KMS integration and its pinned release
 are accepted separately by the product owner.
 
@@ -25,6 +24,7 @@ import {
   createLocalNoteApi,
   type NoteCoreApi, type NoteKnowledgeContextApi, type NoteRelationsApi,
   type NoteCoreGuiOptions, type NoteGuiOptions, type NoteHost,
+  type NoteColorScheme, type NoteAppearance,
   type NoteDestination, type NoteAccessLifecycle, type NoteAccessController,
   type MountedNoteGui, type NoteGuiHostModule,
 } from '@saerosoft/note-gui';
@@ -37,9 +37,18 @@ mounting. Copy the complete `dist` tree, including chunks, fonts, notices and
 the source offer. This entry bundles the pinned React runtime.
 
 ```ts
+type NoteColorScheme = 'light' | 'dark';
+interface NoteAppearance {
+  colorScheme?: NoteColorScheme;
+  chrome?: 'full' | 'embedded';
+}
 function mountNoteCoreGui(container: HTMLElement, options: NoteCoreGuiOptions): MountedNoteGui;
 function mountNoteGui(container: HTMLElement, options?: NoteGuiOptions | NoteCoreGuiOptions): MountedNoteGui;
-interface MountedNoteGui { unmount(): void; hasUnsavedChanges(): boolean }
+interface MountedNoteGui {
+  unmount(): void;
+  hasUnsavedChanges(): boolean;
+  setAppearance(appearance: NoteAppearance): void;
+}
 interface NoteCoreGuiOptions {
   api: NoteCoreApi;
   host: NoteHost;
@@ -49,6 +58,7 @@ interface NoteCoreGuiOptions {
   associations?: NoteAssociationsApi;
   timeZone?: string;
   onDirtyChange?: (dirty: boolean) => void;
+  appearance?: NoteAppearance;
 }
 ```
 
@@ -82,6 +92,50 @@ extension falls back to the default API.
 zone rejects mounting before React root creation. Its absence uses the browser
 clock. The GUI keeps `space`, `note` and optional `right` selection query
 parameters on the current host pathname; these are GUI locations, not KMS routes.
+
+## Appearance and embedded chrome
+
+Both `NoteCoreGuiOptions` and `NoteGuiOptions` accept optional `appearance?: NoteAppearance`.
+Invalid `colorScheme` (anything other than `'light' | 'dark' | undefined`) or
+invalid `chrome` (anything other than `'full' | 'embedded' | undefined`) throws
+`RangeError` synchronously before React root creation during mount, or without
+altering the active appearance when passed to `setAppearance`.
+
+- **`colorScheme`**: When `'light'` or `'dark'` is supplied, it drives Mantine's
+  color scheme (`forceColorScheme` and `data-mantine-color-scheme`) and every
+  GUI-owned surface (application shell, navbar, page tree, tab bar, editor canvas,
+  toolbar, menus, modals, detail panels, and Mermaid/Excalidraw/Draw.io diagram
+  chrome). Text on dark surfaces maintains WCAG AA ≥ 4.5:1 contrast. While host-controlled,
+  the GUI does **not** write to or clear its own `localStorage` key
+  (`mantine-color-scheme-value`), and ignores OS `prefers-color-scheme`. When
+  `colorScheme` is omitted (`undefined`), existing uncontrolled behavior (`defaultColorScheme="light"`
+  backed by Mantine's localStorage manager) is preserved unchanged.
+- **Live updates (`setAppearance`)**: Calling `mounted.setAppearance(next)` updates
+  `colorScheme` and `chrome` in place without remounting the workspace, panes, or
+  editors and without losing unsaved edits, tab state, or comment/property drafts.
+  Passing an object replaces the active appearance snapshot (omitting `colorScheme`
+  returns to uncontrolled mode; omitting `chrome` defaults to `'full'`). Calling
+  `setAppearance` after `unmount()` is a safe no-op.
+- **`chrome: 'embedded'`**: Removes only the top application header row (`AppHeader`)
+  and switches the shell to a static, container-bounded layout (`height: 100%`) so
+  embedded hosts supplying their own title bar, navigation rail, or status bar do
+  not incur viewport `100dvh` overflow or duplicate top chrome. The host container
+  should have a bounded height (for example, a `minmax(0, 1fr)` grid/flex slot
+  with `overflow: hidden`). On narrow viewports (`< 48em`), the mobile navigation
+  drawer and backdrop stay contained inside the host mount slot rather than
+  overlapping host chrome. The page tree, space switcher, tabs, document toolbar,
+  and all editing/detail/context features remain intact.
+
+When `chrome: 'embedded'` removes `AppHeader`, its previous controls are accounted
+for as follows:
+
+| Previous `AppHeader` feature | Status in `chrome: 'embedded'` | Location / rationale |
+| --- | --- | --- |
+| Sidebar collapse / mobile drawer toggle (`페이지 탐색`) | Moved | Pinned to the leading edge of the primary pane's tab bar (`.note-gui-tabs`). |
+| Split-pane toggle (`두 창으로` / `한 창으로`) | Moved | Pinned to the trailing edge of the tab bar (left pane when single, right pane when split). |
+| Space-scoped note search (`노트 검색`) | Retained | Reachable from `검색` in `SpaceSidebar`. |
+| AI chat link (`AI 대화`, when `destinations.resolve({ kind: 'ask', spaceId })` is supplied) | Moved | Rendered in `SpaceSidebar` alongside `개요`, `검색`, and `공간 설정`. |
+| Brand logo / title (`Knowledge Engine`), `홈` link, header search input, and `window` `Ctrl+K`/`Cmd+K` listener | Dropped | Owned by the embedding host shell so Note GUI does not duplicate top-bar branding/search or hijack the host's global command shortcut. |
 
 ## Core data and operations
 
